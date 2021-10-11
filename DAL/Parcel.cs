@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        class Parcel
+         public class Parcel
         {
             public int Id { get; set; }
             public int SenderId { get; set; }
