@@ -10,6 +10,10 @@ namespace IDAL
     {
         class Parcel
         {
+            public override string ToString()
+            {
+                return $"{SenderId} + {Id}";
+            }
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int Target { get; set; }

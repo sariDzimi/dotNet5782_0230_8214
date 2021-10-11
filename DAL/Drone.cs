@@ -10,6 +10,11 @@ namespace IDAL
     {
         public class Drone
         {
+
+            public override string ToString()
+            {
+                return $"{Id} + {Model}";
+            }
             public int Id{ get; set; }
             public string Model { get; set; }
             public weightCategories MaxWeight { get; set; }
