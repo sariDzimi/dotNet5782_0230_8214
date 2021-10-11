@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
- public class Station{
+    public class Station{
          public override string ToString()
             {
                 return $"{Name} : {Id}";
