@@ -17,8 +17,8 @@ namespace IDAL
             }
             public int Id{ get; set; }
             public string Model { get; set; }
-            public weightCategories MaxWeight { get; set; }
-            public droneStatus Status { get; set; }
+            public WeightCategories MaxWeight { get; set; }
+            public DroneStatus Status { get; set; }
             public double Battery { get; set; }
         }
     }

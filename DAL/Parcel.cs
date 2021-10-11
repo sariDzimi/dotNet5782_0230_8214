@@ -17,8 +17,8 @@ namespace IDAL
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int Target { get; set; }
-            public weightCategories Weight { get; set; }
-            public pritorities Pritority { get; set; }
+            public WeightCategories Weight { get; set; }
+            public Pritorities Pritority { get; set; }
             public DateTime Requested { get; set; }
             public int DroneId { get; set; }
 
