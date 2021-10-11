@@ -10,7 +10,14 @@ namespace DAL
     {
     class DroneCharge
     {
-       public int DroneId { get; set; }
+
+            public override string ToString()
+            {
+                return $"{DroneId} + {stationId}";
+            }
+
+
+            public int DroneId { get; set; }
        public int stationId { get; set; }
     }
     } 
