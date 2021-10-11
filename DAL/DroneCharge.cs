@@ -13,7 +13,7 @@ namespace DAL
 
             public override string ToString()
             {
-                return $"{DroneId} + {stationId}";
+                return $"{DroneId} : {stationId}";
             }
 
 

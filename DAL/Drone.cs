@@ -13,7 +13,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"{Id} + {Model}";
+                return $"{Id} : {Model}";
             }
             public int Id{ get; set; }
             public string Model { get; set; }

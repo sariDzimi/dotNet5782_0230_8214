@@ -11,7 +11,7 @@ namespace IDAL
  public class Station{
          public override string ToString()
             {
-                return $"{Name} + {Id}";
+                return $"{Name} : {Id}";
             }
         public int Id { get ; set ; }
         public int Name { get; set; }

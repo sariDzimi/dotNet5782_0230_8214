@@ -12,7 +12,7 @@ namespace IDAL
         {
             public override string ToString()
             {
-                return $"{SenderId} + {Id}";
+                return $"{SenderId} :{Id}";
             }
             public int Id { get; set; }
             public int SenderId { get; set; }
