@@ -1,13 +1,9 @@
 ﻿using System;
 
-namespace DAL
+namespace IDAL
 {
-   namespace DO
+    namespace DO
     {
-        public class Drone
-        {
-            
-        }
-
     }
+
 }
