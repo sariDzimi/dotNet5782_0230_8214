@@ -8,8 +8,8 @@ namespace IDAL
 {
     namespace DO
     {
-    class DroneCharge
-    {
+        class DroneCharge
+        {
 
             public override string ToString()
             {
@@ -18,8 +18,8 @@ namespace IDAL
 
 
             public int DroneId { get; set; }
-       public int stationId { get; set; }
+            public int stationId { get; set; }
+        }
     }
-    } 
-   
+
 }

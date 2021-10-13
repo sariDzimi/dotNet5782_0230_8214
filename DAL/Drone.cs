@@ -15,7 +15,7 @@ namespace IDAL
             {
                 return $"{Id} : {Model}";
             }
-            public int Id{ get; set; }
+            public int Id { get; set; }
             public string Model { get; set; }
             public WeightCategories MaxWeight { get; set; }
             public DroneStatus Status { get; set; }

@@ -8,22 +8,23 @@ namespace IDAL
 {
     namespace DO
     {
-   public class Customer{
+        public class Customer
+        {
 
-        public int Id { get; set; }
-        public string  Name { get; set; }
-        public string Phone { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Phone { get; set; }
 
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+            public double Longitude { get; set; }
+            public double Latitude { get; set; }
 
-        public override string ToString()
+            public override string ToString()
             {
                 return $"{Name} : {Id}";
             }
 
         }
- 
+
 
     }
 }

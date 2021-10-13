@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-         public class Parcel
+        public class Parcel
         {
             public override string ToString()
             {
@@ -32,5 +32,5 @@ namespace IDAL
         }
 
     }
-   
+
 }
