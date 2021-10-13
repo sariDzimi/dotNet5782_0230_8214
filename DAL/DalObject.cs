@@ -14,6 +14,57 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
+
+        public void addDrone(Drone drone)
+        {
+            DataSource.drones[DataSource.Config.dronesIndexer] = drone;
+            DataSource.Config.dronesIndexer++;
+        }
+
+
+
+    }
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public Station[] GetStations()
         {
             int length = DataSource.stations.Length;
