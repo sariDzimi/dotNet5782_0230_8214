@@ -8,17 +8,17 @@ namespace IDAL
 {
     namespace DO
     {
-        public class Station
+        public struct Station
         {
-            public override string ToString()
-            {
-                return $"{Name} : {Id}";
-            }
             public int Id { get; set; }
             public int Name { get; set; }
             public double Longitude { get; set; }
             public double Latitude { get; set; }
             public int ChargeSlots { get; set; }
+            public override string ToString()
+            {
+                return $"station {Name} : {Id}";
+            }
 
         }
 

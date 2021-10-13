@@ -8,17 +8,14 @@ namespace IDAL
 {
     namespace DO
     {
-        class DroneCharge
+        public struct DroneCharge
         {
-
-            public override string ToString()
-            {
-                return $"{DroneId} : {stationId}";
-            }
-
-
             public int DroneId { get; set; }
             public int stationId { get; set; }
+            public override string ToString()
+            {
+                return $"DroneCharge {DroneId} : {stationId}";
+            }
         }
     }
 

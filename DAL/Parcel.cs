@@ -8,15 +8,11 @@ namespace IDAL
 {
     namespace DO
     {
-        public class Parcel
+        public struct Parcel
         {
-            public override string ToString()
-            {
-                return $"{SenderId} :{Id}";
-            }
             public int Id { get; set; }
             public int SenderId { get; set; }
-            public int Target { get; set; }
+            public int TargetId { get; set; }
             public WeightCategories Weight { get; set; }
             public Pritorities Pritority { get; set; }
             public DateTime Requested { get; set; }
@@ -28,7 +24,10 @@ namespace IDAL
 
             public DateTime Delivered { get; set; }
 
-
+            public override string ToString()
+            {
+                return $"sender {SenderId} : {Id}";
+            }
         }
 
     }
