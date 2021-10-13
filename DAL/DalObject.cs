@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
+using IDAL.DO;
 namespace DalObject
 {
     public class DalObject
@@ -13,5 +14,53 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+        public void addDrone(Drone drone)
+        {
+            DataSource.drones[DataSource.Config.dronesIndexer] = drone;
+            DataSource.Config.dronesIndexer++;
+        }
+
+
+
     }
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
