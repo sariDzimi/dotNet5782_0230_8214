@@ -8,11 +8,11 @@ namespace IDAL
 {
     namespace DO
     {
-         public struct Parcel
+        public struct Parcel
         {
             public int Id { get; set; }
             public int SenderId { get; set; }
-            public int Target { get; set; }
+            public int TargetId { get; set; }
             public WeightCategories Weight { get; set; }
             public Pritorities Pritority { get; set; }
             public DateTime Requested { get; set; }
@@ -31,5 +31,5 @@ namespace IDAL
         }
 
     }
-   
+
 }

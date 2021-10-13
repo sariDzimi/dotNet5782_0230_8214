@@ -6,7 +6,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Random r = new Random();
+            Console.WriteLine(r);
+            double s = r.Next();
+            Console.WriteLine(s);
+            Console.ReadKey();
         }
     }
 }
