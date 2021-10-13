@@ -44,7 +44,7 @@ namespace DalObject
                     dronesIndexer++;
                 }
 
-                for(int i = 0; i < 10; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     customers[customersIndexer].Id = customersIndexer + 1;
                     customers[customersIndexer].Name = $"customer{i}";
@@ -57,18 +57,20 @@ namespace DalObject
                 for (int i = 0; i < 10; i++)
                 {
                     parcels[parcelsIndexer].Id = parcelsIndexer + 1;
-                    parcels[parcelsIndexer].SenderId = rand.Next()%customersIndexer;
-                    parcels[parcelsIndexer].TargetId = rand.Next()%stationsIndexer;
+                    parcels[parcelsIndexer].SenderId = rand.Next() % customersIndexer;
+                    parcels[parcelsIndexer].TargetId = rand.Next() % stationsIndexer;
                     parcels[parcelsIndexer].Weight = WeightCategories.Heavy + i;
                     parcels[parcelsIndexer].Pritority = Pritorities.Emergency + i;
                     parcels[parcelsIndexer].Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
                     parcels[parcelsIndexer].DroneId = rand.Next() % dronesIndexer;
                     parcels[parcelsIndexer].Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
                     parcels[parcelsIndexer].PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                    parcels[parcelsIndexer].Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60)); ;
+                    parcels[parcelsIndexer].Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
                     parcelsIndexer++;
-                    
+
                 }
+
+                parcelRecognizer = parcelsIndexer + 2;
 
             }
         }
