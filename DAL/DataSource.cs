@@ -21,58 +21,64 @@ namespace DalObject
             static internal int parcelsIndexer = 0;
             static internal int parcelRecognizer = 0;
 
-            static Random rand = new Random();
-            static public void Initialize()
+           
+           
+        }
+        static public void Initialize()
+        {
+            Random rand = new Random();
+            for (int i = 0; i < 2; i++)
             {
-                for (int i = 0; i < 2; i++)
-                {
-                    stations[stationsIndexer].Id = stationsIndexer + 1;
-                    stations[stationsIndexer].Name = stationsIndexer + 1;
-                    stations[stationsIndexer].Latitude = rand.Next();
-                    stations[stationsIndexer].Longitude = rand.Next();
-                    stations[stationsIndexer].ChargeSlots = rand.Next(300);
-                    stationsIndexer++;
-                }
+                Station station = stations[Config.stationsIndexer];
+                station.Id = Config.stationsIndexer + 1;
+                station.Name = Config.stationsIndexer + 1;
+                station.Latitude = rand.Next();
+                station.Longitude = rand.Next();
+                station.ChargeSlots = rand.Next(300);
+                Config.stationsIndexer++;
+            }
 
-                for (int i = 0; i < 5; i++)
-                {
-                    drones[dronesIndexer].Id = dronesIndexer + 1;
-                    drones[dronesIndexer].Model = "MarvicAir2";
-                    drones[dronesIndexer].MaxWeight = WeightCategories.Heavy + i;
-                    drones[dronesIndexer].Status = DroneStatus.Delivery + i;
-                    drones[dronesIndexer].Battery = rand.Next(100);
-                    dronesIndexer++;
-                }
+            for (int i = 0; i < 5; i++)
+            {
+                Drone drone = drones[Config.dronesIndexer];
+                drone.Id = Config.dronesIndexer + 1;
+                drone.Model = "MarvicAir2";
+                drone.MaxWeight = (WeightCategories)(rand.Next() % 3);
+                drone.Status = (DroneStatus)(rand.Next() % 3);
+                drone.Battery = rand.Next(100);
+                Config.dronesIndexer++;
+            }
 
-                for (int i = 0; i < 10; i++)
-                {
-                    customers[customersIndexer].Id = customersIndexer + 1;
-                    customers[customersIndexer].Name = $"customer{i}";
-                    customers[customersIndexer].Phone = $"{rand.Next(111111111, 999999999)}";
-                    customers[customersIndexer].Latitude = rand.Next();
-                    customers[customersIndexer].Longitude = rand.Next();
-                    customersIndexer++;
-                }
+            for (int i = 0; i < 10; i++)
+            {
+                Customer customer = customers[Config.customersIndexer];
+                customer.Id = Config.customersIndexer + 1;
+                customer.Name = $"customer{i}";
+                customer.Phone = $"{rand.Next(111111111, 999999999)}";
+                customer.Latitude = rand.Next();
+                customer.Longitude = rand.Next();
+                Config.customersIndexer++;
+            }
 
-                for (int i = 0; i < 10; i++)
-                {
-                    parcels[parcelsIndexer].Id = parcelsIndexer + 1;
-                    parcels[parcelsIndexer].SenderId = rand.Next() % customersIndexer;
-                    parcels[parcelsIndexer].TargetId = rand.Next() % stationsIndexer;
-                    parcels[parcelsIndexer].Weight = WeightCategories.Heavy + i;
-                    parcels[parcelsIndexer].Pritority = Pritorities.Emergency + i;
-                    parcels[parcelsIndexer].Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                    parcels[parcelsIndexer].DroneId = rand.Next() % dronesIndexer;
-                    parcels[parcelsIndexer].Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                    parcels[parcelsIndexer].PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                    parcels[parcelsIndexer].Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                    parcelsIndexer++;
-
-                }
-
-                parcelRecognizer = parcelsIndexer + 2;
+            for (int i = 0; i < 10; i++)
+            {
+                Parcel parcel = parcels[Config.parcelsIndexer];
+                parcel.Id = Config.parcelsIndexer + 1;
+                parcel.SenderId = rand.Next() % Config.customersIndexer;
+                parcel.TargetId = rand.Next() % Config.stationsIndexer;
+                parcel.Weight = (WeightCategories)(rand.Next() % 3);
+                parcel.Pritority = (Pritorities)(rand.Next() % 3);
+                parcel.Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                parcel.DroneId = rand.Next() % Config.dronesIndexer;
+                parcel.Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                parcel.PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                parcel.Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                Config.parcelsIndexer++;
 
             }
+
+            Config.parcelRecognizer = Config.parcelsIndexer + 2;
+
         }
     }
 }
