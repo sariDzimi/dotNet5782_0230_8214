@@ -81,7 +81,54 @@ namespace DalObject
         }
 
 
-     
+        public void belongPacelToADrone(Parcel parcel)
+        {
+
+            for (int i = 0; i < DataSource.drones.Length; i++)
+            {
+                if (DataSource.drones[i].Status == DroneStatus.Free)
+                {
+                    parcel.DroneId = DataSource.drones[i].Id;
+                    DataSource.drones[i].Status = DroneStatus.Delivery;
+
+                    return;
+                }
+                
+            }
+            // "no available drone";
+        }
+        
+        public void CollectAParcelByDrone(Parcel parcel)
+        {
+            parcel.PickedUp = DateTime.Now;
+        }
+
+        public void DeliverParcelToCustomer(Parcel parcel)
+        {
+            parcel.Delivered = DateTime.Now;
+        }
+
+        public void SendDroneForCharging(Drone drone)
+        {
+            drone.Status = DroneStatus.Maintenance;
+            DroneCharge [] droneCharge = new DroneCharge [DataSource.Config.droneChargeIndexer + 1];
+           
+            for(int i=0; i< DataSource.droneCharges.Length; i++)
+            {
+                droneCharge[i] = DataSource.droneCharges[i];
+            }
+            droneCharge[DataSource.Config.droneChargeIndexer].DroneId = drone.Id;
+            //droneCharge[DataSource.Config.droneChargeIndexer].stationId = drone.Id;
+
+            DataSource.droneCharges = droneCharge;
+            DataSource.Config.droneChargeIndexer++;
+
+        }
+        public void ReleaseDroneFromCharging(Drone drone )
+        {
+            drone.Status = DroneStatus.Free;
+            drone.Battery = 100;
+        }
 
     }
 }
