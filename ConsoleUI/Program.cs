@@ -1,4 +1,5 @@
 ﻿using System;
+using IDAL.DO;
 
 namespace ConsoleUI
 {
@@ -6,7 +7,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-         
+       
             Console.WriteLine("to add enter 1");
             Console.WriteLine("to update enter 2");
             Console.WriteLine("to display enter 3");
@@ -108,6 +109,11 @@ namespace ConsoleUI
                     Console.WriteLine("input not valid");
                     break;
             }
+        }
+
+        public void displayStations()
+        {
+           Station[]  stations = DalObject.DalObject.
         }
     }
 }
