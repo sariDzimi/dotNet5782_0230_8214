@@ -11,7 +11,7 @@ namespace DalObject
     {
         static internal Drone[] drones = new Drone[10];
         static internal Station[] stations = new Station[5];
-        static internal Customer[] customers = new Customer[100];
+        static internal Customer[] customers = new Customer[100]; 
         static internal Parcel[] parcels = new Parcel[100];
         static internal DroneCharge[] droneCharges = new DroneCharge[0];
         internal class Config
