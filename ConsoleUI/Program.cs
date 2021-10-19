@@ -8,9 +8,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
-
-
+            DalObject.DalObject dalObject = new DalObject.DalObject();
 
             Console.WriteLine("to add enter 1");
             Console.WriteLine("to update enter 2");
@@ -30,18 +28,18 @@ namespace ConsoleUI
                     switch (choice)
                     {
                         case 1:
-                            DalObject.DalObject.addStation(getStationFromUser());
+                            dalObject.addStation(getStationFromUser());
                             break;
                         case 2:
-                            DalObject.DalObject.addDrone(getDroneFromUser());
+                            dalObject.addDrone(getDroneFromUser());
 
                             break;
                         case 3:
-                            DalObject.DalObject.addCustomer(getCustomerFromUser());
+                            dalObject.addCustomer(getCustomerFromUser());
 
                             break;
                         case 4:
-                            DalObject.DalObject.addParcel(getParcelFromUser());
+                            dalObject.addParcel(getParcelFromUser());
                             break;
                         default:
                             break;
@@ -56,20 +54,15 @@ namespace ConsoleUI
                     switch (choice)
                     {
                         case 1:
-                            Console.WriteLine("enter an parcels id");
-                            int id = Convert.ToInt32(Console.ReadLine());
-                            DalObject.DalObject.belongPacelToADrone(DalObject.DalObject.findParcel(id));
+
+                            dalObject.belongPacelToADrone(dalObject.findParcel(getParcleId()));
                             break;
                         case 2:
-                            Console.WriteLine("enter an parcels id");
-                            id = Convert.ToInt32(Console.ReadLine());
-                            DalObject.DalObject.CollectAParcelByDrone(DalObject.DalObject.findParcel(id));
+                            dalObject.CollectAParcelByDrone(dalObject.findParcel(getParcleId()));
 
                             break;
                         case 3:
-                            Console.WriteLine("enter an parcels id");
-                            id = Convert.ToInt32(Console.ReadLine());
-                            DalObject.DalObject.DeliverParcelToCustomer(DalObject.DalObject.findParcel(id));
+                            dalObject.DeliverParcelToCustomer(dalObject.findParcel(getParcleId()));
                             break;
                         case 4:
 
@@ -112,12 +105,16 @@ namespace ConsoleUI
                     switch (choice)
                     {
                         case 1:
+                            DisplayList<Station>(dalObject.GetStations());
                             break;
                         case 2:
+                            DisplayList<Drone>(dalObject.GetDrones());
                             break;
                         case 3:
+                            DisplayList<Customer>(dalObject.GetCustomer());
                             break;
                         case 4:
+                            DisplayList<Parcel>(dalObject.GetParcel());
                             break;
                         default:
                             break;
@@ -136,11 +133,6 @@ namespace ConsoleUI
         }
 
 
-        public static void displayStations()
-        {
-            //Station[]  stations = DalObject.DalObject.
-        }
-
         public static Parcel getParcelFromUser()
         {
             Parcel parcel = new Parcel();
@@ -154,7 +146,6 @@ namespace ConsoleUI
             Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
             int prionity = Convert.ToInt32(Console.ReadLine());
             parcel.Pritority = (Pritorities)prionity;
-
             return parcel;
 
 
@@ -219,5 +210,23 @@ namespace ConsoleUI
 
         }
 
+        public static int getParcleId()
+        {
+            Console.WriteLine("enter an parcels id");
+            int id = Convert.ToInt32(Console.ReadLine());
+            return id;
+        }
+
+        public static void DisplayObj<T>(T obj)
+        {
+            Console.WriteLine(obj);
+        }
+        public static void DisplayList<T>(T [] arr)
+        {
+            foreach(var item in arr)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }

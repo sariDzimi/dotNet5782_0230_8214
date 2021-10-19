@@ -25,6 +25,7 @@ namespace DalObject
         }
         static public void Initialize()
         {
+
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
             {
@@ -67,17 +68,24 @@ namespace DalObject
                 parcel.TargetId = rand.Next() % Config.stationsIndexer;
                 parcel.Weight = (WeightCategories)(rand.Next() % 3);
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
-                parcel.Requested = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                parcel.Requested = RandomDate();
                 parcel.DroneId = rand.Next() % Config.dronesIndexer;
-                parcel.Scheduled = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                parcel.PickedUp = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
-                parcel.Delivered = new DateTime(rand.Next(12), rand.Next(24), rand.Next(30), rand.Next(60), rand.Next(60), rand.Next(60));
+                parcel.Scheduled = RandomDate();
+                parcel.PickedUp = RandomDate();
+                parcel.Delivered = RandomDate();
                 Config.parcelsIndexer++;
 
             }
 
             Config.parcelRecognizer = Config.parcelsIndexer + 2;
+        }
 
+        public static DateTime RandomDate()
+        {
+            Random rand = new Random();
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Today - start).Seconds;
+            return start.AddDays(rand.Next(range));
         }
     }
 }
