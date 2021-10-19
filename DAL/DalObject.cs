@@ -24,7 +24,7 @@ namespace DalObject
         public void addCustomer(Customer customer)
         {
             DataSource.customers[DataSource.Config.customersIndexer] = customer;
-            DataSource.Config.customersIndexer++;
+            DataSource.Config.customersIndexer++; 
         }
         public void addParcel(Parcel parcel)
         {
