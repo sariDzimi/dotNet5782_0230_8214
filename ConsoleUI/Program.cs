@@ -1,5 +1,6 @@
 ﻿using System;
 using IDAL.DO;
+using DalObject;
 
 namespace ConsoleUI
 {
@@ -7,7 +8,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-       
+
+
+
+
             Console.WriteLine("to add enter 1");
             Console.WriteLine("to update enter 2");
             Console.WriteLine("to display enter 3");
@@ -26,12 +30,18 @@ namespace ConsoleUI
                     switch (choice)
                     {
                         case 1:
+                            DalObject.DalObject.addStation(getStationFromUser());
                             break;
                         case 2:
+                            DalObject.DalObject.addDrone(getDroneFromUser());
+
                             break;
                         case 3:
+                            DalObject.DalObject.addCustomer(getCustomerFromUser());
+
                             break;
                         case 4:
+                            DalObject.DalObject.addParcel(getParcelFromUser());
                             break;
                         default:
                             break;
@@ -46,12 +56,23 @@ namespace ConsoleUI
                     switch (choice)
                     {
                         case 1:
+                            Console.WriteLine("enter an parcels id");
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            DalObject.DalObject.belongPacelToADrone(DalObject.DalObject.findParcel(id));
                             break;
                         case 2:
+                            Console.WriteLine("enter an parcels id");
+                            id = Convert.ToInt32(Console.ReadLine());
+                            DalObject.DalObject.CollectAParcelByDrone(DalObject.DalObject.findParcel(id));
+
                             break;
                         case 3:
+                            Console.WriteLine("enter an parcels id");
+                            id = Convert.ToInt32(Console.ReadLine());
+                            DalObject.DalObject.DeliverParcelToCustomer(DalObject.DalObject.findParcel(id));
                             break;
                         case 4:
+
                             break;
                         default:
                             break;
@@ -109,11 +130,94 @@ namespace ConsoleUI
                     Console.WriteLine("input not valid");
                     break;
             }
+
+
+
         }
 
-        public void displayStations()
+
+        public static void displayStations()
         {
-           Station[]  stations = DalObject.DalObject.
+            //Station[]  stations = DalObject.DalObject.
         }
+
+        public static Parcel getParcelFromUser()
+        {
+            Parcel parcel = new Parcel();
+            Console.WriteLine("enter a senderId");
+            parcel.SenderId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter a targetetId");
+            parcel.TargetId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
+            int weight = Convert.ToInt32(Console.ReadLine());
+            parcel.Weight = (WeightCategories)weight;
+            Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
+            int prionity = Convert.ToInt32(Console.ReadLine());
+            parcel.Pritority = (Pritorities)prionity;
+
+            return parcel;
+
+
+        }
+
+        public static Drone getDroneFromUser()
+        {
+            Drone drone = new Drone();
+            Console.WriteLine("enter an id");
+            drone.Id = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter a modedl");
+            drone.Model = Console.ReadLine();
+            Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
+            int weight = Convert.ToInt32(Console.ReadLine());
+            drone.MaxWeight = (WeightCategories)weight;
+            Console.WriteLine("enter the status : 1.Free, 2.Maintenance, 3.Delivery");
+            int status = Convert.ToInt32(Console.ReadLine());
+            drone.Status = (DroneStatus)status;
+
+            return drone;
+
+
+        }
+
+
+        public static Station getStationFromUser()
+        {
+            Station station = new Station();
+            Console.WriteLine("enter the name");
+            station.Name = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter number of charge slots");
+            station.ChargeSlots = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter the longitude");
+            int longitude = Convert.ToInt32(Console.ReadLine());
+            station.Longitude = (double)longitude;
+            Console.WriteLine("enter the latitude");
+            int latitude = Convert.ToInt32(Console.ReadLine());
+            station.Latitude = (double)latitude;
+
+            return station;
+
+
+        }
+
+
+        public static Customer getCustomerFromUser()
+        {
+            Customer customer = new Customer();
+            Console.WriteLine("enter the name");
+            customer.Name = Console.ReadLine();
+            Console.WriteLine("enter the celPhone");
+            customer.Phone = Console.ReadLine();
+            Console.WriteLine("enter the longitude");
+            int longitude = Convert.ToInt32(Console.ReadLine());
+            customer.Longitude = (double)longitude;
+            Console.WriteLine("enter the latitude");
+            int latitude = Convert.ToInt32(Console.ReadLine());
+            customer.Latitude = (double)latitude;
+
+            return customer;
+
+
+        }
+
     }
 }

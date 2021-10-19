@@ -15,28 +15,28 @@ namespace DalObject
             DataSource.Initialize();
         }
 
-        public void addDrone(Drone drone)
+        public static void addDrone(Drone drone)
         {
             DataSource.drones[DataSource.Config.dronesIndexer] = drone;
             DataSource.Config.dronesIndexer++;
         }
 
-        public void addCustomer(Customer customer)
+        public static void addCustomer(Customer customer)
         {
             DataSource.customers[DataSource.Config.customersIndexer] = customer;
             DataSource.Config.customersIndexer++; 
         }
-        public void addParcel(Parcel parcel)
+        public static void addParcel(Parcel parcel)
         {
             DataSource.parcels[DataSource.Config.parcelsIndexer] = parcel;
             DataSource.Config.parcelsIndexer++;
         }
-        public void addStation(Station station)
+        public static  void addStation(Station station)
         {
             DataSource.stations[DataSource.Config.stationsIndexer] = station;
             DataSource.Config.dronesIndexer++;
         }
-        public Station[] GetStations()
+        public static Station[] GetStations()
         {
             int length = DataSource.stations.Length;
             Station[] newStations = new Station[length];
@@ -47,7 +47,7 @@ namespace DalObject
             return newStations;
         }
 
-        public Drone[] GetDrones()
+        public static Drone[] GetDrones()
         {
             int length = DataSource.drones.Length;
             Drone[] newDrones = new Drone[length];
@@ -58,7 +58,7 @@ namespace DalObject
             return newDrones;
         }
 
-        public Customer[] GetCustomer()
+        public static Customer[] GetCustomer()
         {
             int length = DataSource.customers.Length;
             Customer[] newCustomer = new Customer[length];
@@ -69,7 +69,7 @@ namespace DalObject
             return newCustomer;
         }
 
-        public Parcel[] GetParcel()
+        public static Parcel[] GetParcel()
         {
             int length = DataSource.parcels.Length;
             Parcel[] newParcel = new Parcel[length];
@@ -81,8 +81,25 @@ namespace DalObject
         }
 
 
-        public void belongPacelToADrone(Parcel parcel)
+        public static Parcel findParcel(int id)
         {
+            for(int i=0; i< DataSource.parcels.Length; i++)
+            {
+                if (DataSource.parcels[i].Id == id)
+                {
+                    return DataSource.parcels[i];
+                }
+            }
+            return DataSource.parcels[0];
+        }
+
+
+
+
+
+        public static void belongPacelToADrone(Parcel parcel)
+        {
+
 
             for (int i = 0; i < DataSource.drones.Length; i++)
             {
@@ -98,17 +115,17 @@ namespace DalObject
             // "no available drone";
         }
         
-        public void CollectAParcelByDrone(Parcel parcel)
+        public static void CollectAParcelByDrone(Parcel parcel)
         {
             parcel.PickedUp = DateTime.Now;
         }
 
-        public void DeliverParcelToCustomer(Parcel parcel)
+        public static void DeliverParcelToCustomer(Parcel parcel)
         {
             parcel.Delivered = DateTime.Now;
         }
 
-        public void SendDroneForCharging(Drone drone)
+        public static void SendDroneForCharging(Drone drone)
         {
             drone.Status = DroneStatus.Maintenance;
             DroneCharge [] droneCharge = new DroneCharge [DataSource.Config.droneChargeIndexer + 1];
@@ -118,13 +135,14 @@ namespace DalObject
                 droneCharge[i] = DataSource.droneCharges[i];
             }
             droneCharge[DataSource.Config.droneChargeIndexer].DroneId = drone.Id;
+          
             //droneCharge[DataSource.Config.droneChargeIndexer].stationId = drone.Id;
 
             DataSource.droneCharges = droneCharge;
             DataSource.Config.droneChargeIndexer++;
 
         }
-        public void ReleaseDroneFromCharging(Drone drone )
+        public static void ReleaseDroneFromCharging(Drone drone )
         {
             drone.Status = DroneStatus.Free;
             drone.Battery = 100;
