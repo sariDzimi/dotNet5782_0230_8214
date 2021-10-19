@@ -7,7 +7,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    class DataSource
+     public class DataSource
     {
         static internal Drone[] drones = new Drone[10];
         static internal Station[] stations = new Station[5];
