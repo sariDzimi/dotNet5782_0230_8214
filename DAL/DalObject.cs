@@ -136,9 +136,6 @@ namespace DalObject
         }
 
 
-
-
-
         public void belongPacelToADrone(Parcel parcel)
         {
 
