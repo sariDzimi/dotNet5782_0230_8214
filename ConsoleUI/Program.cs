@@ -8,13 +8,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            DalObject.DalObject dalObject = new DalObject.DalObject();
             int choices;
             do
             {
-
-
-                DalObject.DalObject dalObject = new DalObject.DalObject();
-
                 Console.WriteLine("to add enter 1");
                 Console.WriteLine("to update enter 2");
                 Console.WriteLine("to display enter 3");
@@ -154,6 +151,8 @@ namespace ConsoleUI
         public static Parcel getParcelFromUser()
         {
             Parcel parcel = new Parcel();
+            Console.WriteLine("enter the id");
+            parcel.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter a senderId");
             parcel.SenderId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter a targetetId");
@@ -192,6 +191,8 @@ namespace ConsoleUI
         public static Station getStationFromUser()
         {
             Station station = new Station();
+            Console.WriteLine("enter the id");
+            station.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter the name");
             station.Name = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter number of charge slots");
@@ -211,7 +212,10 @@ namespace ConsoleUI
 
         public static Customer getCustomerFromUser()
         {
+
             Customer customer = new Customer();
+            Console.WriteLine("enter the id");
+            customer.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter the name");
             customer.Name = Console.ReadLine();
             Console.WriteLine("enter the celPhone");
@@ -260,9 +264,9 @@ namespace ConsoleUI
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>(T [] arr)
+        public static void DisplayList<T>(T[] arr)
         {
-            foreach(var item in arr)
+            foreach (var item in arr)
             {
                 Console.WriteLine(item);
             }
