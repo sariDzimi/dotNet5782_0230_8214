@@ -91,8 +91,17 @@ namespace DalObject
             }
             return newParcel;
         }
-
-
+        
+        public DroneCharge[] GetDroneCharges()
+        {
+            int length = DataSource.droneCharges.Length;
+            DroneCharge[] newDroneCharge = new DroneCharge[length];
+            for (int i = 0; i < length; i++)
+            {
+                newDroneCharge[i] = DataSource.droneCharges[i];
+            }
+            return newDroneCharge;
+        }
 
         public Parcel findParcel(int id)
         {
@@ -172,13 +181,13 @@ namespace DalObject
             parcel.Delivered = DateTime.Now;
         }
 
-        public void SendDroneForCharging(Drone drone)
+        public void SendDroneForCharging(Drone drone, Station station)
         {
             drone.Status = DroneStatus.Maintenance;
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone.Id;
-
-            for (int i = 0; i < DataSource.stations.Length; i++)
+            droneCharge.stationId = station.Id;
+/*            for (int i = 0; i < DataSource.stations.Length; i++)
             {
                 int ChargeSlots = 0;
                 for (int j = 0; j < DataSource.droneCharges.Length; j++)
@@ -192,7 +201,7 @@ namespace DalObject
                     droneCharge.stationId = DataSource.stations[i].Id;
                     break;
                 }
-            }
+            }*/
             addDronCharge(droneCharge);
         }
         public void ReleaseDroneFromCharging(Drone drone)
@@ -213,7 +222,10 @@ namespace DalObject
             DataSource.Config.droneChargeIndexer--;
             //DataSource.droneCharges[DataSource.Config.droneChargeIndexer] = null;
         }
+ 
     }
+
+
 }
 
 

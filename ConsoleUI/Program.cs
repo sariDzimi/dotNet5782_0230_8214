@@ -71,7 +71,7 @@ namespace ConsoleUI
                                 dalObject.DeliverParcelToCustomer(dalObject.findParcel(getParcleId()));
                                 break;
                             case 4:
-                                dalObject.SendDroneForCharging(dalObject.findDrone(getDroeId()));
+                                dalObject.SendDroneForCharging(dalObject.findDrone(getDroeId()), dalObject.findStation(getStaionId()));
                                 break;
                             case 5:
                                 dalObject.ReleaseDroneFromCharging(dalObject.findDrone(getDroeId()));
@@ -129,6 +129,12 @@ namespace ConsoleUI
                                 break;
                             case 4:
                                 DisplayList<Parcel>(dalObject.GetParcel());
+                                break;
+                            case 5:
+                                DisplayNotBelongedParcels(dalObject.GetParcel());
+                                break;
+                            case 6:
+                                displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
                                 break;
                             default:
                                 break;
@@ -265,6 +271,34 @@ namespace ConsoleUI
             foreach(var item in arr)
             {
                 Console.WriteLine(item);
+            }
+        }
+
+        public static void DisplayNotBelongedParcels(Parcel[] parcels) 
+        {
+            foreach(var parcel in parcels)
+            {
+                if(parcel.DroneId == 0)
+                    Console.WriteLine(parcel);
+            }
+        }
+
+       public static void displayStationsWithEmptyChargingSlots(Station [] stations, DroneCharge[] droneCharges)
+        {
+            for (int i = 0; i < stations.Length; i++)
+            {
+                int ChargeSlots = 0;
+                for (int j = 0; j < droneCharges.Length; j++)
+                {
+                    if (droneCharges[j].stationId == stations[i].Id)
+                        ChargeSlots++;
+
+                }
+                if (ChargeSlots < stations[i].ChargeSlots)
+                {
+                    Console.WriteLine(stations[i]);
+                    break;
+                }
             }
         }
     }
