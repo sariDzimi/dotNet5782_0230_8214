@@ -8,128 +8,146 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            DalObject.DalObject dalObject = new DalObject.DalObject();
-
-            Console.WriteLine("to add enter 1");
-            Console.WriteLine("to update enter 2");
-            Console.WriteLine("to display enter 3");
-            Console.WriteLine("to display lists enter 4");
-            Console.WriteLine("to exit enter 5");
-            int choices = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(choices);
-            switch (choices)
+            int choices;
+            do
             {
-                case 1:
-                    Console.WriteLine("to add a station enter 1");
-                    Console.WriteLine("to add a drone enter 2");
-                    Console.WriteLine("to add a customer enter 3");
-                    Console.WriteLine("to add a parcel enter 4");
-                    int choice = Convert.ToInt32(Console.ReadLine());
-                    switch (choice)
-                    {
-                        case 1:
-                            dalObject.addStation(getStationFromUser());
-                            break;
-                        case 2:
-                            dalObject.addDrone(getDroneFromUser());
-
-                            break;
-                        case 3:
-                            dalObject.addCustomer(getCustomerFromUser());
-
-                            break;
-                        case 4:
-                            dalObject.addParcel(getParcelFromUser());
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 2:
-                    Console.WriteLine("to conect a parcel to a drone enter 1");
-                    Console.WriteLine("to collect a parcel by a drone enter 2");
-                    Console.WriteLine("to supply a parcel to a customer enter 3");
-                    Console.WriteLine("to send a drone to charge in a station enter 4");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    switch (choice)
-                    {
-                        case 1:
-
-                            dalObject.belongPacelToADrone(dalObject.findParcel(getParcleId()));
-                            break;
-                        case 2:
-                            dalObject.CollectAParcelByDrone(dalObject.findParcel(getParcleId()));
-
-                            break;
-                        case 3:
-                            dalObject.DeliverParcelToCustomer(dalObject.findParcel(getParcleId()));
-                            break;
-                        case 4:
-
-                            break;
-                        default:
-                            break;
-                    }
 
 
-                    break;
-                case 3:
-                    Console.WriteLine("to display a station enter 1");
-                    Console.WriteLine("to display a drone enter 2");
-                    Console.WriteLine("to display a customer enter 3");
-                    Console.WriteLine("to display a parcel enter 4");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    switch (choice)
-                    {
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        default:
-                            break;
-                    }
+                DalObject.DalObject dalObject = new DalObject.DalObject();
 
-                    break;
-                case 4:
-                    Console.WriteLine("to display the stations list enter 1");
-                    Console.WriteLine("to display the drones list enter 2");
-                    Console.WriteLine("to display the customers list enter 3");
-                    Console.WriteLine("to display the parcels list enter 4");
-                    Console.WriteLine("to display the list of parcels that are free enter 5");
-                    Console.WriteLine("to display the list of station that have  free chargers enter 6");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    switch (choice)
-                    {
-                        case 1:
-                            DisplayList<Station>(dalObject.GetStations());
-                            break;
-                        case 2:
-                            DisplayList<Drone>(dalObject.GetDrones());
-                            break;
-                        case 3:
-                            DisplayList<Customer>(dalObject.GetCustomer());
-                            break;
-                        case 4:
-                            DisplayList<Parcel>(dalObject.GetParcel());
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 5:
-                    break;
+                Console.WriteLine("to add enter 1");
+                Console.WriteLine("to update enter 2");
+                Console.WriteLine("to display enter 3");
+                Console.WriteLine("to display lists enter 4");
+                Console.WriteLine("to exit enter 5");
+                choices = Convert.ToInt32(Console.ReadLine());
+                switch (choices)
+                {
+                    case 1:
+                        Console.WriteLine("to add a station enter 1");
+                        Console.WriteLine("to add a drone enter 2");
+                        Console.WriteLine("to add a customer enter 3");
+                        Console.WriteLine("to add a parcel enter 4");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                dalObject.addStation(getStationFromUser());
+                                break;
+                            case 2:
+                                dalObject.addDrone(getDroneFromUser());
 
-                default:
-                    Console.WriteLine("input not valid");
-                    break;
-            }
+                                break;
+                            case 3:
+                                dalObject.addCustomer(getCustomerFromUser());
+
+                                break;
+                            case 4:
+                                dalObject.addParcel(getParcelFromUser());
+                                break;
+                            default:
+                                Console.WriteLine("please enter a number btween 1-4");
+                                break;
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("to conect a parcel to a drone enter 1");
+                        Console.WriteLine("to collect a parcel by a drone enter 2");
+                        Console.WriteLine("to supply a parcel to a customer enter 3");
+                        Console.WriteLine("to send a drone to charge in a station enter 4");
+                        Console.WriteLine("to Release a skimmer from charging at a base station enter 5 ");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+
+                                dalObject.belongPacelToADrone(dalObject.findParcel(getParcleId()));
+                                break;
+                            case 2:
+                                dalObject.CollectAParcelByDrone(dalObject.findParcel(getParcleId()));
+
+                                break;
+                            case 3:
+                                dalObject.DeliverParcelToCustomer(dalObject.findParcel(getParcleId()));
+                                break;
+                            case 4:
+                                dalObject.SendDroneForCharging(dalObject.findDrone(getDroeId()));
+                                break;
+                            case 5:
+                                dalObject.ReleaseDroneFromCharging(dalObject.findDrone(getDroeId()));
+                                break;
+
+                            default:
+                                break;
+                        }
+
+
+                        break;
+                    case 3:
+                        Console.WriteLine("to display a station enter 1");
+                        Console.WriteLine("to display a drone enter 2");
+                        Console.WriteLine("to display a customer enter 3");
+                        Console.WriteLine("to display a parcel enter 4");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                DisplayObj<Station>(dalObject.findStation(getStaionId()));
+                                break;
+                            case 2:
+                                DisplayObj<Drone>(dalObject.findDrone(getDroeId()));
+                                break;
+                            case 3:
+                                DisplayObj<Customer>(dalObject.findCustomer(getCustomerId()));
+                                break;
+                            case 4:
+                                DisplayObj<Parcel>(dalObject.findParcel(getParcleId()));
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+                    case 4:
+                        Console.WriteLine("to display the stations list enter 1");
+                        Console.WriteLine("to display the drones list enter 2");
+                        Console.WriteLine("to display the customers list enter 3");
+                        Console.WriteLine("to display the parcels list enter 4");
+                        Console.WriteLine("to display the list of parcels that are free enter 5");
+                        Console.WriteLine("to display the list of station that have  free chargers enter 6");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                DisplayList<Station>(dalObject.GetStations());
+                                break;
+                            case 2:
+                                DisplayList<Drone>(dalObject.GetDrones());
+                                break;
+                            case 3:
+                                DisplayList<Customer>(dalObject.GetCustomer());
+                                break;
+                            case 4:
+                                DisplayList<Parcel>(dalObject.GetParcel());
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+
+                    default:
+                        Console.WriteLine("input not valid");
+                        break;
+                }
 
 
 
+
+            } while (choices != 5);
         }
 
 
@@ -213,6 +231,27 @@ namespace ConsoleUI
         public static int getParcleId()
         {
             Console.WriteLine("enter an parcels id");
+            int id = Convert.ToInt32(Console.ReadLine());
+            return id;
+        }
+
+        public static int getDroeId()
+        {
+            Console.WriteLine("enter an drone id");
+            int id = Convert.ToInt32(Console.ReadLine());
+            return id;
+        }
+
+        public static int getStaionId()
+        {
+            Console.WriteLine("enter an station id");
+            int id = Convert.ToInt32(Console.ReadLine());
+            return id;
+        }
+
+        public static int getCustomerId()
+        {
+            Console.WriteLine("enter an cusomer id");
             int id = Convert.ToInt32(Console.ReadLine());
             return id;
         }

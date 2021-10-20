@@ -38,7 +38,14 @@ namespace DalObject
         }
         public void addDronCharge(DroneCharge droneCharge)
         {
-            DataSource.droneCharges[DataSource.Config.droneChargeIndexer] = droneCharge;
+            int length = DataSource.droneCharges.Length;
+            DroneCharge[] newDronechage = new DroneCharge[length + 1];
+            for (int i = 0; i < length; i++)
+            {
+                newDronechage[i] = DataSource.droneCharges[i];
+            }
+            newDronechage[DataSource.Config.droneChargeIndexer] = droneCharge;
+            DataSource.droneCharges = newDronechage;
             DataSource.Config.droneChargeIndexer++;
         }
         public Station[] GetStations()
