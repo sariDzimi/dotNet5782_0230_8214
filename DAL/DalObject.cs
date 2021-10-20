@@ -17,24 +17,33 @@ namespace DalObject
 
         public void addDrone(Drone drone)
         {
+            //To do condion to check the size of the array
+            //if(DataSource.Config.stationsIndexer<10)
+            Console.WriteLine($"{ DataSource.Config.dronesIndexer}");
             DataSource.drones[DataSource.Config.dronesIndexer] = drone;
             DataSource.Config.dronesIndexer++;
         }
 
         public void addCustomer(Customer customer)
         {
+            //To do condion to check the size of the array
+            //if(DataSource.Config.stationsIndexer<100)
             DataSource.customers[DataSource.Config.customersIndexer] = customer;
             DataSource.Config.customersIndexer++; 
         }
         public void addParcel(Parcel parcel)
         {
+            //To do condion to check the size of the array
+            //if(DataSource.Config.stationsIndexer<100)
             DataSource.parcels[DataSource.Config.parcelsIndexer] = parcel;
             DataSource.Config.parcelsIndexer++;
         }
         public  void addStation(Station station)
         {
+            //To do condion to check the size of the array
+            //if(DataSource.Config.stationsIndexer<5)
             DataSource.stations[DataSource.Config.stationsIndexer] = station;
-            DataSource.Config.dronesIndexer++;
+            DataSource.Config.stationsIndexer++;
         }
         public void addDronCharge(DroneCharge droneCharge)
         {
