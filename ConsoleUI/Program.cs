@@ -277,7 +277,6 @@ namespace ConsoleUI
                 Console.WriteLine(item);
             }
         }
-
         public static void DisplayNotBelongedParcels(Parcel[] parcels) 
         {
             foreach(var parcel in parcels)
