@@ -162,15 +162,47 @@ namespace DalObject
         }
 
 
+        public void updateDrone(Drone drone)
+        {
+            int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
+            DataSource.drones[index] = drone;
+
+        }
+        public void updateParcel(Parcel parcel)
+        {
+            int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
+            DataSource.parcels[index] = parcel;
+
+        }
+        public void updateCustomer(Customer customer)
+        {
+            int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
+            DataSource.customers[index] = customer;
+
+        }
+
+        public void updateDronecharge(DroneCharge dronecharge)
+        {
+            int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
+            DataSource.droneCharges[index] = dronecharge;
+
+        }
+
+
+
         public void belongPacelToADrone(Parcel parcel)
         {
             Parcel parcel1 = new Parcel();
             parcel1 = parcel;
             var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);
+            int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
             parcel1.DroneId = drone.Id;
+            drone.Status = DroneStatus.Delivery;
+            updateDrone(drone);
+            updateParcel(parcel1);
 
-            int index = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
-            DataSource.parcels[index] = parcel1;
+            //int index = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
+            //DataSource.parcels[index] = parcel1;
 
             //for (int i = 0; i < DataSource.drones.Count; i++)
             //{
