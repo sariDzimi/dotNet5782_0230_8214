@@ -271,7 +271,7 @@ namespace ConsoleUI
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>(List<T> arr)
+        public static void DisplayList<T>( IEnumerable<T> arr)//List<T> arr)
         {
             foreach (var item in arr)
             {
@@ -287,9 +287,9 @@ namespace ConsoleUI
             }
         }
 
-       public static void displayStationsWithEmptyChargingSlots(List<Station> stations, List<DroneCharge> droneCharges)
+       public static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> stations, List<DroneCharge> droneCharges)
         {
-            for (int i = 0; i < stations.Count; i++)
+/*            for (int i = 0; i < stations.Count; i++)
             {
                 int ChargeSlots = 0;
                 for (int j = 0; j < droneCharges.Count; j++)
@@ -303,7 +303,7 @@ namespace ConsoleUI
                     Console.WriteLine(stations[i]);
                     break;
                 }
-            }
+            }*/
         }
     }
 }

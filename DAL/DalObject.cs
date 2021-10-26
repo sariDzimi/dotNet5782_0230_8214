@@ -58,15 +58,20 @@ namespace DalObject
             //DataSource.droneCharges = newDronechage;
             //DataSource.Config.droneChargeIndexer++;
         }
-        public List<Station> GetStations()
+        public IEnumerable<Station> GetStations()
         {
-            int length = DataSource.stations.Count;
+            /*int length = DataSource.stations.Count;
             List<Station> newStations = new List<Station>();
             for (int i = 0; i < length; i++)
             {
                 newStations[i] = DataSource.stations[i];
             }
-            return newStations;
+            return newStations;*/
+
+            foreach(var station in DataSource.stations)
+            {
+                yield return station;
+            }
         }
 
         public List<Drone> GetDrones()
