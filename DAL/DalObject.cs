@@ -60,62 +60,42 @@ namespace DalObject
         }
         public IEnumerable<Station> GetStations()
         {
-            /*int length = DataSource.stations.Count;
-            List<Station> newStations = new List<Station>();
-            for (int i = 0; i < length; i++)
-            {
-                newStations[i] = DataSource.stations[i];
-            }
-            return newStations;*/
-
             foreach(var station in DataSource.stations)
             {
                 yield return station;
             }
         }
 
-        public List<Drone> GetDrones()
+        public IEnumerable<Drone> GetDrones()
         {
-            int length = DataSource.drones.Count;
-            List<Drone> newDrones = new List<Drone>();
-            for (int i = 0; i < length; i++)
+            foreach (var drone in DataSource.drones)
             {
-                newDrones[i] = DataSource.drones[i];
+                yield return drone;
             }
-            return newDrones;
         }
 
-        public List<Customer> GetCustomer()
+        public IEnumerable<Customer> GetCustomer()
         {
-            int length = DataSource.customers.Count;
-            List<Customer> newCustomer = new List<Customer>();
-            for (int i = 0; i < length; i++)
+            foreach (var customer in DataSource.customers)
             {
-                newCustomer[i] = DataSource.customers[i];
+                yield return customer;
             }
-            return newCustomer;
         }
 
-        public List<Parcel> GetParcel()
+        public IEnumerable<Parcel> GetParcel()
         {
-            int length = DataSource.parcels.Count;
-            List<Parcel> newParcel = new List<Parcel>();
-            for (int i = 0; i < length; i++)
+            foreach (var parcel in DataSource.parcels)
             {
-                newParcel[i] = DataSource.parcels[i];
+                yield return parcel;
             }
-            return newParcel;
         }
         
-        public List<DroneCharge> GetDroneCharges()
+        public IEnumerable<DroneCharge> GetDroneCharges()
         {
-            int length = DataSource.droneCharges.Count;
-            List<DroneCharge> newDroneCharge = new List<DroneCharge>();
-            for (int i = 0; i < length; i++)
+            foreach (var droneCharge in DataSource.droneCharges)
             {
-                newDroneCharge[i] = DataSource.droneCharges[i];
+                yield return droneCharge;
             }
-            return newDroneCharge;
         }
 
         public Parcel findParcel(int id)
