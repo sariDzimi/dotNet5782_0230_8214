@@ -1,6 +1,7 @@
 ﻿using System;
 using IDAL.DO;
 using DalObject;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -270,14 +271,14 @@ namespace ConsoleUI
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>(T[] arr)
+        public static void DisplayList<T>(List<T> arr)
         {
             foreach (var item in arr)
             {
                 Console.WriteLine(item);
             }
         }
-        public static void DisplayNotBelongedParcels(Parcel[] parcels) 
+        public static void DisplayNotBelongedParcels(List<Parcel> parcels) 
         {
             foreach(var parcel in parcels)
             {
@@ -286,12 +287,12 @@ namespace ConsoleUI
             }
         }
 
-       public static void displayStationsWithEmptyChargingSlots(Station [] stations, DroneCharge[] droneCharges)
+       public static void displayStationsWithEmptyChargingSlots(List<Station> stations, List<DroneCharge> droneCharges)
         {
-            for (int i = 0; i < stations.Length; i++)
+            for (int i = 0; i < stations.Count; i++)
             {
                 int ChargeSlots = 0;
-                for (int j = 0; j < droneCharges.Length; j++)
+                for (int j = 0; j < droneCharges.Count; j++)
                 {
                     if (droneCharges[j].stationId == stations[i].Id)
                         ChargeSlots++;
