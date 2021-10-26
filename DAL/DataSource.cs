@@ -83,12 +83,12 @@ namespace DalObject
                 //Parcel parcel = parcels[Config.parcelsIndexer];
                 Parcel parcel = new Parcel();
                 parcel.Id = parcels.Count+1;
-                parcel.SenderId = rand.Next() % parcels.Count + 1;
-                parcel.TargetId = rand.Next() % parcels.Count + 1;
+                parcel.SenderId = rand.Next() % (parcels.Count + 1);
+                parcel.TargetId = rand.Next() % (parcels.Count + 1);
                 parcel.Weight = (WeightCategories)(rand.Next() % 3);
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
-                parcel.DroneId = rand.Next() % parcels.Count() + 1;
+                parcel.DroneId = rand.Next() % (parcels.Count + 1);
                 parcel.Scheduled = RandomDate();
                 parcel.PickedUp = RandomDate();
                 parcel.Delivered = RandomDate();
