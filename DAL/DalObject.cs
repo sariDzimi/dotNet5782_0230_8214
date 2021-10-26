@@ -227,11 +227,13 @@ namespace DalObject
         public void CollectAParcelByDrone(Parcel parcel)
         {
             parcel.PickedUp = DateTime.Now;
+            updateParcel(parcel);
         }
 
         public void DeliverParcelToCustomer(Parcel parcel)
         {
             parcel.Delivered = DateTime.Now;
+            updateParcel(parcel);
         }
 
         public void SendDroneForCharging(Drone drone, Station station)
