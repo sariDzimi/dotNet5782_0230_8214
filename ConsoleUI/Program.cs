@@ -154,6 +154,15 @@ namespace ConsoleUI
             } while (choices != 5);
         }
 
+        private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
+        {
+            throw new NotImplementedException();
+        }
 
         public static Parcel getParcelFromUser()
         {

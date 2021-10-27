@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
-using IDAL.DO;
+using IBL.BO;
 
-namespace DalObject
+namespace BLDalObject
 {
-    public class DalObject: IDal.IDal
+    public class BalObject: BL.IBL
     {
-        public DalObject()
+        public BalObject()
         {
             DataSource.Initialize();
         }
