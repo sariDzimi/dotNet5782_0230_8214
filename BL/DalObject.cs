@@ -3,63 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DalObject;
 using IBL.BO;
 
-namespace BLDalObject
+
+namespace DalObject
 {
-    public class BalObject: BL.IBL
+    public class DalObject : IBL.IBL
     {
-        public BalObject()
+        public DalObject()
         {
             DataSource.Initialize();
         }
 
         public void addDrone(Drone drone)
         {
-            //To do condion to check the size of the array
-            //if(DataSource.Config.stationsIndexer<10)
-            //Console.WriteLine($"{ DataSource.Config.dronesIndexer}");
+
             DataSource.drones.Add(drone);
-          //  DataSource.Config.dronesIndexer++;
+
         }
 
         public void addCustomer(Customer customer)
         {
-            //To do condion to check the size of the array
-            //if(DataSource.Config.stationsIndexer<100)
+
             DataSource.customers.Add(customer);
-            //DataSource.Config.customersIndexer++; 
+
         }
         public void addParcel(Parcel parcel)
         {
-            //To do condion to check the size of the array
-            //if(DataSource.Config.stationsIndexer<100)
-            DataSource.parcels.Add( parcel);
-            //DataSource.Config.parcelsIndexer++;
+            DataSource.parcels.Add(parcel);
+
         }
-        public  void addStation(Station station)
+        public void addStation(Station station)
         {
-            //To do condion to check the size of the array
-            //if(DataSource.Config.stationsIndexer<5)
+
             DataSource.stations.Add(station);
-            //DataSource.Config.stationsIndexer++;
         }
-        public void addDronCharge(DroneCharge droneCharge)
+
+        public void AddDronCharge(DroneCharge droneCharge)
         {
             DataSource.droneCharges.Add(droneCharge);
-            //int length = DataSource.droneCharges.Length;
-            //DroneCharge[] newDronechage = new DroneCharge[length + 1];
-            //for (int i = 0; i < length; i++)
-            //{
-            //    newDronechage[i] = DataSource.droneCharges[i];
-            //}
-            //newDronechage[DataSource.Config.droneChargeIndexer] = droneCharge;
-            //DataSource.droneCharges = newDronechage;
-            //DataSource.Config.droneChargeIndexer++;
+
         }
         public IEnumerable<Station> GetStations()
         {
-            foreach(var station in DataSource.stations)
+            foreach (var station in DataSource.stations)
             {
                 yield return station;
             }
@@ -88,7 +76,7 @@ namespace BLDalObject
                 yield return parcel;
             }
         }
-        
+
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
             foreach (var droneCharge in DataSource.droneCharges)
@@ -185,24 +173,9 @@ namespace BLDalObject
             updateDrone(drone);
             updateParcel(parcel1);
 
-            //int index = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
-            //DataSource.parcels[index] = parcel1;
 
-            //for (int i = 0; i < DataSource.drones.Count; i++)
-            //{
-            //    if (DataSource.drones[i].Status == DroneStatus.Free)
-            //    {
-            //        parcel.DroneId = DataSource.drones[i].Id;
-            //        //DataSource.drones[i].Status = DroneStatus.Delivery;
-            //        return;
-            //    }
-            //}
-            //TODO: "no available drone";
-            //TODO: "no available drone";
-            //TODO: "no available drone";
-            //TODO: "no available drone";
         }
-        
+
         public void CollectAParcelByDrone(Parcel parcel)
         {
             parcel.PickedUp = DateTime.Now;
@@ -221,21 +194,7 @@ namespace BLDalObject
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone.Id;
             droneCharge.stationId = station.Id;
-/*            for (int i = 0; i < DataSource.stations.Length; i++)
-            {
-                int ChargeSlots = 0;
-                for (int j = 0; j < DataSource.droneCharges.Length; j++)
-                {
-                    if (DataSource.droneCharges[j].stationId == DataSource.stations[i].Id)
-                        ChargeSlots++;
 
-                }
-                if (ChargeSlots < DataSource.stations[i].ChargeSlots)
-                {
-                    droneCharge.stationId = DataSource.stations[i].Id;
-                    break;
-                }
-            }*/
             addDronCharge(droneCharge);
         }
         public void ReleaseDroneFromCharging(Drone drone)
@@ -249,24 +208,26 @@ namespace BLDalObject
                     index = i;
                     break;
                 }
-                   
+
 
             }
-            //TODO: if not found...
+
             for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
             {
                 DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
             }
-            //DataSource.Config.droneChargeIndexer--;
-            //DataSource.droneCharges[DataSource.Config.droneChargeIndexer] = null;
         }
- 
+
+
+
+
+        public void addDronCharge(DroneCharge droneCharge)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
     }
-
-
 }
-
-
-
-
-

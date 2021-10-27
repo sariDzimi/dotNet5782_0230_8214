@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Station
+        public class Station
         {
             public int Id { get; set; }
             public int Name { get; set; }

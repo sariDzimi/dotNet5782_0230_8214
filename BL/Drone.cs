@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Drone
+        public class Drone
         {
             public int Id { get; set; }
             public string Model { get; set; }

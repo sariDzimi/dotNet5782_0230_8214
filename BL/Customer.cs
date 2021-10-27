@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        public struct Customer
+        public class Customer
         {
 
             public int Id { get; set; }

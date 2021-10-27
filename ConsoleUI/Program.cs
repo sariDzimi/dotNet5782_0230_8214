@@ -298,21 +298,7 @@ namespace ConsoleUI
 
        public static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> stations, List<DroneCharge> droneCharges)
         {
-/*            for (int i = 0; i < stations.Count; i++)
-            {
-                int ChargeSlots = 0;
-                for (int j = 0; j < droneCharges.Count; j++)
-                {
-                    if (droneCharges[j].stationId == stations[i].Id)
-                        ChargeSlots++;
 
-                }
-                if (ChargeSlots < stations[i].ChargeSlots)
-                {
-                    Console.WriteLine(stations[i]);
-                    break;
-                }
-            }*/
         }
     }
 }
