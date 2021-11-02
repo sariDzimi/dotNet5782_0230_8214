@@ -8,9 +8,20 @@ namespace IBL
 {
     namespace BO
     {
+        
         public class Station
         {
-            IDAL.DO.Station station = new IDAL.DO.Station();
+            IDAL.DO.Station station;
+            public Station()
+            {
+                station = new IDAL.DO.Station();
+            }
+            
+
+            public override string ToString()
+            {
+                return $"station {station.Name} : {station.Id}";
+            }
 
         }
 
