@@ -9,7 +9,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public class DalObject: IDal.IDal
+    public class DalObject : IDal.IDal
     {
         public DalObject()
         {
@@ -18,37 +18,54 @@ namespace DalObject
 
         public void addDrone(Drone drone)
         {
-            
+            if (DataSource.drones.Any(dr => dr.Id == drone.Id))
+            {
+                throw new IdAlreadyExist(drone.Id);
+            }
+
             DataSource.drones.Add(drone);
-         
+
         }
 
         public void addCustomer(Customer customer)
         {
-           
+            if (DataSource.customers.Any(cs => cs.Id == customer.Id))
+            {
+                throw new IdAlreadyExist(customer.Id);
+            }
+
             DataSource.customers.Add(customer);
-          
+
         }
         public void addParcel(Parcel parcel)
         {
-            
-            DataSource.parcels.Add( parcel);
-         
+            if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
+            {
+                throw new IdAlreadyExist(parcel.Id);
+            }
+
+            DataSource.parcels.Add(parcel);
+
         }
-        public  void addStation(Station station)
+        public void addStation(Station station)
         {
-          
+            if (DataSource.customers.Any(st => st.Id == station.Id))
+            {
+                throw new IdAlreadyExist(station.Id);
+            }
+
             DataSource.stations.Add(station);
-          
+
         }
         public void addDronCharge(DroneCharge droneCharge)
         {
+
             DataSource.droneCharges.Add(droneCharge);
-           
+
         }
         public IEnumerable<Station> GetStations()
         {
-            foreach(var station in DataSource.stations)
+            foreach (var station in DataSource.stations)
             {
                 yield return station;
             }
@@ -77,7 +94,7 @@ namespace DalObject
                 yield return parcel;
             }
         }
-        
+
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
             foreach (var droneCharge in DataSource.droneCharges)
@@ -94,52 +111,50 @@ namespace DalObject
             }
             catch (ArgumentNullException e)
             {
-                throw new NotFoundException( id);
+                throw new NotFoundException(id);
             }
-            //for (int i = 0; i < DataSource.parcels.Count; i++)
-            //{
-            //    if (DataSource.parcels[i].Id == id)
-            //    {
-            //        return DataSource.parcels[i];
-            //    }
-            //}
-            //return DataSource.parcels[0];
+
         }
+
 
         public Station findStation(int id)
         {
-            for (int i = 0; i < DataSource.stations.Count; i++)
+            try
             {
-                if (DataSource.stations[i].Id == id)
-                {
-                    return DataSource.stations[i];
-                }
+                return DataSource.stations.First(sat => sat.Id == id);
             }
-            return DataSource.stations[0];
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundException(id);
+            }
+
         }
 
         public Customer findCustomer(int id)
         {
-            for (int i = 0; i < DataSource.customers.Count; i++)
+
+
+            try
             {
-                if (DataSource.parcels[i].Id == id)
-                {
-                    return DataSource.customers[i];
-                }
+                return DataSource.customers.First(customer => customer.Id == id);
             }
-            return DataSource.customers[0];
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundException(id);
+            }
+
         }
 
         public Drone findDrone(int id)
         {
-            for (int i = 0; i < DataSource.drones.Count; i++)
+            try
             {
-                if (DataSource.drones[i].Id == id)
-                {
-                    return DataSource.drones[i];
-                }
+                return DataSource.drones.First(drone => drone.Id == id);
             }
-            return DataSource.drones[0];
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundException(id);
+            }
         }
 
 
@@ -148,6 +163,8 @@ namespace DalObject
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             DataSource.drones[index] = drone;
         }
+
+
         public void updateParcel(Parcel parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
@@ -191,9 +208,16 @@ namespace DalObject
         public void ReleaseDroneFromCharging(Drone drone)
         {
             throw new NotImplementedException();
-        }
-    }
 
+        }
+        public double[] RequestElectricity()
+        {
+            
+        }
+          
+     }
+
+    
 
 }
 
