@@ -200,8 +200,7 @@ namespace ConsoleUI_BL
             drone.MaxWeight = (WeightCategories)weight;
             Console.WriteLine("enter the status : 1.Free, 2.Maintenance, 3.Delivery");
             int status = Convert.ToInt32(Console.ReadLine());
-            drone.Status = (DroneStatus)status;
-
+            
             return drone;
 
 
@@ -211,7 +210,7 @@ namespace ConsoleUI_BL
         public static Station getStationFromUser()
         {
             Station station = new Station();
-            Console.WriteLine("enter the id");
+            Console.WriteLine("enter station number");
             station.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter the name");
             station.Name = Convert.ToInt32(Console.ReadLine());

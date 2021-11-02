@@ -84,6 +84,8 @@ namespace IDal
         public List<Parcel> GetParcelsList();
 
 
+
+        public double[] RequestElectricityUse();
     }
 
 }
