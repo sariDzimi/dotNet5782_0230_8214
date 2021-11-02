@@ -74,8 +74,8 @@ namespace IDal
         public void SendDroneForCharging(Drone drone, Station station);
 
         public void ReleaseDroneFromCharging(Drone drone);
-        
 
+        public double[] RequestElectricityUse();
     }
 
 }

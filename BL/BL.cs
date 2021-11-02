@@ -13,69 +13,94 @@ namespace BL
 {
     public class BL 
     {
+
+       
+        DalObject.DalObject dalObject;
         public BL()
         {
             IDal.IDal dalObject = new DalObject.DalObject();
+            double[] ElectricityUse = dalObject.RequestElectricityUse();
+            double ElectricityUseWhenFree = ElectricityUse[0];
+            double ElectricityUseWhenLight = ElectricityUse[1];
+            double ElectricityUseWhenMedium = ElectricityUse[2];
+            double ElectricityUseWhenheavy = ElectricityUse[3];
+            double RateOfCharching = ElectricityUse[4];
+
+            List<Drone> drones = dalObject.GetDrones();
+            drones.ForEach(e=> e.)
+
+
+
+
         }
 
-        DalObject.DalObject dalObject;
 
-        public void belongPacelToADrone(Parcel parcel)
-        {
-            Parcel parcel1 = new Parcel();
-            parcel1 = parcel;
-           var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);
-            int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
-            parcel1.DroneId = drone.Id;
-            drone.Status = DroneStatus.Delivery;
-            dalObject.updateDrone(drone);
-            dalObject.updateParcel(parcel1);
+       
+
+        
+ 
+
+
+
+
+
+
+        //public void belongPacelToADrone(Parcel parcel)
+        //{
+        //    Parcel parcel1 = new Parcel();
+        //    parcel1 = parcel;
+        //   var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);
+        //    int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
+        //    parcel1.DroneId = drone.Id;
+        //    drone.Status = DroneStatus.Delivery;
+        //    dalObject.updateDrone(drone);
+        //    dalObject.updateParcel(parcel1);
 
             
-        }
+        //}
 
-        public void CollectAParcelByDrone(Parcel parcel)
-        {
-            parcel.PickedUp = DateTime.Now;
-            dalObject.updateParcel(parcel);
-        }
+        //public void CollectAParcelByDrone(Parcel parcel)
+        //{
+        //    parcel.PickedUp = DateTime.Now;
+        //    dalObject.updateParcel(parcel);
+        //}
 
-        public void DeliverParcelToCustomer(Parcel parcel)
-        {
-            parcel.Delivered = DateTime.Now;
-            dalObject.updateParcel(parcel);
-        }
+        //public void DeliverParcelToCustomer(Parcel parcel)
+        //{
+        //    parcel.Delivered = DateTime.Now;
+        //    dalObject.updateParcel(parcel);
+        //}
 
-        public void SendDroneForCharging(Drone drone, Station station)
-        {
-            drone.Status = DroneStatus.Maintenance;
-            DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneId = drone.Id;
-            droneCharge.stationId = station.Id;
+        //public void SendDroneForCharging(Drone drone, Station station)
+        //{
+        //    drone.Status = DroneStatus.Maintenance;
+        //    DroneCharge droneCharge = new DroneCharge();
+        //    droneCharge.DroneId = drone.Id;
+        //    droneCharge.stationId = station.Id;
 
-            dalObject.addDronCharge(droneCharge);
-        }
-        public void ReleaseDroneFromCharging(Drone drone)
-        {
-            int index = 0;
-            drone.Status = DroneStatus.Free;
-            for (int i = 0; i < DataSource.droneCharges.Count; i++)
-            {
-                if (DataSource.droneCharges[i].DroneId == drone.Id)
-                {
-                    index = i;
-                    break;
-                }
+        //    dalObject.addDronCharge(droneCharge);
+        //}
+        //public void ReleaseDroneFromCharging(Drone drone)
+        //{
+        //    int index = 0;
+        //    drone.Status = DroneStatus.Free;
+        //    for (int i = 0; i < DataSource.droneCharges.Count; i++)
+        //    {
+        //        if (DataSource.droneCharges[i].DroneId == drone.Id)
+        //        {
+        //            index = i;
+        //            break;
+        //        }
 
 
-            }
+        //    }
          
-            for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
-            {
-                DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
-            }
+        //    for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
+        //    {
+        //        DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
+        //    }
            
-        }
+        //}
 
 
 

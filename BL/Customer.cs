@@ -16,12 +16,18 @@ namespace IBL
             {
                  customer = new IDAL.DO.Customer();
             }
-           
+
+            List<Parcel> parcelsSentedByCustomer = new List<Parcel>();
+            List<Parcel> parcelsSentedToCustomer = new List<Parcel>();
+
+
 
             public override string ToString()
             {
                 return $"customer {customer.Name} : {customer.Id}";
             }
+
+            
         }
     }
 }

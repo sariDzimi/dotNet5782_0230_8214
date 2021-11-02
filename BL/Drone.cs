@@ -17,11 +17,14 @@ namespace IBL
                 drone = new IDAL.DO.Drone();
 
             }
-          
-           
-      
 
-        public override string ToString()
+            public DroneStatus droneStatus { get; set; }
+
+            public Parcel sendedparcel { get; set; }
+
+            public Location location { get; set; }
+
+            public override string ToString()
             {
                 return $"drone  : {drone.Id}";
             }
