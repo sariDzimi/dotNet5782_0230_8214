@@ -16,7 +16,8 @@ namespace IBL
             {
                 station = new IDAL.DO.Station();
             }
-            
+
+            public List<Drone> ChargingDrones { get; set; }
 
             public override string ToString()
             {

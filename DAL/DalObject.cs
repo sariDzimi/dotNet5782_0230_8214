@@ -63,6 +63,27 @@ namespace DalObject
             DataSource.droneCharges.Add(droneCharge);
 
         }
+
+        public List<Station> GetStationsList()
+        {
+            return DataSource.stations;
+        }
+
+        public List<Drone> GetDronesList()
+        {
+            return DataSource.drones;
+        }
+
+        public List<Customer> GetCustomersList()
+        {
+            return DataSource.customers;
+        }
+
+        public List<Parcel> GetParcelsList()
+        {
+            return DataSource.parcels;
+        }
+
         public IEnumerable<Station> GetStations()
         {
             foreach (var station in DataSource.stations)
