@@ -9,7 +9,7 @@ using IDAL.DO;
 
 namespace IDal
 {
-    interface IDal
+    public interface IDal
     {
         public void addDrone(Drone drone);
 

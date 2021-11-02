@@ -15,8 +15,7 @@ namespace BL
     {
         public BL()
         {
-            DalObject.DalObject dalObject = new DalObject.DalObject();
-
+            IDal.IDal dalObject = new DalObject.DalObject();
         }
 
         DalObject.DalObject dalObject;
