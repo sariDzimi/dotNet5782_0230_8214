@@ -11,9 +11,17 @@ namespace IBL
     {
         public class Customer
         {
-            IDAL.DO.Customer customer = new IDAL.DO.Customer();
+            IDAL.DO.Customer customer;
+            public Customer()
+            {
+                 customer = new IDAL.DO.Customer();
+            }
+           
+
+            public override string ToString()
+            {
+                return $"customer {customer.Name} : {customer.Id}";
+            }
         }
-
-
     }
 }
