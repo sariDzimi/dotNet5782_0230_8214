@@ -147,7 +147,6 @@ namespace DalObject
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             DataSource.drones[index] = drone;
-
         }
         public void updateParcel(Parcel parcel)
         {

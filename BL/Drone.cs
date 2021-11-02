@@ -10,16 +10,7 @@ namespace IBL
     {
         public class Drone
         {
-            public int Id { get; set; }
-            public string Model { get; set; }
-            public WeightCategories MaxWeight { get; set; }
-            public DroneStatus Status { get; set; }
-            public double Battery { get; set; }
-
-            public override string ToString()
-            {
-                return $"drone {Id} : {Model}";
-            }
+           IDAL.DO.Drone drone = new IDAL.DO.Drone();
         }
     }
 }
