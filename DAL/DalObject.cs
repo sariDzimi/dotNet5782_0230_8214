@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
 using DalObject;
 using IDAL.DO;
 
@@ -87,14 +88,22 @@ namespace DalObject
 
         public Parcel findParcel(int id)
         {
-            for (int i = 0; i < DataSource.parcels.Count; i++)
+            try
             {
-                if (DataSource.parcels[i].Id == id)
-                {
-                    return DataSource.parcels[i];
-                }
+                return DataSource.parcels.First(parcel => parcel.Id == id);
             }
-            return DataSource.parcels[0];
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundException( id);
+            }
+            //for (int i = 0; i < DataSource.parcels.Count; i++)
+            //{
+            //    if (DataSource.parcels[i].Id == id)
+            //    {
+            //        return DataSource.parcels[i];
+            //    }
+            //}
+            //return DataSource.parcels[0];
         }
 
         public Station findStation(int id)
