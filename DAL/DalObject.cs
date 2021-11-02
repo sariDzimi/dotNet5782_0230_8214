@@ -210,14 +210,15 @@ namespace DalObject
             throw new NotImplementedException();
 
         }
-        public double[] RequestElectricity()
-        {
-            
-        }
-          
-     }
 
-    
+        public double[] RequestElectricityUse()
+        {
+            double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium,DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
+            return Electricity;
+
+        }
+
+    }
 
 }
 

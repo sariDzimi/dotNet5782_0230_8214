@@ -194,9 +194,7 @@ namespace ConsoleUI
             Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
             int weight = Convert.ToInt32(Console.ReadLine());
             drone.MaxWeight = (WeightCategories)weight;
-            Console.WriteLine("enter the status : 1.Free, 2.Maintenance, 3.Delivery");
-            int status = Convert.ToInt32(Console.ReadLine());
-            drone.Status = (DroneStatus)status;
+
 
             return drone;
 
