@@ -185,6 +185,15 @@ namespace DalObject
 
         }
 
+        public IEnumerable<Parcel> GetNotBelongedParcels()
+        {
+            foreach (var parcel in DataSource.parcels)
+            {
+                if(parcel.DroneId == 0)
+                    yield return parcel;
+            }
+        }
+
         public void belongPacelToADrone(Parcel parcel)
         {
             throw new NotImplementedException();
@@ -216,6 +225,15 @@ namespace DalObject
             double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium,DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
             return Electricity;
 
+        }
+
+        public IEnumerable<Station> GetStationsWithEmptyChargingSlots()
+        {
+            //TODO//////////////////////////////////////////
+            foreach (var station in DataSource.stations)
+            {
+                yield return station;
+            }
         }
 
     }

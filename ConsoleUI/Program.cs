@@ -129,10 +129,10 @@ namespace ConsoleUI
                                 DisplayList<Parcel>(dalObject.GetParcel());
                                 break;
                             case 5:
-                                DisplayNotBelongedParcels(dalObject.GetParcel());
+                                DisplayList<Parcel>(dalObject.GetNotBelongedParcels());
                                 break;
                             case 6:
-                                displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
+                                DisplayList<Station>(dalObject.GetStationsWithEmptyChargingSlots());
                                 break;
                             default:
                                 break;
@@ -154,15 +154,7 @@ namespace ConsoleUI
             } while (choices != 5);
         }
 
-        private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
-        {
-            throw new NotImplementedException();
-        }
 
-        private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
-        {
-            throw new NotImplementedException();
-        }
 
         public static Parcel getParcelFromUser()
         {
@@ -194,8 +186,6 @@ namespace ConsoleUI
             Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
             int weight = Convert.ToInt32(Console.ReadLine());
             drone.MaxWeight = (WeightCategories)weight;
-
-
             return drone;
 
 
@@ -278,25 +268,13 @@ namespace ConsoleUI
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>( IEnumerable<T> arr)//List<T> arr)
+        public static void DisplayList<T>( IEnumerable<T> arr)
         {
             foreach (var item in arr)
             {
                 Console.WriteLine(item);
             }
         }
-        public static void DisplayNotBelongedParcels(List<Parcel> parcels) 
-        {
-            foreach(var parcel in parcels)
-            {
-                if(parcel.DroneId == 0)
-                    Console.WriteLine(parcel);
-            }
-        }
 
-       public static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> stations, List<DroneCharge> droneCharges)
-        {
-
-        }
     }
 }

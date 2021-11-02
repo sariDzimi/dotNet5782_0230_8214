@@ -57,7 +57,9 @@ namespace IDal
 
         public void updateDronecharge(DroneCharge dronecharge);
 
+        public IEnumerable<Station> GetStationsWithEmptyChargingSlots();
 
+        public IEnumerable<Parcel> GetNotBelongedParcels();
 
 
         public void belongPacelToADrone(Parcel parcel);
