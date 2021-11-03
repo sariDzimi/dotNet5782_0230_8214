@@ -171,39 +171,32 @@ namespace ConsoleUI_BL
         public static Parcel getParcelFromUser()
         {
             Parcel parcel = new Parcel();
-            Console.WriteLine("enter the id");
-            parcel.Id = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter a senderId");
+            Console.WriteLine("enter id of sender");
             parcel.SenderId = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter a targetetId");
-            parcel.TargetId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter id of reciver");
+            parcel.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
             int weight = Convert.ToInt32(Console.ReadLine());
             parcel.Weight = (WeightCategories)weight;
             Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
             int prionity = Convert.ToInt32(Console.ReadLine());
             parcel.Pritority = (Pritorities)prionity;
+
             return parcel;
-
-
         }
 
         public static Drone getDroneFromUser()
         {
             Drone drone = new Drone();
-            Console.WriteLine("enter an id");
+            Console.WriteLine("enter id");
             drone.Id = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter a modedl");
-            drone.Model = Console.ReadLine();
-            Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
+            Console.WriteLine("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
             int weight = Convert.ToInt32(Console.ReadLine());
             drone.MaxWeight = (WeightCategories)weight;
-            Console.WriteLine("enter the status : 1.Free, 2.Maintenance, 3.Delivery");
-            int status = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("number of station for start charging");
+            //TODO
             
             return drone;
-
-
         }
 
 
@@ -212,9 +205,9 @@ namespace ConsoleUI_BL
             Station station = new Station();
             Console.WriteLine("enter station number");
             station.Id = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter the name");
+            Console.WriteLine("enter station name");
             station.Name = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter number of charge slots");
+            Console.WriteLine("enter number of free charge slots");
             station.ChargeSlots = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter the longitude");
             int longitude = Convert.ToInt32(Console.ReadLine());
@@ -231,24 +224,15 @@ namespace ConsoleUI_BL
 
         public static Customer getCustomerFromUser()
         {
-
             Customer customer = new Customer();
-            Console.WriteLine("enter the id");
+            Console.WriteLine("enter id");
             customer.Id = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter the name");
+            Console.WriteLine("enter name");
             customer.Name = Console.ReadLine();
-            Console.WriteLine("enter the celPhone");
+            Console.WriteLine("enter cellPhone");
             customer.Phone = Console.ReadLine();
-            Console.WriteLine("enter the longitude");
-            int longitude = Convert.ToInt32(Console.ReadLine());
-            customer.Longitude = (double)longitude;
-            Console.WriteLine("enter the latitude");
-            int latitude = Convert.ToInt32(Console.ReadLine());
-            customer.Latitude = (double)latitude;
 
             return customer;
-
-
         }
 
         public static int getParcleId()
