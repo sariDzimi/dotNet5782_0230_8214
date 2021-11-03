@@ -20,7 +20,7 @@ namespace IBL
 
             public DroneStatus droneStatus { get; set; }
 
-            public Parcel sendedparcel { get; set; }
+            public ParcelAtTransfor parcelAtTransfor { get; set; }
 
             public Location location { get; set; }
 

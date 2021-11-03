@@ -14,8 +14,8 @@ namespace IBL
                 Longitude = Longitude1;
                 Latitude = Latitude1;
             }
-            double Longitude;
-            double Latitude;
+            public double Longitude;
+            public double Latitude;
         }
 
 

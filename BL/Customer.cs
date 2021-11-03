@@ -17,9 +17,10 @@ namespace IBL
                  customer = new IDAL.DO.Customer();
             }
 
-            List<Parcel> parcelsSentedByCustomer = new List<Parcel>();
-            List<Parcel> parcelsSentedToCustomer = new List<Parcel>();
+            List<ParcelAtTransfor> parcelsSentedByCustomer = new List<ParcelAtTransfor>();
+            List<ParcelAtTransfor> parcelsSentedToCustomer = new List<ParcelAtTransfor>();
 
+            Location location { get; set; }
 
 
             public override string ToString()

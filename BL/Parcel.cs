@@ -15,6 +15,9 @@ namespace IBL
             {
                 parcel = new IDAL.DO.Parcel();
             }
+
+
+            Drone drone;
             public override string ToString()
             {
                 return $"sender {parcel.SenderId} : {parcel.Id}";
