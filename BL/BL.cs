@@ -52,9 +52,10 @@ namespace BL
 
         }
 
-        public void addStationToBL(StationBL stationBL)
+        public void addStationToBL(int id, int name, Location location)
         {
-
+            StationBL stationBL = new StationBL() { Id = id, Name = name, LocationStation = location };
+            List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
         }
 
         public void updateDroneModel(int id, string model)
