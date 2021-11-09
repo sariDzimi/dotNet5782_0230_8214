@@ -27,7 +27,7 @@ namespace DalObject
                 return instance;
             }
         }
-        public void addDrone(Drone drone)
+        public void addDrone(DroneDL drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
             {
@@ -38,7 +38,7 @@ namespace DalObject
 
         }
 
-        public void addCustomer(Customer customer)
+        public void addCustomer(CustomerDL customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
             {
@@ -48,7 +48,7 @@ namespace DalObject
             DataSource.customers.Add(customer);
 
         }
-        public void addParcel(Parcel parcel)
+        public void addParcel(ParcelDL parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
             {
@@ -58,7 +58,7 @@ namespace DalObject
             DataSource.parcels.Add(parcel);
 
         }
-        public void addStation(Station station)
+        public void addStation(StationDL station)
         {
             if (DataSource.customers.Any(st => st.Id == station.Id))
             {
@@ -68,34 +68,34 @@ namespace DalObject
             DataSource.stations.Add(station);
 
         }
-        public void addDronCharge(DroneCharge droneCharge)
+        public void addDronCharge(DroneChargeDL droneCharge)
         {
 
             DataSource.droneCharges.Add(droneCharge);
 
         }
 
-        public List<Station> GetStationsList()
+        public List<StationDL> GetStationsList()
         {
             return DataSource.stations;
         }
 
-        public List<Drone> GetDronesList()
+        public List<DroneDL> GetDronesList()
         {
             return DataSource.drones;
         }
 
-        public List<Customer> GetCustomersList()
+        public List<CustomerDL> GetCustomersList()
         {
             return DataSource.customers;
         }
 
-        public List<Parcel> GetParcelsList()
+        public List<ParcelDL> GetParcelsList()
         {
             return DataSource.parcels;
         }
 
-        public IEnumerable<Station> GetStations()
+        public IEnumerable<StationDL> GetStations()
         {
             foreach (var station in DataSource.stations)
             {
@@ -103,7 +103,7 @@ namespace DalObject
             }
         }
 
-        public IEnumerable<Drone> GetDrones()
+        public IEnumerable<DroneDL> GetDrones()
         {
             foreach (var drone in DataSource.drones)
             {
@@ -111,7 +111,7 @@ namespace DalObject
             }
         }
 
-        public IEnumerable<Customer> GetCustomer()
+        public IEnumerable<CustomerDL> GetCustomer()
         {
             foreach (var customer in DataSource.customers)
             {
@@ -119,7 +119,7 @@ namespace DalObject
             }
         }
 
-        public IEnumerable<Parcel> GetParcel()
+        public IEnumerable<ParcelDL> GetParcel()
         {
             foreach (var parcel in DataSource.parcels)
             {
@@ -127,7 +127,7 @@ namespace DalObject
             }
         }
 
-        public IEnumerable<DroneCharge> GetDroneCharges()
+        public IEnumerable<DroneChargeDL> GetDroneCharges()
         {
             foreach (var droneCharge in DataSource.droneCharges)
             {
@@ -135,7 +135,7 @@ namespace DalObject
             }
         }
 
-        public Parcel findParcel(int id)
+        public ParcelDL findParcel(int id)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace DalObject
         }
 
 
-        public Station findStation(int id)
+        public StationDL findStation(int id)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace DalObject
 
         }
 
-        public Customer findCustomer(int id)
+        public CustomerDL findCustomer(int id)
         {
 
 
@@ -177,7 +177,7 @@ namespace DalObject
 
         }
 
-        public Drone findDrone(int id)
+        public DroneDL findDrone(int id)
         {
             try
             {
@@ -190,34 +190,34 @@ namespace DalObject
         }
 
 
-        public void updateDrone(Drone drone)
+        public void updateDrone(DroneDL drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             DataSource.drones[index] = drone;
         }
 
 
-        public void updateParcel(Parcel parcel)
+        public void updateParcel(ParcelDL parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             DataSource.parcels[index] = parcel;
 
         }
-        public void updateCustomer(Customer customer)
+        public void updateCustomer(CustomerDL customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
             DataSource.customers[index] = customer;
 
         }
 
-        public void updateDronecharge(DroneCharge dronecharge)
+        public void updateDronecharge(DroneChargeDL dronecharge)
         {
             int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
             DataSource.droneCharges[index] = dronecharge;
 
         }
 
-        public IEnumerable<Parcel> GetNotBelongedParcels()
+        public IEnumerable<ParcelDL> GetNotBelongedParcels()
         {
             foreach (var parcel in DataSource.parcels)
             {
@@ -236,9 +236,9 @@ namespace DalObject
         }
 
 
-        public void belongPacelToADrone(Parcel parcel)
+        public void belongPacelToADrone(ParcelDL parcel)
         {
-            Parcel parcel1 = new Parcel();
+            ParcelDL parcel1 = new ParcelDL();
             parcel1 = parcel;
             var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);//TODO
             int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
@@ -249,28 +249,28 @@ namespace DalObject
 
         }
 
-        public void CollectAParcelByDrone(Parcel parcel)
+        public void CollectAParcelByDrone(ParcelDL parcel)
         {
             parcel.PickedUp = DateTime.Now;
             updateParcel(parcel);
         }
 
-        public void DeliverParcelToCustomer(Parcel parcel)
+        public void DeliverParcelToCustomer(ParcelDL parcel)
         {
             parcel.Delivered = DateTime.Now;
             updateParcel(parcel);
         }
 
-        public void SendDroneForCharging(Drone drone, Station station)
+        public void SendDroneForCharging(DroneDL drone, StationDL station)
         {
-           
-            DroneCharge droneCharge = new DroneCharge();
+
+            DroneChargeDL droneCharge = new DroneChargeDL();
             droneCharge.DroneId = drone.Id;
             droneCharge.stationId = station.Id;
 
             addDronCharge(droneCharge);
         }
-        public void ReleaseDroneFromCharging(Drone drone)
+        public void ReleaseDroneFromCharging(DroneDL drone)
         {
             int index = 0;
             
@@ -292,7 +292,7 @@ namespace DalObject
 
         }
 
-        public IEnumerable<Station> GetStationsWithEmptyChargingSlots()
+        public IEnumerable<StationDL> GetStationsWithEmptyChargingSlots()
         {
             //TODO//////////////////////////////////////////
             foreach (var station in DataSource.stations)
