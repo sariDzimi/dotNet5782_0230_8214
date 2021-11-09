@@ -11,18 +11,19 @@ namespace IBL
         
         public class Station
         {
-            IDAL.DO.Station station;
-            public Station()
+            public int Id { get; set; }
+            public int Name { get; set; }
+            public double Longitude { get; set; }
+            public double Latitude { get; set; }
+            public int ChargeSlots { get; set; }
+            public override string ToString()
             {
-                station = new IDAL.DO.Station();
+                return $"station {Name} : {Id}";
             }
 
             List<DroneAtCharging> droneAtChargings = new List<DroneAtCharging>();
 
-            public override string ToString()
-            {
-                return $"station {station.Name} : {station.Id}";
-            }
+           
 
         }
 

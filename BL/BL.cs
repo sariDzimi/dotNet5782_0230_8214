@@ -26,8 +26,29 @@ namespace BL
             double ElectricityUseWhenheavy = ElectricityUse[3];
             double RateOfCharching = ElectricityUse[4];
 
-            List<Drone> drones = dalObject.GetDrones();
-            drones.ForEach(e=> e.)
+            //st<Drone> drones = dalObject.GetDrones();
+            //drones.ForEach(e=> e.)
+
+            List <IDAL.DO.Drone> drones = dalObject.GetDronesList();
+
+            
+           foreach(var drone in drones)
+            {
+                
+                //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
+                //מצב הרחפן יהיה כמבצע משלוח ○
+                /*            מיקום הרחפן יהיה כדלקמן: ○
+                אם החבילה שויכה אך לא נאספה -מיקום יהיה ■
+                בתחנה הקרובה לשולח
+                אם החבילה נאספה אך עוד לא סופקה -מיקום ■
+                הרחפן יהיה במיקום השולח
+                מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן ○
+                לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד
+                המשלוח לבין טעינה מלאה
+                */
+                //else
+                
+            }
 
 
 
@@ -35,10 +56,10 @@ namespace BL
         }
 
 
-       
 
-        
- 
+
+
+
 
 
 
@@ -56,7 +77,7 @@ namespace BL
         //    dalObject.updateDrone(drone);
         //    dalObject.updateParcel(parcel1);
 
-            
+
         //}
 
         //public void CollectAParcelByDrone(Parcel parcel)
@@ -94,12 +115,12 @@ namespace BL
 
 
         //    }
-         
+
         //    for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
         //    {
         //        DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
         //    }
-           
+
         //}
 
 
