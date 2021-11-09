@@ -9,7 +9,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class Customer
+        public class CustomerBL
         {
 
 

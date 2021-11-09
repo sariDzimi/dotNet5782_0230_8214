@@ -200,9 +200,9 @@ namespace ConsoleUI_BL
         }
 
 
-        public static Station getStationFromUser()
+        public static StationBL getStationFromUser()
         {
-            Station station = new Station();
+            StationBL station = new Station();
             Console.WriteLine("enter station number");
             station.Id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("enter station name");

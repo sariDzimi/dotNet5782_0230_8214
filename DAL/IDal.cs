@@ -11,77 +11,77 @@ namespace IDal
 {
     public interface IDal
     {
-        public void addDrone(Drone drone);
+        public void addDrone(DroneDL drone);
 
-        public void addCustomer(Customer customer);
+        public void addCustomer(CustomerDL customer);
 
-        public void addParcel(Parcel parcel);
+        public void addParcel(ParcelDL parcel);
 
-        public void addStation(Station station);
+        public void addStation(StationDL station);
 
-        public void addDronCharge(DroneCharge droneCharge);
+        public void addDronCharge(DroneChargeDL droneCharge);
 
-        public IEnumerable<Station> GetStations();
-
-
-        public IEnumerable<Drone> GetDrones();
+        public IEnumerable<StationDL> GetStations();
 
 
-        public IEnumerable<Customer> GetCustomer();
+        public IEnumerable<DroneDL> GetDrones();
 
 
-        public IEnumerable<Parcel> GetParcel();
-
-        public IEnumerable<DroneCharge> GetDroneCharges();
+        public IEnumerable<CustomerDL> GetCustomer();
 
 
-        public Parcel findParcel(int id);
+        public IEnumerable<ParcelDL> GetParcel();
+
+        public IEnumerable<DroneChargeDL> GetDroneCharges();
 
 
-        public Station findStation(int id);
+        public ParcelDL findParcel(int id);
 
 
-        public Customer findCustomer(int id);
+        public StationDL findStation(int id);
 
 
-        public Drone findDrone(int id);
+        public CustomerDL findCustomer(int id);
+
+
+        public DroneDL findDrone(int id);
 
 
 
-        public void updateDrone(Drone drone);
+        public void updateDrone(DroneDL drone);
 
-        public void updateParcel(Parcel parcel);
+        public void updateParcel(ParcelDL parcel);
 
-        public void updateCustomer(Customer customer);
-
-
-        public void updateDronecharge(DroneCharge dronecharge);
-
-        public IEnumerable<Station> GetStationsWithEmptyChargingSlots();
-
-        public IEnumerable<Parcel> GetNotBelongedParcels();
+        public void updateCustomer(CustomerDL customer);
 
 
-        public void belongPacelToADrone(Parcel parcel);
+        public void updateDronecharge(DroneChargeDL dronecharge);
+
+        public IEnumerable<StationDL> GetStationsWithEmptyChargingSlots();
+
+        public IEnumerable<ParcelDL> GetNotBelongedParcels();
 
 
-        public void CollectAParcelByDrone(Parcel parcel);
+        public void belongPacelToADrone(ParcelDL parcel);
 
 
-        public void DeliverParcelToCustomer(Parcel parcel);
+        public void CollectAParcelByDrone(ParcelDL parcel);
 
 
-        public void SendDroneForCharging(Drone drone, Station station);
+        public void DeliverParcelToCustomer(ParcelDL parcel);
 
-        public void ReleaseDroneFromCharging(Drone drone);
 
-        public List<Station> GetStationsList();
+        public void SendDroneForCharging(DroneDL drone, StationDL station);
 
-        public List<Drone> GetDronesList();
+        public void ReleaseDroneFromCharging(DroneDL drone);
 
-        public List<Customer> GetCustomersList();
+        public List<StationDL> GetStationsList();
 
-        public List<Parcel> GetParcelsList();
+        public List<DroneDL> GetDronesList();
+
+        public List<CustomerDL> GetCustomersList();
+
+        public List<ParcelDL> GetParcelsList();
 
 
 

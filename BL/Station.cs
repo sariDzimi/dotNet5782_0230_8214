@@ -9,19 +9,19 @@ namespace IBL
     namespace BO
     {
         
-        public class Station
+        public class StationBL
         {
             public int Id { get; set; }
             public int Name { get; set; }
-            public double Longitude { get; set; }
-            public double Latitude { get; set; }
+
+            public Location Location { get; set; }
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
                 return $"station {Name} : {Id}";
             }
 
-            List<DroneAtCharging> droneAtChargings = new List<DroneAtCharging>();
+            List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
 
            
 

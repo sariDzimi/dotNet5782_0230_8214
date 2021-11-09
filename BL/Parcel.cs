@@ -8,13 +8,13 @@ namespace IBL
 {
     namespace BO
     {
-        public class Parcel
+        public class ParcelBL
         {
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int TargetId { get; set; }
-            public WeightCategories Weight { get; set; }
-            public Pritorities Pritority { get; set; }
+            public IDAL.DO.WeightCategories Weight { get; set; }
+            public IDAL.DO.Pritorities Pritority { get; set; }
             public DateTime Requested { get; set; }
             public int DroneId { get; set; }
 
