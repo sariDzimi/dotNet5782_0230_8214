@@ -52,10 +52,45 @@ namespace BL
 
         }
 
-        public void addStationToBL(int id, int name, Location location)
+        public void addStationToBL(int id, int name, Location location, int slots)
         {
-            StationBL stationBL = new StationBL() { Id = id, Name = name, LocationStation = location };
+            StationBL stationBL = new StationBL() { Id = id, Name = name, LocationStation = location , ChargeSlots=slots};
             List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
+        }
+
+        public void addDroneToBL(int id,int status, string model , int numberStaion)
+        {
+            DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
+            //TODO numberStation.
+            droneBL.droneStatus = DroneStatus.Maintenance;
+
+            
+            droneBL.Battery= rand.Next(20, 40);
+            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
+            stationDL = dalObject.findStation(numberStaion);
+            Location location = new Location(stationDL.Longitude, stationDL.Latitude);
+            droneBL.location = location;
+
+
+
+        }
+
+        public void addCustomerToBL(int id, string name, string phone, Location location)
+        {
+            CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
+
+        }
+
+
+        public void ParcelAtTransfor(int sendedId, int reciveId, int weigth, int prioty)
+        {
+            ParcelBL parcelBL = new ParcelBL() { Id = sendedId, TargetId = reciveId, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
+            parcelBL.Requested = DateTime.Now;
+            parcelBL.droneAtParcel = null;
+
+
+
+
         }
 
 
@@ -64,12 +99,9 @@ namespace BL
 
 
 
-        public int DroneId { get; set; }
-        public int stationId { get; set; }
 
 
-
-
+        Random rand = new Random();
         DalObject.DalObject dalObject;
         public BL()
         {
@@ -88,7 +120,7 @@ namespace BL
 
             List<Drone> dronesBL = new List<Drone>();
 
-            Random rand = new Random();
+           
             foreach (var drone in dronesDL)
            {
                 Drone droneBL = new Drone();

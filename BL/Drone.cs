@@ -15,7 +15,7 @@ namespace IBL
             public string Model { get; set; }
             public IDAL.DO.WeightCategories MaxWeight { get; set; }
 
-            double battery { get; set; }
+            public double Battery { get; set; }
 
             public DroneStatus droneStatus { get; set; }
 

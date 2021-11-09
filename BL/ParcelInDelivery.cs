@@ -15,13 +15,17 @@ namespace IBL
 
             }
 
-            public int Id { get; set; }
+            public int Id { get; set; } 
+
+            public bool isWating { get; set; }
 
             public IDAL.DO.WeightCategories weightCategories { get; set; }
 
             public IDAL.DO.Pritorities pritorities { get; set; }
 
-            public bool isWating { get; set; }
+           public CustomerAtParcel customerAtParcelTheSender { get; set; }
+           public CustomerAtParcel customerAtParcelTheReciver { get; set; }
+
 
             public Location locationCollect { get; set; }
             public Location locationTarget { get; set; }

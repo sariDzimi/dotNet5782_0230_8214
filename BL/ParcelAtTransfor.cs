@@ -19,8 +19,8 @@ namespace IBL
 
             public IDAL.DO.Pritorities pritorities { get; set; }
 
-            public CustomerAtDelivery customerAtDeliverySender { get; set; }
-            public CustomerAtDelivery customerAtDeliveryReciver { get; set; }
+            public CustomerAtParcel customerAtDeliverySender { get; set; }
+            public CustomerAtParcel customerAtDeliveryReciver { get; set; }
 
 
 

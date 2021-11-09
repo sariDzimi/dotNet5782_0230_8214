@@ -9,10 +9,10 @@ namespace IBL
     namespace BO
     {
 
-        public class CustomerAtDelivery
+        public class CustomerAtParcel
         {
 
-            public CustomerAtDelivery()
+            public CustomerAtParcel()
             {
 
             }
