@@ -13,7 +13,7 @@ namespace IBL
         {
             public int Id { get; set; }
             public string Model { get; set; }
-            public WeightCategories MaxWeight { get; set; }
+            public IDAL.DO.WeightCategories MaxWeight { get; set; }
 
             double battery { get; set; }
 
