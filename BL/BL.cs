@@ -86,10 +86,14 @@ namespace BL
 
             List <IDAL.DO.DroneDL> drones = dalObject.GetDronesList();
 
-            
-           foreach(var drone in drones)
-            {
-                
+            List<Drone> dronesBL = new List<Drone>();
+
+            Random rand = new Random();
+            foreach (var drone in dronesDL)
+           {
+                Drone droneBL = new Drone();
+                droneBL = convertToDroneBL(drone);
+
                 //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
                 //מצב הרחפן יהיה כמבצע משלוח ○
                 /*            מיקום הרחפן יהיה כדלקמן: ○
@@ -102,14 +106,28 @@ namespace BL
                 המשלוח לבין טעינה מלאה
                 */
                 //else
-                
-            }
+                droneBL.droneStatus = (DroneStatus)rand.Next(0, 2);
+                if(droneBL.droneStatus == DroneStatus.Maintenance)
+                {
+                    int length = dalObject.GetStationsList().Count;
+                    IDAL.DO.Station stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
+                    Station stationBL = 
+                }
 
-
-
+           }
 
         }
+        public Drone convertToDroneBL(IDAL.DO.Drone drone)
+        {
+            Drone DroneBL = new Drone() { Id = drone.Id, Model = drone.Model, MaxWeight = drone.MaxWeight };
+            return DroneBL;
+        }
 
+        public Station convertToStationBL(IDAL.DO.Station Station)
+        {
+            Station StationBL = new Station() { Id = Station.Id, Name = Station.Name,};
+            return StationBL;
+        }
 
 
 
