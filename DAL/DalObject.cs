@@ -11,11 +11,22 @@ namespace DalObject
 {
     public class DalObject : IDal.IDal
     {
+        private static DalObject instance;
+
         public DalObject()
         {
             DataSource.Initialize();
         }
 
+        public static DalObject GetInstance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new DalObject();
+                return instance;
+            }
+        }
         public void addDrone(Drone drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
@@ -215,36 +226,69 @@ namespace DalObject
             }
         }
 
-        public void belongPacelToADrone(Parcel parcel)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void CollectAParcelByDrone(Parcel parcel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeliverParcelToCustomer(Parcel parcel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SendDroneForCharging(Drone drone, Station station)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReleaseDroneFromCharging(Drone drone)
-        {
-            throw new NotImplementedException();
-
-        }
 
         public double[] RequestElectricityUse()
         {
             double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium,DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
             return Electricity;
+
+        }
+
+
+        public void belongPacelToADrone(Parcel parcel)
+        {
+            Parcel parcel1 = new Parcel();
+            parcel1 = parcel;
+            var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);//TODO
+            int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
+            parcel1.DroneId = drone.Id;
+            updateDrone(drone);
+            updateParcel(parcel1);
+
+
+        }
+
+        public void CollectAParcelByDrone(Parcel parcel)
+        {
+            parcel.PickedUp = DateTime.Now;
+            updateParcel(parcel);
+        }
+
+        public void DeliverParcelToCustomer(Parcel parcel)
+        {
+            parcel.Delivered = DateTime.Now;
+            updateParcel(parcel);
+        }
+
+        public void SendDroneForCharging(Drone drone, Station station)
+        {
+           
+            DroneCharge droneCharge = new DroneCharge();
+            droneCharge.DroneId = drone.Id;
+            droneCharge.stationId = station.Id;
+
+            addDronCharge(droneCharge);
+        }
+        public void ReleaseDroneFromCharging(Drone drone)
+        {
+            int index = 0;
+            
+            for (int i = 0; i < DataSource.droneCharges.Count; i++)
+            {
+                if (DataSource.droneCharges[i].DroneId == drone.Id)
+                {
+                    index = i;
+                    break;
+                }
+
+
+            }
+
+            for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
+            {
+                DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
+            }
 
         }
 
@@ -256,6 +300,8 @@ namespace DalObject
                 yield return station;
             }
         }
+
+
 
     }
 

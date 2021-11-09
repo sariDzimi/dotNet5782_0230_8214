@@ -11,11 +11,19 @@ namespace IBL
     {
         public class Customer
         {
-            IDAL.DO.Customer customer;
-            public Customer()
+
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Phone { get; set; }
+
+            public double Longitude { get; set; }
+            public double Latitude { get; set; }
+            public override string ToString()
             {
-                 customer = new IDAL.DO.Customer();
+                return $"customer {Name} : {Id}";
             }
+
 
             List<ParcelAtTransfor> parcelsSentedByCustomer = new List<ParcelAtTransfor>();
             List<ParcelAtTransfor> parcelsSentedToCustomer = new List<ParcelAtTransfor>();
@@ -23,11 +31,7 @@ namespace IBL
             Location location { get; set; }
 
 
-            public override string ToString()
-            {
-                return $"customer {customer.Name} : {customer.Id}";
-            }
-
+           
             
         }
     }
