@@ -23,7 +23,7 @@ namespace BL
 
         public void addStationToDL(StationBL station)
         {
-            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Longitude, ChargeSlots = station.ChargeSlots, Latitude= station.Latitude };
+            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude= station.Location.Latitude };
             dalObject.addStation(stationDL);
 
         }
@@ -54,7 +54,7 @@ namespace BL
 
         public void addStationToBL(int id, int name, Location location, int slots)
         {
-            StationBL stationBL = new StationBL() { Id = id, Name = name, LocationStation = location , ChargeSlots=slots};
+            StationBL stationBL = new StationBL() { Id = id, Name = name, Location = location , ChargeSlots=slots};
             List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
         }
 
@@ -62,14 +62,14 @@ namespace BL
         {
             DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
             //TODO numberStation.
-            droneBL.droneStatus = DroneStatus.Maintenance;
+            droneBL.DroneStatus = DroneStatus.Maintenance;
 
             
             droneBL.Battery= rand.Next(20, 40);
             IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
             stationDL = dalObject.findStation(numberStaion);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
-            droneBL.location = location;
+            droneBL.Location = location;
 
 
 
@@ -97,6 +97,7 @@ namespace BL
             ParcelBL parcelBL = new ParcelBL() { Id = sendedId, TargetId = reciveId, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
+        }
 
         public void updateDrone(DroneBL drone)
         {
@@ -106,7 +107,7 @@ namespace BL
 
 
 
-        }
+        
 
 
 
