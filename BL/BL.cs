@@ -13,7 +13,7 @@ namespace BL
 {
     public class BL 
     {
-
+        public List<DroneBL> dronesBL;
         public void addDroneToDL(DroneBL drone)
         {
             IDAL.DO.DroneDL droneDL = new IDAL.DO.DroneDL() { Id = drone.Id, MaxWeight = drone.MaxWeight, Model = drone.Model };
@@ -57,8 +57,23 @@ namespace BL
 
         }
 
+        public void updateDroneModel(int id, string model)
+        {
+            
+            IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().First(d => d.Id == id);
+            droneDL.Model = model;
+            dalObject.updateDrone(droneDL);
 
+            DroneBL droneBL = dronesBL.First(d => d.Id == id);
+            droneBL.Model = model;
+            updateDrone(droneBL);
+        }
 
+        public void updateDrone(DroneBL drone)
+        {
+            int index = dronesBL.FindIndex(d => d.Id == drone.Id);
+            dronesBL[index] = drone;
+        }
 
 
 
@@ -83,14 +98,14 @@ namespace BL
             //st<Drone> drones = dalObject.GetDrones();
             //drones.ForEach(e=> e.)
 
-            List <IDAL.DO.DroneDL> drones = dalObject.GetDronesList();
+            List <IDAL.DO.DroneDL> dronesDL = dalObject.GetDronesList();
 
-            List<Drone> dronesBL = new List<Drone>();
+            dronesBL = new List<DroneBL>();
 
             Random rand = new Random();
             foreach (var drone in dronesDL)
            {
-                Drone droneBL = new Drone();
+                DroneBL droneBL = new DroneBL();
                 droneBL = convertToDroneBL(drone);
 
                 //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
@@ -105,29 +120,48 @@ namespace BL
                 המשלוח לבין טעינה מלאה
                 */
                 //else
-                droneBL.droneStatus = (DroneStatus)rand.Next(0, 2);
-                if(droneBL.droneStatus == DroneStatus.Maintenance)
+                droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
+                if(droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     int length = dalObject.GetStationsList().Count;
-                    IDAL.DO.Station stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
-                    Station stationBL = 
+                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
+                    StationBL stationBL = convertToStationBL(stationDL);
+                    droneBL.Location = stationBL.Location;
+                    droneBL.Battery = rand.Next(0, 20);
                 }
+                if(droneBL.DroneStatus == DroneStatus.Free)
+                {
+                    //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם//TODO
 
-           }
+                }
+                dronesBL.Add(droneBL);
+
+            }
 
         }
-        public Drone convertToDroneBL(IDAL.DO.Drone drone)
+        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
         {
-            Drone DroneBL = new Drone() { Id = drone.Id, Model = drone.Model, MaxWeight = drone.MaxWeight };
+            DroneBL DroneBL = new DroneBL() { Id = d.Id, Model = d.Model, MaxWeight = d.MaxWeight};
             return DroneBL;
         }
 
-        public Station convertToStationBL(IDAL.DO.Station Station)
+        public StationBL convertToStationBL(IDAL.DO.StationDL s)
         {
-            Station StationBL = new Station() { Id = Station.Id, Name = Station.Name,};
+            StationBL StationBL = new StationBL() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude)};
             return StationBL;
         }
 
+        public CustomerBL convertToCustomerBL(IDAL.DO.CustomerDL c)
+        {
+            CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
+            return CustomerBL;
+        }
+
+        public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
+        {
+            ParcelBL ParcelBL = new ParcelBL() {Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, DroneId = p.DroneId, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, SenderId = p.SenderId, TargetId = p.TargetId, Weight = p.Weight};
+            return ParcelBL;
+        }
 
 
 

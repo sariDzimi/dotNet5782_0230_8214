@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
-    namespace BL
+    namespace BO
     {
-        class MyExceptionsBL
-
+        public class OutOfRange : Exception
         {
+            public OutOfRange(string message) : base(message + " out of range"){}
         }
     }
 }

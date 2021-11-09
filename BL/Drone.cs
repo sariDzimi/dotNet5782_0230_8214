@@ -15,13 +15,24 @@ namespace IBL
             public string Model { get; set; }
             public IDAL.DO.WeightCategories MaxWeight { get; set; }
 
-            double battery { get; set; }
+            public double Battery
+            {
+                get
+                {
+                    return Battery;
+                }
+                set
+                {
+                    if (value < 0 || value > 100)
+                        throw new OutOfRange("battery");
+                    Battery = value;
+                }
+            }
+            public DroneStatus DroneStatus { get; set; }
 
-            public DroneStatus droneStatus { get; set; }
+            public ParcelAtTransfor ParcelAtTransfor { get; set; }
 
-            public ParcelAtTransfor parcelAtTransfor { get; set; }
-
-            public Location location { get; set; }
+            public Location Location { get; set; }
 
             public override string ToString()
             {
