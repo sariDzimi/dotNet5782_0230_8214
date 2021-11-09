@@ -13,8 +13,7 @@ namespace IBL
         {
             public int Id { get; set; }
             public int Name { get; set; }
-
-            public Location LocationStation { get; set; }
+            public Location Location { get; set; }
             public int ChargeSlots { get; set; }
             public override string ToString()
             {

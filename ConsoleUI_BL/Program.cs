@@ -125,7 +125,7 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 2:
-                        Console.WriteLine("to conect a parcel to a drone enter 1");
+                        Console.WriteLine("to udate Model of drone enter 1");
                         Console.WriteLine("to collect a parcel by a drone enter 2");
                         Console.WriteLine("to supply a parcel to a customer enter 3");
                         Console.WriteLine("to send a drone to charge in a station enter 4");
@@ -134,9 +134,11 @@ namespace ConsoleUI_BL
                         switch (choice)
                         {
                             case 1:
-
-                                dalObject.belongPacelToADrone(dalObject.findParcel(getParcleId()));
-                                break;
+                                Console.WriteLine("enter id");
+                                int id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("enter new Model");
+                                string name = Console.ReadLine();
+                                updateDroneModel(id, name);
                             case 2:
                                 dalObject.CollectAParcelByDrone(dalObject.findParcel(getParcleId()));
 
