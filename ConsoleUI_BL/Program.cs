@@ -96,7 +96,7 @@ namespace ConsoleUI_BL
                                     double latitude2 = Convert.ToDouble(Console.ReadLine());
                                     Location location1 = new Location(longitude2, latitude2);
 
-                                bL.addCustomerToBL(Id, NameCustomer, Phone, location1);
+                                    bL.addCustomerToBL(Id, NameCustomer, Phone, location1);
 
 
                                 break;

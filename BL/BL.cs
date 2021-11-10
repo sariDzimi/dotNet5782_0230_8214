@@ -30,16 +30,16 @@ namespace BL
 
         public void addParcelToDL(ParcelBL parcel)
         {
-            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() { Id = parcel.Id, SenderId = parcel.SenderId, TargetId = parcel.TargetId, Weight = parcel.Weight, Pritority = parcel.Pritority,
+            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() { Id = parcel.Id, SenderId = parcel.customerAtParcelSender.Id, TargetId = parcel.customerAtParcelReciver.Id, Weight = parcel.Weight, Pritority = parcel.Pritority,
            
-                Requested = parcel.Requested, DroneId =parcel.DroneId, Scheduled = parcel.Scheduled, Delivered = parcel.Delivered , PickedUp = parcel.PickedUp};
+                Requested = parcel.Requested, DroneId =parcel.droneAtParcel.Id, Scheduled = parcel.Scheduled, Delivered = parcel.Delivered , PickedUp = parcel.PickedUp};
             dalObject.addParcel(parcelDL);
 
         }
 
         public void addCustomerToDL(CustomerBL station)
         {
-            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Longitude, Phone = station.Phone, Latitude = station.Latitude };
+            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
             dalObject.addCustomer(customerDL);
 
         }
@@ -92,9 +92,13 @@ namespace BL
             updateDrone(droneBL);
         }
 
-        public void ParcelAtTransfor(int sendedId, int reciveId, int weigth, int prioty)
+        public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
-            ParcelBL parcelBL = new ParcelBL() { Id = sendedId, TargetId = reciveId, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
+            CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
+            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = reciveId };
+
+            ParcelBL parcelBL = new ParcelBL() { customerAtParcelSender= customerAtParcelsendedr, customerAtParcelReciver= customerAtParcelreciver,   Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
+
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
         }
@@ -196,7 +200,11 @@ namespace BL
 
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
-            ParcelBL ParcelBL = new ParcelBL() {Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, DroneId = p.DroneId, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, SenderId = p.SenderId, TargetId = p.TargetId, Weight = p.Weight};
+            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
+            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId };
+            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId };
+
+            ParcelBL ParcelBL = new ParcelBL() {Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel= droneAtParcel, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender, customerAtParcelReciver = customerAtParcelreciver, Weight = p.Weight};
             return ParcelBL;
         }
 
