@@ -210,6 +210,11 @@ namespace DalObject
 
         }
 
+        public void updateStation(StationDL station)
+        {
+            int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
+            DataSource.stations[index] = station;
+        }
         public void updateDronecharge(DroneChargeDL dronecharge)
         {
             int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);

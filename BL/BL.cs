@@ -37,15 +37,15 @@ namespace BL
 
         }
 
-        public void addCustomerToDL(CustomerBL station)
+        public void addCustomerToDL(CustomerBL customer)
         {
-            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
+            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
             dalObject.addCustomer(customerDL);
 
         }
 
 
-        public void addCustomerToDL(DroneChargeBL droneCharge)
+        public void addDroneChargeToDL(DroneChargeBL droneCharge)
         {
             IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
             dalObject.addDronCharge(droneChargeDL);
@@ -92,11 +92,24 @@ namespace BL
             updateDrone(droneBL);
         }
 
-        public void updateDataStation(int )
+        public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-
+            IDAL.DO.StationDL station = dalObject.findStation(id);
+            if (name != -1)
+                station.Name = name;
+            if (totalChargeSlots != -1)
+                station.ChargeSlots = totalChargeSlots;
+            dalObject.updateStation(station);
+        } 
+        public void updateDataCustomer(int id, string name = null, string  phone = null)
+        {
+            IDAL.DO.CustomerDL customer = dalObject.findCustomer(id);
+            if (name != null)
+                customer.Name = name;
+            if (phone != null)
+                customer.Phone = phone;
+            dalObject.updateCustomer(customer);
         }
-
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
@@ -116,7 +129,6 @@ namespace BL
 
 
 
-        
 
 
 
@@ -213,7 +225,17 @@ namespace BL
             return ParcelBL;
         }
 
+        public IDAL.DO.StationDL convertToStationDL(StationBL station)
+        {
+            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
+            return stationDL;
+        }
 
+        public IDAL.DO.CustomerDL convertToCustomerDL(CustomerBL station)
+        {
+            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
+            return customerDL;
+        }
 
 
 
