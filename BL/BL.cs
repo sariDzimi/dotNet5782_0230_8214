@@ -8,76 +8,16 @@ using System.Linq;
 
 namespace BL
 {
-    public class BL 
+    public partial class BL 
     {
         public List<DroneBL> dronesBL;
-        public void addDroneToDL(DroneBL drone)
-        {
-            IDAL.DO.DroneDL droneDL = new IDAL.DO.DroneDL() { Id = drone.Id, MaxWeight = drone.MaxWeight, Model = drone.Model };
-            dalObject.addDrone(droneDL);
-
-        }
-
-        public void addStationToDL(StationBL station)
-        {
-            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude= station.Location.Latitude };
-            dalObject.addStation(stationDL);
-
-        }
-
-        public void addParcelToDL(ParcelBL parcel)
-        {
-            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() { Id = parcel.Id, SenderId = parcel.customerAtParcelSender.Id, TargetId = parcel.customerAtParcelReciver.Id, Weight = parcel.Weight, Pritority = parcel.Pritority,
-           
-                Requested = parcel.Requested, DroneId =parcel.droneAtParcel.Id, Scheduled = parcel.Scheduled, Delivered = parcel.Delivered , PickedUp = parcel.PickedUp};
-            dalObject.addParcel(parcelDL);
-
-        }
-
-        public void addCustomerToDL(CustomerBL customer)
-        {
-            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
-            dalObject.addCustomer(customerDL);
-
-        }
+        
 
 
-        public void addDroneChargeToDL(DroneChargeBL droneCharge)
-        {
-            IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
-            dalObject.addDronCharge(droneChargeDL);
+       
 
-        }
-
-        public void addStationToBL(int id, int name, Location location, int slots)
-        {
-            StationBL stationBL = new StationBL() { Id = id, Name = name, Location = location , ChargeSlots=slots};
-            List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
-        }
-
-        public void addDroneToBL(int id,int status, string model , int numberStaion)
-        {
-            DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
-            //TODO numberStation.
-            droneBL.DroneStatus = DroneStatus.Maintenance;
-
-            
-            droneBL.Battery= rand.Next(20, 40);
-            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
-            stationDL = dalObject.findStation(numberStaion);
-            Location location = new Location(stationDL.Longitude, stationDL.Latitude);
-            droneBL.Location = location;
-
-
-
-        }
-
-        public void addCustomerToBL(int id, string name, string phone, Location location)
-        {
-            CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
-
-        }
-        public void updateDroneModel(int id, string model)
+ 
+/*        public void updateDroneModel(int id, string model)
         {
             
             IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().First(d => d.Id == id);
@@ -106,7 +46,7 @@ namespace BL
             if (phone != null)
                 customer.Phone = phone;
             dalObject.updateCustomer(customer);
-        }
+        }*/
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
@@ -118,11 +58,7 @@ namespace BL
             parcelBL.droneAtParcel = null;
         }
 
-        public void updateDrone(DroneBL drone)
-        {
-            int index = dronesBL.FindIndex(d => d.Id == drone.Id);
-            dronesBL[index] = drone;
-        }
+
 
 
         public void  sendDroneToCharge(int droneId)
@@ -263,35 +199,9 @@ namespace BL
             }
 
         }
-        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
-        {
-            DroneBL DroneBL = new DroneBL() { Id = d.Id, Model = d.Model, MaxWeight = d.MaxWeight};
-            return DroneBL;
-        }
 
-        public StationBL convertToStationBL(IDAL.DO.StationDL s)
-        {
-            StationBL StationBL = new StationBL() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude)};
-            return StationBL;
-        }
 
-        public CustomerBL convertToCustomerBL(IDAL.DO.CustomerDL c)
-        {
-            CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
-            return CustomerBL;
-        }
-
-        public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
-        {
-            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
-            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId };
-            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId };
-
-            ParcelBL ParcelBL = new ParcelBL() {Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel= droneAtParcel, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender, customerAtParcelReciver = customerAtParcelreciver, Weight = p.Weight};
-            return ParcelBL;
-        }
-
-        public IDAL.DO.StationDL convertToStationDL(StationBL station)
+ /*       public IDAL.DO.StationDL convertToStationDL(StationBL station)
         {
             IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
             return stationDL;
@@ -301,7 +211,7 @@ namespace BL
         {
             IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
             return customerDL;
-        }
+        }*/
 
 
 
