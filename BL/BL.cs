@@ -1,10 +1,7 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IBL.BO;
-using DalObject;
 
 
 
@@ -110,10 +107,79 @@ namespace BL
         }
 
 
+        public void  sendDroneToCharge(int droneId)
+        {
+            var drone = dronesBL.Find(d => d.Id == droneId);
+            if(drone.DroneStatus == 0)
+            {
+                StationBL stationMini = minimumDistanceFromStation(drone.Location);
+               if( dalObject.RequestElectricityUse()[0]* distanceBetweenTwoLocationds(stationMini.Location, drone.Location)>drone.Battery)
+                {
+                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList().Find(s=> s.Id == stationMini.Id);
+                    IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().Find(s => s.Id == stationMini.Id);
+                    //BL
+                    drone.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location);
+                    drone.Location = stationMini.Location;
+                    drone.DroneStatus = (DroneStatus)1;
+                    stationMini.ChargeSlots = stationMini.ChargeSlots - 1;
 
+                    //DL
+                     droneDL.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location);
+                    IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL();  
+                    dalObject.addDronCharge(droneChargeDL);
+
+
+
+
+
+
+
+                }
+                else
+                {
+                    //TODO throw exception
+                }
+            }
+            else
+            {
+                //TODO throw exception
+            }
+        }
         
 
+        public StationBL minimumDistanceFromStation(Location location)
+        {
+            StationBL stationMini;
+            StationBL station;
 
+
+            stationMini = convertToStationBL(dalObject.GetStationsList()[0]);
+            
+                foreach (IDAL.DO.StationDL s in dalObject.GetStations())
+                {
+                    station = convertToStationBL(s);
+                    double distance1 = distanceBetweenTwoLocationds(station.Location, location);
+                    double distance2 = distanceBetweenTwoLocationds(stationMini.Location, location);
+                    if (distance1 < distance2 && station.ChargeSlots < 0)
+                    {
+                        stationMini = station;
+                    }
+                }
+
+            return stationMini; 
+
+
+        }
+
+
+        public double distanceBetweenTwoLocationds(Location location1, Location location2)
+        {
+            return Math.Sqrt(Math.Pow(location1.Longitude - location2.Longitude, 2) 
+                + Math.Pow(location1.Latitude - location2.Latitude, 2)*1.0);
+
+
+        }
+        
 
 
 
