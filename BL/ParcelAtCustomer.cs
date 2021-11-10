@@ -25,7 +25,7 @@ namespace IBL
 
             public ParcelStatus parcelStatus { get; set; }
 
-            public CustomerAtDelivery customerAtDelivery { get; set; }
+            public CustomerAtParcel customerAtParcel { get; set; }
 
 
         }

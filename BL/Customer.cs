@@ -16,6 +16,7 @@ namespace IBL
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
+
             public Location Location { get; set; }
             public override string ToString()
             {
@@ -23,10 +24,10 @@ namespace IBL
             }
 
 
-            List<ParcelAtTransfor> parcelsSentedByCustomer = new List<ParcelAtTransfor>();
-            List<ParcelAtTransfor> parcelsSentedToCustomer = new List<ParcelAtTransfor>();
+            List<ParcelAtCustomer> parcelsSentedByCustomer = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelsSentedToCustomer = new List<ParcelAtCustomer>();
 
-            Location location { get; set; }
+          
 
 
            
