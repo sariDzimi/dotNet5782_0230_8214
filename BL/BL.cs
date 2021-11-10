@@ -89,6 +89,11 @@ namespace BL
             updateDrone(droneBL);
         }
 
+        public void updateDataStation(int )
+        {
+
+        }
+
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
