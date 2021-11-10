@@ -70,6 +70,11 @@ namespace BL
             updateDrone(droneBL);
         }
 
+        public void updateDataStation(int )
+        {
+
+        }
+
         public void updateDrone(DroneBL drone)
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
