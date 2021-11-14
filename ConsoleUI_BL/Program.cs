@@ -310,7 +310,7 @@ namespace ConsoleUI_BL
 
         public static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> stations, List<DroneCharge> droneCharges)
         {
-            /*            for (int i = 0; i < stations.Count; i++)
+                       for (int i = 0; i < stations.Count; i++)
                         {
                             int ChargeSlots = 0;
                             for (int j = 0; j < droneCharges.Count; j++)
@@ -324,7 +324,7 @@ namespace ConsoleUI_BL
                                 Console.WriteLine(stations[i]);
                                 break;
                             }
-                        }*/
+                        }
         }
     }
 }
