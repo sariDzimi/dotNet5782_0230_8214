@@ -11,42 +11,56 @@ namespace BL
     public partial class BL 
     {
         public List<DroneBL> dronesBL;
-        
-
-
-       
-
- 
-/*        public void updateDroneModel(int id, string model)
+        Random rand = new Random();
+        DalObject.DalObject dalObject;
+        public BL()
         {
-            
-            IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().First(d => d.Id == id);
-            droneDL.Model = model;
-            dalObject.updateDrone(droneDL);
+            //intlizing BL members
+            IDal.IDal dalObject = new DalObject.DalObject();
+            double[] ElectricityUse = dalObject.RequestElectricityUse();
+            double ElectricityUseWhenFree = ElectricityUse[0];
+            double ElectricityUseWhenLight = ElectricityUse[1];
+            double ElectricityUseWhenMedium = ElectricityUse[2];
+            double ElectricityUseWhenheavy = ElectricityUse[3];
+            double RateOfCharching = ElectricityUse[4];
+            dronesBL = new List<DroneBL>();
 
-            DroneBL droneBL = dronesBL.First(d => d.Id == id);
-            droneBL.Model = model;
-            updateDrone(droneBL);
+            foreach (var drone in dalObject.GetDrones())
+            {
+                DroneBL droneBL = new DroneBL();
+                droneBL = convertToDroneBL(drone);
+
+                //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
+                //מצב הרחפן יהיה כמבצע משלוח ○
+                /*            מיקום הרחפן יהיה כדלקמן: ○
+                אם החבילה שויכה אך לא נאספה -מיקום יהיה ■
+                בתחנה הקרובה לשולח
+                אם החבילה נאספה אך עוד לא סופקה -מיקום ■
+                הרחפן יהיה במיקום השולח
+                מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן ○
+                לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד
+                המשלוח לבין טעינה מלאה
+                */
+                //else
+                droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
+                if (droneBL.DroneStatus == DroneStatus.Maintenance)
+                {
+                    int length = dalObject.GetStationsList().Count;
+                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
+                    StationBL stationBL = convertToStationBL(stationDL);
+                    droneBL.Location = stationBL.Location;
+                    droneBL.Battery = rand.Next(0, 20);
+                }
+                if (droneBL.DroneStatus == DroneStatus.Free)
+                {
+                    //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם//TODO
+
+                }
+                dronesBL.Add(droneBL);
+
+            }
+
         }
-
-        public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
-        {
-            IDAL.DO.StationDL station = dalObject.findStation(id);
-            if (name != -1)
-                station.Name = name;
-            if (totalChargeSlots != -1)
-                station.ChargeSlots = totalChargeSlots;
-            dalObject.updateStation(station);
-        } 
-        public void updateDataCustomer(int id, string name = null, string  phone = null)
-        {
-            IDAL.DO.CustomerDL customer = dalObject.findCustomer(id);
-            if (name != null)
-                customer.Name = name;
-            if (phone != null)
-                customer.Phone = phone;
-            dalObject.updateCustomer(customer);
-        }*/
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
@@ -81,13 +95,6 @@ namespace BL
                      droneDL.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location);
                     IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL();  
                     dalObject.addDronCharge(droneChargeDL);
-
-
-
-
-
-
-
                 }
                 else
                 {
@@ -143,62 +150,7 @@ namespace BL
 
 
 
-        Random rand = new Random();
-        DalObject.DalObject dalObject;
-        public BL()
-        {
-            IDal.IDal dalObject = new DalObject.DalObject();
-            double[] ElectricityUse = dalObject.RequestElectricityUse();
-            double ElectricityUseWhenFree = ElectricityUse[0];
-            double ElectricityUseWhenLight = ElectricityUse[1];
-            double ElectricityUseWhenMedium = ElectricityUse[2];
-            double ElectricityUseWhenheavy = ElectricityUse[3];
-            double RateOfCharching = ElectricityUse[4];
 
-            //st<Drone> drones = dalObject.GetDrones();
-            //drones.ForEach(e=> e.)
-
-            List <IDAL.DO.DroneDL> dronesDL = dalObject.GetDronesList();
-
-            dronesBL = new List<DroneBL>();
-
-           
-            foreach (var drone in dronesDL)
-           {
-                DroneBL droneBL = new DroneBL();
-                droneBL = convertToDroneBL(drone);
-
-                //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
-                //מצב הרחפן יהיה כמבצע משלוח ○
-                /*            מיקום הרחפן יהיה כדלקמן: ○
-                אם החבילה שויכה אך לא נאספה -מיקום יהיה ■
-                בתחנה הקרובה לשולח
-                אם החבילה נאספה אך עוד לא סופקה -מיקום ■
-                הרחפן יהיה במיקום השולח
-                מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן ○
-                לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד
-                המשלוח לבין טעינה מלאה
-                */
-                //else
-                droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
-                if(droneBL.DroneStatus == DroneStatus.Maintenance)
-                {
-                    int length = dalObject.GetStationsList().Count;
-                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
-                    StationBL stationBL = convertToStationBL(stationDL);
-                    droneBL.Location = stationBL.Location;
-                    droneBL.Battery = rand.Next(0, 20);
-                }
-                if(droneBL.DroneStatus == DroneStatus.Free)
-                {
-                    //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם//TODO
-
-                }
-                dronesBL.Add(droneBL);
-
-            }
-
-        }
 
 
  /*       public IDAL.DO.StationDL convertToStationDL(StationBL station)
