@@ -22,9 +22,6 @@ namespace IBL
             public CustomerAtParcel customerAtDeliverySender { get; set; }
             public CustomerAtParcel customerAtDeliveryReciver { get; set; }
 
-
-
         }
-
     }
 }

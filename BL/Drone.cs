@@ -33,7 +33,7 @@ namespace IBL
                 {
                     if (value < 0 || value > 100)
                         throw new OutOfRange("battery");
-                    Battery = value;
+                    battery = value;
                 }
             }
             public DroneStatus DroneStatus { get; set; }

@@ -189,6 +189,17 @@ namespace DalObject
             }
         }
 
+        public DroneChargeDL findDroneCharge(int id)
+        {
+            try
+            {
+                return DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundException(id);
+            }
+        }
 
         public void updateDrone(DroneDL drone)
         {
@@ -240,7 +251,7 @@ namespace DalObject
 
         }
 
-
+/*
         public void belongPacelToADrone(ParcelDL parcel)
         {
             ParcelDL parcel1 = new ParcelDL();
@@ -252,7 +263,7 @@ namespace DalObject
             updateParcel(parcel1);
 
 
-        }
+        }*/
 
         public void CollectAParcelByDrone(ParcelDL parcel)
         {
@@ -306,8 +317,15 @@ namespace DalObject
             }
         }
 
+        public void belongPacelToADrone(ParcelDL parcel)
+        {
+            ((IDal.IDal)GetInstance).belongPacelToADrone(parcel);
+        }
 
-
+        public void removeDroneCharge(int id)
+        {
+            DataSource.droneCharges.Remove(findDroneCharge(id));
+        }
     }
 
 }
