@@ -24,6 +24,13 @@ namespace IBL
             }*/
 
 
+
+            }
+
+            public StationBL()
+            {
+
+            }
             public int Id { get; set; }
             public int Name { get; set; }
             public Location Location { get; set; }
