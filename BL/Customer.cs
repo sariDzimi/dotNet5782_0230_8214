@@ -11,7 +11,7 @@ namespace IBL
     {
         public class CustomerBL
         {
- /*           public CustomerBL(int id, string name, string phone, double Longitude, double Latitude)
+            public CustomerBL(int id, string name, string phone, double Longitude, double Latitude)
             {
                 Id = id;
                 Name = name;

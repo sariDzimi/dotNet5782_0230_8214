@@ -10,11 +10,11 @@ namespace BL
 {
     public partial class BL
     {
-        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
+/*        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
         {
             DroneBL DroneBL = new DroneBL() { Id = d.Id, Model = d.Model, MaxWeight = d.MaxWeight };
             return DroneBL;
-        }
+        }*/
 
         public StationBL convertToStationBL(IDAL.DO.StationDL s)
         {
