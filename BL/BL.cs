@@ -163,8 +163,9 @@ namespace BL
             List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
             List<IDAL.DO.ParcelDL> parcelDL = new List<IDAL.DO.ParcelDL>();
             List<ParcelBL> parcelBLs = new List<ParcelBL>();
-            List<CustomerBL> customerBLs = new List<CustomerBL>();
-            CustomerBL customerBL = new CustomerBL();
+            List<CustomerBL> customerBLs = GetCustomerFromBL();
+
+
             ParcelBL parcel = new ParcelBL();
             DroneBL droneBL = new DroneBL();
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
@@ -175,7 +176,7 @@ namespace BL
                 foreach (IDAL.DO.ParcelDL p in  dalObject.GetParcel())
                 {
                     parcel = convertToParcelBL(p);
-                    parcel.customerAtParcelSender.Id
+                    customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.id);
                 }
                 IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
                 parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);

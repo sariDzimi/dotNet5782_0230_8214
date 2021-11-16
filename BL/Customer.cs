@@ -11,8 +11,18 @@ namespace IBL
     {
         public class CustomerBL
         {
+            public CustomerBL(int id, string name, string phone, double Longitude, double Latitude)
+            {
+                Id = id;
+                Name = name;
+                Phone = phone;
+                Location = new Location(Longitude, Latitude);
+                parcelsSentedByCustomer = new List<ParcelAtCustomer>();
+                parcelsSentedToCustomer = new List<ParcelAtCustomer>();
 
 
+
+            }
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
@@ -24,8 +34,8 @@ namespace IBL
             }
 
 
-            List<ParcelAtCustomer> parcelsSentedByCustomer = new List<ParcelAtCustomer>();
-            List<ParcelAtCustomer> parcelsSentedToCustomer = new List<ParcelAtCustomer>();
+            List<ParcelAtCustomer> parcelsSentedByCustomer;
+            List<ParcelAtCustomer> parcelsSentedToCustomer;
 
           
 
