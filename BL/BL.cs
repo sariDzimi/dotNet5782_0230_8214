@@ -13,6 +13,11 @@ namespace BL
         public List<DroneBL> dronesBL;
         Random rand = new Random();
         DalObject.DalObject dalObject;
+
+        double ElectricityUseWhenFree=0;
+        double ElectricityUseWhenLight=0;
+        double ElectricityUseWhenMedium=0;
+        double ElectricityUseWhenheavy=0;
         public BL()
         {
             //intlizing BL members
@@ -61,6 +66,12 @@ namespace BL
             }
 
         }
+
+
+
+
+
+
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty)
         {
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
@@ -108,6 +119,9 @@ namespace BL
         }
         
 
+
+      
+
         public StationBL minimumDistanceFromStation(Location location)
         {
             StationBL stationMini;
@@ -140,7 +154,77 @@ namespace BL
 
 
         }
+
+
+
+
+        public void AssignAParcelToADrone(int id)
+        {
+            List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
+            List<IDAL.DO.ParcelDL> parcelDL = new List<IDAL.DO.ParcelDL>();
+            List<ParcelBL> parcelBLs = new List<ParcelBL>();
+            List<CustomerBL> customerBLs = new List<CustomerBL>();
+            CustomerBL customerBL = new CustomerBL();
+            ParcelBL parcel = new ParcelBL();
+            DroneBL droneBL = new DroneBL();
+            IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
+            droneBL = dronesBL.Find(s => s.Id == id);
+            if (droneBL.DroneStatus == DroneStatus.Free)
+            {
+
+                foreach (IDAL.DO.ParcelDL p in  dalObject.GetParcel())
+                {
+                    parcel = convertToParcelBL(p);
+                    parcel.customerAtParcelSender.Id
+                }
+                IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
+                parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);
+                parcelDL = parcelDL.FindAll(s => s.Weight < droneBL.MaxWeight);
+                IDAL.DO.WeightCategories weightCategories = parcelDL.Max(s => s.Weight);
+                parcelDL = parcelDL.FindAll(s => s.Weight == weightCategories);
+                
+
+
+
+            }
+        }
+
+            public double CalculateElectricity(Location location1 , Location location2, IDAL.DO.WeightCategories weight)
+            {
+
+            double distance=  distanceBetweenTwoLocationds(location1, location2);
+            switch (weight) {
+                case IDAL.DO.WeightCategories.Light:
+                    return (distance* this.ElectricityUseWhenLight);
+                case IDAL.DO.WeightCategories.Medium:
+                    return (distance * this.ElectricityUseWhenMedium);
+                case IDAL.DO.WeightCategories.Heavy:
+                    return (distance * this.ElectricityUseWhenheavy);
+
+                default:
+                    return 0;
+
+
+            }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
+
 
 
 
