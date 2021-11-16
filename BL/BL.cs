@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-
-
 namespace BL
 {
     public partial class BL 
@@ -18,6 +16,7 @@ namespace BL
         double ElectricityUseWhenLight=0;
         double ElectricityUseWhenMedium=0;
         double ElectricityUseWhenheavy=0;
+        double RateOfCharching;
         public BL()
         {
             //intlizing BL members
@@ -105,12 +104,24 @@ namespace BL
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 //TODO - throw exeption
                 ;
+            IDAL.DO.DroneDL droneDL = dalObject.findDrone(idDrone);
+
             IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
             IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliveryReciver.Id);
             Location locationReciver = convertToCustomerBL(customerReciver).Location;
             //double distance = distanceBetweenTwoLocationds(locationSender, locationReciver);
-            dalObject.findParcel( droneBL.ParcelAtTransfor.ID)
+            IDAL.DO.ParcelDL parcelDL = dalObject.findParcel(droneBL.ParcelAtTransfor.ID);
+            IDAL.DO.WeightCategories weight = parcelDL.Weight;
+            double useElectricity = CalculateElectricity(locationSender, locationReciver, weight);
+            droneBL.Battery -= useElectricity;
+            droneDL.Battery -= useElectricity;
+            droneBL.Location = locationReciver;
+            updateDrone(droneBL);
+            dalObject.updateDrone(droneDL);
+            parcelDL.PickedUp = DateTime.Now;
+            dalObject.updateParcel(parcelDL);
+
         }
 
 
