@@ -19,6 +19,11 @@ namespace IBL
                 MaxWeight = weightCategories;
                 Battery = battery;
                }
+
+            public DroneBL()
+            {
+
+            }
             public int Id { get; set; }
             public string Model { get; set; }
             public IDAL.DO.WeightCategories MaxWeight { get; set; }

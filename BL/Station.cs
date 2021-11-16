@@ -21,6 +21,12 @@ namespace IBL
                 droneAtChargings = new List<DroneAtChargingBL>();
 
 
+
+            }
+
+            public StationBL()
+            {
+
             }
             public int Id { get; set; }
             public int Name { get; set; }

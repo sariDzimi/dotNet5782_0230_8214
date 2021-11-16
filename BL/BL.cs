@@ -193,7 +193,9 @@ namespace BL
             List<IDAL.DO.ParcelDL> parcelDL = new List<IDAL.DO.ParcelDL>();
             List<ParcelBL> parcelBLs = new List<ParcelBL>();
             List<CustomerBL> customerBLs = GetCustomerFromBL();
-
+            CustomerBL customerBLsender = new CustomerBL();
+            CustomerBL customerBLreciver = new CustomerBL();
+            StationBL stationBL = new StationBL();
 
             ParcelBL parcel = new ParcelBL();
             DroneBL droneBL = new DroneBL();
@@ -205,7 +207,15 @@ namespace BL
                 foreach (IDAL.DO.ParcelDL p in  dalObject.GetParcel())
                 {
                     parcel = convertToParcelBL(p);
-                    customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.id);
+                    customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
+                    customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
+                    stationBL = minimumDistanceFromStation(customerBLreciver.Location);
+                    //Calculate Electricity if the drone have enaph battery to do it.
+                    if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight)+ distanceBetweenTwoLocationds(stationBL.Location,droneBL.Location)*this.ElectricityUseWhenFree+ distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location)*this.ElectricityUseWhenFree < droneBL.Battery)
+                    {
+                        parcelDL.Remove(p);
+                    }
+
                 }
                 IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
                 parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);
@@ -218,6 +228,9 @@ namespace BL
 
             }
         }
+                
+
+
 
             public double CalculateElectricity(Location location1 , Location location2, IDAL.DO.WeightCategories weight)
             {
