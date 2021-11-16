@@ -83,7 +83,7 @@ namespace IDal
 
         public List<ParcelDL> GetParcelsList();
 
-
+        public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();
     }

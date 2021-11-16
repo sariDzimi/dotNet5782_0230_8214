@@ -11,6 +11,7 @@ namespace IBL
         
         public class DroneBL
         {
+            private double battery;
             public int Id { get; set; }
             public string Model { get; set; }
             public IDAL.DO.WeightCategories MaxWeight { get; set; }
@@ -25,7 +26,7 @@ namespace IBL
                 {
                     if (value < 0 || value > 100)
                         throw new OutOfRange("battery");
-                    Battery = value;
+                    battery = value;
                 }
             }
             public DroneStatus DroneStatus { get; set; }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using IDAL.DO;
 using DalObject;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             Console.WriteLine(new DateTime() == '01/01/0001 00:00:00');
-            /*DalObject.DalObject dalObject = new DalObject.DalObject();
+            DalObject.DalObject dalObject = new DalObject.DalObject();
             int choices;
             do
             {
@@ -275,8 +275,8 @@ namespace ConsoleUI
             {
                 Console.WriteLine(item);
             }
-       */
+       
         }
 
     }
-}
+}*/
