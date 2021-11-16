@@ -216,7 +216,7 @@ namespace BL
                 foreach (IDAL.DO.ParcelDL p in  dalObject.GetParcel())
                 {
                     parcel = convertToParcelBL(p);
-                    customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.id);
+                    customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
                 }
                 IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
                 parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);
