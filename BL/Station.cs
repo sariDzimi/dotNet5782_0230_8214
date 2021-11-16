@@ -11,6 +11,17 @@ namespace IBL
         
         public class StationBL
         {
+
+            public StationBL(IDAL.DO.StationDL stationDL)
+            {
+                Id = stationDL.Id;
+                Name = stationDL.Name;
+                Location = new Location(stationDL.Longitude, stationDL.Latitude);
+                ChargeSlots = stationDL.ChargeSlots;
+                droneAtChargings = new List<DroneAtChargingBL>();
+
+
+            }
             public int Id { get; set; }
             public int Name { get; set; }
             public Location Location { get; set; }
@@ -20,7 +31,7 @@ namespace IBL
                 return $"station {Name} : {Id}";
             }
 
-            List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
+            List<DroneAtChargingBL> droneAtChargings;
 
            
 

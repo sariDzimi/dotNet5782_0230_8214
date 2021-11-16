@@ -11,6 +11,35 @@ namespace IBL
         public class ParcelBL
         {
 
+            public ParcelBL( IDAL.DO.ParcelDL parcel)
+            {
+                Id = parcel.Id;
+                customerAtParcelSender = new CustomerAtParcel();
+                customerAtParcelSender.Id = parcel.SenderId;
+
+                customerAtParcelReciver= new CustomerAtParcel();
+                customerAtParcelReciver.Id = parcel.TargetId;
+
+                Weight = parcel.Weight;
+                Pritority = parcel.Pritority;
+                Requested = parcel.Requested;
+                Scheduled = parcel.Scheduled;
+                PickedUp = parcel.PickedUp;
+                Delivered = parcel.Delivered;
+
+
+
+
+
+
+
+            }
+
+            public ParcelBL()
+            {
+
+            }
+
             public int Id { get; set; }
             public CustomerAtParcel customerAtParcelSender { get; set; } 
             public CustomerAtParcel customerAtParcelReciver { get; set; }
