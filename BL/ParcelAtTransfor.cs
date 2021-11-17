@@ -22,6 +22,17 @@ namespace IBL
             public CustomerAtParcel customerAtDeliverySender { get; set; }
             public CustomerAtParcel customerAtDeliveryReciver { get; set; }
 
+            public override string ToString()
+            {
+                return $"ID  : {ID}, " +
+                    $" pritorities: {pritorities}, customerAtDeliverySender: {customerAtDeliverySender}," +
+                    $" customerAtDeliveryReciver: {customerAtDeliveryReciver}, " 
+                 
+
+                ;
+            }
+
+
         }
     }
 }

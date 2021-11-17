@@ -24,6 +24,8 @@ namespace IBL
             {
 
             }
+
+            private double battery;
             public int Id { get; set; }
             public string Model { get; set; }
             public IDAL.DO.WeightCategories MaxWeight { get; set; }
@@ -49,7 +51,12 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"drone  : {Id}";
+                return $"drone  : {Id}, " +
+                    $" battery: {battery}, Model: {Model}, MaxWeight: {MaxWeight}, " +
+                    $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelAtTransfor}," +
+                    $"Location: {Location}";
+
+                    ;
             }
         }
 

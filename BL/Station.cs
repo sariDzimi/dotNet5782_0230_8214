@@ -34,7 +34,15 @@ namespace IBL
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"station {Name} : {Id}";
+                string droneAtCharging = " ";
+
+                foreach(var d in droneAtChargings)
+                {
+                    droneAtCharging += d;
+                    droneAtCharging += " ";
+                }
+                return $"station {Name} : {Id}, 'Location' {Location} , 'ChargeSlots': {ChargeSlots}," +
+                    $"{droneAtCharging}  ";
             }
 
             List<DroneAtChargingBL> droneAtChargings;
