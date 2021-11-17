@@ -28,6 +28,17 @@ namespace IBL
             public CustomerAtParcel customerAtParcel { get; set; }
 
 
+            public override string ToString()
+            {
+                return $"ParcelAtCustomer  : {ID}, " +
+                    $" , weightCategories:{weightCategories} {pritorities}, pritorities: " +
+                    $" parcelStatus {parcelStatus}, " +
+                    $"customerAtParcel : {customerAtParcel},";
+                ;
+            }
+
+
+
         }
 
     }

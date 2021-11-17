@@ -15,6 +15,17 @@ namespace IBL
             public double Battery { get; set; }
 
             public Location Location { get; set; }
+
+
+            public override string ToString()
+            {
+                return $"DroneAtParcel id  : {Id}, " +
+                    $" Battery: {Battery}, Location: {Location}, ";
+
+                ;
+            }
+
+
         }
     }
 }

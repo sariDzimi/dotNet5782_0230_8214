@@ -53,7 +53,23 @@ namespace IBL
             public DateTime PickedUp { get; set; }
 
             public DateTime Delivered { get; set; }
-            
+
+            public override string ToString()
+            {
+                return $"ParcelBL  : {Id}, " +
+                    $" customerAtParcelSender: {customerAtParcelSender}, customerAtParcelReciver: {customerAtParcelReciver}," +
+                    $" Weight: {Weight}, " +
+                    $"Pritority : {Pritority}, Requested: {Requested}, " +
+                    $"droneAtParcel: {droneAtParcel}, Scheduled : {Scheduled},PickedUp: {PickedUp}," +
+                    $" Delivered: {Delivered} ";
+
+                ;
+            }
+
+
+
+
+
 
         }
 

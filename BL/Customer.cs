@@ -35,7 +35,24 @@ namespace IBL
             public Location Location { get; set; }
             public override string ToString()
             {
-                return $"customer {Name} : {Id}";
+                string parcelSentedByCustomer=" ";
+                string parcelSentedToCustomer= " ";
+
+                foreach (var p in parcelsSentedByCustomer)
+                {
+                    parcelSentedByCustomer += p;
+                    parcelSentedByCustomer += " ";
+                }
+
+                foreach (var p in parcelsSentedToCustomer)
+                {
+                    parcelSentedToCustomer += p;
+                    parcelSentedToCustomer += " ";
+                }
+
+
+                return $"customer {Name} : {Id}, {Phone}, Location : {Location}," +
+                    $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
             }
 
 
