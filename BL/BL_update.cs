@@ -12,7 +12,6 @@ namespace BL
     {
         public void updateDroneModel(int id, string model)
         {
-
             IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().First(d => d.Id == id);
             droneDL.Model = model;
             dalObject.updateDrone(droneDL);

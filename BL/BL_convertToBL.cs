@@ -10,15 +10,16 @@ namespace BL
 {
     public partial class BL
     {
-        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
+/*        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
         {
             DroneBL DroneBL = new DroneBL() { Id = d.Id, Model = d.Model, MaxWeight = d.MaxWeight };
             return DroneBL;
-        }
+        }*/
 
         public StationBL convertToStationBL(IDAL.DO.StationDL s)
         {
             StationBL StationBL = new StationBL() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
+            StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
             return StationBL;
         }
 
@@ -30,12 +31,24 @@ namespace BL
 
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
-            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
-            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId };
-            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId };
+            DroneBL droneBL = dronesBL.Find(d => d.Id == p.DroneId);
+            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
+            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.GetCustomersList().Find(c => c.Id == p.SenderId).Name };
+            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.GetCustomersList().Find(c => c.Id == p.TargetId).Name };
 
             ParcelBL ParcelBL = new ParcelBL() { Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel = droneAtParcel, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender, customerAtParcelReciver = customerAtParcelreciver, Weight = p.Weight };
             return ParcelBL;
+        }
+
+        public int calculateFreeChargeSlotsInStation(int statioinID)
+        {
+            int total = dalObject.findStation(statioinID).ChargeSlots;
+            foreach (var chargeDrone in dalObject.GetDroneCharges())
+            {
+                if (chargeDrone.stationId == statioinID)
+                    total--;
+            }
+            return total;
         }
     }
 }

@@ -8,11 +8,11 @@ namespace IBL
 {
     namespace BO
     {
-        
+
         public class StationBL
         {
 
-            public StationBL(IDAL.DO.StationDL stationDL)
+/*            public StationBL(IDAL.DO.StationDL stationDL)
             {
                 Id = stationDL.Id;
                 Name = stationDL.Name;
@@ -21,8 +21,11 @@ namespace IBL
                 droneAtChargings = new List<DroneAtChargingBL>();
 
 
+            }*/
 
-            }
+
+
+            
 
             public StationBL()
             {
@@ -47,7 +50,7 @@ namespace IBL
 
             List<DroneAtChargingBL> droneAtChargings;
 
-           
+
 
         }
 
