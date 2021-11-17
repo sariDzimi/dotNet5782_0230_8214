@@ -18,10 +18,10 @@ namespace DAL
     }
     public class IdAlreadyExist : Exception
     {
-        public IdAlreadyExist(int Id): base($"id:{Id} already exsist")
-        {
-          
-
-        }
+        public IdAlreadyExist(int Id) : base($"id:{Id} already exsist") { }
+        
     }
+
+
+
 }

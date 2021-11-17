@@ -25,7 +25,7 @@ namespace BL
             return droneBL;
         }
 
-        public CustomerBL DispleyCuatomer(int id)
+        public CustomerBL DispleyCustomer(int id)
         {
             IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL();
             customerDL = dalObject.findCustomer(id);

@@ -93,9 +93,10 @@ namespace BL
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
-            if (droneBL.DroneStatus != DroneStatus.Free)
-                //TODO - throw exeption
-                ;
+            if (droneBL.DroneStatus != DroneStatus.Maintenance)
+                throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in Maintenance ");
+
+
             DroneDL droneDL = dalObject.findDrone(idDrone);
             droneDL.Battery += timeInCharging * RateOfCharching;
             droneBL.Battery += timeInCharging * RateOfCharching;
@@ -110,8 +111,8 @@ namespace BL
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
             if (droneBL.DroneStatus != DroneStatus.Delivery)
-                //TODO - throw exeption
-                ;
+                throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in Delivery  ");
+            ;
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(idDrone);
             IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
@@ -154,12 +155,12 @@ namespace BL
                 }
                 else
                 {
-                    //TODO throw exception
+                    throw new IBL.BO.DroneDoesNotHaveEnoughBattery();
                 }
             }
             else
             {
-                //TODO throw exception
+                throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not free");
             }
         }
 
@@ -219,7 +220,7 @@ namespace BL
             droneBL = dronesBL.Find(s => s.Id == id);
             if (droneBL.DroneStatus != DroneStatus.Free)
             {
-                //throw Exception
+                throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not free");
             }
 
 
@@ -239,17 +240,6 @@ namespace BL
                     if (parcelDL.Pritority < p.Pritority)
                     {
                         parcelDL = p;
-
-                foreach (IDAL.DO.ParcelDL p in dalObject.GetParcel())
-                {
-                    parcel = convertToParcelBL(p);
-                    customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
-                    customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
-                    stationBL = minimumDistanceFromStation(customerBLreciver.Location);
-                    //Calculate Electricity if the drone have enaph battery to do it.
-                    if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree < droneBL.Battery)
-                    {
-                        parcelDL.Remove(p);
                     }
 
                     else if (parcelDL.Pritority == p.Pritority)
@@ -274,7 +264,7 @@ namespace BL
 
                     if (parcelDL.Weight == 0)
                     {
-
+                        throw new parcelNotFound();
                     }
 
                     droneBL.DroneStatus = DroneStatus.Delivery;
@@ -283,24 +273,20 @@ namespace BL
                     parcelDL.Scheduled = DateTime.Now;
                     dalObject.updateParcel(parcelDL);
                 }
-                IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
-                parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);
-                parcelDL = parcelDL.FindAll(s => s.Weight < droneBL.MaxWeight);
-                IDAL.DO.WeightCategories weightCategories = parcelDL.Max(s => s.Weight);
-                parcelDL = parcelDL.FindAll(s => s.Weight == weightCategories);
-
             }
         }
 
-                }
+
+
+
 
         public void supllyParcelByDrone(int DroneID)
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == DroneID);
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(DroneID);
             if (droneBL.DroneStatus != DroneStatus.Delivery)
-                //TODO throw exception
-                ;
+                throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in delivery");
+            ;
             IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
             IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliveryReciver.Id);
@@ -317,65 +303,15 @@ namespace BL
             parcelDL.Delivered = DateTime.Now;
             dalObject.updateParcel(parcelDL);
 
-            }
-        }
-
         }
 
 
 
-           
 
 
 
 
 
-
-
-            //List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
-            //List<IDAL.DO.ParcelDL> parcelDL = new List<IDAL.DO.ParcelDL>();
-            //List<ParcelBL> parcelBLs = new List<ParcelBL>();
-            //List<CustomerBL> customerBLs = GetCustomerFromBL();
-            //CustomerBL customerBLsender = new CustomerBL();
-            //CustomerBL customerBLreciver = new CustomerBL();
-            //StationBL stationBL = new StationBL();
-
-            //ParcelBL parcel = new ParcelBL();
-            //DroneBL droneBL = new DroneBL();
-            //IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
-            //droneBL = dronesBL.Find(s => s.Id == id);
-            //if (droneBL.DroneStatus == DroneStatus.Free)
-            //{
-
-            //    foreach (IDAL.DO.ParcelDL p in  dalObject.GetParcel())
-            //    {
-            //        parcel = convertToParcelBL(p);
-            //        customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
-            //        customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
-            //        stationBL = minimumDistanceFromStation(customerBLreciver.Location);
-            //        //Calculate Electricity if the drone have enaph battery to do it.
-            //        if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight)+ distanceBetweenTwoLocationds(stationBL.Location,droneBL.Location)*this.ElectricityUseWhenFree+ distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location)*this.ElectricityUseWhenFree < droneBL.Battery)
-            //        {
-            //            parcelDL.Remove(p);
-            //        }
-
-            //    }
-            //    IDAL.DO.Pritorities pritority = parcelDLs.Max(s => s.Pritority);
-            //    parcelDL = parcelDLs.FindAll(s => s.Pritority == pritority);
-            //    parcelDL = parcelDL.FindAll(s => s.Weight < droneBL.MaxWeight);
-            //    IDAL.DO.WeightCategories weightCategories = parcelDL.Max(s => s.Weight);
-            //    parcelDL = parcelDL.FindAll(s => s.Weight == weightCategories);
-
-
-
-
-    
-                
-
-
-
-            public double CalculateElectricity(Location location1 , Location location2, IDAL.DO.WeightCategories weight)
-            {
         public double CalculateElectricity(Location location1, Location location2, IDAL.DO.WeightCategories weight)
         {
 
@@ -416,8 +352,10 @@ namespace BL
 
 
 
+
         public int DroneId { get; set; }
         public int stationId { get; set; }
+    }
 
 
 

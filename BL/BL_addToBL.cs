@@ -11,15 +11,33 @@ namespace BL
     public partial class BL
     {
 
+        
+
 
         public void addStationToBL(int id, int name, Location location, int slots)
         {
+            foreach (var item in dalObject.GetStationsList())
+            {
+                if (item.Id == id)
+                {
+                    throw new IdAlreadyExist(id);
+                }
+            }
+
             StationBL stationBL = new StationBL() { Id = id, Name = name, Location = location, ChargeSlots = slots };
             List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
         }
 
         public void addDroneToBL(int id, int status, string model, int numberStaion)
         {
+
+            foreach (var item in dalObject.GetDrones())
+            {
+                if (item.Id == id)
+                {
+                    throw new IdAlreadyExist(id);
+                }
+            }
             DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
             //TODO numberStation.
             droneBL.DroneStatus = DroneStatus.Maintenance;
@@ -36,8 +54,34 @@ namespace BL
         }
 
         public void addCustomerToBL(int id, string name, string phone, Location location)
+
         {
+            foreach (var item in dalObject.GetCustomersList())
+            {
+                if (item.Id == id)
+                {
+                    throw new IdAlreadyExist(id);
+                }
+            }
             CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
+
+        }
+
+        public void addParcelToBL( int SenderId,int  reciverId, int weight, int prionity)
+        {
+            foreach (var item in dalObject.GetParcelsList())
+            {
+                if (item.Id == SenderId)
+                {
+                    throw new IdAlreadyExist(SenderId);
+                }
+            }
+
+            CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = SenderId };
+            CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = reciverId };
+            ParcelBL parcelBL = new ParcelBL() { customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities) prionity };
+
+
 
         }
     }
