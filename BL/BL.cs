@@ -43,7 +43,7 @@ namespace BL
                     {
                         int senderID = parcelBL.customerAtParcelSender.Id;
                         Location senderLocation = convertToCustomerBL(dalObject.findCustomer(senderID)).Location;
-                        droneBL.Location = minimumDistanceFromStation(senderLocation).Location;
+                        droneBL.Location = closestStationToLoacation(senderLocation).Location;
                     }
                     else
                     {
@@ -71,7 +71,7 @@ namespace BL
                     ParcelBL randomDeliveredParcel = convertToParcelBL(deliveredParcels[rand.Next(0, deliveredParcels.Count)]);
                     int recieverID = randomDeliveredParcel.customerAtParcelReciver.Id;
                     droneBL.Location = convertToCustomerBL(dalObject.findCustomer(recieverID)).Location;
-                    double distance = distanceBetweenTwoLocationds(droneBL.Location, minimumDistanceFromStation(droneBL.Location).Location);
+                    double distance = distanceBetweenTwoLocationds(droneBL.Location, closestStationToLoacation(droneBL.Location).Location);
                     droneBL.Battery -= distance * ElectricityUseWhenFree;
                 }
                 dronesBL.Add(droneBL);
@@ -113,7 +113,7 @@ namespace BL
                 //TODO - throw exeption
                 ;
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(idDrone);
-            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
+            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
             //double distance = distanceBetweenTwoLocationds(locationSender, locationReciver);
             IDAL.DO.ParcelDL parcelDL = dalObject.findParcel(droneBL.ParcelAtTransfor.ID);
@@ -136,11 +136,11 @@ namespace BL
             var drone = dronesBL.Find(d => d.Id == droneId);
             if (drone.DroneStatus == 0)
             {
-                StationBL stationMini = minimumDistanceFromStation(drone.Location);
+                StationBL stationMini = closestStationToLoacation(drone.Location);
                 if (dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location) > drone.Battery)
                 {
-                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList().Find(s => s.Id == stationMini.Id);
-                    IDAL.DO.DroneDL droneDL = dalObject.GetDronesList().Find(s => s.Id == stationMini.Id);
+                    IDAL.DO.StationDL stationDL = dalObject.GetStations().ToList().Find(s => s.Id == stationMini.Id);
+                    IDAL.DO.DroneDL droneDL = dalObject.GetDrones().ToList().Find(s => s.Id == stationMini.Id);
                     //BL
                     drone.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location);
                     drone.Location = stationMini.Location;
@@ -167,13 +167,13 @@ namespace BL
 
 
 
-        public StationBL minimumDistanceFromStation(Location location)
+        public StationBL closestStationToLoacation(Location location)
         {
             StationBL stationMini;
             StationBL station;
 
 
-            stationMini = convertToStationBL(dalObject.GetStationsList()[0]);
+            stationMini = convertToStationBL(dalObject.GetStations().ToList()[0]);
 
             foreach (IDAL.DO.StationDL s in dalObject.GetStations())
             {
@@ -224,7 +224,7 @@ namespace BL
                     parcel = convertToParcelBL(p);
                     customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
                     customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
-                    stationBL = minimumDistanceFromStation(customerBLreciver.Location);
+                    stationBL = closestStationToLoacation(customerBLreciver.Location);
                     //Calculate Electricity if the drone have enaph battery to do it.
                     if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree < droneBL.Battery)
                     {
@@ -249,9 +249,9 @@ namespace BL
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 //TODO throw exception
                 ;
-            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
+            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
-            IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliveryReciver.Id);
+            IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliveryReciver.Id);
             Location locationReciver = convertToCustomerBL(customerReciver).Location;
             //double distance = distanceBetweenTwoLocationds(locationSender, locationReciver);
             IDAL.DO.ParcelDL parcelDL = dalObject.findParcel(droneBL.ParcelAtTransfor.ID);

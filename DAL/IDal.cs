@@ -75,14 +75,6 @@ namespace IDal
 
         public void ReleaseDroneFromCharging(DroneDL drone);
 
-        public List<StationDL> GetStationsList();
-
-        public List<DroneDL> GetDronesList();
-
-        public List<CustomerDL> GetCustomersList();
-
-        public List<ParcelDL> GetParcelsList();
-
         public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();

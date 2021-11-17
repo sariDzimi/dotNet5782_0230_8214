@@ -75,25 +75,25 @@ namespace DalObject
 
         }
 
-        public List<StationDL> GetStationsList()
+/*        public List<StationDL> GetStationsList()
         {
             return DataSource.stations;
-        }
+        }*/
 
-        public List<DroneDL> GetDronesList()
+/*        public List<DroneDL> GetDronesList()
         {
             return DataSource.drones;
-        }
+        }*/
 
-        public List<CustomerDL> GetCustomersList()
+/*        public List<CustomerDL> GetCustomersList()
         {
             return DataSource.customers;
-        }
+        }*/
 
-        public List<ParcelDL> GetParcelsList()
+/*        public List<ParcelDL> GetParcelsList()
         {
             return DataSource.parcels;
-        }
+        }*/
 
         public IEnumerable<StationDL> GetStations()
         {

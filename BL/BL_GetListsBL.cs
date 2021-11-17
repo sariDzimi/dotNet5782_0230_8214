@@ -12,45 +12,38 @@ namespace BL
     public partial class BL
     {
 
-       
 
-        public List<CustomerBL> GetCustomerFromBL()
+
+        public IEnumerable<StationBL> GetStations()
         {
-            List<CustomerDL> customerDLs = dalObject.GetCustomersList();
-            List<CustomerBL> customerBLs = new List<CustomerBL>();
-            foreach (var e in customerDLs) {
-                customerBLs.Add(convertToCustomerBL(e));
-                    };
-
-                return customerBLs;
-
-
-
+            foreach (var station in dalObject.GetStations())
+            {
+                yield return convertToStationBL(station);
+            }
         }
 
-/*        public List<StationBL> GetStationFromBL()
+        public IEnumerable<ParcelBL> GetParcels()
         {
-            List<StationDL> stationDLs = dalObject.GetStations().ToList();
-            List<StationBL> stationBLs = new List<StationBL>();
-            foreach (var station in stationDLs)
+            foreach (var parcel in dalObject.GetParcel())
             {
-                stationBLs.Add(convertToStationBL(station));
-            };
-
-            return stationBLs;
+                yield return  convertToParcelBL(parcel);
+            }
         }
 
-        public List<ParcelBL> GetSParcelFromBL()
+        public IEnumerable<CustomerBL> GetCustomers()
         {
-            List<ParcelDL> ParcelDLs = dalObject.GetParcel().ToList();
-            List<ParcelBL> ParcelBLs = new List<ParcelBL>();
-            foreach (var Parcel in ParcelDLs)
+            foreach (var customer in dalObject.GetCustomer())
             {
-                ParcelBLs.Add(convertToParcelBL(Parcel));
-            };
+                yield return convertToCustomerBL(customer);
+            }
+        }
 
-            return ParcelBLs;
-        }*/
-
+        public IEnumerable<DroneBL> GetDrones()
+        {
+            foreach (var drone in dronesBL)
+            {
+                yield return drone;
+            }
+        }
     }
 }
