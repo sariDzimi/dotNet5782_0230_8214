@@ -33,8 +33,8 @@ namespace BL
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == p.DroneId);
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
-            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.GetCustomersList().Find(c => c.Id == p.SenderId).Name };
-            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.GetCustomersList().Find(c => c.Id == p.TargetId).Name };
+            CustomerAtParcel customerAtParcelsender = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.GetCustomer().ToList().Find(c => c.Id == p.SenderId).Name };
+            CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.GetCustomer().ToList().Find(c => c.Id == p.TargetId).Name };
 
             ParcelBL ParcelBL = new ParcelBL() { Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel = droneAtParcel, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender, customerAtParcelReciver = customerAtParcelreciver, Weight = p.Weight };
             return ParcelBL;

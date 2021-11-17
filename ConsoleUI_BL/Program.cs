@@ -1,8 +1,6 @@
 ﻿using System;
 using IBL.BO;
-using DalObject;
 using System.Collections.Generic;
-using BL;
 
 
 

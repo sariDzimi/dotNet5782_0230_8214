@@ -12,58 +12,38 @@ namespace BL
     public partial class BL
     {
 
-       
 
-        public List<CustomerBL> GetCustomerFromBL()
+
+        public IEnumerable<StationBL> GetStations()
         {
-            List<CustomerDL> customerDLs = dalObject.GetCustomersList();
-            List<CustomerBL> customerBLs = new List<CustomerBL>();
-            foreach (var e in customerDLs) {
-                customerBLs.Add(convertToCustomerBL(e));
-                    };
-
-                return customerBLs;
-
-
-
-        }
-
-     
-
-
-
-        }
-
-
-
-
-
-
-
-
-/*        public List<StationBL> GetStationFromBL()
-        {
-            List<StationDL> stationDLs = dalObject.GetStations().ToList();
-            List<StationBL> stationBLs = new List<StationBL>();
-            foreach (var station in stationDLs)
+            foreach (var station in dalObject.GetStations())
             {
-                stationBLs.Add(convertToStationBL(station));
-            };
-
-            return stationBLs;
+                yield return convertToStationBL(station);
+            }
         }
 
-        public List<ParcelBL> GetSParcelFromBL()
+        public IEnumerable<ParcelBL> GetParcels()
         {
-            List<ParcelDL> ParcelDLs = dalObject.GetParcel().ToList();
-            List<ParcelBL> ParcelBLs = new List<ParcelBL>();
-            foreach (var Parcel in ParcelDLs)
+            foreach (var parcel in dalObject.GetParcel())
             {
-                ParcelBLs.Add(convertToParcelBL(Parcel));
-            };
+                yield return  convertToParcelBL(parcel);
+            }
+        }
 
-            return ParcelBLs;
-        }*/
+        public IEnumerable<CustomerBL> GetCustomers()
+        {
+            foreach (var customer in dalObject.GetCustomer())
+            {
+                yield return convertToCustomerBL(customer);
+            }
+        }
 
+        public IEnumerable<DroneBL> GetDrones()
+        {
+            foreach (var drone in dronesBL)
+            {
+                yield return drone;
+            }
+        }
     }
 }
