@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IDAL.DO;
 
 
 namespace BL
@@ -28,40 +29,52 @@ namespace BL
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<DroneBL>();
+            List<ParcelDL> parcelDLs = dalObject.GetParcel().ToList();
 
             foreach (var drone in dalObject.GetDrones())
             {
-                DroneBL droneBL = new DroneBL();
-                //droneBL = convertToDroneBL(drone);
+                DroneBL droneBL = new DroneBL() { Id = drone.Id, Model = drone.Model, MaxWeight = drone.MaxWeight };
+                ParcelDL parcel = parcelDLs.Find(p => p.DroneId == drone.Id);
+                if (!parcel.Equals(null))
+                {
+                    droneBL.DroneStatus = DroneStatus.Delivery;
+                    ParcelBL parcelBL = convertToParcelBL(parcel);
+                    if (parcel.PickedUp < DateTime.Now)
+                    {
+                        int senderID = parcelBL.customerAtParcelSender.Id;
+                        Location senderLocation = convertToCustomerBL(dalObject.findCustomer(senderID)).Location;
+                        droneBL.Location = minimumDistanceFromStation(senderLocation).Location;
+                    }
+                    else
+                    {
+                        int reciverID = parcelBL.customerAtParcelSender.Id;
+                        droneBL.Location = convertToCustomerBL(dalObject.findCustomer(reciverID)).Location;
+                    }
+                    double electicityNeeded = CalculateElectricity(droneBL.Location, convertToCustomerBL(dalObject.findCustomer(parcelBL.customerAtParcelReciver.Id)).Location, parcelBL.Weight);
+                    droneBL.Battery = rand.Next((int)electicityNeeded, 100);
+                }
+                else
+                    droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
 
-                //if(אם יש חבילהות שעוד לא סופקו אך הרחפן כבר שויך)
-                //מצב הרחפן יהיה כמבצע משלוח ○
-                /*            מיקום הרחפן יהיה כדלקמן: ○
-                אם החבילה שויכה אך לא נאספה -מיקום יהיה ■
-                בתחנה הקרובה לשולח
-                אם החבילה נאספה אך עוד לא סופקה -מיקום ■
-                הרחפן יהיה במיקום השולח
-                מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן ○
-                לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד
-                המשלוח לבין טעינה מלאה
-                */
-                //else
-                droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
-                    int length = dalObject.GetStationsList().Count;
-                    IDAL.DO.StationDL stationDL = dalObject.GetStationsList()[rand.Next(0, length)];
+                    int numOfStations = dalObject.GetStations().ToList().Count;
+                    IDAL.DO.StationDL stationDL = dalObject.GetStations().ToList()[rand.Next(0, numOfStations)];
                     StationBL stationBL = convertToStationBL(stationDL);
                     droneBL.Location = stationBL.Location;
-                    droneBL.Battery = rand.Next(0, 20);
+                    droneBL.Battery = rand.Next(0, 21);
                 }
+
                 if (droneBL.DroneStatus == DroneStatus.Free)
                 {
-                    //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם//TODO
-
+                    List<ParcelDL> deliveredParcels = dalObject.GetParcel().ToList().FindAll(p => !p.Delivered.Equals(null));
+                    ParcelBL randomDeliveredParcel = convertToParcelBL(deliveredParcels[rand.Next(0, deliveredParcels.Count)]);
+                    int recieverID = randomDeliveredParcel.customerAtParcelReciver.Id;
+                    droneBL.Location = convertToCustomerBL(dalObject.findCustomer(recieverID)).Location;
+                    double distance = distanceBetweenTwoLocationds(droneBL.Location, minimumDistanceFromStation(droneBL.Location).Location);
+                    droneBL.Battery -= distance * ElectricityUseWhenFree;
                 }
                 dronesBL.Add(droneBL);
-
             }
 
         }
@@ -83,7 +96,7 @@ namespace BL
             if (droneBL.DroneStatus != DroneStatus.Free)
                 //TODO - throw exeption
                 ;
-            IDAL.DO.DroneDL droneDL = dalObject.findDrone(idDrone);
+            DroneDL droneDL = dalObject.findDrone(idDrone);
             droneDL.Battery += timeInCharging * RateOfCharching;
             droneBL.Battery += timeInCharging * RateOfCharching;
             droneBL.DroneStatus = DroneStatus.Free;
@@ -199,7 +212,6 @@ namespace BL
             CustomerBL customerBLsender = new CustomerBL();
             CustomerBL customerBLreciver = new CustomerBL();
             StationBL stationBL = new StationBL();
-
             ParcelBL parcel = new ParcelBL();
             DroneBL droneBL = new DroneBL();
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
@@ -225,9 +237,6 @@ namespace BL
                 parcelDL = parcelDL.FindAll(s => s.Weight < droneBL.MaxWeight);
                 IDAL.DO.WeightCategories weightCategories = parcelDL.Max(s => s.Weight);
                 parcelDL = parcelDL.FindAll(s => s.Weight == weightCategories);
-
-
-
 
             }
         }
