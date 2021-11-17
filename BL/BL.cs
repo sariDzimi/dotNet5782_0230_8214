@@ -212,7 +212,7 @@ namespace BL
             IDAL.DO.CustomerDL customerParcel = new IDAL.DO.CustomerDL();
             CustomerBL customerBLreciver = new CustomerBL();
             IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL();
-            List<CustomerBL> customerBLs = GetCustomerFromBL();
+            List<CustomerBL> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
             DroneBL droneBL = new DroneBL();

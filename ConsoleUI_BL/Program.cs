@@ -212,20 +212,26 @@ namespace ConsoleUI_BL
 
 
         }
-/*
-        private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
+        /*
+                private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
+                {
+                    throw new NotImplementedException();
+                }
+
+                private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
+                {
+                    throw new NotImplementedException();
+                }
+        */
+
+
+        public void DisplayList<T>(IEnumerable<T> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
         }
-
-        private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
-        {
-            throw new NotImplementedException();
-        }
-*/
-
-
-
 
 
 
@@ -269,13 +275,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>(IEnumerable<T> arr)//List<T> arr)
-        {
-            foreach (var item in arr)
-            {
-                Console.WriteLine(item);
-            }
-        }
+
 /*        public static void DisplayNotBelongedParcels(List<Parcel> parcels)
         {
             foreach (var parcel in parcels)

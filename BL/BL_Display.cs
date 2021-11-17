@@ -10,38 +10,44 @@ namespace BL
 {
     public partial class BL
     {
-        public StationBL DispleyStation(int id)
+/*        public StationBL DisplayStation(int id)
         {
-            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
-            stationDL = dalObject.findStation(id);
-            StationBL stationBL = new StationBL();
-            stationBL = convertToStationBL(stationDL);
-            return stationBL;
+            return FindStation(id);
         }
 
-        public DroneBL DispleyDrone(int id)
-        {
-            DroneBL droneBL = dronesBL.Find(d => d.Id == id);
-            return droneBL;
+        public DroneBL DisplayDrone(int id)
+        { 
+            return FindDrone(id);
         }
 
-        public CustomerBL DispleyCuatomer(int id)
+        public CustomerBL DisplayCuatomer(int id)
         {
-            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL();
-            customerDL = dalObject.findCustomer(id);
-            CustomerBL customerBL = new CustomerBL();
-            customerBL = convertToCustomerBL(customerDL);
-            return customerBL;
+            return FindCuatomer(id);
         }
 
-        public ParcelBL DispleyParcel(int id)
+        public ParcelBL DisplayParcel(int id)
         {
-            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL();
-            parcelDL = dalObject.findParcel(id);
-            ParcelBL parcelBL = new ParcelBL();
-            parcelBL = convertToParcelBL(parcelDL);
-            return parcelBL;
+            return FindParcel(id);
+        }*/
+
+        public IEnumerable<ParcelBL> GetNotAsignedParcels()
+        {
+            foreach(var parcel in GetParcels())
+            {
+                if (parcel.droneAtParcel.Equals(null))
+                    yield return parcel;
+            }
         }
+
+        public IEnumerable<StationBL> StationsWithEmptyChargeSlots()
+        {
+            foreach (var station in GetStations())
+            {
+                if (station.ChargeSlots > 0)
+                    yield return station;
+            }
+        }
+
 
 
 
