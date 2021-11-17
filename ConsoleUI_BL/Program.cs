@@ -91,6 +91,8 @@ namespace ConsoleUI_BL
                                 weight = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
                                 int prionity = Convert.ToInt32(Console.ReadLine());
+                                bL.addParcelToBL(SenderId, Id, weight, prionity);
+
                                 break;
                             default:
                                 Console.WriteLine("please enter a number btween 1-4");
@@ -102,6 +104,14 @@ namespace ConsoleUI_BL
                         Console.WriteLine("to update data of station enter 2");
                         Console.WriteLine("to update data of customer enter 3");
                         Console.WriteLine("to send a drone to charge in a station enter 4");
+                        Console.WriteLine("to release drone from charging enter 5");
+                        Console.WriteLine("to assign a  parcel to a drone enter 6");
+                        Console.WriteLine("to collection of a parcel by drone enter 7");
+                        Console.WriteLine("to delivery of a parcel by drone enter 8");
+
+
+
+
                         //Console.WriteLine("to Release a skimmer from charging at a base station enter 5 ");
                         choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
@@ -131,67 +141,108 @@ namespace ConsoleUI_BL
                                 string phone = Console.ReadLine();
                                 bL.updateDataCustomer(id, name, phone);
                                 break;
+                            case 4:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                bL.sendDroneToCharge(id);
+                                break;
+                            case 5:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("enter Charging time");
+                                double time = Convert.ToInt32(Console.ReadLine());
+                                bL.releaseDroneFromCharging(id, time);
+                                break;
+
+                            case 6:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                bL.AssignAParcelToADrone(id);
+                                break;
+                            case 7:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                bL.collectParcleByDrone(id);
+                                break;
+                            case 8:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                bL.supllyParcelByDrone(id);
+                                break;
+
+
+
+
                             default:
                                 break;
                         }
                         break;
-                        /*                    case 3:
-                                                Console.WriteLine("to display a station enter 1");
-                                                Console.WriteLine("to display a drone enter 2");
-                                                Console.WriteLine("to display a customer enter 3");
-                                                Console.WriteLine("to display a parcel enter 4");
-                                                choice = Convert.ToInt32(Console.ReadLine());
-                                                switch (choice)
-                                                {
-                                                    case 1:
-                                                        DisplayObj<Station>(dalObject.findStation(getStaionId()));
-                                                        break;
-                                                    case 2:
-                                                        DisplayObj<Drone>(dalObject.findDrone(getDroeId()));
-                                                        break;
-                                                    case 3:
-                                                        DisplayObj<Customer>(dalObject.findCustomer(getCustomerId()));
-                                                        break;
-                                                    case 4:
-                                                        DisplayObj<Parcel>(dalObject.findParcel(getParcleId()));
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
 
-                                                break;
-                                            case 4:
-                                                Console.WriteLine("to display the stations list enter 1");
-                                                Console.WriteLine("to display the drones list enter 2");
-                                                Console.WriteLine("to display the customers list enter 3");
-                                                Console.WriteLine("to display the parcels list enter 4");
-                                                Console.WriteLine("to display the list of parcels that are free enter 5");
-                                                Console.WriteLine("to display the list of station that have  free chargers enter 6");
-                                                choice = Convert.ToInt32(Console.ReadLine());
-                                                switch (choice)
-                                                {
-                                                    case 1:
-                                                        DisplayList<Station>(dalObject.GetStations());
-                                                        break;
-                                                    case 2:
-                                                        DisplayList<Drone>(dalObject.GetDrones());
-                                                        break;
-                                                    case 3:
-                                                        DisplayList<Customer>(dalObject.GetCustomer());
-                                                        break;
-                                                    case 4:
-                                                        DisplayList<Parcel>(dalObject.GetParcel());
-                                                        break;
-                                                    case 5:
-                                                        DisplayNotBelongedParcels(dalObject.GetParcel());
-                                                        break;
-                                                    case 6:
-                                                        displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                        */
+                    case 3:
+                        Console.WriteLine("to display a station enter 1");
+                        Console.WriteLine("to display a drone enter 2");
+                        Console.WriteLine("to display a customer enter 3");
+                        Console.WriteLine("to display a parcel enter 4");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.WriteLine("enter id");
+                                int id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine(bL.DispleyStation(id));
+                                break;
+                            case 2:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine(bL.DispleyDrone(id));
+                                break;
+                            case 3:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine(bL.DispleyCustomer(id));
+                                break;
+                            case 4:
+                                Console.WriteLine("enter id");
+                                id = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine(bL.DispleyParcel(id));
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+                    case 4:
+                        Console.WriteLine("to display the stations list enter 1");
+                        Console.WriteLine("to display the drones list enter 2");
+                        Console.WriteLine("to display the customers list enter 3");
+                        Console.WriteLine("to display the parcels list enter 4");
+                        Console.WriteLine("to display the list of parcels that are free enter 5");
+                        Console.WriteLine("to display the list of station that have  free chargers enter 6");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                DisplayList<Station>(dalObject.GetStations());
+                                break;
+                            case 2:
+                                DisplayList<Drone>(dalObject.GetDrones());
+                                break;
+                            case 3:
+                                DisplayList<Customer>(dalObject.GetCustomer());
+                                break;
+                            case 4:
+                                DisplayList<Parcel>(dalObject.GetParcel());
+                                break;
+                            case 5:
+                                DisplayNotBelongedParcels(dalObject.GetParcel());
+                                break;
+                            case 6:
+                                displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
+                                break;
+                            default:
+                                break;
+                        }
+                        
                         break;
                     case 5:
                         break;
@@ -212,17 +263,17 @@ namespace ConsoleUI_BL
 
 
         }
-        /*
-                private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
-                {
-                    throw new NotImplementedException();
-                }
+/*
+        private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
+        {
+            throw new NotImplementedException();
+        }
 
-                private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
-                {
-                    throw new NotImplementedException();
-                }
-        */
+        private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
+        {
+            throw new NotImplementedException();
+        }
+*/
 
 
         public void DisplayList<T>(IEnumerable<T> list)
@@ -275,7 +326,13 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine(obj);
         }
-
+        public static void DisplayList<T>(IEnumerable<T> arr)//List<T> arr)
+        {
+            foreach (var item in arr)
+            {
+                Console.WriteLine(item);
+            }
+        }
 /*        public static void DisplayNotBelongedParcels(List<Parcel> parcels)
         {
             foreach (var parcel in parcels)

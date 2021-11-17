@@ -10,7 +10,32 @@ namespace IBL
     {
         public class OutOfRange : Exception
         {
-            public OutOfRange(string message) : base(message + " out of range"){}
+            public OutOfRange(string message) : base(message + " out of range") { }
         }
+
+
+        public class DroneIsNotInCorrectStatus : Exception {
+            public DroneIsNotInCorrectStatus(string message) : base(message) { }
+        }
+
+        public class DroneDoesNotHaveEnoughBattery : Exception {
+            public DroneDoesNotHaveEnoughBattery() : base("Drone does not have enough battery ") { }
+
+        }
+
+        public class parcelNotFound : Exception
+        {
+            public parcelNotFound() : base("parcel not found") { }
+
+        }
+
+        public class IdAlreadyExist : Exception{
+            public IdAlreadyExist(int id) : base( $"{id}, not valid") { }
+
+        }
+
+
+
+
     }
 }
