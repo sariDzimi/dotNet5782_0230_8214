@@ -232,7 +232,7 @@ namespace BL
                 customerParcel = dalObject.findCustomer(parcelDL.SenderId);
                 customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
                 customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
-                stationBL = minimumDistanceFromStation(customerBLreciver.Location);
+                stationBL = closestStationToLoacation(customerBLreciver.Location);
                 double electricidy1 = CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree;
                 double distanceToCharging1 = distanceBetweenTwoLocationds(customerBLreciver.Location, stationBL.Location);
                 if (electricidy1 > droneBL.Battery)
@@ -241,48 +241,49 @@ namespace BL
                     {
                         parcelDL = p;
 
-                foreach (IDAL.DO.ParcelDL p in dalObject.GetParcel())
-                {
-                    parcel = convertToParcelBL(p);
-                    customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
-                    customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
-                    stationBL = closestStationToLoacation(customerBLreciver.Location);
+                        //foreach (IDAL.DO.ParcelDL p in dalObject.GetParcel())
+                        //{
+                        parcel = convertToParcelBL(p);
+                        customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
+                        customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
+                        stationBL = closestStationToLoacation(customerBLreciver.Location);
                     //Calculate Electricity if the drone have enaph battery to do it.
-                    if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree < droneBL.Battery)
-                    {
-                        parcelDL.Remove(p);
-                    }
+                    //if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree < droneBL.Battery)
+                    //{
+                    //    parcelDL.Remove(p);
+                    //}
 
-                    else if (parcelDL.Pritority == p.Pritority)
-                    {
-                        if (parcelDL.Weight < p.Weight)
+                        else if (parcelDL.Pritority == p.Pritority)
                         {
-                            parcelDL = p;
+                            if (parcelDL.Weight < p.Weight)
+                            {
+                                parcelDL = p;
+
+                            }
+                        }
+                        else if (parcelDL.Weight == p.Weight)
+                        {
+                            if (distanceToCharging1 < distanceBetweenTwoLocationds(droneBL.Location, new Location(customerParcel.Longitude, customerParcel.Latitude)))
+                            {
+                                parcelDL = p;
+
+                            }
+
 
                         }
-                    }
-                    else if (parcelDL.Weight == p.Weight)
-                    {
-                        if (distanceToCharging1 < distanceBetweenTwoLocationds(droneBL.Location, new Location(customerParcel.Longitude, customerParcel.Latitude)))
-                        {
-                            parcelDL = p;
 
+
+                        if (parcelDL.Weight == 0)
+                        {
+                            throw new parcelNotFound();
                         }
 
-
+                        droneBL.DroneStatus = DroneStatus.Delivery;
+                        updateDrone(droneBL);
+                        parcelDL.DroneId = id;
+                        parcelDL.Scheduled = DateTime.Now;
+                        dalObject.updateParcel(parcelDL);
                     }
-
-
-                    if (parcelDL.Weight == 0)
-                    {
-                        throw new parcelNotFound();
-                    }
-
-                    droneBL.DroneStatus = DroneStatus.Delivery;
-                    updateDrone(droneBL);
-                    parcelDL.DroneId = id;
-                    parcelDL.Scheduled = DateTime.Now;
-                    dalObject.updateParcel(parcelDL);
                 }
             }
         }
