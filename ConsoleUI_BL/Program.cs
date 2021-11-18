@@ -34,6 +34,7 @@ namespace ConsoleUI_BL
                         switch (choice)
                         {
                             case 1:
+
                                 Console.WriteLine("enter station number");
                                 int Id = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("enter station name");
@@ -48,7 +49,16 @@ namespace ConsoleUI_BL
                                 double Latitude = (double)latitude;
                                 Location location = new Location(Longitude, Latitude);
 
+                                try
+                                {
+
                                 bL.addStationToBL(Id, Name, location, ChargeSlots);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                    
+                                }
 
                                 break;
                             case 2:
@@ -62,7 +72,16 @@ namespace ConsoleUI_BL
                                 Console.WriteLine("number of station for start charging");
                                 int number = Convert.ToInt32(Console.ReadLine());
 
-                                bL.addDroneToBL(id, weight, Model, number);
+                                try
+                                {
+                                    bL.addDroneToBL(id, weight, Model, number);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+
+                                }
+                               
 
                                 break;
 
@@ -79,7 +98,17 @@ namespace ConsoleUI_BL
                                 double latitude2 = Convert.ToDouble(Console.ReadLine());
                                 Location location1 = new Location(longitude2, latitude2);
 
-                                bL.addCustomerToBL(Id, NameCustomer, Phone, location1);
+
+                                try
+                                {
+                                    bL.addCustomerToBL(Id, NameCustomer, Phone, location1);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+
+                                }
+                               
 
                                 break;
                             case 4:
@@ -91,7 +120,18 @@ namespace ConsoleUI_BL
                                 weight = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
                                 int prionity = Convert.ToInt32(Console.ReadLine());
-                                bL.addParcelToBL(SenderId, Id, weight, prionity);
+
+                                try
+                                {
+                                    bL.addParcelToBL(SenderId, Id, weight, prionity);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+
+                                }
+
+                               
 
                                 break;
                             default:
@@ -242,8 +282,8 @@ namespace ConsoleUI_BL
                             default:
                                 break;
                         }
-                  
 
+                        break;
                     default:
                         Console.WriteLine("input not valid");
                         break;

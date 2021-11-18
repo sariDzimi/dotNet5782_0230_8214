@@ -24,7 +24,9 @@ namespace BL
 
         public CustomerBL FindCuatomer(int id)
         {
-            CustomerBL customerBL = GetCustomers().ToList().Find(d => d.Id == id);
+            List<CustomerBL> customerBLs = GetCustomers().ToList();
+            CustomerBL customerBL = customerBLs.Find(d => d.Id == id);
+            //Console.WriteLine(customerBL);
             return customerBL;
         }
 

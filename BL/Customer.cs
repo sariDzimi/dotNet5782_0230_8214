@@ -26,6 +26,8 @@ namespace IBL
 
             public CustomerBL()
             {
+                parcelsSentedByCustomer = new List<ParcelAtCustomer>();
+                parcelsSentedToCustomer = new List<ParcelAtCustomer>();
 
             }
             public int Id { get; set; }
@@ -35,20 +37,28 @@ namespace IBL
             public Location Location { get; set; }
             public override string ToString()
             {
-                string parcelSentedByCustomer=" ";
-                string parcelSentedToCustomer= " ";
+                string parcelSentedByCustomer="yyyyyyyyy ";
+                string parcelSentedToCustomer= "rrrrrrrrrrrrr";
 
-                foreach (var p in parcelsSentedByCustomer)
+                if (parcelsSentedByCustomer.Count!=0)
                 {
-                    parcelSentedByCustomer += p;
-                    parcelSentedByCustomer += " ";
+                    foreach (var p in parcelsSentedByCustomer)
+                    {
+                        parcelSentedByCustomer += p;
+                        parcelSentedByCustomer += " ";
+                    }
                 }
 
-                foreach (var p in parcelsSentedToCustomer)
+                if (parcelsSentedToCustomer.Count != 0)
                 {
-                    parcelSentedToCustomer += p;
-                    parcelSentedToCustomer += " ";
+                    foreach (var p in parcelsSentedToCustomer)
+                    {
+                        parcelSentedToCustomer += p;
+                        parcelSentedToCustomer += " ";
+                    }
                 }
+
+              
 
 
                 return $"customer {Name} : {Id}, {Phone}, Location : {Location}," +

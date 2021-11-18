@@ -137,68 +137,53 @@ namespace DalObject
 
         public ParcelDL findParcel(int id)
         {
-            try
-            {
-                return DataSource.parcels.First(parcel => parcel.Id == id);
-            }
-            catch (ArgumentNullException e)
-            {
-                throw new NotFoundException(id);
-            }
+            ParcelDL parcel = DataSource.parcels.First(parcel => parcel.Id == id);
 
+            if (parcel.Equals(null))
+                throw new NotFoundException(id);
+            return parcel;
         }
 
 
         public StationDL findStation(int id)
         {
-            try
-            {
-                return DataSource.stations.First(sat => sat.Id == id);
-            }
-            catch (ArgumentNullException e)
-            {
+
+            StationDL station = DataSource.stations.First(sat => sat.Id == id);
+
+            if (station.Equals(null))
                 throw new NotFoundException(id);
-            }
+            return station;
+ 
 
         }
 
         public CustomerDL findCustomer(int id)
         {
 
-
-            try
-            {
-                return DataSource.customers.First(customer => customer.Id == id);
-            }
-            catch (ArgumentNullException e)
-            {
+            CustomerDL customer = DataSource.customers.Find(customer => customer.Id == id);
+            if (customer.Equals(null))
                 throw new NotFoundException(id);
-            }
+            return customer;
+
 
         }
 
         public DroneDL findDrone(int id)
         {
-            try
-            {
-                return DataSource.drones.First(drone => drone.Id == id);
-            }
-            catch (ArgumentNullException e)
-            {
+
+            DroneDL drone = DataSource.drones.First(drone => drone.Id == id);
+            if (drone.Equals(null))
                 throw new NotFoundException(id);
-            }
+            return drone;
         }
 
         public DroneChargeDL findDroneCharge(int id)
         {
-            try
-            {
-                return DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
-            }
-            catch (ArgumentNullException e)
-            {
+
+            DroneChargeDL droneCharge = DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
+            if (droneCharge.Equals(null))
                 throw new NotFoundException(id);
-            }
+            return droneCharge;
         }
 
         public void updateDrone(DroneDL drone)
