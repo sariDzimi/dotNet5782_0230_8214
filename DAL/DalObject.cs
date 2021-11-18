@@ -27,6 +27,12 @@ namespace DalObject
                 return instance;
             }
         }
+
+        /// <summary>
+        /// Adds the drone to the drones list in the DataSource
+        /// If the ID alredy exist the function will throw exception
+        /// </summary>
+        /// <param name="drone"></param>
         public void addDrone(DroneDL drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
@@ -38,6 +44,11 @@ namespace DalObject
 
         }
 
+        /// <summary>
+        /// adds the customer to the customers list in the DataSource
+        ///  If the ID alredy exist the function will throw exception
+        /// </summary>
+        /// <param name="customer"></param>
         public void addCustomer(CustomerDL customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
@@ -48,6 +59,12 @@ namespace DalObject
             DataSource.customers.Add(customer);
 
         }
+
+        /// <summary>
+        /// adds the parcel to the parcels list in the DataSource
+        /// If the ID alredy exist the function will throw exception
+        /// </summary>
+        /// <param name="parcel"></param>
         public void addParcel(ParcelDL parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
@@ -58,6 +75,12 @@ namespace DalObject
             DataSource.parcels.Add(parcel);
 
         }
+
+        /// <summary>
+        /// Adds the station to the stations list in the DataSource
+        /// If the ID alredy exist the function will throw exception
+        /// </summary>
+        /// <param name="station"></param>
         public void addStation(StationDL station)
         {
             if (DataSource.customers.Any(st => st.Id == station.Id))
@@ -68,9 +91,18 @@ namespace DalObject
             DataSource.stations.Add(station);
 
         }
+
+        /// <summary>
+        /// adds the droneCharge to the droneCharges list in the DataSource
+        /// If the ID alredy exist the function will throw exception
+        /// </summary>
+        /// <param name="droneCharge"></param>
         public void addDronCharge(DroneChargeDL droneCharge)
         {
-
+            if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
+            {
+                throw new IdAlreadyExist(droneCharge.DroneId);
+            }
             DataSource.droneCharges.Add(droneCharge);
 
         }
