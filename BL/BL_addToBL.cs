@@ -10,10 +10,6 @@ namespace BL
 {
     public partial class BL
     {
-
-        
-
-
         public void addStationToBL(int id, int name, Location location, int slots)
         {
             foreach (var item in dalObject.GetStations().ToList())
@@ -48,9 +44,6 @@ namespace BL
             stationDL = dalObject.findStation(numberStaion);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
-
-
-
         }
 
         public void addCustomerToBL(int id, string name, string phone, Location location)
@@ -64,7 +57,6 @@ namespace BL
                 }
             }
             CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
-
         }
 
         public void addParcelToBL( int SenderId,int  reciverId, int weight, int prionity)
@@ -80,9 +72,6 @@ namespace BL
             CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = SenderId };
             CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = reciverId };
             ParcelBL parcelBL = new ParcelBL() { customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities) prionity };
-
-
-
         }
     }
 }
