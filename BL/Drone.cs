@@ -22,6 +22,7 @@ namespace IBL
             }
             public DroneBL()
             {
+
                 battery = 100;
             }
 

@@ -229,22 +229,58 @@ namespace ConsoleUI_BL
                             case 1:
                                 Console.WriteLine("enter id");
                                 int id = Convert.ToInt32(Console.ReadLine());
+                                try
+                                {
                                 Console.WriteLine(bL.FindStation(id));
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
                                 break;
                             case 2:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.FindDrone(id));
+
+                                try
+                                {
+                                    Console.WriteLine(bL.FindDrone(id));
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 3:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.FindCuatomer(id));
+
+
+                                try
+                                {
+                                    Console.WriteLine(bL.FindCuatomer(id));
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+
+                               
                                 break;
                             case 4:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.FindParcel(id));
+                                
+
+                                try
+                                {
+                                    Console.WriteLine(bL.FindParcel(id));
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
                                 break;
                             default:
                                 break;

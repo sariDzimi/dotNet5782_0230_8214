@@ -23,9 +23,9 @@ namespace IBL
 
         }
 
-        public class parcelNotFound : Exception
+        public class NotFound : Exception
         {
-            public parcelNotFound() : base("parcel not found") { }
+            public NotFound(string e) : base($" {e} not found") { }
 
         }
 

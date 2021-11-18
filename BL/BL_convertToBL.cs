@@ -31,7 +31,21 @@ namespace BL
 
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
-            DroneBL droneBL = dronesBL.Find(d => d.Id == p.DroneId);
+            DroneBL droneBL = new DroneBL();
+            try
+            { 
+                 droneBL = dronesBL.Find(d => d.Id == p.DroneId);
+                if (droneBL == null)
+                {
+                    throw new Exception("cant convert");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+          
+          
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
             CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomer(p.SenderId).Name };
             CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomer(p.TargetId).Name };
