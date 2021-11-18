@@ -10,35 +10,24 @@ namespace BL
 {
     public partial class BL
     {
-/*        public StationBL DisplayStation(int id)
-        {
-            return FindStation(id);
-        }
 
-        public DroneBL DisplayDrone(int id)
-        { 
-            return FindDrone(id);
-        }
-
-        public CustomerBL DisplayCuatomer(int id)
-        {
-            return FindCuatomer(id);
-        }
-
-        public ParcelBL DisplayParcel(int id)
-        {
-            return FindParcel(id);
-        }*/
-
+        /// <summary>
+        /// Get Not Asigned Parcels
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelBL> GetNotAsignedParcels()
         {
             foreach(var parcel in GetParcels())
             {
-                if (parcel.droneAtParcel.Equals(null))
+                if (parcel.droneAtParcel.Id==0)
                     yield return parcel;
             }
         }
 
+        /// <summary>
+        /// GetS tations With Empty ChargeSlots
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots()
         {
             foreach (var station in GetStations())

@@ -10,6 +10,11 @@ namespace BL
 {
     public partial class BL
     {
+        /// <summary>
+        /// Find Station
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public StationBL FindStation(int id)
         {
             StationBL stationBL = GetStations().ToList().Find(s => s.Id == id);
@@ -20,6 +25,11 @@ namespace BL
             return stationBL;
         }
 
+        /// <summary>
+        /// Find Drone
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DroneBL FindDrone(int id)
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == id);
@@ -30,6 +40,11 @@ namespace BL
             return droneBL;
         }
 
+        /// <summary>
+        /// Find Cuatomer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public CustomerBL FindCuatomer(int id)
         {
             List<CustomerBL> customerBLs = GetCustomers().ToList();
@@ -42,6 +57,11 @@ namespace BL
             return customerBL;
         }
 
+        /// <summary>
+        /// Find Parcel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ParcelBL FindParcel(int id)
         {
             ParcelBL parcelBL = GetParcels().ToList().Find(d => d.Id == id);
@@ -51,6 +71,5 @@ namespace BL
             }
             return parcelBL;
         }
-
     }
 }

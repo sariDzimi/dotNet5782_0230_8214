@@ -10,6 +10,11 @@ namespace BL
 {
     public partial class BL
     {
+        /// <summary>
+        /// updat eDrone Model
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
         public void updateDroneModel(int id, string model)
         {
             IDAL.DO.DroneDL droneDL = dalObject.GetDrones().ToList().First(d => d.Id == id);
@@ -21,6 +26,12 @@ namespace BL
             updateDrone(droneBL);
         }
 
+        /// <summary>
+        /// update Data Station
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="totalChargeSlots"></param>
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
             IDAL.DO.StationDL station = dalObject.findStation(id);
@@ -30,6 +41,13 @@ namespace BL
                 station.ChargeSlots = totalChargeSlots;
             dalObject.updateStation(station);
         }
+
+        /// <summary>
+        /// update Data Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
         public void updateDataCustomer(int id, string name = null, string phone = null)
         {
             IDAL.DO.CustomerDL customer = dalObject.findCustomer(id);
@@ -40,6 +58,10 @@ namespace BL
             dalObject.updateCustomer(customer);
         }
 
+        /// <summary>
+        /// update Drone
+        /// </summary>
+        /// <param name="drone"></param>
         public void updateDrone(DroneBL drone)
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);

@@ -51,7 +51,7 @@ namespace IBL
                     $"{droneAtCharging}  ";
             }
 
-            List<DroneAtChargingBL> droneAtChargings;
+            public List<DroneAtChargingBL> droneAtChargings;
 
 
 

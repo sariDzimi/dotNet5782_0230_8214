@@ -10,12 +10,12 @@ namespace BL
 {
     public partial class BL
     {
-/*        public DroneBL convertToDroneBL(IDAL.DO.DroneDL d)
-        {
-            DroneBL DroneBL = new DroneBL() { Id = d.Id, Model = d.Model, MaxWeight = d.MaxWeight };
-            return DroneBL;
-        }*/
 
+        /// <summary>
+        /// convert To Station BL
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public StationBL convertToStationBL(IDAL.DO.StationDL s)
         {
             StationBL StationBL = new StationBL() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
@@ -23,18 +23,29 @@ namespace BL
             return StationBL;
         }
 
+        /// <summary>
+        /// convert To Customer BL
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public CustomerBL convertToCustomerBL(IDAL.DO.CustomerDL c)
         {
             CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone  };
             return CustomerBL;
         }
 
+
+        /// <summary>
+        /// convert To Parcel BL
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
             DroneBL droneBL = new DroneBL();
             try
             { 
-                 droneBL = dronesBL.Find(d => d.Id == p.DroneId);
+                droneBL = dronesBL.First(d => d.Id == p.DroneId);
                 if (droneBL == null)
                 {
                     throw new Exception("cant convert");
@@ -54,6 +65,11 @@ namespace BL
             return ParcelBL;
         }
 
+        /// <summary>
+        /// calculate Free ChargeSlots In Station
+        /// </summary>
+        /// <param name="statioinID"></param>
+        /// <returns></returns>
         public int calculateFreeChargeSlotsInStation(int statioinID)
         {
             int total = dalObject.findStation(statioinID).ChargeSlots;

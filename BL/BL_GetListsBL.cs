@@ -13,7 +13,10 @@ namespace BL
     {
 
 
-
+        /// <summary>
+        /// Get Stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StationBL> GetStations()
         {
             foreach (var station in dalObject.GetStations())
@@ -22,6 +25,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Get Parcels
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelBL> GetParcels()
         {
             foreach (var parcel in dalObject.GetParcel())
@@ -30,6 +37,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Get Customers
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<CustomerBL> GetCustomers()
         {
             foreach (var customer in dalObject.GetCustomer())
@@ -38,6 +49,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Get Drones
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DroneBL> GetDrones()
         {
             foreach (var drone in dronesBL)

@@ -26,13 +26,6 @@ namespace IBL
                 Scheduled = parcel.Scheduled;
                 PickedUp = parcel.PickedUp;
                 Delivered = parcel.Delivered;
-
-
-
-
-
-
-
             }
 
             public ParcelBL()

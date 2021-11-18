@@ -10,6 +10,10 @@ namespace BL
 {
     public partial class BL
     {
+        /// <summary>
+        /// add Drone To DL
+        /// </summary>
+        /// <param name="drone"></param>
         public void addDroneToDL(DroneBL drone)
         {
             foreach (var item in dalObject.GetStations().ToList())
@@ -25,7 +29,10 @@ namespace BL
             dalObject.addDrone(droneDL);
 
         }
-
+        /// <summary>
+        /// add Station To DL
+        /// </summary>
+        /// <param name="station"></param>
         public void addStationToDL(StationBL station)
         {
             foreach (var item in dalObject.GetStations().ToList())
@@ -41,6 +48,10 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// add Parcel To DL
+        /// </summary>
+        /// <param name="parcel"></param>
         public void addParcelToDL(ParcelBL parcel)
         {
 
@@ -70,6 +81,10 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// add Customer To DL
+        /// </summary>
+        /// <param name="customer"></param>
         public void addCustomerToDL(CustomerBL customer)
         {
             foreach (var item in dalObject.GetStations().ToList())
@@ -85,6 +100,10 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// add DroneCharge To DL
+        /// </summary>
+        /// <param name="droneCharge"></param>
         public void addDroneChargeToDL(DroneChargeBL droneCharge)
         {
             

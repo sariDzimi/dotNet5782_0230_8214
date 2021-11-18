@@ -339,9 +339,6 @@ namespace ConsoleUI_BL
             }
         }
 
-
-
-
         private static void addStationToBL(int id, int name, Location location, int chargeSlots)
         {
             throw new NotImplementedException();
