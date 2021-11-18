@@ -18,15 +18,16 @@ namespace DalObject
 
         internal class Config
         {
-            public static double free = 10 ;
-            public static double light = 30;
-            public static double medium = 40 ;
-            public static double heavy = 70;
-            public static double rateChargePerHour = 50;
+            public static double free = .01 ;
+            public static double light = .3;
+            public static double medium = .4 ;
+            public static double heavy = .7;
+            public static double rateChargePerHour = .5;
         }
         static public void Initialize()
         {
 
+            int maxRand = 10;
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
             {
@@ -35,8 +36,8 @@ namespace DalObject
 
                 station.Id = stations.Count + 1;
                 station.Name = stations.Count + 1;
-                station.Latitude = rand.Next();
-                station.Longitude = rand.Next();
+                station.Latitude = rand.Next()% maxRand;
+                station.Longitude = rand.Next() % maxRand;
                 station.ChargeSlots = rand.Next(300);
                 stations.Add(station);
 
@@ -46,10 +47,11 @@ namespace DalObject
             {
 
                 DroneDL drone = new DroneDL();
-                drone.Id = drones.Count + 1;
+                drone.Id = (drones.Count) + 1;
                 drone.Model = "MarvicAir2";
                 drone.MaxWeight = (WeightCategories)(rand.Next() % 3);
                 drones.Add(drone);
+          
 
             }
 
@@ -58,11 +60,11 @@ namespace DalObject
 
 
                 CustomerDL customer = new CustomerDL();
-                customer.Id = customers.Count + 1;
+                customer.Id = (customers.Count) + 1;
                 customer.Name = $"customer{i}";
                 customer.Phone = $"{rand.Next(111111111, 999999999)}";
-                customer.Latitude = rand.Next();
-                customer.Longitude = rand.Next();
+                customer.Latitude = rand.Next() % maxRand;
+                customer.Longitude = rand.Next() % maxRand;
                 customers.Add(customer);
 
             }
@@ -73,8 +75,9 @@ namespace DalObject
 
                 ParcelDL parcel = new ParcelDL();
                 parcel.Id = parcels.Count + 1;
-                parcel.SenderId = rand.Next() % (parcels.Count + 1);
-                parcel.TargetId = rand.Next() % (parcels.Count + 1);
+                parcel.SenderId = customers[rand.Next() % (customers.Count-1)].Id;
+                //parcel.TargetId = customers[rand.Next() % (customers.Count-1)].Id;
+                parcel.TargetId = 5;
                 parcel.Weight = (WeightCategories)(rand.Next() % 3);
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();

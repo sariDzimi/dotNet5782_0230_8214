@@ -12,7 +12,7 @@ namespace BL
     {
         public void addDroneToDL(DroneBL drone)
         {
-            foreach (var item in dalObject.GetStations())
+            foreach (var item in dalObject.GetStations().ToList())
             {
                 if (item.Id == drone.Id)
                 {
@@ -28,7 +28,7 @@ namespace BL
 
         public void addStationToDL(StationBL station)
         {
-            foreach (var item in dalObject.GetStations())
+            foreach (var item in dalObject.GetStations().ToList())
             {
                 if (item.Id == station.Id)
                 {
@@ -44,7 +44,7 @@ namespace BL
         public void addParcelToDL(ParcelBL parcel)
         {
 
-            foreach (var item in dalObject.GetStations())
+            foreach (var item in dalObject.GetStations().ToList())
             {
                 if (item.Id == parcel.Id)
                 {
@@ -72,7 +72,7 @@ namespace BL
 
         public void addCustomerToDL(CustomerBL customer)
         {
-            foreach (var item in dalObject.GetStations())
+            foreach (var item in dalObject.GetStations().ToList())
             {
                 if (item.Id == customer.Id)
                 {

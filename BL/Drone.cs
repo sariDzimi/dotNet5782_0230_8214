@@ -22,7 +22,7 @@ namespace IBL
             }
             public DroneBL()
             {
-
+                battery = 100;
             }
 
             private double battery;
@@ -34,7 +34,7 @@ namespace IBL
             {
                 get
                 {
-                    return Battery;
+                    return battery;
                 }
                 set
                 {
