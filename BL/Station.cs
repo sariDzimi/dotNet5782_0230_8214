@@ -29,7 +29,7 @@ namespace IBL
 
             public StationBL()
             {
-
+                droneAtChargings = new List<DroneAtChargingBL>();
             }
             public int Id { get; set; }
             public int Name { get; set; }
@@ -38,12 +38,15 @@ namespace IBL
             public override string ToString()
             {
                 string droneAtCharging = " ";
-
-                foreach(var d in droneAtChargings)
+                if (droneAtChargings.Count != 0)
                 {
-                    droneAtCharging += d;
-                    droneAtCharging += " ";
+                    foreach (var d in droneAtChargings)
+                    {
+                        droneAtCharging += d;
+                        droneAtCharging += " ";
+                    }
                 }
+               
                 return $"station {Name} : {Id}, 'Location' {Location} , 'ChargeSlots': {ChargeSlots}," +
                     $"{droneAtCharging}  ";
             }

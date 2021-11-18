@@ -276,7 +276,7 @@ namespace BL
 
                     if (parcelDL.Weight == 0)
                     {
-                        throw new parcelNotFound();
+                        throw new NotFound("not found  parcel");
                     }
 
                     droneBL.DroneStatus = DroneStatus.Delivery;
