@@ -241,17 +241,11 @@ namespace BL
                     {
                         parcelDL = p;
 
-                        //foreach (IDAL.DO.ParcelDL p in dalObject.GetParcel())
-                        //{
                         parcel = convertToParcelBL(p);
                         customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
                         customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
                         stationBL = closestStationToLoacation(customerBLreciver.Location);
-                    //Calculate Electricity if the drone have enaph battery to do it.
-                    //if (CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree < droneBL.Battery)
-                    //{
-                    //    parcelDL.Remove(p);
-                    //}
+
 
                         else if (parcelDL.Pritority == p.Pritority)
                         {
