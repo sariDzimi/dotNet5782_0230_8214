@@ -292,14 +292,14 @@ namespace BL
 
 
 
-        public void supllyParcelByDrone(int DroneID)
+        public void supplyParcelByDrone(int DroneID)
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == DroneID);
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(DroneID);
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in delivery");
             ;
-            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomersList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
+            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliverySender.Id);
             Location locationSender = convertToCustomerBL(customerSernder).Location;
             IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelAtTransfor.customerAtDeliveryReciver.Id);
             Location locationReciver = convertToCustomerBL(customerReciver).Location;
@@ -375,83 +375,81 @@ namespace BL
 
 
 
-        /*       public IDAL.DO.StationDL convertToStationDL(StationBL station)
-               {
-                   IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
-                   return stationDL;
-               }
+    /*       public IDAL.DO.StationDL convertToStationDL(StationBL station)
+           {
+               IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
+               return stationDL;
+           }
 
-               public IDAL.DO.CustomerDL convertToCustomerDL(CustomerBL station)
-               {
-                   IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
-                   return customerDL;
-               }*/
-
-
+           public IDAL.DO.CustomerDL convertToCustomerDL(CustomerBL station)
+           {
+               IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Phone = station.Phone, Latitude = station.Location.Latitude };
+               return customerDL;
+           }*/
 
 
 
 
 
 
-        //public void belongPacelToADrone(Parcel parcel)
-        //{
-        //    Parcel parcel1 = new Parcel();
-        //    parcel1 = parcel;
-        //   var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);
-        //    int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
-        //    parcel1.DroneId = drone.Id;
-        //    drone.Status = DroneStatus.Delivery;
-        //    dalObject.updateDrone(drone);
-        //    dalObject.updateParcel(parcel1);
 
 
-        //}
-
-        //public void CollectAParcelByDrone(Parcel parcel)
-        //{
-        //    parcel.PickedUp = DateTime.Now;
-        //    dalObject.updateParcel(parcel);
-        //}
-
-        //public void DeliverParcelToCustomer(Parcel parcel)
-        //{
-        //    parcel.Delivered = DateTime.Now;
-        //    dalObject.updateParcel(parcel);
-        //}
-
-        //public void SendDroneForCharging(Drone drone, Station station)
-        //{
-        //    drone.Status = DroneStatus.Maintenance;
-        //    DroneCharge droneCharge = new DroneCharge();
-        //    droneCharge.DroneId = drone.Id;
-        //    droneCharge.stationId = station.Id;
-
-        //    dalObject.addDronCharge(droneCharge);
-        //}
-        //public void ReleaseDroneFromCharging(Drone drone)
-        //{
-        //    int index = 0;
-        //    drone.Status = DroneStatus.Free;
-        //    for (int i = 0; i < DataSource.droneCharges.Count; i++)
-        //    {
-        //        if (DataSource.droneCharges[i].DroneId == drone.Id)
-        //        {
-        //            index = i;
-        //            break;
-        //        }
+    //public void belongPacelToADrone(Parcel parcel)
+    //{
+    //    Parcel parcel1 = new Parcel();
+    //    parcel1 = parcel;
+    //   var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);
+    //    int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
+    //    parcel1.DroneId = drone.Id;
+    //    drone.Status = DroneStatus.Delivery;
+    //    dalObject.updateDrone(drone);
+    //    dalObject.updateParcel(parcel1);
 
 
-        //    }
+    //}
 
-        //    for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
-        //    {
-        //        DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
-        //    }
+    //public void CollectAParcelByDrone(Parcel parcel)
+    //{
+    //    parcel.PickedUp = DateTime.Now;
+    //    dalObject.updateParcel(parcel);
+    //}
 
-        //}
+    //public void DeliverParcelToCustomer(Parcel parcel)
+    //{
+    //    parcel.Delivered = DateTime.Now;
+    //    dalObject.updateParcel(parcel);
+    //}
+
+    //public void SendDroneForCharging(Drone drone, Station station)
+    //{
+    //    drone.Status = DroneStatus.Maintenance;
+    //    DroneCharge droneCharge = new DroneCharge();
+    //    droneCharge.DroneId = drone.Id;
+    //    droneCharge.stationId = station.Id;
+
+    //    dalObject.addDronCharge(droneCharge);
+    //}
+    //public void ReleaseDroneFromCharging(Drone drone)
+    //{
+    //    int index = 0;
+    //    drone.Status = DroneStatus.Free;
+    //    for (int i = 0; i < DataSource.droneCharges.Count; i++)
+    //    {
+    //        if (DataSource.droneCharges[i].DroneId == drone.Id)
+    //        {
+    //            index = i;
+    //            break;
+    //        }
 
 
+    //    }
+
+    //    for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
+    //    {
+    //        DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
+    //    }
+
+    //}
 
 
 
@@ -469,5 +467,7 @@ namespace BL
 
 
 
-    }
+
+
+}
 }

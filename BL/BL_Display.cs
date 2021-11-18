@@ -39,7 +39,7 @@ namespace BL
             }
         }
 
-        public IEnumerable<StationBL> StationsWithEmptyChargeSlots()
+        public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots()
         {
             foreach (var station in GetStations())
             {

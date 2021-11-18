@@ -167,7 +167,7 @@ namespace ConsoleUI_BL
                             case 8:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                bL.supllyParcelByDrone(id);
+                                bL.supplyParcelByDrone(id);
                                 break;
 
 
@@ -189,22 +189,22 @@ namespace ConsoleUI_BL
                             case 1:
                                 Console.WriteLine("enter id");
                                 int id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.DispleyStation(id));
+                                Console.WriteLine(bL.FindStation(id));
                                 break;
                             case 2:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.DispleyDrone(id));
+                                Console.WriteLine(bL.FindDrone(id));
                                 break;
                             case 3:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.DispleyCustomer(id));
+                                Console.WriteLine(bL.FindCuatomer(id));
                                 break;
                             case 4:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine(bL.DispleyParcel(id));
+                                Console.WriteLine(bL.FindParcel(id));
                                 break;
                             default:
                                 break;
@@ -216,67 +216,46 @@ namespace ConsoleUI_BL
                         Console.WriteLine("to display the drones list enter 2");
                         Console.WriteLine("to display the customers list enter 3");
                         Console.WriteLine("to display the parcels list enter 4");
-                        Console.WriteLine("to display the list of parcels that are free enter 5");
-                        Console.WriteLine("to display the list of station that have  free chargers enter 6");
+                        Console.WriteLine("to display the list of not asigned parcels enter 5");
+                        Console.WriteLine("to display the list of station that have free chargers enter 6");
                         choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
                         {
                             case 1:
-                                DisplayList<Station>(dalObject.GetStations());
+                                DisplayList(bL.GetStations());
                                 break;
                             case 2:
-                                DisplayList<Drone>(dalObject.GetDrones());
+                                DisplayList(bL.GetDrones());
                                 break;
                             case 3:
-                                DisplayList<Customer>(dalObject.GetCustomer());
+                                DisplayList(bL.GetCustomers());
                                 break;
                             case 4:
-                                DisplayList<Parcel>(dalObject.GetParcel());
+                                DisplayList(bL.GetParcels());
                                 break;
                             case 5:
-                                DisplayNotBelongedParcels(dalObject.GetParcel());
+                                DisplayList(bL.GetNotAsignedParcels());
                                 break;
                             case 6:
-                                displayStationsWithEmptyChargingSlots(dalObject.GetStations(), dalObject.GetDroneCharges());
+                                DisplayList(bL.GetStationsWithEmptyChargeSlots());
                                 break;
                             default:
                                 break;
                         }
-                        
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
+                  
 
                     default:
                         Console.WriteLine("input not valid");
                         break;
                 }
 
-
-
-
             } while (choices != 5);
 
-
-
-
-        }
-/*
-        private static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> enumerable1, IEnumerable<DroneCharge> enumerable2)
-        {
-            throw new NotImplementedException();
         }
 
-        private static void DisplayNotBelongedParcels(IEnumerable<Parcel> enumerable)
-        {
-            throw new NotImplementedException();
-        }
-*/
 
 
-        public void DisplayList<T>(IEnumerable<T> list)
+        public static void DisplayList<T>(IEnumerable<T> list)
         {
             foreach (var item in list)
             {
@@ -326,40 +305,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine(obj);
         }
-        public static void DisplayList<T>(IEnumerable<T> arr)//List<T> arr)
-        {
-            foreach (var item in arr)
-            {
-                Console.WriteLine(item);
-            }
-        }
-/*        public static void DisplayNotBelongedParcels(List<Parcel> parcels)
-        {
-            foreach (var parcel in parcels)
-            {
-                if (parcel.DroneId == 0)
-                    Console.WriteLine(parcel);
-            }
-        }*/
 
-/*        public static void displayStationsWithEmptyChargingSlots(IEnumerable<Station> stations, List<DroneCharge> droneCharges)
-        {
-            for (int i = 0; i < stations.Count; i++)
-            {
-                int ChargeSlots = 0;
-                for (int j = 0; j < droneCharges.Count; j++)
-                {
-                    if (droneCharges[j].stationId == stations[i].Id)
-                        ChargeSlots++;
-
-                }
-                if (ChargeSlots < stations[i].ChargeSlots)
-                {
-                    Console.WriteLine(stations[i]);
-                    break;
-                }
-            }
-        }*/
     }
 }
 
