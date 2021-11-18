@@ -242,6 +242,7 @@ namespace ConsoleUI_BL
                             default:
                                 break;
                         }
+                        break;
                   
 
                     default:
