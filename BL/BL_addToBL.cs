@@ -62,9 +62,10 @@ namespace BL
             {
                 throw new NotFound($"station number {numberStaion} to put the drone");
             }
-            if (stationBL.droneAtChargings.Count > 0)
+
+            if (stationBL.ChargeSlots == 0)
             {
-                throw new NotFound($"not found space in the station number {numberStaion} to put the drone");
+                throw new NotFound($"space in the station number {numberStaion} to put the drone");
             }
             else
             {
@@ -120,9 +121,14 @@ namespace BL
         /// <param name="prionity"></param>
         public int addParcelToBL(int SenderId, int reciverId, int weight, int prionity)
         {
+            if(weight <1 || weight > 3)
+            {
+                throw new OutOfRange("weight");
+            }
+
             if (prionity < 1 || prionity > 3)
             {
-                throw new OutOfRange("status");
+                throw new OutOfRange("Pritorities");
             }
 
             bool flag;

@@ -12,7 +12,8 @@ namespace IBL
         {
             public ParcelAtTransfor()
             {
-
+                customerAtDeliverySender = new CustomerAtParcel();
+                customerAtDeliveryReciver = new CustomerAtParcel();
             }
 
             public int ID { get; set; }

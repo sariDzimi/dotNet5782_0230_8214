@@ -108,6 +108,10 @@ namespace BL
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
             DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
+            if (droneBL == null)
+            {
+                throw new NotFound($" drone number {idDrone}");
+            }
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in Maintenance ");
 
@@ -126,7 +130,13 @@ namespace BL
         /// <param name="idDrone"></param>
         public void collectParcleByDrone(int idDrone)
         {
+
             DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
+            if(droneBL== null)
+            {
+                throw new NotFound($"drone number {idDrone}");
+            }
+
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in Delivery  ");
             ;
@@ -152,7 +162,11 @@ namespace BL
         /// <param name="droneId"></param>
         public void sendDroneToCharge(int droneId)
         {
-            var drone = dronesBL.Find(d => d.Id == droneId);
+            DroneBL drone = dronesBL.Find(d => d.Id == droneId);
+            if (drone==null)
+            {
+                throw new NotFound($"drone number {droneId}");
+            }
             if (drone.DroneStatus == 0)
             {
                 StationBL stationMini = closestStationToLoacation(drone.Location);
@@ -238,19 +252,19 @@ namespace BL
             IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL();
             List<CustomerBL> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
-            IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
-            DroneBL droneBL = new DroneBL();
-            droneBL = dronesBL.Find(s => s.Id == id);
+            //IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
+           // DroneBL droneBL = new DroneBL();
+            DroneBL droneBL = dronesBL.Find(s => s.Id == id);
+            if(droneBL== null)
+            {
+                throw new NotFound($"drone number {id}");
+            }
             if (droneBL.DroneStatus != DroneStatus.Free)
             {
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not free");
             }
-
-
             foreach (var p in parcelDLs)
             {
-
-
                 parcel = convertToParcelBL(p);
                 customerParcel = dalObject.findCustomer(parcelDL.SenderId);
                 customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
@@ -269,8 +283,6 @@ namespace BL
                         customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
                         stationBL = closestStationToLoacation(customerBLreciver.Location);
                     }
-
-
                     else if (parcelDL.Pritority == p.Pritority)
                     {
                         if (parcelDL.Weight < p.Weight)
@@ -286,11 +298,7 @@ namespace BL
                             parcelDL = p;
 
                         }
-
-
                     }
-
-
                     if (parcelDL.Weight == 0)
                     {
                         throw new NotFound("not found  parcel");
@@ -312,7 +320,12 @@ namespace BL
 
         public void supplyParcelByDrone(int DroneID)
         {
+
             DroneBL droneBL = dronesBL.Find(d => d.Id == DroneID);
+            if(droneBL== null)
+            {
+                throw new NotFound($"drone number {DroneID}");
+            }
             IDAL.DO.DroneDL droneDL = dalObject.findDrone(DroneID);
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in delivery");

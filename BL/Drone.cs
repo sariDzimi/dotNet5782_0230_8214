@@ -18,11 +18,12 @@ namespace IBL
                 Model = model;
                 MaxWeight = weightCategories;
                 Battery = battery;
+                ParcelAtTransfor = new ParcelAtTransfor();
 
             }
             public DroneBL()
             {
-
+                ParcelAtTransfor = new ParcelAtTransfor();
                 battery = 100;
             }
 
