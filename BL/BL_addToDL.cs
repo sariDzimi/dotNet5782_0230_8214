@@ -55,6 +55,7 @@ namespace BL
         public void addParcelToDL(ParcelBL parcel)
         {
 
+
             foreach (var item in dalObject.GetStations().ToList())
             {
                 if (item.Id == parcel.Id)

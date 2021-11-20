@@ -11,30 +11,28 @@ namespace IBL
 
         public class StationBL
         {
-
-/*            public StationBL(IDAL.DO.StationDL stationDL)
-            {
-                Id = stationDL.Id;
-                Name = stationDL.Name;
-                Location = new Location(stationDL.Longitude, stationDL.Latitude);
-                ChargeSlots = stationDL.ChargeSlots;
-                droneAtChargings = new List<DroneAtChargingBL>();
-
-
-            }*/
-
-
-
-            
-
             public StationBL()
             {
                 droneAtChargings = new List<DroneAtChargingBL>();
             }
+            private int chargeSlots;
             public int Id { get; set; }
             public int Name { get; set; }
             public Location Location { get; set; }
-            public int ChargeSlots { get; set; }
+
+            public int ChargeSlots
+            {
+                get
+                {
+                    return chargeSlots;
+                }
+                set
+                {
+                    if (value < 0)
+                        throw new OutOfRange("chargeSlots");
+                    chargeSlots = value;
+                }
+            }
             public override string ToString()
             {
                 string droneAtCharging = " ";

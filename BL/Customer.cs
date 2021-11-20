@@ -37,8 +37,8 @@ namespace IBL
             public Location Location { get; set; }
             public override string ToString()
             {
-                string parcelSentedByCustomer="yyyyyyyyy ";
-                string parcelSentedToCustomer= "rrrrrrrrrrrrr";
+                string parcelSentedByCustomer=" ";
+                string parcelSentedToCustomer= " ";
 
                 if (parcelsSentedByCustomer.Count!=0)
                 {

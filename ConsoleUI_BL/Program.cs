@@ -123,7 +123,8 @@ namespace ConsoleUI_BL
 
                                 try
                                 {
-                                    bL.addParcelToBL(SenderId, Id, weight, prionity);
+                                    id=bL.addParcelToBL(SenderId, Id, weight, prionity);
+                                    Console.WriteLine($"your id's parcel is {id}");
                                 }
                                 catch (Exception e)
                                 {
@@ -170,7 +171,14 @@ namespace ConsoleUI_BL
                                 int nameOfStation = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("enter number of charge slots");
                                 int chargeSlots = Convert.ToInt32(Console.ReadLine());
-                                bL.updateDataStation(id, nameOfStation, chargeSlots);
+                                try
+                                {
+                                    bL.updateDataStation(id, nameOfStation, chargeSlots);
+                                }
+                                catch(Exception e){
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 3:
                                 Console.WriteLine("enter id");
@@ -179,35 +187,84 @@ namespace ConsoleUI_BL
                                 name = Console.ReadLine();
                                 Console.WriteLine("enter phone");
                                 string phone = Console.ReadLine();
-                                bL.updateDataCustomer(id, name, phone);
+                                try
+                                {
+                                    bL.updateDataCustomer(id, name, phone);
+
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 4:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                bL.sendDroneToCharge(id);
+                                try
+                                {
+                                    bL.sendDroneToCharge(id);
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 5:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("enter Charging time");
                                 double time = Convert.ToInt32(Console.ReadLine());
-                                bL.releaseDroneFromCharging(id, time);
+                                try
+                                {
+                                    bL.releaseDroneFromCharging(id, time);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
 
                             case 6:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                bL.AssignAParcelToADrone(id);
+                                try
+                                {
+                                    bL.AssignAParcelToADrone(id);
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 7:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                bL.collectParcleByDrone(id);
+                                try
+                                {
+                                    bL.collectParcleByDrone(id);
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                               
                                 break;
                             case 8:
                                 Console.WriteLine("enter id");
                                 id = Convert.ToInt32(Console.ReadLine());
-                                bL.supplyParcelByDrone(id);
+                                try
+                                {
+                                    bL.supplyParcelByDrone(id);
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
+                                
                                 break;
 
 
@@ -318,7 +375,9 @@ namespace ConsoleUI_BL
                             default:
                                 break;
                         }
-
+                        break;
+                    case 5:
+                        Console.WriteLine("exit");
                         break;
                     default:
                         Console.WriteLine("input not valid");
@@ -382,5 +441,81 @@ namespace ConsoleUI_BL
     }
 }
 
-
-
+//דוגמאת הרצה:
+//    IBL.BO.DroneIsNotInCorrectStatus: drone is not in Maintenance
+//   at BL.BL.releaseDroneFromCharging(Int32 idDrone, Double timeInCharging) in C:\סמסטר א- חומר\C#\C#\BL\BL.cs:line 112
+//   at ConsoleUI_BL.Program.Main(String[] args) in C:\סמסטר א- חומר\C#\C#\ConsoleUI_BL\Program.cs:line 221
+//to add enter 1
+//to update enter 2
+//to display enter 3
+//to display lists enter 4
+//to exit enter 5
+//2
+//to udate Model of drone enter 1
+//to update data of station enter 2
+//to update data of customer enter 3
+//to send a drone to charge in a station enter 4
+//to release drone from charging enter 5
+//to assign a  parcel to a drone enter 6
+//to collection of a parcel by drone enter 7
+//to delivery of a parcel by drone enter 8
+//6
+//enter id
+//5
+//IBL.BO.DroneIsNotInCorrectStatus: drone is not free
+//   at BL.BL.AssignAParcelToADrone(Int32 id) in C:\סמסטר א- חומר\C#\C#\BL\BL.cs:line 246
+//   at ConsoleUI_BL.Program.Main(String[] args) in C:\סמסטר א- חומר\C#\C#\ConsoleUI_BL\Program.cs:line 235
+//to add enter 1
+//to update enter 2
+//to display enter 3
+//to display lists enter 4
+//to exit enter 5
+//2
+//to udate Model of drone enter 1
+//to update data of station enter 2
+//to update data of customer enter 3
+//to send a drone to charge in a station enter 4
+//to release drone from charging enter 5
+//to assign a  parcel to a drone enter 6
+//to collection of a parcel by drone enter 7
+//to delivery of a parcel by drone enter 8
+//7
+//enter id
+//3
+//IBL.BO.DroneIsNotInCorrectStatus: drone is not in Delivery
+//   at BL.BL.collectParcleByDrone(Int32 idDrone) in C:\סמסטר א- חומר\C#\C#\BL\BL.cs:line 131
+//   at ConsoleUI_BL.Program.Main(String[] args) in C:\סמסטר א- חומר\C#\C#\ConsoleUI_BL\Program.cs:line 248
+//to add enter 1
+//to update enter 2
+//to display enter 3
+//to display lists enter 4
+//to exit enter 5
+//8
+//input not valid
+//to add enter 1
+//to update enter 2
+//to display enter 3
+//to display lists enter 4
+//to exit enter 5
+//2
+//to udate Model of drone enter 1
+//to update data of station enter 2
+//to update data of customer enter 3
+//to send a drone to charge in a station enter 4
+//to release drone from charging enter 5
+//to assign a  parcel to a drone enter 6
+//to collection of a parcel by drone enter 7
+//to delivery of a parcel by drone enter 8
+//8
+//enter id
+//4
+//IBL.BO.DroneIsNotInCorrectStatus: drone is not in delivery
+//   at BL.BL.supplyParcelByDrone(Int32 DroneID) in C:\סמסטר א- חומר\C#\C#\BL\BL.cs:line 318
+//   at ConsoleUI_BL.Program.Main(String[] args) in C:\סמסטר א- חומר\C#\C#\ConsoleUI_BL\Program.cs:line 261
+//to add enter 1
+//to update enter 2
+//to display enter 3
+//to display lists enter 4
+//to exit enter 5
+//5
+//input not valid

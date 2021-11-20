@@ -51,12 +51,8 @@ namespace BL
                         int reciverID = parcel.SenderId;
                         droneBL.Location = convertToCustomerBL(dalObject.findCustomer(reciverID)).Location;
                     }
-                    //int t = parcel.TargetId;
-                    //List<CustomerBL> customerBLs = GetCustomers().ToList();
-                    //CustomerBL customerBL = FindCuatomer(parcel.TargetId);
-                    //Location location = FindCuatomer(parcel.TargetId).Location;
+                
                     double electicityNeeded = CalculateElectricity(droneBL.Location, FindCuatomer(parcel.TargetId).Location, parcel.Weight);
-                    //Console.WriteLine();
                     int r = rand.Next((int)electicityNeeded, 100);
                     droneBL.Battery = r;
                 }

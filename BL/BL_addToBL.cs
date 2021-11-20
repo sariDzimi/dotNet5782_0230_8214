@@ -44,7 +44,10 @@ namespace BL
         /// <param name="numberStaion"></param>
         public void addDroneToBL(int id, int status, string model, int numberStaion)
         {
-
+            if(status <1 || status > 3)
+            {
+                throw new OutOfRange("status");
+            }
             foreach (var item in dalObject.GetDrones())
             {
                 if (item.Id == id)
@@ -55,6 +58,10 @@ namespace BL
             DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
 
             StationBL stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
+            if (stationBL==null)
+            {
+                throw new NotFound($"station number {numberStaion} to put the drone");
+            }
             if (stationBL.droneAtChargings.Count > 0)
             {
                 throw new NotFound($"not found space in the station number {numberStaion} to put the drone");
@@ -65,10 +72,7 @@ namespace BL
                 stationBL.droneAtChargings.Add(droneAtChargingBL);
                 stationBL.ChargeSlots -= 1;
             }
-            if (stationBL.Equals(null))
-            {
-                throw new NotFound($"not found station number {numberStaion} to put the drone");
-            }
+           
 
             droneBL.DroneStatus = DroneStatus.Maintenance;
 
@@ -114,21 +118,39 @@ namespace BL
         /// <param name="reciverId"></param>
         /// <param name="weight"></param>
         /// <param name="prionity"></param>
-        public void addParcelToBL(int SenderId, int reciverId, int weight, int prionity)
+        public int addParcelToBL(int SenderId, int reciverId, int weight, int prionity)
         {
-            foreach (var item in dalObject.GetParcel().ToList())
+            if (prionity < 1 || prionity > 3)
             {
-                if (item.Id == SenderId)
-                {
-                    throw new IdAlreadyExist(SenderId);
-                }
+                throw new OutOfRange("status");
             }
+
+            bool flag;
+            int id;
+            do
+            {
+                flag = false;
+                id = rand.Next() % ((dalObject.GetParcel().ToList()).Count + 10);
+                foreach (var item in dalObject.GetParcel().ToList())
+                {
+                    if (item.Id == id)
+                    {
+                        flag = true;
+                        break;
+                    }
+
+                }
+            } while (flag == true);
+
+
+           
 
             CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = SenderId };
             CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = reciverId };
-            ParcelBL parcelBL = new ParcelBL() { customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
-            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() { SenderId = SenderId, TargetId = reciverId, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
+            ParcelBL parcelBL = new ParcelBL() {Id=id, customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
+            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() {Id= id, SenderId = SenderId, TargetId = reciverId, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
             dalObject.addParcel(parcelDL);
+            return id;
         }
     }
 }

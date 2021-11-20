@@ -43,18 +43,18 @@ namespace BL
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
             DroneBL droneBL = new DroneBL();
-            try
-            { 
-                droneBL = dronesBL.First(d => d.Id == p.DroneId);
-                if (droneBL == null)
-                {
-                    throw new Exception("cant convert");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            //try
+            //{ 
+            //    droneBL = dronesBL.First(d => d.Id == p.DroneId);
+            //    if (droneBL == null)
+            //    {
+            //        throw new Exception("cant convert");
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
           
           
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
