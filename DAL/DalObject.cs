@@ -172,7 +172,7 @@ namespace DalObject
             }
             catch (Exception)
             {
-                throw new NotFoundException(id);
+                throw new NotFoundException($"parcel number{id}");
             }
 
             return parcel;
@@ -193,7 +193,7 @@ namespace DalObject
             }
             catch (Exception)
             {
-                throw new NotFoundException(id);
+                throw new NotFoundException($"starion number{ id }");
             }
             return station;
         }
@@ -214,7 +214,7 @@ namespace DalObject
             catch (Exception)
             {
 
-                throw new NotFoundException(id);
+                throw new NotFoundException($"customer number {id}");
             }
             return customer;
         }
@@ -233,7 +233,7 @@ namespace DalObject
             }
             catch (Exception)
             {
-                throw new NotFoundException(id);
+                throw new NotFoundException($"drone number{id} ");
             }
             return drone;
         }
@@ -253,7 +253,7 @@ namespace DalObject
             }
             catch (Exception)
             {
-                throw new NotFoundException(id);
+                throw new NotFoundException($"droneCharge number{id}");
             }
             return droneCharge;
         }
