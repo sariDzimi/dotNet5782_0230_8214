@@ -409,7 +409,6 @@ namespace ConsoleUI_BL
                 throw new InvalidInput("int");
             }
             return num;
-
         }
 
         /// <summary>
