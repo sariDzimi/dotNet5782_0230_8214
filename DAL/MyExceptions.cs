@@ -8,7 +8,7 @@ namespace DAL
 {
     class NotFoundException : Exception
     {
-        public NotFoundException(int Id):base($"Not found {Id}")
+        public NotFoundException(string e) : base($"{e}  Not found")
         {
 
         }

@@ -7,7 +7,7 @@ using IDAL.DO;
 
 namespace BL
 {
-    public partial class BL
+    public partial class BL: IBL.IBL
     {
         public List<DroneBL> dronesBL;
         Random rand = new Random();

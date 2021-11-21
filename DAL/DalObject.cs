@@ -172,7 +172,7 @@ namespace DalObject
             ParcelDL parcel = DataSource.parcels.First(parcel => parcel.Id == id);
 
             if (parcel.Equals(null))
-                throw new NotFoundException(id);
+                throw new NotFoundException($"parcel number {id}");
             return parcel;
         }
 
@@ -180,10 +180,10 @@ namespace DalObject
         public StationDL findStation(int id)
         {
 
-            StationDL station = DataSource.stations.First(sat => sat.Id == id);
+            StationDL station = DataSource.stations.Find(sat => sat.Id == id);
 
-            if (station.Equals(null))
-                throw new NotFoundException(id);
+            if (station.Id==0)
+                throw new NotFoundException($" station number{ id }");
             return station;
  
 
@@ -193,8 +193,8 @@ namespace DalObject
         {
 
             CustomerDL customer = DataSource.customers.Find(customer => customer.Id == id);
-            if (customer.Equals(null))
-                throw new NotFoundException(id);
+            if (customer.Id == 0)
+                throw new NotFoundException($"customer number {id}");
             return customer;
 
 
@@ -203,18 +203,20 @@ namespace DalObject
         public DroneDL findDrone(int id)
         {
 
-            DroneDL drone = DataSource.drones.First(drone => drone.Id == id);
-            if (drone.Equals(null))
-                throw new NotFoundException(id);
+            DroneDL drone = DataSource.drones.Find(drone => drone.Id == id);
+            if (drone.Id == 0)
+                throw new NotFoundException($"drone number {id}");
+          
+              
             return drone;
         }
 
         public DroneChargeDL findDroneCharge(int id)
         {
 
-            DroneChargeDL droneCharge = DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
-            if (droneCharge.Equals(null))
-                throw new NotFoundException(id);
+            DroneChargeDL droneCharge = DataSource.droneCharges.Find(droneCahrge => droneCahrge.DroneId == id);
+            if (droneCharge.DroneId == 0)
+                throw new NotFoundException($"droneCharge number {id}");
             return droneCharge;
         }
 
