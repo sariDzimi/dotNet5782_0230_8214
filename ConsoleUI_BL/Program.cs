@@ -12,7 +12,6 @@ namespace ConsoleUI_BL
 
         static void Main(string[] args)
         {
-
             BL.BL bL = new BL.BL();
             int choices;
             do
@@ -26,6 +25,7 @@ namespace ConsoleUI_BL
                 switch (choices)
                 {
                     case 1:
+                        int Id, id;
                         Console.WriteLine("to add a station enter 1");
                         Console.WriteLine("to add a drone enter 2");
                         Console.WriteLine("to add a customer enter 3");
@@ -34,96 +34,66 @@ namespace ConsoleUI_BL
                         switch (choice)
                         {
                             case 1:
-
-                                Console.WriteLine("enter station number");
-                                int Id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter station name");
-                                int Name = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter number of free charge slots");
-                                int ChargeSlots = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter the longitude");
-                                int longitude = Convert.ToInt32(Console.ReadLine());
-                                double Longitude = (double)longitude;
-                                Console.WriteLine("enter the latitude");
-                                int latitude = Convert.ToInt32(Console.ReadLine());
-                                double Latitude = (double)latitude;
-                                Location location = new Location(Longitude, Latitude);
-
                                 try
                                 {
-
-                                bL.addStationToBL(Id, Name, location, ChargeSlots);
+                                    Id = getInt("enter station number");
+                                    int Name = getInt("enter station name");
+                                    int ChargeSlots = getInt("enter number of free charge slots");
+                                    double Longitude = getDouble("enter the longitude");
+                                    double Latitude = getDouble("enter the latitude");
+                                    Location location = new Location(Longitude, Latitude);
+                                    bL.addStationToBL(Id, Name, location, ChargeSlots);
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
-                                    
+
                                 }
 
                                 break;
                             case 2:
-                                Console.WriteLine("enter id");
-                                int id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
-                                int weight = Convert.ToInt32(Console.ReadLine());
-                                int MaxWeight = weight;
-                                Console.WriteLine("enter the model");
-                                string Model = Console.ReadLine();
-                                Console.WriteLine("number of station for start charging");
-                                int number = Convert.ToInt32(Console.ReadLine());
-
                                 try
                                 {
-                                    bL.addDroneToBL(id, weight, Model, number);
+                                    id = getId();
+                                    int MaxWeight = getInt("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
+                                    string Model = getString("enter the model");
+                                    int number = getInt("number of station for start charging");
+                                    bL.addDroneToBL(id, MaxWeight, Model, number);
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
-
                                 }
-                               
-
                                 break;
 
                             case 3:
-                                Console.WriteLine("enter id");
-                                Id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter name");
-                                string NameCustomer = Console.ReadLine();
-                                Console.WriteLine("enter cellPhone");
-                                string Phone = Console.ReadLine();
-                                Console.WriteLine("enter the Longitude");
-                                double longitude2 = Convert.ToDouble(Console.ReadLine());
-                                Console.WriteLine("enter the Latitude");
-                                double latitude2 = Convert.ToDouble(Console.ReadLine());
-                                Location location1 = new Location(longitude2, latitude2);
-
-
                                 try
                                 {
+                                    Id = getId();
+                                    string NameCustomer = getString("enter name");
+                                    string Phone = getString("enter cellPhone");
+                                    double longitude2 = getDouble("enter the Longitude");
+                                    double latitude2 = getDouble("enter the Latitude");
+                                    Location location1 = new Location(longitude2, latitude2);
+
                                     bL.addCustomerToBL(Id, NameCustomer, Phone, location1);
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
-
                                 }
-                               
-
                                 break;
-                            case 4:
-                                Console.WriteLine("enter id of sender");
-                                int SenderId = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter id of reciver");
-                                Id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter the weight : 1. Light,2. Medium, 3.Heavy");
-                                weight = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
-                                int prionity = Convert.ToInt32(Console.ReadLine());
 
+                            case 4:
                                 try
                                 {
-                                    id=bL.addParcelToBL(SenderId, Id, weight, prionity);
+                                    int weight;
+                                    int SenderId = getInt("enter id of sender");
+                                    Id = getInt("enter id of reciver");
+                                    weight = getInt("enter the weight : 1. Light,2. Medium, 3.Heavy");
+                                    int prionity = getInt("enter the prionity : 1. Reguler,2. Fast, 3.Emergency");
+
+                                    id = bL.addParcelToBL(SenderId, Id, weight, prionity);
                                     Console.WriteLine($"your id's parcel is {id}");
                                 }
                                 catch (Exception e)
@@ -132,7 +102,7 @@ namespace ConsoleUI_BL
 
                                 }
 
-                               
+
 
                                 break;
                             default:
@@ -146,125 +116,119 @@ namespace ConsoleUI_BL
                         Console.WriteLine("to update data of customer enter 3");
                         Console.WriteLine("to send a drone to charge in a station enter 4");
                         Console.WriteLine("to release drone from charging enter 5");
-                        Console.WriteLine("to assign a  parcel to a drone enter 6");
-                        Console.WriteLine("to collection of a parcel by drone enter 7");
-                        Console.WriteLine("to delivery of a parcel by drone enter 8");
+                        Console.WriteLine("to assign a parcel to a drone enter 6");
+                        Console.WriteLine("to collect a parcel by drone enter 7");
+                        Console.WriteLine("to deliver a parcel by drone enter 8");
 
-
-
-
-                        //Console.WriteLine("to Release a skimmer from charging at a base station enter 5 ");
-                        choice = Convert.ToInt32(Console.ReadLine());
+                        choice = getInt();
+                        string name;
                         switch (choice)
                         {
+                            
                             case 1:
-                                Console.WriteLine("enter id");
-                                int id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter new Model");
-                                string name = Console.ReadLine();
-                                bL.updateDroneModel(id, name);
+                                try
+                                {
+                                    id = getId();
+                                    name = getString("enter new Model");
+                                    bL.updateDroneModel(id, name);
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                }
                                 break;
                             case 2:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter name");
-                                int nameOfStation = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter number of charge slots");
-                                int chargeSlots = Convert.ToInt32(Console.ReadLine());
                                 try
                                 {
+                                    id = getId();
+                                    int nameOfStation = getInt("enter name");
+                                    int chargeSlots = getInt("enter number of charge slots");
+
                                     bL.updateDataStation(id, nameOfStation, chargeSlots);
                                 }
-                                catch(Exception e){
+                                catch (Exception e)
+                                {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 3:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter name");
-                                name = Console.ReadLine();
-                                Console.WriteLine("enter phone");
-                                string phone = Console.ReadLine();
                                 try
                                 {
-                                    bL.updateDataCustomer(id, name, phone);
+                                    id = getId();
+                                    name = getString("enter name");
+                                    string phone = getString("enter phone");
 
+                                    bL.updateDataCustomer(id, name, phone);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 4:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
                                 try
                                 {
+                                    id = getId();
                                     bL.sendDroneToCharge(id);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 5:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("enter Charging time");
-                                double time = Convert.ToInt32(Console.ReadLine());
+                                
                                 try
                                 {
+                                    id = getId();
+                                    double time = getDouble("enter Charging time");
                                     bL.releaseDroneFromCharging(id, time);
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
 
                             case 6:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
+                                id = getId();
                                 try
                                 {
                                     bL.AssignAParcelToADrone(id);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 7:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
+                                id = getId();
                                 try
                                 {
                                     bL.collectParcleByDrone(id);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 8:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
+                                id = getId();
                                 try
                                 {
                                     bL.supplyParcelByDrone(id);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                                
+
                                 break;
 
 
@@ -284,11 +248,10 @@ namespace ConsoleUI_BL
                         switch (choice)
                         {
                             case 1:
-                                Console.WriteLine("enter id");
-                                int id = Convert.ToInt32(Console.ReadLine());
                                 try
                                 {
-                                Console.WriteLine(bL.FindStation(id));
+                                    id = getId();
+                                    Console.WriteLine(bL.FindStation(id));
                                 }
                                 catch (Exception e)
                                 {
@@ -296,26 +259,22 @@ namespace ConsoleUI_BL
                                 }
                                 break;
                             case 2:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
 
                                 try
                                 {
+                                    id = getId();
                                     Console.WriteLine(bL.FindDrone(id));
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 }
-                               
+
                                 break;
                             case 3:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
-
-
                                 try
                                 {
+                                    id = getId();
                                     Console.WriteLine(bL.FindCuatomer(id));
                                 }
                                 catch (Exception e)
@@ -323,15 +282,12 @@ namespace ConsoleUI_BL
                                     Console.WriteLine(e);
                                 }
 
-                               
+
                                 break;
                             case 4:
-                                Console.WriteLine("enter id");
-                                id = Convert.ToInt32(Console.ReadLine());
-                                
-
                                 try
                                 {
+                                    id = getId();
                                     Console.WriteLine(bL.FindParcel(id));
                                 }
                                 catch (Exception e)
@@ -350,7 +306,7 @@ namespace ConsoleUI_BL
                         Console.WriteLine("to display the customers list enter 3");
                         Console.WriteLine("to display the parcels list enter 4");
                         Console.WriteLine("to display the list of not asigned parcels enter 5");
-                        Console.WriteLine("to display the list of station that have free chargers enter 6");
+                        Console.WriteLine("to display the list of stations that have free chargers enter 6");
                         choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
                         {
@@ -405,32 +361,51 @@ namespace ConsoleUI_BL
 
 
 
-        public static int getParcleId()
+        public static int getId()
         {
-            Console.WriteLine("enter an parcels id");
+            return getInt("enter id");
+            /*Console.WriteLine("enter id");
             int id = Convert.ToInt32(Console.ReadLine());
-            return id;
+            return id;*/
         }
 
-        public static int getDroeId()
+        public static int getInt(string message = "")
         {
-            Console.WriteLine("enter an drone id");
-            int id = Convert.ToInt32(Console.ReadLine());
-            return id;
+            int num;
+            Console.WriteLine(message);
+            try
+            {
+                num = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                throw new InvalidInput("int");
+            }
+            return num;
+
         }
 
-        public static int getStaionId()
+        public static double getDouble(string message)
         {
-            Console.WriteLine("enter an station id");
-            int id = Convert.ToInt32(Console.ReadLine());
-            return id;
+            double num;
+            Console.WriteLine(message);
+            try
+            {
+                num = Convert.ToDouble(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                throw new InvalidInput("int");
+            }
+            return num;
+
         }
 
-        public static int getCustomerId()
+        public static string getString(string message)
         {
-            Console.WriteLine("enter an cusomer id");
-            int id = Convert.ToInt32(Console.ReadLine());
-            return id;
+            Console.WriteLine(message);
+            string str = Console.ReadLine();
+            return str;
         }
 
         public static void DisplayObj<T>(T obj)

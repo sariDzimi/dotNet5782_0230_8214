@@ -70,7 +70,7 @@ namespace BL
 
                 if (droneBL.DroneStatus == DroneStatus.Free)
                 {
-                    List<ParcelDL> deliveredParcels = dalObject.GetParcel().ToList().FindAll(p => !p.Delivered.Equals(null));
+                    List<ParcelDL> deliveredParcels = dalObject.GetParcel().ToList().FindAll(p => p.Delivered!= new DateTime());
                     ParcelDL randomDeliveredParcel = deliveredParcels[rand.Next(0, deliveredParcels.Count)];
                     int recieverID = randomDeliveredParcel.TargetId;
                     CustomerDL reciver = dalObject.findCustomer(recieverID);
