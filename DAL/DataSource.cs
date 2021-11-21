@@ -24,6 +24,10 @@ namespace DalObject
             public static double heavy = .7;
             public static double rateChargePerHour = .5;
         }
+
+        /// <summary>
+        /// intilizes the lists in he database by randomng data
+        /// </summary>
         static public void Initialize()
         {
 
@@ -92,6 +96,11 @@ namespace DalObject
 
         }
 
+
+        /// <summary>
+        /// randoms a date
+        /// </summary>
+        /// <returns>date</returns>
         public static DateTime RandomDate()
         {
             Random rand = new Random();

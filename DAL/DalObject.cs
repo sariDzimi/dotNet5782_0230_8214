@@ -18,16 +18,6 @@ namespace DalObject
             DataSource.Initialize();
         }
 
-        public static DalObject GetInstance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new DalObject();
-                return instance;
-            }
-        }
-
         /// <summary>
         /// Adds the drone to the drones list in the DataSource
         /// If the ID alredy exist the function will throw exception
@@ -107,26 +97,11 @@ namespace DalObject
 
         }
 
-/*        public List<StationDL> GetStationsList()
-        {
-            return DataSource.stations;
-        }*/
 
-/*        public List<DroneDL> GetDronesList()
-        {
-            return DataSource.drones;
-        }*/
-
-/*        public List<CustomerDL> GetCustomersList()
-        {
-            return DataSource.customers;
-        }*/
-
-/*        public List<ParcelDL> GetParcelsList()
-        {
-            return DataSource.parcels;
-        }*/
-
+        /// <summary>
+        /// returns stations form datasource
+        /// </summary>
+        /// <returns>DataSource.stations</returns>
         public IEnumerable<StationDL> GetStations()
         {
             foreach (var station in DataSource.stations)
@@ -135,6 +110,10 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// returns drones form datasource
+        /// </summary>
+        /// <returns>DataSource.drones</returns>
         public IEnumerable<DroneDL> GetDrones()
         {
             foreach (var drone in DataSource.drones)
@@ -143,6 +122,10 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// returns customers form datasource
+        /// </summary>
+        /// <returns>DataSource.customers</returns>
         public IEnumerable<CustomerDL> GetCustomer()
         {
             foreach (var customer in DataSource.customers)
@@ -151,6 +134,10 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// returns customers form datasource
+        /// </summary>
+        /// <returns>DataSource.customers</returns>
         public IEnumerable<ParcelDL> GetParcel()
         {
             foreach (var parcel in DataSource.parcels)
@@ -159,6 +146,10 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// returns droneCharges form datasource
+        /// </summary>
+        /// <returns>DataSource.droneCharges</returns>
         public IEnumerable<DroneChargeDL> GetDroneCharges()
         {
             foreach (var droneCharge in DataSource.droneCharges)
@@ -167,70 +158,131 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// returns parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>parcel</returns>
         public ParcelDL findParcel(int id)
         {
-            ParcelDL parcel = DataSource.parcels.First(parcel => parcel.Id == id);
-
-            if (parcel.Equals(null))
+            ParcelDL parcel;
+            try
+            {
+                parcel = DataSource.parcels.First(parcel => parcel.Id == id);
+            }
+            catch (Exception)
+            {
                 throw new NotFoundException(id);
+            }
+
             return parcel;
         }
 
-
+        /// <summary>
+        /// returns station by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>station</returns>
         public StationDL findStation(int id)
         {
 
-            StationDL station = DataSource.stations.First(sat => sat.Id == id);
-
-            if (station.Equals(null))
+            StationDL station;
+            try
+            {
+                station = DataSource.stations.First(sat => sat.Id == id);
+            }
+            catch (Exception)
+            {
                 throw new NotFoundException(id);
+            }
             return station;
- 
-
         }
 
+        /// <summary>
+        /// returns customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>customer</returns>
         public CustomerDL findCustomer(int id)
         {
 
-            CustomerDL customer = DataSource.customers.Find(customer => customer.Id == id);
-            if (customer.Equals(null))
+            CustomerDL customer;
+            try
+            {
+                customer = DataSource.customers.Find(customer => customer.Id == id);
+            }
+            catch (Exception)
+            {
+
                 throw new NotFoundException(id);
+            }
             return customer;
-
-
         }
 
+        /// <summary>
+        /// returns drone by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>drone</returns>
         public DroneDL findDrone(int id)
         {
-
-            DroneDL drone = DataSource.drones.First(drone => drone.Id == id);
-            if (drone.Equals(null))
+            DroneDL drone;
+            try
+            {
+                drone = DataSource.drones.First(drone => drone.Id == id);
+            }
+            catch (Exception)
+            {
                 throw new NotFoundException(id);
+            }
             return drone;
         }
 
+        /// <summary>
+        /// returns droneCharge by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>droneCharge</returns>
         public DroneChargeDL findDroneCharge(int id)
         {
 
-            DroneChargeDL droneCharge = DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
-            if (droneCharge.Equals(null))
+            DroneChargeDL droneCharge;
+            try
+            {
+                droneCharge = DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
+            }
+            catch (Exception)
+            {
                 throw new NotFoundException(id);
+            }
             return droneCharge;
         }
 
+        /// <summary>
+        /// updates the drones list in the database
+        /// </summary>
+        /// <param name="drone"></param>
         public void updateDrone(DroneDL drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             DataSource.drones[index] = drone;
         }
 
-
+        /// <summary>
+        /// updates the drones list in the database
+        /// </summary>
+        /// <param name="parcel"></param>
         public void updateParcel(ParcelDL parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             DataSource.parcels[index] = parcel;
 
         }
+
+        /// <summary>
+        /// updates the drones list in the database
+        /// </summary>
+        /// <param name="customer"></param>
         public void updateCustomer(CustomerDL customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
@@ -238,11 +290,20 @@ namespace DalObject
 
         }
 
+        /// <summary>
+        /// updates the stations list in the database
+        /// </summary>
+        /// <param name="station"></param>
         public void updateStation(StationDL station)
         {
             int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
             DataSource.stations[index] = station;
         }
+
+        /// <summary>
+        /// updates the dronecharges list in the database
+        /// </summary>
+        /// <param name="dronecharge"></param>
         public void updateDronecharge(DroneChargeDL dronecharge)
         {
             int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
@@ -250,17 +311,10 @@ namespace DalObject
 
         }
 
-        public IEnumerable<ParcelDL> GetNotBelongedParcels()
-        {
-            foreach (var parcel in DataSource.parcels)
-            {
-                if(parcel.DroneId == 0)
-                    yield return parcel;
-            }
-        }
-
-
-
+        /// <summary>
+        /// returns the array of the electricity use
+        /// </summary>
+        /// <returns>Electricity</returns>
         public double[] RequestElectricityUse()
         {
             double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium,DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
@@ -268,77 +322,10 @@ namespace DalObject
 
         }
 
-/*
-        public void belongPacelToADrone(ParcelDL parcel)
-        {
-            ParcelDL parcel1 = new ParcelDL();
-            parcel1 = parcel;
-            var drone = DataSource.drones.Find(c => c.Status == DroneStatus.Free);//TODO
-            int indexDrone = DataSource.drones.FindIndex(c => c.Id == parcel.Id);
-            parcel1.DroneId = drone.Id;
-            updateDrone(drone);
-            updateParcel(parcel1);
-
-
-        }*/
-
-        public void CollectAParcelByDrone(ParcelDL parcel)
-        {
-            parcel.PickedUp = DateTime.Now;
-            updateParcel(parcel);
-        }
-
-        public void DeliverParcelToCustomer(ParcelDL parcel)
-        {
-            parcel.Delivered = DateTime.Now;
-            updateParcel(parcel);
-        }
-
-        public void SendDroneForCharging(DroneDL drone, StationDL station)
-        {
-
-            DroneChargeDL droneCharge = new DroneChargeDL();
-            droneCharge.DroneId = drone.Id;
-            droneCharge.stationId = station.Id;
-
-            addDronCharge(droneCharge);
-        }
-        public void ReleaseDroneFromCharging(DroneDL drone)
-        {
-            int index = 0;
-            
-            for (int i = 0; i < DataSource.droneCharges.Count; i++)
-            {
-                if (DataSource.droneCharges[i].DroneId == drone.Id)
-                {
-                    index = i;
-                    break;
-                }
-
-
-            }
-
-            for (int i = index; i < DataSource.droneCharges.Count - 1; i++)
-            {
-                DataSource.droneCharges[i] = DataSource.droneCharges[i + 1];
-            }
-
-        }
-
-        public IEnumerable<StationDL> GetStationsWithEmptyChargingSlots()
-        {
-            //TODO//////////////////////////////////////////
-            foreach (var station in DataSource.stations)
-            {
-                yield return station;
-            }
-        }
-
-        public void belongPacelToADrone(ParcelDL parcel)
-        {
-            ((IDal.IDal)GetInstance).belongPacelToADrone(parcel);
-        }
-
+        /// <summary>
+        /// removes droneCharge from dronecharges list in database
+        /// </summary>
+        /// <param name="id"></param>
         public void removeDroneCharge(int id)
         {
             DataSource.droneCharges.Remove(findDroneCharge(id));

@@ -57,24 +57,6 @@ namespace IDal
 
         public void updateDronecharge(DroneChargeDL dronecharge);
 
-        public IEnumerable<StationDL> GetStationsWithEmptyChargingSlots();
-
-        public IEnumerable<ParcelDL> GetNotBelongedParcels();
-
-
-        public void belongPacelToADrone(ParcelDL parcel);
-
-
-        public void CollectAParcelByDrone(ParcelDL parcel);
-
-
-        public void DeliverParcelToCustomer(ParcelDL parcel);
-
-
-        public void SendDroneForCharging(DroneDL drone, StationDL station);
-
-        public void ReleaseDroneFromCharging(DroneDL drone);
-
         public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();

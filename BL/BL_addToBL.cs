@@ -48,13 +48,10 @@ namespace BL
             {
                 throw new OutOfRange("status");
             }
-            foreach (var item in dalObject.GetDrones())
-            {
-                if (item.Id == id)
-                {
-                    throw new IdAlreadyExist(id);
-                }
-            }
+
+            if(dalObject.GetDrones().Any(d => d.Id == id))
+                throw new IdAlreadyExist(id);
+
             DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
 
             StationBL stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
@@ -96,15 +93,10 @@ namespace BL
         /// <param name="phone"></param>
         /// <param name="location"></param>
         public void addCustomerToBL(int id, string name, string phone, Location location)
-
         {
-            foreach (var item in dalObject.GetCustomer().ToList())
-            {
-                if (item.Id == id)
-                {
-                    throw new IdAlreadyExist(id);
-                }
-            }
+            if(dalObject.GetCustomer().Any(c => c.Id == id))
+                throw new IdAlreadyExist(id);
+
             CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
             IDAL.DO.CustomerDL customer = new IDAL.DO.CustomerDL() { Id = id, Latitude = location.Latitude, Longitude = location.Longitude, Name = name, Phone = phone };
             dalObject.addCustomer(customer);

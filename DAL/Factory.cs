@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IDal
 {
-    public static class DalFactory
+/*    public static class DalFactory
     {
         public static IDal factory(string type)
         {
@@ -23,5 +23,5 @@ namespace IDal
         }
        
 
-    }
+    }*/
 }
