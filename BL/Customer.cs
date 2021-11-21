@@ -27,8 +27,8 @@ namespace IBL
             public CustomerBL()
             {
                 parcelsSentedByCustomer = new List<ParcelAtCustomer>();
+                
                 parcelsSentedToCustomer = new List<ParcelAtCustomer>();
-
             }
             public int Id { get; set; }
             public string Name { get; set; }
@@ -66,8 +66,8 @@ namespace IBL
             }
 
 
-            List<ParcelAtCustomer> parcelsSentedByCustomer;
-            List<ParcelAtCustomer> parcelsSentedToCustomer;
+            public List<ParcelAtCustomer> parcelsSentedByCustomer;
+            public List<ParcelAtCustomer> parcelsSentedToCustomer;
 
           
 

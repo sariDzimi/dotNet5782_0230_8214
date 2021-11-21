@@ -31,6 +31,19 @@ namespace BL
         public CustomerBL convertToCustomerBL(IDAL.DO.CustomerDL c)
         {
             CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone  };
+            foreach(var p in dalObject.GetParcel().ToList())
+            {
+                if(p.SenderId== CustomerBL.Id)
+                {
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name } , weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus= ParcelStatus.created };
+                    CustomerBL.parcelsSentedByCustomer.Add(parcelAtCustomer);
+                }
+                if(p.TargetId== CustomerBL.Id)
+                {
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelStatus.Collected };
+                    CustomerBL.parcelsSentedToCustomer.Add(parcelAtCustomer);
+                }
+            }
             return CustomerBL;
         }
 
@@ -43,20 +56,6 @@ namespace BL
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
             DroneBL droneBL = new DroneBL();
-            //try
-            //{ 
-            //    droneBL = dronesBL.First(d => d.Id == p.DroneId);
-            //    if (droneBL == null)
-            //    {
-            //        throw new Exception("cant convert");
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e);
-            //}
-          
-          
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
             CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomer(p.SenderId).Name };
             CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomer(p.TargetId).Name };
