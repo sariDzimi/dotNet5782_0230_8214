@@ -8,14 +8,13 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
             BL.BL bL = new BL.BL();
             int choices;
             do
             {
+
                 Console.WriteLine("to add enter 1");
                 Console.WriteLine("to update enter 2");
                 Console.WriteLine("to display enter 3");
@@ -230,10 +229,6 @@ namespace ConsoleUI_BL
                                 }
 
                                 break;
-
-
-
-
                             default:
                                 break;
                         }

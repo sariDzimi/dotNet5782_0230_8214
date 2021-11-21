@@ -252,8 +252,6 @@ namespace BL
             IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL();
             List<CustomerBL> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = new List<IDAL.DO.ParcelDL>();
-            //IDAL.DO.DroneDL droneDL = dalObject.findDrone(id);
-           // DroneBL droneBL = new DroneBL();
             DroneBL droneBL = dronesBL.Find(s => s.Id == id);
             if(droneBL== null)
             {
