@@ -366,7 +366,7 @@ namespace ConsoleUI_BL
             {
                 num = Convert.ToInt32(Console.ReadLine());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InvalidInput("int");
             }
@@ -387,7 +387,7 @@ namespace ConsoleUI_BL
             {
                 num = Convert.ToDouble(Console.ReadLine());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InvalidInput("int");
             }
