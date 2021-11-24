@@ -3,7 +3,6 @@ using IBL.BO;
 using System.Collections.Generic;
 
 
-
 namespace ConsoleUI_BL
 {
     class Program
@@ -47,7 +46,6 @@ namespace ConsoleUI_BL
                                     catch (Exception e)
                                     {
                                         Console.WriteLine(e);
-
                                     }
                                     break;
                                 case 2:
@@ -100,9 +98,6 @@ namespace ConsoleUI_BL
                                         Console.WriteLine(e);
 
                                     }
-
-
-
                                     break;
                                 default:
                                     Console.WriteLine("please enter a number btween 1-4");
@@ -179,7 +174,6 @@ namespace ConsoleUI_BL
 
                                     break;
                                 case 5:
-
                                     try
                                     {
                                         id = getId();
@@ -190,13 +184,12 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(e);
                                     }
-
                                     break;
 
                                 case 6:
-                                    id = getId();
                                     try
                                     {
+                                        id = getId();
                                         bL.AssignAParcelToADrone(id);
                                     }
                                     catch (Exception e)
@@ -215,7 +208,6 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(e);
                                     }
-
                                     break;
                                 case 8:
                                     id = getId();
@@ -227,12 +219,7 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(e);
                                     }
-
                                     break;
-
-
-
-
                                 default:
                                     break;
                             }
@@ -258,7 +245,6 @@ namespace ConsoleUI_BL
                                     }
                                     break;
                                 case 2:
-
                                     try
                                     {
                                         id = getId();
@@ -268,7 +254,6 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(e);
                                     }
-
                                     break;
                                 case 3:
                                     try
@@ -280,8 +265,6 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(e);
                                     }
-
-
                                     break;
                                 case 4:
                                     try
