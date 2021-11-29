@@ -33,7 +33,7 @@ namespace BL
         {
             foreach (var parcel in dalObject.GetParcel())
             {
-                yield return  convertToParcelBL(parcel);
+                yield return convertToParcelBL(parcel);
             }
         }
 
@@ -62,3 +62,6 @@ namespace BL
         }
     }
 }
+
+   
+
