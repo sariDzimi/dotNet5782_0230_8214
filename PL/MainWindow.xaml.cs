@@ -20,18 +20,16 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        BL.BL bL;
         public MainWindow()
         {
-
+            bL = new BL.BL();
             InitializeComponent();
         }
 
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DronesList().Show();
+            new DronesList(bL).Show();
         }
     }
 }

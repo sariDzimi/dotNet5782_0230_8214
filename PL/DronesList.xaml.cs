@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace PL
 {
@@ -19,9 +21,18 @@ namespace PL
     /// </summary>
     public partial class DronesList : Window
     {
+        BL.BL bL;
         public DronesList()
         {
             InitializeComponent();
+            
         }
+
+        public DronesList(BL.BL bL1)
+        {
+            bL = bL1;
+        }
+
+        
     }
 }

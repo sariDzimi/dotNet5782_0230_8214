@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesList" Height="450" Width="800">
-    <Grid>
-        
+        Title="DronesList" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="400*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Name="StatusSelector" Grid.Column="2" HorizontalAlignment="Left" Margin="63,35,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox Name="MaxWeightSelector" Grid.Column="3" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" Width="120"/>
+        </Grid>
     </Grid>
 </Window>
