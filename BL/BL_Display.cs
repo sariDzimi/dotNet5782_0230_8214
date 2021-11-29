@@ -41,7 +41,13 @@ namespace BL
 
 
 
+        //public IEnumerable<T> GetListDrone<T>(Predicate<T> predicate, List<DroneBL> droneBLs)
+        //{
+         
 
+        //    return
+
+        //}
 
 
 
