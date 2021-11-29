@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Height="63" Margin="400,188,0,0" VerticalAlignment="Top" Width="188" Click="Button_Click"/>
+        <Button Content="Open Drones List" HorizontalAlignment="Left" Height="63" Margin="504,56,0,0" VerticalAlignment="Top" Width="188" Click="Button_Click"/>
 
     </Grid>
 </Window>

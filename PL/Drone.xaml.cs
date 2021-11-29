@@ -25,9 +25,5 @@ namespace PL
             InitializeComponent();
         }
 
-        public Drone(BL.BL bL1)
-        {
-            bL = bL1;
-        }
     }
 }
