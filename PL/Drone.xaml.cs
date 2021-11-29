@@ -19,9 +19,11 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
+        BL.BL bL;
         public Drone()
         {
             InitializeComponent();
         }
+
     }
 }

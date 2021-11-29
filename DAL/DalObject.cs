@@ -330,6 +330,22 @@ namespace DalObject
         {
             DataSource.droneCharges.Remove(findDroneCharge(id));
         }
+
+
+
+        public IEnumerable<ParcelDL> GetParcelIdBy(Predicate<ParcelDL> findBy)
+        {
+            return from parcel in DataSource.parcels
+                   where findBy(parcel)
+                   select parcel;
+        }
+
+        public IEnumerable<StationDL> GetStationIdBy(Predicate<StationDL> findBy)
+        {
+            return from station in DataSource.stations
+                   where findBy(station)
+                   select station;
+        }
     }
 
 }

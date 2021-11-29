@@ -12,7 +12,7 @@ namespace IBL
         public class DroneBL
         {
 
-            public DroneBL(int id, string model, IDAL.DO.WeightCategories weightCategories, double battery)
+            public DroneBL(int id, string model, WeightCategories weightCategories, double battery)
             {
                 Id = id;
                 Model = model;
@@ -30,7 +30,7 @@ namespace IBL
             private double battery;
             public int Id { get; set; }
             public string Model { get; set; }
-            public IDAL.DO.WeightCategories MaxWeight { get; set; }
+            public WeightCategories MaxWeight { get; set; }
 
             public double Battery
             {

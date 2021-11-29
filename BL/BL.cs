@@ -33,7 +33,7 @@ namespace BL
 
             foreach (var drone in dalObject.GetDrones())
             {
-                DroneBL droneBL = new DroneBL() { Id = drone.Id, Model = drone.Model, MaxWeight = drone.MaxWeight };
+                DroneBL droneBL = new DroneBL() { Id = drone.Id, Model = drone.Model, MaxWeight = (IBL.BO.WeightCategories)drone.MaxWeight };
                 ParcelDL parcel = parcelDLs.Find(p => p.DroneId == drone.Id);
 
                 if (parcel.TargetId != 0)

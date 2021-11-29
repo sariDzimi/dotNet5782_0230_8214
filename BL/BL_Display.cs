@@ -17,12 +17,12 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<ParcelBL> GetNotAsignedParcels()
         {
-            foreach(var parcel in GetParcels())
+            foreach(var p in dalObject.GetParcelIdBy((x) => x.DroneId == 0))
             {
-                if (parcel.droneAtParcel.Id==0)
-                    yield return parcel;
+                yield return convertToParcelBL(p);
             }
         }
+
 
         /// <summary>
         /// GetS tations With Empty ChargeSlots
@@ -30,35 +30,12 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots()
         {
-            foreach (var station in GetStations())
+            foreach (var station in dalObject.GetStationIdBy((x)=> x.ChargeSlots > 0))
             {
-                if (station.ChargeSlots > 0)
-                    yield return station;
+                yield return convertToStationBL(station);
             }
         }
 
-
-
-
-
-        //public IEnumerable<T> GetListDrone<T>(Predicate<T> predicate, List<DroneBL> droneBLs)
-        //{
-         
-
-        //    return
-
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
+       
     }
 }
