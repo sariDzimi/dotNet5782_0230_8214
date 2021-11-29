@@ -143,7 +143,7 @@ namespace BL
 
             CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = SenderId };
             CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = reciverId };
-            ParcelBL parcelBL = new ParcelBL() {Id=id, customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
+            ParcelBL parcelBL = new ParcelBL() {Id=id, customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity, PickedUp=null, Requested= DateTime.Now, Delivered=null, Scheduled=null };
             IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() {Id= id, SenderId = SenderId, TargetId = reciverId, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
             dalObject.addParcel(parcelDL);
             return id;
