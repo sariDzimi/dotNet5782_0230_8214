@@ -41,15 +41,6 @@ namespace PL
             Actions.Visibility = Visibility.Visible;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -73,6 +64,12 @@ namespace PL
                 numberOfStationInput.Text = "";
             }
 
+        }
+
+        private void ButtonClick_Close(object sender, RoutedEventArgs e)
+        {
+            new DronesList(bL).Show();
+            Close();
         }
     }
 }

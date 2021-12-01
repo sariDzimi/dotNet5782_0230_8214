@@ -54,12 +54,13 @@ namespace PL
         {
             IBL.BO.DroneBL droneBL = sender as IBL.BO.DroneBL;
             new Drone(bl, droneBL).Show();
+            Close();
         }
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            Close();
             new Drone(bl).Show();
+            Close();
         }
     }
 }

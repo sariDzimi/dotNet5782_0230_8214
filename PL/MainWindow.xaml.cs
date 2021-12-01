@@ -30,6 +30,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DronesList(bL).Show();
+            Close();
         }
     }
 }

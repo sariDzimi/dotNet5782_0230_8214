@@ -7,24 +7,23 @@
         mc:Ignorable="d"
         Title="Drone" Height="450" Width="800">
     <Grid>
-    <Grid x:Name="AddDrone" Visibility="Hidden">
+        <Grid x:Name="AddDrone" Visibility="Hidden">
 
-        <TextBox x:Name="IdInput" HorizontalAlignment="Left" Margin="91,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34"/>
-        <Label Content="id drone:" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-        <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="105,88,0,0" VerticalAlignment="Top" Width="197" SelectionChanged="WeightSelector_SelectionChanged"/>
-        <Label Content="max weight" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-        <TextBox x:Name="ModelInput" HorizontalAlignment="Left" Margin="105,152,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34" TextChanged="TextBox_TextChanged"/>
-        <Label Content="model" HorizontalAlignment="Left" Margin="27,149,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-        <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" Margin="237,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="211" Height="34" TextChanged="TextBox_TextChanged"/>
-        <Label Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Center" Height="37" Width="210"/>
-        
-        <Button Content="Add" HorizontalAlignment="Left" Margin="105,296,0,0" VerticalAlignment="Top" Height="32" Width="91" Click="Button_Click"/>
+            <TextBox x:Name="IdInput" HorizontalAlignment="Left" Margin="91,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34"/>
+            <Label Content="id drone:" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
+            <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="105,88,0,0" VerticalAlignment="Top" Width="197" />
+            <Label Content="max weight" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
+            <TextBox x:Name="ModelInput" HorizontalAlignment="Left" Margin="105,152,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34"/>
+            <Label Content="model" HorizontalAlignment="Left" Margin="27,149,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
+            <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" Margin="237,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="211" Height="34"/>
+            <Label Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Center" Height="37" Width="210"/>
 
-    </Grid>
-
-    <Grid x:Name="Actions" Visibility="Visible" Margin="10,0,-10,0">
-            <Label Content="Label" HorizontalAlignment="Left" Margin="247,294,0,0" VerticalAlignment="Top"/>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="105,296,0,0" VerticalAlignment="Top" Height="32" Width="91" Click="Button_Click"/>
 
         </Grid>
+
+        <Grid x:Name="Actions" Visibility="Visible" Margin="10,0,-10,0"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>
+
     </Grid>
 </Window>
