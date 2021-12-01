@@ -61,14 +61,17 @@ namespace PL
             {
                 bL.addDroneToBL(id, maxWeight, model, numOfStationForCharching);
                 MessageBox.Show("the drone was added succesfuly!!!");
+                Close();
+                new DronesList(bL).Show();
             }
             catch (Exception)
             {
                 MessageBox.Show("couldn't add the drone");
+
+                IdInput.Text = "";
+                ModelInput.Text = "";
+                numberOfStationInput.Text = "";
             }
-            IdInput.Text = "";
-            ModelInput.Text = "";
-            numberOfStationInput.Text = "";
 
         }
     }

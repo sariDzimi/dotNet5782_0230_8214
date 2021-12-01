@@ -58,6 +58,7 @@ namespace PL
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
+            Close();
             new Drone(bl).Show();
         }
     }
