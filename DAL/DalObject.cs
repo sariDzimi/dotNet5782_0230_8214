@@ -273,7 +273,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcel"></param>
         public void updateParcel(ParcelDL parcel)
-        {
+        {   
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             DataSource.parcels[index] = parcel;
 
