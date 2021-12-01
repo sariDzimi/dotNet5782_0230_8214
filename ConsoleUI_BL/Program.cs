@@ -54,7 +54,7 @@ namespace ConsoleUI_BL
                                         id = getId();
                                         int MaxWeight = getInt("enter the maximal weight : 1. Light,2. Medium, 3.Heavy");
                                         string Model = getString("enter the model");
-                                        int number = getInt("number of station for start charging");
+                                        int number = getInt("number of station for first charging");
                                         bL.addDroneToBL(id, MaxWeight, Model, number);
                                     }
                                     catch (Exception e)
