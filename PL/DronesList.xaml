@@ -10,12 +10,21 @@
         <Style x:Key="commonStyle"
            TargetType="Control">
             <Setter Property="FontSize"
-              Value="32" />
+              Value="15" />
             <Setter Property="FontFamily"
               Value="Consolas" />
             <Setter Property="FontWeight"
               Value="Bold" />
         </Style>
+        <Style TargetType="Label"
+           BasedOn="{StaticResource commonStyle}">
+            <Setter Property="Background"
+              Value= "#FF7791EA" />
+            <Setter Property="Foreground"
+              Value="Black" />
+        </Style>
+
+
         <Style TargetType="ComboBox"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
@@ -34,29 +43,31 @@
     </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="400*"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="8*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,459" Grid.RowSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Name="StatusSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" Margin="10,16,0,0"/>
-            <ComboBox Name="MaxWeightSelector" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.ColumnSpan="2" Margin="76,15,0,0"/>
-            <Button x:Name="addADrone" Content="add a drone" Grid.ColumnSpan="2" Margin="146,9,131,4" Grid.Column="2" Click="addADrone_Click" />
+            <ComboBox Name="StatusSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="0" Margin="136,70,0,0" Grid.ColumnSpan="2" Height="31"/>
+            <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="0" Margin="138,22,0,0" HorizontalAlignment="Left" Width="148" Height="31"/>
+            <Button x:Name="addADrone" Content="Add a drone"  Click="addADrone_Click"   Height="31" Grid.Column="2"/>
         </Grid>
-        
-        <ListView x:Name="DronesListView" Height="523" VerticalAlignment="Top" Margin="0,32,0,0" Grid.Row="1" MouseDoubleClick="MouseDoubleClick_droneChoosen">
+
+        <ListView x:Name="DronesListView" Height="400" VerticalAlignment="Top" Margin="0,96,0,0" Grid.Row="1" MouseDoubleClick="MouseDoubleClick_droneChoosen">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-            
-           
+
+
         </ListView>
+        <Label Content="drone status:" HorizontalAlignment="Left" Margin="24,69,0,0" VerticalAlignment="Top" Height="31" Width="101" Grid.RowSpan="2"/>
+        <Label Content="max weight" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.295,-6.252" Width="101" Height="31"/>
     </Grid>
 </Window>

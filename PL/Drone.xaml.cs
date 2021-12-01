@@ -37,6 +37,7 @@ namespace PL
         {
             InitializeComponent();
             bL = bL1;
+            
             AddDrone.Visibility = Visibility.Hidden;
             Actions.Visibility = Visibility.Visible;
         }
@@ -52,8 +53,8 @@ namespace PL
             {
                 bL.addDroneToBL(id, maxWeight, model, numOfStationForCharching);
                 MessageBox.Show("the drone was added succesfuly!!!");
-                Close();
                 new DronesList(bL).Show();
+                Close();
             }
             catch (Exception)
             {
@@ -62,6 +63,7 @@ namespace PL
                 IdInput.Text = "";
                 ModelInput.Text = "";
                 numberOfStationInput.Text = "";
+                WeightSelector.SelectedItem = null;
             }
 
         }
@@ -70,6 +72,11 @@ namespace PL
         {
             new DronesList(bL).Show();
             Close();
+        }
+
+        private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
