@@ -6,8 +6,27 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="commonStyle"
+           TargetType="Control">
+            <Setter Property="FontSize"
+              Value="32" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="FontWeight"
+              Value="Bold" />
+        </Style>
+        <Style TargetType="Button"
+           BasedOn="{StaticResource commonStyle}">
+            <Setter Property="Background"
+              Value="#FF7791EA" />
+            <Setter Property="Foreground"
+              Value= "Black" />
+        </Style>
+
+    </Window.Resources>
     <Grid>
-        <Button Content="Open Drones List" HorizontalAlignment="Left" Height="63" Margin="504,56,0,0" VerticalAlignment="Top" Width="188" Click="Button_Click"/>
+        <Button Content="Open Drones List" HorizontalAlignment="Center" Height="63" Margin="0,32,0,0" VerticalAlignment="Top" Width="322" Click="Button_Click"/>
 
     </Grid>
 </Window>

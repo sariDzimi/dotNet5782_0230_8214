@@ -39,16 +39,26 @@ namespace PL
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            var selected = (IBL.BO.WeightCategories)comboBox.SelectedItem;
+            var selected = (IBL.BO.WeightCategories)MaxWeightSelector.SelectedItem;
             DronesListView.ItemsSource = bl.GetDronesBy((d) => d.MaxWeight == selected);
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            var selected = (IBL.BO.DroneStatus)comboBox.SelectedItem;
+            var selected = (IBL.BO.DroneStatus)StatusSelector.SelectedItem;
             DronesListView.ItemsSource = bl.GetDronesBy((d) => d.DroneStatus == selected);
+        }
+
+
+        private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
+        {
+            IBL.BO.DroneBL droneBL = sender as IBL.BO.DroneBL;
+            new Drone(bl, droneBL).Show();
+        }
+
+        private void addADrone_Click(object sender, RoutedEventArgs e)
+        {
+            new Drone(bl).Show();
         }
     }
 }

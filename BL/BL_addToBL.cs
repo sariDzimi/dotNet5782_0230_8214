@@ -39,12 +39,12 @@ namespace BL
         /// add Drone To BL
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status"></param>
+        /// <param name="maxWeight"></param>
         /// <param name="model"></param>
         /// <param name="numberStaion"></param>
-        public void addDroneToBL(int id, int status, string model, int numberStaion)
+        public void addDroneToBL(int id, int maxWeight, string model, int numberStaion)
         {
-            if(status <1 || status > 3)
+            if(maxWeight < 1 || maxWeight > 3)
             {
                 throw new OutOfRange("status");
             }
@@ -52,7 +52,7 @@ namespace BL
             if(dalObject.GetDrones().Any(d => d.Id == id))
                 throw new IdAlreadyExist(id);
 
-            DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (WeightCategories)status, Model = model };
+            DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
 
             StationBL stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
             if (stationBL==null)
@@ -79,7 +79,7 @@ namespace BL
             stationDL.ChargeSlots -= 1;
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
-            IDAL.DO.DroneDL drone = new IDAL.DO.DroneDL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)status, Model = model };
+            IDAL.DO.DroneDL drone = new IDAL.DO.DroneDL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)maxWeight, Model = model };
             dalObject.addDrone(drone);
             dronesBL.Add(droneBL);
             dalObject.updateStation(stationDL);
