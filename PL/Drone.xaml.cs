@@ -37,7 +37,11 @@ namespace PL
         {
             InitializeComponent();
             bL = bL1;
-            
+            idDroneL.Text = $"{droneBL.Id}";
+            //return $"drone  : {Id}, " +
+            //      $" battery: {battery}, Model: {Model}, MaxWeight: {MaxWeight}, " +
+            //      $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelAtTransfor}," +
+            //      $"Location: {Location}";
             AddDrone.Visibility = Visibility.Hidden;
             Actions.Visibility = Visibility.Visible;
         }

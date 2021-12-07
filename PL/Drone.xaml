@@ -63,12 +63,19 @@
         </Grid>
 
         <Grid x:Name="Actions" Visibility="Visible" Margin="-268,10,598,-10"/>
+        
         <Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>
         <Button x:Name="sendDroneForCharging" Content="send drone for charging" HorizontalAlignment="Left" Margin="10,278,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForCharging"/>
         <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="158,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="495,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="611,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Label Content="id :" Margin="28,26,721,381"/>
+        <TextBox x:Name="idDroneL"  IsReadOnly="True" Margin="79,26,519,381"></TextBox>
+        <Label Content="model :" Margin="28,74,721,333"/>
+        <TextBox x:Name="modelDroneL"  IsReadOnly="True" Margin="79,74,519,333"></TextBox>
+        <Label Content="station :" Margin="28,118,721,289"/>
+        <TextBox x:Name="stationDroneL"  IsReadOnly="True" Margin="79,118,519,289"></TextBox>
 
     </Grid>
 </Window>
