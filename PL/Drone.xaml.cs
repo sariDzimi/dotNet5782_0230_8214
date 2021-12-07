@@ -37,13 +37,15 @@ namespace PL
         {
             InitializeComponent();
             bL = bL1;
-            idDroneL.Text = $"{droneBL.Id}";
-            //return $"drone  : {Id}, " +
-            //      $" battery: {battery}, Model: {Model}, MaxWeight: {MaxWeight}, " +
-            //      $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelAtTransfor}," +
-            //      $"Location: {Location}";
             AddDrone.Visibility = Visibility.Hidden;
             Actions.Visibility = Visibility.Visible;
+            idDroneL.Text = $"{droneBL.Id}";
+            modelDroneL.Text = $"{droneBL.Model}";
+            MaxWeight.Text = $"{droneBL.MaxWeight}";
+            DroneStatusDroneL.Text = $"{droneBL.DroneStatus}";
+            Location.Text = $"{droneBL.Location}";
+            ParcelAtTransfor.Text = $"{droneBL.ParcelAtTransfor}";
+    
         }
 
 
@@ -81,6 +83,15 @@ namespace PL
         private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string newModel = modelDroneL.Text;
+            int i = Convert.ToInt32(idDroneL.Text);
+            bL.updateDroneModel(i,newModel);
+            new DronesList(bL).Show();
+            Close();
         }
     }
 }
