@@ -53,7 +53,7 @@ namespace DalObject
                 DroneDL drone = new DroneDL();
                 drone.Id = (drones.Count) + 1;
                 drone.Model = "MarvicAir2";
-                drone.MaxWeight = (WeightCategories)(rand.Next() % 3);
+                drone.MaxWeight = (WeightCategories)(rand.Next() % 3)+1;
                 drones.Add(drone);
           
 

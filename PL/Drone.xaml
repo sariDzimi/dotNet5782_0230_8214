@@ -6,23 +6,63 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Drone" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="commonStyle"
+           TargetType="Control" >
+            <Setter Property="FontSize"
+              Value="15" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="FontWeight"
+              Value="Bold" />
+        </Style>
+        <Style TargetType="Label"
+           BasedOn="{StaticResource commonStyle}">
+            <Setter Property="Background"
+              Value= "#FF7791EA" />
+            <Setter Property="Foreground"
+              Value="Black" />
+        </Style>
+
+
+        <Style TargetType="ComboBox"
+           BasedOn="{StaticResource commonStyle}">
+            <Setter Property="Background"
+              Value= "#FF7791EA" />
+            <Setter Property="Foreground"
+              Value="Black" />
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background"
+              Value= "#FFDADFF1" />
+            <Setter Property="Foreground"
+              Value="#FF08089B" />
+            <Setter Property="FontSize"
+              Value="20" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <Grid x:Name="AddDrone" Visibility="Hidden">
+        <Grid x:Name="AddDrone" Visibility="Hidden" HorizontalAlignment="Left" Width="464" Margin="239,10,0,-10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="127*"/>
+            </Grid.RowDefinitions>
 
-            <TextBox x:Name="IdInput" HorizontalAlignment="Left" Margin="91,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34"/>
-            <Label Content="id drone:" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-            <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="105,88,0,0" VerticalAlignment="Top" Width="197" />
-            <Label Content="max weight" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-            <TextBox x:Name="ModelInput" HorizontalAlignment="Left" Margin="105,152,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Height="34"/>
-            <Label Content="model" HorizontalAlignment="Left" Margin="27,149,0,0" VerticalAlignment="Top" Height="37" Width="210"/>
-            <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" Margin="237,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="211" Height="34"/>
-            <Label Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Center" Height="37" Width="210"/>
+            <TextBox x:Name="IdInput" HorizontalAlignment="Left" Margin="126,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="30"/>
+            <Label Content="id drone:" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
+            <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="127,85,0,0" VerticalAlignment="Top" Width="157" Height="30" />
+            <Label Content="max weight" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
+            <TextBox x:Name="ModelInput" HorizontalAlignment="Left" Margin="126,145,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="30" />
+            <Label Content="model" HorizontalAlignment="Left" Margin="27,145,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
+            <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="258,22,180,0" Grid.Row="1" TextChanged="numberOfStationInput_TextChanged"/>
+            <Label Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="27,22,0,0" VerticalAlignment="Top" Height="30" Width="231" Grid.Row="1" />
 
-            <Button Content="Add" HorizontalAlignment="Left" Margin="105,296,0,0" VerticalAlignment="Top" Height="32" Width="91" Click="Button_Click"/>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="105,116,0,0" VerticalAlignment="Top" Height="32" Width="91" Click="Button_Click" Grid.Row="1"/>
 
         </Grid>
 
-        <Grid x:Name="Actions" Visibility="Visible" Margin="10,0,-10,0"/>
+        <Grid x:Name="Actions" Visibility="Visible" Margin="-268,10,598,-10"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>
 
     </Grid>
