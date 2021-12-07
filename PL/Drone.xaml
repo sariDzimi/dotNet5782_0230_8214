@@ -62,14 +62,16 @@
 
         </Grid>
 
-        <Grid x:Name="Actions" Visibility="Visible" Margin="1,10,30,-10"/>
+        <Grid x:Name="Actions" Visibility="Visible" Margin="1,10,30,-10">
+        </Grid>
+
+
 
         <Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>
-        <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="10,278,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge"/>
-        <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="158,278,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging"/>
-        <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery"/>
-        <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="495,278,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel"/>
-        <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="611,278,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel"/>
+        <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="329,383,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="34"/>
+        <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="536,266,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery"/>
+        <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="136,378,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="39"/>
+        <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="240,378,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel" Height="39"/>
         <Label Content="id :" Margin="28,26,721,381"/>
         <TextBox x:Name="idDroneL"  IsReadOnly="True" Margin="79,26,329,381"></TextBox>
         <Label Content="model :" Margin="28,74,721,333"/>
@@ -85,6 +87,11 @@
         <Label Content="Location :" Margin="28,271,670,136"/>
         <TextBox x:Name="MaxWeight"  IsReadOnly="True" Margin="130,166,329,241"></TextBox>
         <Button Content="update" HorizontalAlignment="Left" Margin="28,381,0,0" VerticalAlignment="Top" Height="36" Width="91" Click="Button_Click_1"/>
+       
+        <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="522,291,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="33" Width="232"/>
+
+        <Label x:Name="timeCharging" Visibility="Hidden" Content="time of charging"  HorizontalAlignment="Left" Margin="521,323,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="timeOfCharging" Visibility="Hidden"   HorizontalAlignment="Left" Margin="665,324,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" Height="27" />
 
     </Grid>
 </Window>

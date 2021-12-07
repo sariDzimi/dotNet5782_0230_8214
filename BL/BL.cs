@@ -36,7 +36,7 @@ namespace BL
                 DroneBL droneBL = new DroneBL() { Id = drone.Id, Model = drone.Model, MaxWeight = (IBL.BO.WeightCategories)drone.MaxWeight };
                 ParcelDL parcel = parcelDLs.Find(p => p.DroneId == drone.Id);
 
-                if (parcel.TargetId != 0)
+                if (parcel.SenderId != 0 )
                 {
                     droneBL.DroneStatus = DroneStatus.Delivery;
                     //ParcelBL parcelBL = convertToParcelBL(parcel);
@@ -66,6 +66,11 @@ namespace BL
                     StationBL stationBL = convertToStationBL(stationDL);
                     droneBL.Location = stationBL.Location;
                     droneBL.Battery = rand.Next(0, 21);
+                    IDAL.DO.DroneChargeDL droneChargeDL = new DroneChargeDL();
+                    droneChargeDL.DroneId = drone.Id;
+                    droneChargeDL.stationId = stationBL.Id;
+                    dalObject.addDronCharge(droneChargeDL);
+                    droneBL.Location = new Location(stationBL.Location.Longitude, stationBL.Location.Latitude);
                 }
 
                 if (droneBL.DroneStatus == DroneStatus.Free)
@@ -170,7 +175,8 @@ namespace BL
             if (drone.DroneStatus == 0)
             {
                 StationBL stationMini = closestStationToLoacation(drone.Location);
-                if (dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location) > drone.Battery)
+               
+                if (dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location) < drone.Battery)
                 {
                     IDAL.DO.StationDL stationDL = dalObject.GetStations().ToList().Find(s => s.Id == stationMini.Id);
                     IDAL.DO.DroneDL droneDL = dalObject.GetDrones().ToList().Find(s => s.Id == stationMini.Id);

@@ -36,6 +36,7 @@ namespace PL
         }
         public Drone(BL.BL bL1, IBL.BO.DroneBL droneBL)
         {
+            drone = droneBL;
             InitializeComponent();
             bL = bL1;
             AddDrone.Visibility = Visibility.Hidden;
@@ -57,9 +58,13 @@ namespace PL
                     break;
                 case DroneStatus.Maintenance:
                     releaseDroneFromCharging.Visibility = Visibility.Visible;
+                    timeCharging.Visibility = Visibility.Visible;
+                    timeOfCharging.Visibility = Visibility.Visible;
                     break;
                 case DroneStatus.Delivery:
-                    if (bL.FindParcel(drone.ParcelAtTransfor.ID).PickedUp.Equals(null))
+                    // if (bL.FindParcel(drone.ParcelAtTransfor.ID).PickedUp == null)
+                    IBL.BO.ParcelBL parcelBL = bL.FindParcel(drone.Id);
+                    if (parcelBL.PickedUp == null) 
                         colectParcel.Visibility = Visibility.Visible;
                     else
                         supllyParcel.Visibility = Visibility.Visible;
@@ -115,36 +120,80 @@ namespace PL
 
         private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
         {
-           
-            bL.sendDroneToCharge(drone.Id);
+            try
+            {
+                bL.sendDroneToCharge(drone.Id);
+            }
+            
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
             sendDroneToCharge.Visibility = Visibility.Hidden;
             releaseDroneFromCharging.Visibility = Visibility.Visible;
+            timeOfCharging.Visibility = Visibility.Visible;
+            timeCharging.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
         {
-            //bL.releaseDroneFromCharging(drone.Id)
+            double time = Convert.ToDouble( timeOfCharging.Text);
+
+            try
+            {
+                bL.releaseDroneFromCharging(drone.Id, time);
+            }
+          
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             releaseDroneFromCharging.Visibility = Visibility.Hidden;
             sendDroneForDelivery.Visibility = Visibility.Visible;
+            timeCharging.Visibility = Visibility.Hidden;
+            timeOfCharging.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
         {
-            bL.AssignAParcelToADrone(drone.Id);
+            try
+            {
+                bL.AssignAParcelToADrone(drone.Id);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+     
             sendDroneForDelivery.Visibility = Visibility.Hidden;
             colectParcel.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
         {
-            bL.collectParcleByDrone(drone.Id);
+            try
+            {
+                bL.collectParcleByDrone(drone.Id);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
             colectParcel.Visibility = Visibility.Hidden;
             supllyParcel.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
         {
-            bL.supplyParcelByDrone(drone.Id);
+            try
+            {
+                bL.supplyParcelByDrone(drone.Id);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             supllyParcel.Visibility = Visibility.Hidden;
             sendDroneForDelivery.Visibility = Visibility.Visible;
             sendDroneToCharge.Visibility = Visibility.Visible;
@@ -155,8 +204,6 @@ namespace PL
             string newModel = modelDroneL.Text;
             int i = Convert.ToInt32(idDroneL.Text);
             bL.updateDroneModel(i,newModel);
-            new DronesList(bL).Show();
-            Close();
         }
     }
 }

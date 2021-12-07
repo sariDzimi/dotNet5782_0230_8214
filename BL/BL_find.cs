@@ -17,8 +17,9 @@ namespace BL
         /// <returns></returns>
         public StationBL FindStation(int id)
         {
-            StationBL stationBL = GetStations().ToList().Find(s => s.Id == id);
-            if (stationBL==null)
+            StationBL stationBL = new StationBL();
+            stationBL = GetStations().ToList().Find(s => s.Id == id);
+            if (stationBL == null)
             {
                 throw new NotFound($"station number {id}");
             }
@@ -32,7 +33,8 @@ namespace BL
         /// <returns></returns>
         public DroneBL FindDrone(int id)
         {
-            DroneBL droneBL = dronesBL.Find(d => d.Id == id);
+            DroneBL droneBL = new DroneBL();
+            droneBL = dronesBL.Find(d => d.Id == id);
             if (droneBL==null)
             {
                 throw new NotFound($"drone number {id}");
@@ -49,7 +51,7 @@ namespace BL
         {
             List<CustomerBL> customerBLs = GetCustomers().ToList();
             CustomerBL customerBL = customerBLs.Find(d => d.Id == id);
-            if (customerBL==null)
+            if (customerBL == null)
             {
                 throw new NotFound($"customer number {id}");
             }
@@ -64,8 +66,9 @@ namespace BL
         /// <returns></returns>
         public ParcelBL FindParcel(int id)
         {
-            ParcelBL parcelBL = GetParcels().ToList().Find(d => d.Id == id);
-            if (parcelBL ==null)
+            ParcelBL parcelBL = new ParcelBL();
+            parcelBL= GetParcels().ToList().Find(d => d.Id == id);
+            if (parcelBL == null)
             {
                 throw new NotFound($"parcel number {id}");
             }

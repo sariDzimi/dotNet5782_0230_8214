@@ -19,10 +19,10 @@ namespace DalObject
         internal class Config
         {
             public static double free = .01 ;
-            public static double light = .3;
-            public static double medium = .4 ;
-            public static double heavy = .7;
-            public static double rateChargePerHour = .5;
+            public static double light = .03;
+            public static double medium = .04 ;
+            public static double heavy = .07;
+            public static double rateChargePerHour = .05;
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace DalObject
 
                 station.Id = stations.Count + 1;
                 station.Name = stations.Count + 1;
-                station.Latitude = rand.Next()% maxRand;
-                station.Longitude = rand.Next() % maxRand;
+                station.Latitude = rand.Next()% maxRand +1;
+                station.Longitude = rand.Next() % maxRand +1;
                 station.ChargeSlots = rand.Next(300);
                 stations.Add(station);
 
@@ -67,8 +67,8 @@ namespace DalObject
                 customer.Id = (customers.Count) + 1;
                 customer.Name = $"customer{i}";
                 customer.Phone = $"{rand.Next(111111111, 999999999)}";
-                customer.Latitude = rand.Next() % maxRand;
-                customer.Longitude = rand.Next() % maxRand;
+                customer.Latitude = rand.Next() % maxRand+1;
+                customer.Longitude = rand.Next() % maxRand+1;
                 customers.Add(customer);
 
             }
