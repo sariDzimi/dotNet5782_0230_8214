@@ -52,7 +52,8 @@ namespace PL
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-            IBL.BO.DroneBL droneBL = sender as IBL.BO.DroneBL;
+            IBL.BO.DroneBL droneBL = (sender as ListView).SelectedValue as IBL.BO.DroneBL;
+           
             new Drone(bl, droneBL).Show();
             Close();
         }
@@ -61,6 +62,7 @@ namespace PL
         {
             new Drone(bl).Show();
             Close();
+           
         }
     }
 }
