@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace PL
     public partial class Drone : Window
     {
         BL.BL bL;
-
+        DroneBL drone;
         public Drone()
         {
             InitializeComponent();
@@ -39,6 +40,33 @@ namespace PL
             bL = bL1;
             AddDrone.Visibility = Visibility.Hidden;
             Actions.Visibility = Visibility.Visible;
+
+            //hide all buttons
+            sendDroneForDelivery.Visibility = Visibility.Hidden;
+            colectParcel.Visibility = Visibility.Hidden;
+            supllyParcel.Visibility = Visibility.Hidden;
+            sendDroneToCharge.Visibility = Visibility.Hidden;
+            releaseDroneFromCharging.Visibility = Visibility.Hidden;
+
+            //show relaed buttons
+            switch (drone.DroneStatus)
+            {
+                case DroneStatus.Free:
+                    sendDroneForDelivery.Visibility = Visibility.Visible;
+                    sendDroneToCharge.Visibility = Visibility.Visible;
+                    break;
+                case DroneStatus.Maintenance:
+                    releaseDroneFromCharging.Visibility = Visibility.Visible;
+                    break;
+                case DroneStatus.Delivery:
+                    if (bL.FindParcel(drone.ParcelAtTransfor.ID).PickedUp.Equals(null))
+                        colectParcel.Visibility = Visibility.Visible;
+                    else
+                        supllyParcel.Visibility = Visibility.Visible;
+                    break;
+
+
+            }
             idDroneL.Text = $"{droneBL.Id}";
             modelDroneL.Text = $"{droneBL.Model}";
             MaxWeight.Text = $"{droneBL.MaxWeight}";
@@ -83,6 +111,43 @@ namespace PL
         private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
+        {
+           
+            bL.sendDroneToCharge(drone.Id);
+            sendDroneToCharge.Visibility = Visibility.Hidden;
+            releaseDroneFromCharging.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
+        {
+            //bL.releaseDroneFromCharging(drone.Id)
+            releaseDroneFromCharging.Visibility = Visibility.Hidden;
+            sendDroneForDelivery.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
+        {
+            bL.AssignAParcelToADrone(drone.Id);
+            sendDroneForDelivery.Visibility = Visibility.Hidden;
+            colectParcel.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
+        {
+            bL.collectParcleByDrone(drone.Id);
+            colectParcel.Visibility = Visibility.Hidden;
+            supllyParcel.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
+        {
+            bL.supplyParcelByDrone(drone.Id);
+            supllyParcel.Visibility = Visibility.Hidden;
+            sendDroneForDelivery.Visibility = Visibility.Visible;
+            sendDroneToCharge.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
