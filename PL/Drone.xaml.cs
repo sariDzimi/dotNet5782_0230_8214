@@ -72,6 +72,7 @@ namespace PL
 
 
             }
+            ButteryDroneL.Text = $"{droneBL.Battery}";
             idDroneL.Text = $"{droneBL.Id}";
             modelDroneL.Text = $"{droneBL.Model}";
             MaxWeight.Text = $"{droneBL.MaxWeight}";
@@ -113,6 +114,7 @@ namespace PL
             Close();
         }
 
+
         private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -131,6 +133,8 @@ namespace PL
             releaseDroneFromCharging.Visibility = Visibility.Visible;
             timeOfCharging.Visibility = Visibility.Visible;
             timeCharging.Visibility = Visibility.Visible;
+            new Drone(bL, drone).Show();
+            Close();
         }
 
         private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
@@ -151,6 +155,9 @@ namespace PL
             sendDroneForDelivery.Visibility = Visibility.Visible;
             timeCharging.Visibility = Visibility.Hidden;
             timeOfCharging.Visibility = Visibility.Hidden;
+            new Drone(bL, drone).Show();
+            Close();
+
         }
 
         private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
@@ -166,6 +173,8 @@ namespace PL
      
             sendDroneForDelivery.Visibility = Visibility.Hidden;
             colectParcel.Visibility = Visibility.Visible;
+            new Drone(bL, drone).Show();
+            Close();
         }
 
         private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
@@ -181,6 +190,8 @@ namespace PL
            
             colectParcel.Visibility = Visibility.Hidden;
             supllyParcel.Visibility = Visibility.Visible;
+            new Drone(bL, drone).Show();
+            Close();
         }
 
         private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
@@ -197,6 +208,8 @@ namespace PL
             supllyParcel.Visibility = Visibility.Hidden;
             sendDroneForDelivery.Visibility = Visibility.Visible;
             sendDroneToCharge.Visibility = Visibility.Visible;
+            new Drone(bL, drone).Show();
+            Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -204,6 +217,8 @@ namespace PL
             string newModel = modelDroneL.Text;
             int i = Convert.ToInt32(idDroneL.Text);
             bL.updateDroneModel(i,newModel);
+            new Drone(bL, drone).Show();
+            Close();
         }
     }
 }
