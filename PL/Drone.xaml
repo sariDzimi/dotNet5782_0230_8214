@@ -64,6 +64,11 @@
 
         <Grid x:Name="Actions" Visibility="Visible" Margin="-268,10,598,-10"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>
+        <Button x:Name="sendDroneForCharging" Content="send drone for charging" HorizontalAlignment="Left" Margin="10,278,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForCharging"/>
+        <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="158,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="495,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="611,278,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

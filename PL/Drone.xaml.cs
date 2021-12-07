@@ -78,5 +78,10 @@ namespace PL
         {
 
         }
+
+        private void Button_Click_sendDroneForCharging(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
