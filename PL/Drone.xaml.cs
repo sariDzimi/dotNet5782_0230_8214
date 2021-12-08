@@ -24,11 +24,15 @@ namespace PL
         DroneBL drone;
         public Drone()
         {
+            WindowStyle = WindowStyle.None;
+
             InitializeComponent();
         }
         public Drone(BL.BL bL1)
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            
             bL = bL1;
             AddDrone.Visibility = Visibility.Visible;
             Actions.Visibility = Visibility.Hidden;
@@ -36,6 +40,8 @@ namespace PL
         }
         public Drone(BL.BL bL1, IBL.BO.DroneBL droneBL)
         {
+            WindowStyle = WindowStyle.None;
+
             drone = droneBL;
             InitializeComponent();
             bL = bL1;
@@ -130,6 +136,7 @@ namespace PL
                 timeOfCharging.Visibility = Visibility.Visible;
                 timeCharging.Visibility = Visibility.Visible;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                ButteryDroneL.Text = $"{drone.Battery}";
 
 
             }
@@ -148,9 +155,11 @@ namespace PL
                 bL.releaseDroneFromCharging(drone.Id, time);
                 releaseDroneFromCharging.Visibility = Visibility.Hidden;
                 sendDroneForDelivery.Visibility = Visibility.Visible;
+                sendDroneToCharge.Visibility = Visibility.Visible;
                 timeCharging.Visibility = Visibility.Hidden;
                 timeOfCharging.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                ButteryDroneL.Text = $"{drone.Battery}";
 
 
 
@@ -176,9 +185,10 @@ namespace PL
                 sendDroneForDelivery.Visibility = Visibility.Hidden;
                 colectParcel.Visibility = Visibility.Visible;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-
-
             }
+
+
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -212,8 +222,8 @@ namespace PL
             {
                 bL.supplyParcelByDrone(drone.Id);
                 supllyParcel.Visibility = Visibility.Hidden;
-                sendDroneForDelivery.Visibility = Visibility.Visible;
-                sendDroneToCharge.Visibility = Visibility.Visible;
+                sendDroneForDelivery.Visibility = Visibility.Hidden;
+                sendDroneToCharge.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
 
             }
@@ -231,6 +241,11 @@ namespace PL
             int i = Convert.ToInt32(idDroneL.Text);
             bL.updateDroneModel(i,newModel);
            
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

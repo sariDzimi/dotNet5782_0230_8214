@@ -146,10 +146,11 @@ namespace BL
                 throw new IBL.BO.DroneIsNotInCorrectStatus("drone is not in Delivery  ");
             ;
             IDAL.DO.DroneDL droneDL = dalObject.findDroneBy(t=> t.Id==idDrone);
-            IDAL.DO.CustomerDL customerSernder = dalObject.GetCustomer().ToList().Find(d => d.Id == droneBL.ParcelInDelivery.customerAtParcelTheSender.Id);
+            IDAL.DO.ParcelDL parcelDL = dalObject.FindParcelBy(t => t.DroneId == droneBL.Id);
+
+            IDAL.DO.CustomerDL customerSernder = dalObject.findCustomerById(parcelDL.SenderId); 
             Location locationSender = convertToCustomerBL(customerSernder).Location;
             //double distance = distanceBetweenTwoLocationds(locationSender, locationReciver);
-            IDAL.DO.ParcelDL parcelDL = dalObject.FindParcelBy(t => t.Id == droneBL.ParcelInDelivery.Id);
             IDAL.DO.WeightCategories weight = parcelDL.Weight;
             double useElectricity = CalculateElectricity(droneBL.Location, locationSender, weight);
             droneBL.Battery -= useElectricity;
@@ -184,11 +185,13 @@ namespace BL
                     drone.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location);
                     drone.Location = stationMini.Location;
                     drone.DroneStatus = (DroneStatus)1;
+                    updateDrone(drone);
                     stationMini.ChargeSlots = stationMini.ChargeSlots - 1;
 
                     //DL
 
                     IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL();
+                    droneChargeDL.DroneId = droneId;
                     dalObject.addDronCharge(droneChargeDL);
                 }
                 else

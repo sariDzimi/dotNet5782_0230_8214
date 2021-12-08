@@ -375,7 +375,17 @@ namespace DalObject
         /// <param name="id"></param>
         public void removeDroneCharge(int id)
         {
-            DataSource.droneCharges.Remove(findDroneChargeBy(i => i.DroneId == id));
+            DroneChargeDL droneChargeDL= new DroneChargeDL();
+            try
+            {
+                droneChargeDL = findDroneChargeBy(i => i.DroneId == id);
+
+            }
+            catch(Exception ex)
+            {
+                throw new NotFoundException($"{ex}");
+            }
+            DataSource.droneCharges.Remove(droneChargeDL);
         }
 
 

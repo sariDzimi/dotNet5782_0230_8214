@@ -22,12 +22,16 @@ namespace PL
         private BL.BL bl;
         public DronesList()
         {
+            WindowStyle = WindowStyle.None;
+
             InitializeComponent();
             
         }
 
         public DronesList(BL.BL bL1)
         {
+            WindowStyle = WindowStyle.None;
+
             InitializeComponent();
             bl = bL1;
             DronesListView.ItemsSource = bl.GetDrones();
@@ -60,7 +64,12 @@ namespace PL
         {
             new Drone(bl).Show();
             Close();
-           
+
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new DronesList(bl).Show();
+            Close();
         }
     }
 }
