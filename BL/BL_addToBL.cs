@@ -75,7 +75,7 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Maintenance;
             droneBL.Battery = rand.Next(20, 40);
             IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
-            stationDL = dalObject.findStation(numberStaion);
+            stationDL = dalObject.findStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;

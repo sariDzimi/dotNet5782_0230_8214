@@ -35,16 +35,16 @@ namespace IDal
         public IEnumerable<DroneChargeDL> GetDroneCharges();
 
 
-        public ParcelDL findParcel(int id);
+        public ParcelDL FindParcelBy(Predicate<ParcelDL> predicate);
 
 
-        public StationDL findStation(int id);
+        public StationDL findStationBy( Predicate<StationDL> predicate);
 
 
-        public CustomerDL findCustomer(int id);
+        public CustomerDL findCustomerBy( Predicate<CustomerDL> predicate);
 
 
-        public DroneDL findDrone(int id);
+        public DroneDL findDroneBy( Predicate<DroneDL> predicate);
 
 
 

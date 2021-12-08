@@ -160,19 +160,30 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>parcel</returns>
-        public ParcelDL findParcel(int id)
+        /// 
+
+
+        public ParcelDL FindParcelBy(Predicate<ParcelDL> findBy)
         {
-            ParcelDL parcel;
+
+            ParcelDL parcelDL = new ParcelDL();
+
             try
             {
-                parcel = DataSource.parcels.First(parcel => parcel.Id == id);
+                parcelDL = (from parcel in DataSource.parcels
+                            where findBy(parcel)
+                            select parcel).First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new NotFoundException($"parcel number{id}");
+                throw new NotFoundException($" {ex}");
             }
+            return parcelDL;
+        }
 
-            return parcel;
+        public ParcelDL findParcelById(int id)
+        {
+            return FindParcelBy(p => p.Id == id);
         }
 
         /// <summary>
@@ -180,40 +191,60 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>station</returns>
-        public StationDL findStation(int id)
+        public StationDL findStationBy(Predicate<StationDL> findBy)
         {
 
-            StationDL station;
+            StationDL stationDL = new StationDL();
+
             try
             {
-                station = DataSource.stations.First(sat => sat.Id == id);
+                stationDL = (from station in DataSource.stations
+                            where findBy(station)
+                            select station).First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new NotFoundException($"starion number{ id }");
+                throw new NotFoundException($" {ex}");
             }
-            return station;
+            return stationDL;
         }
+
+        public StationDL findStationById(int id)
+        {
+            return findStationBy(s => s.Id == id);
+        }
+
+
+
 
         /// <summary>
         /// returns customer by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>customer</returns>
-        public CustomerDL findCustomer(int id)
+
+
+        public CustomerDL findCustomerBy(Predicate<CustomerDL> findBy)
         {
 
-            CustomerDL customer;
+            CustomerDL customerDL = new CustomerDL();
+
             try
             {
-                customer = DataSource.customers.Find(customer => customer.Id == id);
+                customerDL = (from customer in DataSource.customers
+                             where findBy(customer)
+                             select customer).First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw new NotFoundException($"customer number {id}");
+                throw new NotFoundException($" {ex}");
             }
-            return customer;
+            return customerDL;
+        }
+
+        public CustomerDL findCustomerById(int id)
+        {
+            return findCustomerBy(c => c.Id == id);
         }
 
         /// <summary>
@@ -221,38 +252,55 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>drone</returns>
-        public DroneDL findDrone(int id)
+
+
+        public DroneDL findDroneBy(Predicate<DroneDL> findBy)
         {
-            DroneDL drone;
+
+            DroneDL droneDL = new DroneDL();
+
             try
             {
-                drone = DataSource.drones.First(drone => drone.Id == id);
+                droneDL = (from drone in DataSource.drones
+                              where findBy(drone)
+                              select drone).First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new NotFoundException($"drone number{id} ");
+                throw new NotFoundException($" {ex}");
             }
-            return drone;
+            return droneDL;
         }
+
+        public DroneDL findDroneById(int id)
+        {
+            return findDroneBy(d => d.Id == id);
+        }
+
+
+
 
         /// <summary>
         /// returns droneCharge by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>droneCharge</returns>
-        public DroneChargeDL findDroneCharge(int id)
+        public DroneChargeDL findDroneChargeBy(Predicate<DroneChargeDL> findBy)
         {
 
-            DroneChargeDL droneCharge;
+            DroneChargeDL droneChargeDL = new DroneChargeDL();
+
             try
             {
-                droneCharge = DataSource.droneCharges.First(droneCahrge => droneCahrge.DroneId == id);
+                droneChargeDL = (from droneCharge in DataSource.droneCharges
+                           where findBy(droneCharge)
+                           select droneCharge).First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new NotFoundException($"droneCharge number{id}");
+                throw new NotFoundException($" {ex}");
             }
-            return droneCharge;
+            return droneChargeDL;
         }
 
         /// <summary>
@@ -327,7 +375,7 @@ namespace DalObject
         /// <param name="id"></param>
         public void removeDroneCharge(int id)
         {
-            DataSource.droneCharges.Remove(findDroneCharge(id));
+            DataSource.droneCharges.Remove(findDroneChargeBy(i => i.DroneId == id));
         }
 
 
@@ -345,6 +393,7 @@ namespace DalObject
                    where findBy(station)
                    select station;
         }
+
     }
 
 }

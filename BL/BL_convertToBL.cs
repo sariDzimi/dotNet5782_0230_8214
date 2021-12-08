@@ -57,8 +57,8 @@ namespace BL
         {
             DroneBL droneBL = new DroneBL();
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
-            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomer(p.SenderId).Name };
-            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomer(p.TargetId).Name };
+            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomerById(p.SenderId).Name };
+            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomerById(p.TargetId).Name };
 
             ParcelBL ParcelBL = new ParcelBL() { Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel = droneAtParcel, Pritority = p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender1, customerAtParcelReciver = customerAtParcelreciver1, Weight = p.Weight };
             return ParcelBL;
@@ -71,7 +71,7 @@ namespace BL
         /// <returns></returns>
         public int calculateFreeChargeSlotsInStation(int statioinID)
         {
-            int total = dalObject.findStation(statioinID).ChargeSlots;
+            int total = dalObject.findStationById(statioinID).ChargeSlots;
             foreach (var chargeDrone in dalObject.GetDroneCharges())
             {
                 if (chargeDrone.stationId == statioinID)
