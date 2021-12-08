@@ -63,7 +63,7 @@
 
         </Grid>
 
-        <Grid x:Name="Actions" Visibility="Visible" Margin="-133,-66,-135,-84">
+        <Grid x:Name="Actions" Visibility="Hidden" Margin="-133,-66,-135,-84">
         </Grid>
 
 
@@ -80,7 +80,7 @@
         <Label Content="Battery :" Margin="28,118,721,289"/>
         <TextBox x:Name="ButteryDroneL"  IsReadOnly="True" Margin="115,118,329,289"></TextBox>
         <Label Content="MaxWeight :" Margin="28,166,670,241"/>
-        <TextBox x:Name="ParcelAtTransfor"  IsReadOnly="True" Margin="240,322,329,85"></TextBox>
+        <TextBox x:Name="ParcelInDelivery"  IsReadOnly="True" Margin="240,322,329,85"></TextBox>
         <Label Content="DroneStatus :" Margin="28,214,647,193"/>
         <TextBox x:Name="Location"  IsReadOnly="True" Margin="164,272,329,135"></TextBox>
         <Label Content="ParcelAtTransfor :" Margin="32,323,594,84"/>

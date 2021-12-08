@@ -31,10 +31,10 @@ namespace IBL
         public int calculateFreeChargeSlotsInStation(int statioinID);
         public IEnumerable<ParcelBL> GetNotAsignedParcels();
         public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots();
-        public StationBL FindStation(int id);
-        public DroneBL FindDrone(int id);
-        public CustomerBL FindCuatomer(int id);
-        public ParcelBL FindParcel(int id);
+        public StationBL FindStationBy(Predicate<StationBL> predicate);
+        public DroneBL FindDroneBy(Predicate<DroneBL> predicate);
+        public CustomerBL FindCuatomerBy(Predicate<CustomerBL> predicate);
+        public ParcelBL FindParcelBy(Predicate<ParcelBL> predicate);
         public IEnumerable<StationBL> GetStations();
         public IEnumerable<ParcelBL> GetParcels();
         public IEnumerable<CustomerBL> GetCustomers();

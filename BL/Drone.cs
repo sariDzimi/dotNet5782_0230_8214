@@ -18,12 +18,12 @@ namespace IBL
                 Model = model;
                 MaxWeight = weightCategories;
                 Battery = battery;
-                ParcelAtTransfor = new ParcelAtTransfor();
+                ParcelInDelivery = new ParcelInDelivery();
 
             }
             public DroneBL()
             {
-                ParcelAtTransfor = new ParcelAtTransfor();
+                ParcelInDelivery = new ParcelInDelivery();
                 battery = 100;
             }
 
@@ -47,7 +47,7 @@ namespace IBL
             }
             public DroneStatus DroneStatus { get; set; }
 
-            public ParcelAtTransfor ParcelAtTransfor { get; set; }
+            public ParcelInDelivery ParcelInDelivery { get; set; }
 
             public Location Location { get; set; }
 
@@ -55,7 +55,7 @@ namespace IBL
             {
                 return $"drone  : {Id}, " +
                     $" battery: {battery}, Model: {Model}, MaxWeight: {MaxWeight}, " +
-                    $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelAtTransfor}," +
+                    $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelInDelivery}," +
                     $"Location: {Location}";
 
                     ;

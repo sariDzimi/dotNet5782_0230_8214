@@ -13,19 +13,26 @@ namespace BL
         /// <summary>
         /// Find Station
         /// </summary>
-        /// <param name="id"></param>
+        /// <param Predicate="id"></param>
         /// <returns></returns>
-        public StationBL FindStation(int id)
+        public StationBL FindStationBy(Predicate <StationBL> findBy)
         {
+
             StationBL stationBL = new StationBL();
-            stationBL = GetStations().ToList().Find(s => s.Id == id);
-            if (stationBL == null)
+
+            try
             {
-                throw new NotFound($"station number {id}");
+                 stationBL= (from station in GetStations().ToList()
+                        where findBy(station)
+                        select station).First();
+            }
+            catch (Exception ex)
+            {
+                throw new NotFound($"{ex}");
             }
             return stationBL;
         }
-
+         
         /// <summary>
         /// Find Drone
         /// </summary>
@@ -42,20 +49,50 @@ namespace BL
             return droneBL;
         }
 
+
+
+        public DroneBL FindDroneBy(Predicate<DroneBL> findBy)
+        {
+
+            DroneBL droneBL = new DroneBL();
+
+            try
+            {
+                droneBL = (from drone in GetDrones()
+                             where findBy(drone)
+                             select drone).First();
+            }
+            catch (Exception ex)
+            {
+                throw new NotFound($"{ex}");
+            }
+            return droneBL;
+        }
+
+
+
         /// <summary>
         /// Find Cuatomer
         /// </summary>
-        /// <param name="id"></param>
+        /// <param Predicate></param>
         /// <returns></returns>
-        public CustomerBL FindCuatomer(int id)
+
+
+        public CustomerBL FindCuatomerBy(Predicate<CustomerBL> findBy)
         {
-            List<CustomerBL> customerBLs = GetCustomers().ToList();
-            CustomerBL customerBL = customerBLs.Find(d => d.Id == id);
-            if (customerBL == null)
+
+            CustomerBL customerBL = new CustomerBL();
+
+            try
             {
-                throw new NotFound($"customer number {id}");
+                customerBL = (from customer in GetCustomers().ToList()
+                              where findBy(customer)
+                              select customer).First();
             }
-            //Console.WriteLine(customerBL);
+            catch (Exception ex)
+            {
+                throw new NotFound($"{ex}");
+            }
             return customerBL;
         }
 
@@ -64,15 +101,25 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ParcelBL FindParcel(int id)
+
+        public ParcelBL FindParcelBy(Predicate<ParcelBL> findBy)
         {
+
             ParcelBL parcelBL = new ParcelBL();
-            parcelBL= GetParcels().ToList().Find(d => d.Id == id);
-            if (parcelBL == null)
+
+            try
             {
-                throw new NotFound($"parcel number {id}");
+                parcelBL = (from parcel in GetParcels().ToList()
+                            where findBy(parcel)
+                            select parcel).First();
+            }
+            catch (Exception ex)
+            {
+                throw new NotFound($"{ex}");
             }
             return parcelBL;
         }
     }
+
+    
 }

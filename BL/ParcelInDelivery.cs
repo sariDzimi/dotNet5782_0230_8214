@@ -32,7 +32,16 @@ namespace IBL
 
             public double distance { get; set; }
 
+            public override string ToString()
+            {
+                return $"ID  : {Id}, " +
+                    $" pritorities: {pritorities}, customerAtDeliverySender: {customerAtParcelTheSender}," +
+                    $" customerAtDeliveryReciver: {customerAtParcelTheReciver}, weightCategories {weightCategories}," +
+                    $" locationCollect {locationCollect}, locationTarget {locationTarget}, distance {distance}   "
 
+
+                ;
+            }
 
 
         }
