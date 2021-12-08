@@ -31,7 +31,6 @@ namespace DalObject
             }
 
             DataSource.drones.Add(drone);
-
         }
 
         /// <summary>
@@ -45,9 +44,7 @@ namespace DalObject
             {
                 throw new IdAlreadyExist(customer.Id);
             }
-
-            DataSource.customers.Add(customer);
-
+        DataSource.customers.Add(customer);
         }
 
         /// <summary>
@@ -323,6 +320,8 @@ namespace DalObject
         public void updateParcel(ParcelDL parcel)
         {   
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
+            if (index == -1)
+                throw new NotFoundException("parcel");
             DataSource.parcels[index] = parcel;
 
         }
