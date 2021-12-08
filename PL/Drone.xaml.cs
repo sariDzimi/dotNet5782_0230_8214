@@ -158,6 +158,9 @@ namespace PL
             new Drone(bL, drone).Show();
             Close();
 
+
+
+
         }
 
         private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
