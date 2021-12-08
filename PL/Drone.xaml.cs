@@ -129,9 +129,11 @@ namespace PL
                 releaseDroneFromCharging.Visibility = Visibility.Visible;
                 timeOfCharging.Visibility = Visibility.Visible;
                 timeCharging.Visibility = Visibility.Visible;
-               
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+
+
             }
-            
+
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
            
@@ -148,9 +150,12 @@ namespace PL
                 sendDroneForDelivery.Visibility = Visibility.Visible;
                 timeCharging.Visibility = Visibility.Hidden;
                 timeOfCharging.Visibility = Visibility.Hidden;
-               
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+
+
+
             }
-          
+
 
             catch (Exception ex)
             {
@@ -167,9 +172,11 @@ namespace PL
                 bL.AssignAParcelToADrone(drone.Id);
                 sendDroneForDelivery.Visibility = Visibility.Hidden;
                 colectParcel.Visibility = Visibility.Visible;
-               
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -184,9 +191,11 @@ namespace PL
                 bL.collectParcleByDrone(drone.Id);
                 colectParcel.Visibility = Visibility.Hidden;
                 supllyParcel.Visibility = Visibility.Visible;
-               
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -202,9 +211,10 @@ namespace PL
                 supllyParcel.Visibility = Visibility.Hidden;
                 sendDroneForDelivery.Visibility = Visibility.Visible;
                 sendDroneToCharge.Visibility = Visibility.Visible;
-               
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
