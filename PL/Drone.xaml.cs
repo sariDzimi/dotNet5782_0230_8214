@@ -63,7 +63,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
                     // if (bL.FindParcel(drone.ParcelAtTransfor.ID).PickedUp == null)
-                    IBL.BO.ParcelBL parcelBL = bL.FindParcel(drone.Id);
+                    IBL.BO.ParcelBL parcelBL = bL.FindParcelBy(t=> t.Id== drone.Id);
                     if (parcelBL.PickedUp == null) 
                         colectParcel.Visibility = Visibility.Visible;
                     else
@@ -78,7 +78,7 @@ namespace PL
             MaxWeight.Text = $"{droneBL.MaxWeight}";
             DroneStatusDroneL.Text = $"{droneBL.DroneStatus}";
             Location.Text = $"{droneBL.Location}";
-            ParcelAtTransfor.Text = $"{droneBL.ParcelAtTransfor}";
+            ParcelInDelivery.Text = $"{droneBL.ParcelInDelivery}";
     
         }
 
@@ -125,16 +125,16 @@ namespace PL
             try
             {
                 bL.sendDroneToCharge(drone.Id);
+                sendDroneToCharge.Visibility = Visibility.Hidden;
+                releaseDroneFromCharging.Visibility = Visibility.Visible;
+                timeOfCharging.Visibility = Visibility.Visible;
+                timeCharging.Visibility = Visibility.Visible;
+               
             }
             
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-            sendDroneToCharge.Visibility = Visibility.Hidden;
-            releaseDroneFromCharging.Visibility = Visibility.Visible;
-            timeOfCharging.Visibility = Visibility.Visible;
-            timeCharging.Visibility = Visibility.Visible;
-            new Drone(bL, drone).Show();
-            Close();
+           
         }
 
         private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
@@ -144,6 +144,11 @@ namespace PL
             try
             {
                 bL.releaseDroneFromCharging(drone.Id, time);
+                releaseDroneFromCharging.Visibility = Visibility.Hidden;
+                sendDroneForDelivery.Visibility = Visibility.Visible;
+                timeCharging.Visibility = Visibility.Hidden;
+                timeOfCharging.Visibility = Visibility.Hidden;
+               
             }
           
 
@@ -151,12 +156,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-            releaseDroneFromCharging.Visibility = Visibility.Hidden;
-            sendDroneForDelivery.Visibility = Visibility.Visible;
-            timeCharging.Visibility = Visibility.Hidden;
-            timeOfCharging.Visibility = Visibility.Hidden;
-            new Drone(bL, drone).Show();
-            Close();
+           
 
         }
 
@@ -165,16 +165,16 @@ namespace PL
             try
             {
                 bL.AssignAParcelToADrone(drone.Id);
+                sendDroneForDelivery.Visibility = Visibility.Hidden;
+                colectParcel.Visibility = Visibility.Visible;
+               
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
      
-            sendDroneForDelivery.Visibility = Visibility.Hidden;
-            colectParcel.Visibility = Visibility.Visible;
-            new Drone(bL, drone).Show();
-            Close();
+           
         }
 
         private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
@@ -182,16 +182,16 @@ namespace PL
             try
             {
                 bL.collectParcleByDrone(drone.Id);
+                colectParcel.Visibility = Visibility.Hidden;
+                supllyParcel.Visibility = Visibility.Visible;
+               
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
            
-            colectParcel.Visibility = Visibility.Hidden;
-            supllyParcel.Visibility = Visibility.Visible;
-            new Drone(bL, drone).Show();
-            Close();
+           
         }
 
         private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
@@ -199,17 +199,17 @@ namespace PL
             try
             {
                 bL.supplyParcelByDrone(drone.Id);
+                supllyParcel.Visibility = Visibility.Hidden;
+                sendDroneForDelivery.Visibility = Visibility.Visible;
+                sendDroneToCharge.Visibility = Visibility.Visible;
+               
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             
-            supllyParcel.Visibility = Visibility.Hidden;
-            sendDroneForDelivery.Visibility = Visibility.Visible;
-            sendDroneToCharge.Visibility = Visibility.Visible;
-            new Drone(bL, drone).Show();
-            Close();
+           
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -217,8 +217,7 @@ namespace PL
             string newModel = modelDroneL.Text;
             int i = Convert.ToInt32(idDroneL.Text);
             bL.updateDroneModel(i,newModel);
-            new Drone(bL, drone).Show();
-            Close();
+           
         }
     }
 }
