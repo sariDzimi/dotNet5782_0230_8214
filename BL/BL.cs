@@ -38,6 +38,20 @@ namespace BL
 
                 if (parcel.SenderId != 0 )
                 {
+                    IDAL.DO.ParcelDL parcelDL = dalObject.FindParcelBy(dr => dr.DroneId == droneBL.Id);
+                    IDAL.DO.CustomerDL customerSernder = dalObject.findCustomerBy(c => c.Id == parcelDL.SenderId);
+                    Location locationSender = convertToCustomerBL(customerSernder).Location;
+                    IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomer().ToList().Find(d => d.Id == parcelDL.TargetId);
+                    Location locationReciver = convertToCustomerBL(customerReciver).Location;
+
+                    CustomerAtParcel customerAtParcelSender = new CustomerAtParcel();
+                    customerAtParcelSender.Id = customerSernder.Id;
+                    CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel();
+                    customerAtParcelreciver.Id = customerReciver.Id;
+                    double distance1 = distanceBetweenTwoLocationds(new Location(customerSernder.Longitude, customerSernder.Latitude), new Location(customerReciver.Longitude, customerReciver.Latitude));
+                    ParcelInDelivery parcelInDelivery = new ParcelInDelivery() { Id = parcelDL.Id, customerAtParcelTheSender = customerAtParcelSender, customerAtParcelTheReciver = customerAtParcelreciver, distance = distance1, locationCollect = new Location(customerSernder.Longitude, customerSernder.Latitude), locationTarget = new Location(customerReciver.Longitude, customerReciver.Latitude), pritorities = parcelDL.Pritority, weightCategories = parcelDL.Weight, isWating = false };
+          
+                    droneBL.ParcelInDelivery = parcelInDelivery;
                     droneBL.DroneStatus = DroneStatus.Delivery;
                     //ParcelBL parcelBL = convertToParcelBL(parcel);
                     if (parcel.PickedUp < DateTime.Now)
@@ -258,7 +272,7 @@ namespace BL
             CustomerBL customerBLsender = new CustomerBL();
             IDAL.DO.CustomerDL customerParcel = new IDAL.DO.CustomerDL();
             CustomerBL customerBLreciver = new CustomerBL();
-            IDAL.DO.ParcelDL parcelDL = dalObject.GetParcel().ToList().First();
+            IDAL.DO.ParcelDL parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
             List<CustomerBL> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = dalObject.GetParcel().ToList();
             DroneBL droneBL = dronesBL.Find(s => s.Id == id);
@@ -273,6 +287,10 @@ namespace BL
             foreach (var p in parcelDLs)
             {
                 parcel = convertToParcelBL(p);
+                if(parcel.Scheduled != null)
+                {
+                    continue;
+                }
                 customerParcel = dalObject.findCustomerBy(t => t.Id == parcelDL.SenderId);
                 customerBLsender = customerBLs.Find(e => e.Id == parcel.customerAtParcelSender.Id);
                 customerBLreciver = customerBLs.Find(e => e.Id == parcel.customerAtParcelReciver.Id);
@@ -302,7 +320,6 @@ namespace BL
                         if (distanceToCharging1 < distanceBetweenTwoLocationds(droneBL.Location, new Location(customerParcel.Longitude, customerParcel.Latitude)))
                         {
                             parcelDL = p;
-
                         }
                     }
                     if (parcelDL.Weight == 0)
@@ -312,11 +329,17 @@ namespace BL
 
                 }
             }
+            CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = customerBLsender.Id, Name = customerBLsender.Name };
+            CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = customerBLreciver.Id, Name = customerBLreciver.Name };
             droneBL.DroneStatus = DroneStatus.Delivery;
+            double distance1 = distanceBetweenTwoLocationds(customerBLsender.Location, customerBLreciver.Location);
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery() { Id = parcelDL.Id, customerAtParcelTheSender = customerAtParcelSender, customerAtParcelTheReciver = customerAtParcelReciver, distance = distance1, locationCollect = customerBLsender.Location, locationTarget = customerBLsender.Location, isWating = false, pritorities = parcelDL.Pritority, weightCategories = parcelDL.Weight };
+            droneBL.ParcelInDelivery = parcelInDelivery;
             updateDrone(droneBL);
             parcelDL.DroneId = id;
             parcelDL.Scheduled = DateTime.Now;
             dalObject.updateParcel(parcelDL);
+            
         }
 
         /// <summary>

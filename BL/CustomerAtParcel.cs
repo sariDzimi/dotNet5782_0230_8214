@@ -22,7 +22,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return $" CustomerAtParcel Id  : {Id}, " +
+                return $" id: {Id}, " +
                     $" Name: {Name} ";
 
                 ;

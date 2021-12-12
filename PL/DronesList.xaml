@@ -19,7 +19,7 @@
         <Style TargetType="Label"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
-              Value= "#FF7791EA" />
+              Value= "#FF17BF26" />
             <Setter Property="Foreground"
               Value="Black" />
         </Style>
@@ -28,15 +28,15 @@
         <Style TargetType="ComboBox"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
-              Value= "#FF7791EA" />
+              Value= "Black" />
             <Setter Property="Foreground"
               Value="Black" />
         </Style>
         <Style TargetType="ListView">
             <Setter Property="Background"
-              Value= "#FFDADFF1" />
+              Value= "#FF8BF595" />
             <Setter Property="Foreground"
-              Value="#FF08089B" />
+              Value="Black" />
             <Setter Property="FontSize"
               Value="20" />
         </Style>
@@ -69,6 +69,6 @@
         </ListView>
         <Label Content="drone status:" HorizontalAlignment="Left" Margin="24,69,0,0" VerticalAlignment="Top" Height="31" Width="101" Grid.RowSpan="2"/>
         <Label Content="max weight" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.295,-6.252" Width="101" Height="31"/>
-        <Button Content="close" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="28" Width="57" Click="Button_Click"/>
+        <Button Content="x" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="28" Width="57" Click="Button_Click"/>
     </Grid>
 </Window>

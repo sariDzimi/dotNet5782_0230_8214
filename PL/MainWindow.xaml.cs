@@ -26,9 +26,18 @@ namespace PL
             bL = new BL.BL();
             InitializeComponent();
         }
+        public MainWindow( BL.BL bL1)
+        {
+           
+            bL = bL1;
+            InitializeComponent();
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL).Show();        }
+            new DronesList(bL).Show();
+            Close();
+        }
     }
 }

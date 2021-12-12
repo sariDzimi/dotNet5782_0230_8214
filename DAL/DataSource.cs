@@ -85,9 +85,9 @@ namespace DalObject
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
                 parcel.DroneId = rand.Next() % (drones.Count + 1);
-                parcel.Scheduled = RandomDate();
-                parcel.PickedUp = RandomDate();
-                parcel.Delivered = RandomDate();
+                parcel.Scheduled = null;
+                parcel.PickedUp = null;
+                parcel.Delivered = null;
                 parcels.Add(parcel);
 
 

@@ -73,10 +73,13 @@ namespace BL
            
 
             droneBL.DroneStatus = DroneStatus.Maintenance;
+            
             droneBL.Battery = rand.Next(20, 40);
             IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL();
             stationDL = dalObject.findStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
+            IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL() { DroneId = droneBL.Id, stationId = stationDL.Id };
+            dalObject.addDronCharge(droneChargeDL);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
             IDAL.DO.DroneDL drone = new IDAL.DO.DroneDL() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)maxWeight, Model = model };

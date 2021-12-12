@@ -20,13 +20,16 @@
         <Style TargetType="Button"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
-              Value="#FF7791EA" />
+              Value="#FF17BF26" />
             <Setter Property="Foreground"
               Value= "Black" />
         </Style>
 
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\סמסטר א- חומר\C#\C#\drone.png"/>
+        </Grid.Background>
         <Button Content="Open Drones List" HorizontalAlignment="Center" Height="63" Margin="0,32,0,0" VerticalAlignment="Top" Width="322" Click="Button_Click"/>
 
     </Grid>
