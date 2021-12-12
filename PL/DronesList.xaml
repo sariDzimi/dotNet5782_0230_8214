@@ -19,7 +19,7 @@
         <Style TargetType="Label"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
-              Value= "#FF17BF26" />
+              Value= "#FFD3D6BF" />
             <Setter Property="Foreground"
               Value="Black" />
         </Style>
@@ -34,11 +34,15 @@
         </Style>
         <Style TargetType="ListView">
             <Setter Property="Background"
-              Value= "#FF8BF595" />
+              Value= "#FFD3D6BF" />
             <Setter Property="Foreground"
               Value="Black" />
             <Setter Property="FontSize"
               Value="20" />
+        </Style>
+        <Style TargetType="local:DronesList">
+            <Setter Property="Background"
+              Value= "#FFA6B748" />
         </Style>
     </Window.Resources>
     <Grid Name="MainGrid">

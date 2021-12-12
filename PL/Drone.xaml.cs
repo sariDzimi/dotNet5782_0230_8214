@@ -198,7 +198,7 @@ namespace PL
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = Convert.ToString( drone.ParcelInDelivery);
                 MessageBox.Show("Assign a drone to parcel successfully");
-
+               
             }
 
 
@@ -237,11 +237,12 @@ namespace PL
             {
                 bL.supplyParcelByDrone(drone.Id);
                 supllyParcel.Visibility = Visibility.Hidden;
-                sendDroneForDelivery.Visibility = Visibility.Hidden;
-                sendDroneToCharge.Visibility = Visibility.Hidden;
+                sendDroneForDelivery.Visibility = Visibility.Visible;
+                sendDroneToCharge.Visibility = Visibility.Visible;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("suplly a parcel by drone successfully");
-
+                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
             }
             catch (Exception ex)
             {

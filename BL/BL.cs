@@ -369,11 +369,13 @@ namespace BL
             CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel();
             customerAtParcelreciver.Id = customerReciver.Id;
             double distance1 = distanceBetweenTwoLocationds(new Location(customerSernder.Longitude, customerSernder.Latitude), new Location(customerReciver.Longitude, customerReciver.Latitude));
-            ParcelInDelivery parcelInDelivery = new ParcelInDelivery() { Id = parcelDL.Id, customerAtParcelTheSender = customerAtParcelSender, customerAtParcelTheReciver = customerAtParcelreciver, distance = distance1, locationCollect = new Location(customerSernder.Longitude, customerSernder.Latitude), locationTarget = new Location(customerReciver.Longitude, customerReciver.Latitude), pritorities = parcelDL.Pritority, weightCategories= parcelDL.Weight,isWating= false };
+            //ParcelInDelivery parcelInDelivery = new ParcelInDelivery() { Id = parcelDL.Id, customerAtParcelTheSender = customerAtParcelSender, customerAtParcelTheReciver = customerAtParcelreciver, distance = distance1, locationCollect = new Location(customerSernder.Longitude, customerSernder.Latitude), locationTarget = new Location(customerReciver.Longitude, customerReciver.Latitude), pritorities = parcelDL.Pritority, weightCategories= parcelDL.Weight,isWating= false };
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             IDAL.DO.WeightCategories weight = parcelDL.Weight;
             double useElectricity = CalculateElectricity(locationSender, locationReciver, weight);
             droneBL.Battery -= useElectricity;
             droneBL.Location = locationReciver;
+            droneBL.DroneStatus = DroneStatus.Free;
             droneBL.ParcelInDelivery = parcelInDelivery;
             updateDrone(droneBL);
             dalObject.updateDrone(droneDL);

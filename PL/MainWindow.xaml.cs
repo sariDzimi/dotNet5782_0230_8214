@@ -23,12 +23,14 @@ namespace PL
         public BL.BL bL;
         public MainWindow()
         {
+       
             bL = new BL.BL();
             InitializeComponent();
+            
+
         }
         public MainWindow( BL.BL bL1)
         {
-           
             bL = bL1;
             InitializeComponent();
 
@@ -39,5 +41,8 @@ namespace PL
             new DronesList(bL).Show();
             Close();
         }
+
+     
+
     }
 }
