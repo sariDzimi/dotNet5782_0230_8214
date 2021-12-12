@@ -39,18 +39,24 @@ namespace IDal
 
 
         public StationDL findStationBy( Predicate<StationDL> predicate);
+        public StationDL findStationById( int id);
 
 
         public CustomerDL findCustomerBy( Predicate<CustomerDL> predicate);
+        public CustomerDL findCustomerById( int id);
 
 
         public DroneDL findDroneBy( Predicate<DroneDL> predicate);
+        public DroneDL findDroneById(int id);
 
-
+        
 
         public void updateDrone(DroneDL drone);
 
         public void updateParcel(ParcelDL parcel);
+        public void updateStation(StationDL parcel);
+        public IEnumerable<ParcelDL> GetParcelIdBy( Predicate<ParcelDL> predicate);
+        public IEnumerable<StationDL> GetStationIdBy(Predicate<StationDL> predicate);
 
         public void updateCustomer(CustomerDL customer);
 

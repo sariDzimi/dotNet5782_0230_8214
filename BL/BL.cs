@@ -11,7 +11,7 @@ namespace BL
     {
         public List<DroneBL> dronesBL;
         Random rand = new Random();
-        DalObject.DalObject dalObject;
+        IDal.IDal dalObject;
 
         double ElectricityUseWhenFree = 0;
         double ElectricityUseWhenLight = 0;

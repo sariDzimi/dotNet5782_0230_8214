@@ -197,6 +197,7 @@ namespace PL
                 colectParcel.Visibility = Visibility.Visible;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = Convert.ToString( drone.ParcelInDelivery);
+                ButteryDroneL.Text = $"{drone.Battery}";
                 MessageBox.Show("Assign a drone to parcel successfully");
                
             }
@@ -220,6 +221,7 @@ namespace PL
                 supllyParcel.Visibility = Visibility.Visible;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("collect a parcel by drone successfully");
+                ButteryDroneL.Text = $"{drone.Battery}";
 
 
             }
@@ -243,6 +245,8 @@ namespace PL
                 MessageBox.Show("suplly a parcel by drone successfully");
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
+                ButteryDroneL.Text = $"{drone.Battery}";
+
             }
             catch (Exception ex)
             {

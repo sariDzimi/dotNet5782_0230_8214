@@ -18,11 +18,11 @@ namespace DalObject
 
         internal class Config
         {
-            public static double free = .01 ;
-            public static double light = .03;
-            public static double medium = .04 ;
-            public static double heavy = .07;
-            public static double rateChargePerHour = .05;
+            public static double free = .1 ;
+            public static double light = .4;
+            public static double medium = .5 ;
+            public static double heavy = .7;
+            public static double rateChargePerHour = .5;
         }
 
         /// <summary>
