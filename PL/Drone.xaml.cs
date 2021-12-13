@@ -32,6 +32,8 @@ namespace PL
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
+            timeCharging.Visibility = Visibility.Hidden;
+            timeOfCharging.Visibility = Visibility.Hidden;
 
             bL = bL1;
             //AddDrone.Visibility = Visibility.Visible;
@@ -53,6 +55,8 @@ namespace PL
             updateBottun.IsEnabled = true;
             idDroneL.IsReadOnly = true;
             WeightSelector.Visibility = Visibility.Hidden;
+            numberOfStationInput.Visibility = Visibility.Hidden;
+           
             //hide all buttons
 
             //show relaed buttons
@@ -167,9 +171,9 @@ namespace PL
             try
             {
                 bL.releaseDroneFromCharging(drone.Id, time);
-                releaseDroneFromCharging.Visibility = Visibility.Hidden;
-                sendDroneForDelivery.Visibility = Visibility.Visible;
-                sendDroneToCharge.Visibility = Visibility.Visible;
+                releaseDroneFromCharging.IsEnabled = false;
+                sendDroneForDelivery.IsEnabled = true;
+                sendDroneToCharge.IsEnabled= true;
                 timeCharging.Visibility = Visibility.Hidden;
                 timeOfCharging.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
@@ -196,13 +200,13 @@ namespace PL
             try
             {
                 bL.AssignAParcelToADrone(drone.Id);
-                sendDroneForDelivery.Visibility = Visibility.Hidden;
-                colectParcel.Visibility = Visibility.Visible;
+                sendDroneForDelivery.IsEnabled = false;
+                colectParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
                 ButteryDroneL.Text = $"{drone.Battery}";
                 MessageBox.Show("Assign a drone to parcel successfully");
-
+                sendDroneToCharge.IsEnabled= false;
             }
 
 
@@ -220,8 +224,8 @@ namespace PL
             try
             {
                 bL.collectParcleByDrone(drone.Id);
-                colectParcel.Visibility = Visibility.Hidden;
-                supllyParcel.Visibility = Visibility.Visible;
+                colectParcel.IsEnabled = false;
+                supllyParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("collect a parcel by drone successfully");
                 ButteryDroneL.Text = $"{drone.Battery}";
@@ -241,9 +245,9 @@ namespace PL
             try
             {
                 bL.supplyParcelByDrone(drone.Id);
-                supllyParcel.Visibility = Visibility.Hidden;
-                sendDroneForDelivery.Visibility = Visibility.Visible;
-                sendDroneToCharge.Visibility = Visibility.Visible;
+                supllyParcel.IsEnabled = false;
+                sendDroneForDelivery.IsEnabled = true;
+                sendDroneToCharge.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("suplly a parcel by drone successfully");
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
