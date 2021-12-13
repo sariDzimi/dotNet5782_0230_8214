@@ -36,8 +36,6 @@ namespace PL
             timeOfCharging.Visibility = Visibility.Hidden;
 
             bL = bL1;
-            //AddDrone.Visibility = Visibility.Visible;
-            //Actions.Visibility = Visibility.Hidden;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             MaxWeight.Visibility = Visibility.Hidden;
             numberOfStationInput.Visibility = Visibility.Visible;
@@ -72,7 +70,7 @@ namespace PL
                     timeOfCharging.IsEnabled = true;
                     break;
                 case DroneStatus.Delivery:
-                    // if (bL.FindParcel(drone.ParcelAtTransfor.ID).PickedUp == null)
+                    
                     IBL.BO.ParcelBL parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
@@ -147,11 +145,11 @@ namespace PL
             try
             {
                 bL.sendDroneToCharge(drone.Id);
-                sendDroneToCharge.Visibility = Visibility.Hidden;
-                sendDroneForDelivery.Visibility = Visibility.Hidden;
-                releaseDroneFromCharging.Visibility = Visibility.Visible;
-                timeOfCharging.Visibility = Visibility.Visible;
-                timeCharging.Visibility = Visibility.Visible;
+                sendDroneToCharge.IsEnabled = false;
+                sendDroneForDelivery.IsEnabled = false;
+                releaseDroneFromCharging.IsEnabled = true;
+                timeOfCharging.IsEnabled = true;
+                timeCharging.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ButteryDroneL.Text = $"{drone.Battery}";
                 MessageBox.Show("The drone was sent for charging successfully");
