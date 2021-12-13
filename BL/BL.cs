@@ -38,12 +38,13 @@ namespace BL
 
                 if (parcel.SenderId != 0 )
                 {
+
                     IDAL.DO.ParcelDL parcelDL = dalObject.FindParcelBy(dr => dr.DroneId == droneBL.Id);
                     IDAL.DO.CustomerDL customerSernder = dalObject.findCustomerBy(c => c.Id == parcelDL.SenderId);
                     Location locationSender = convertToCustomerBL(customerSernder).Location;
                     IDAL.DO.CustomerDL customerReciver = dalObject.GetCustomer().ToList().Find(d => d.Id == parcelDL.TargetId);
                     Location locationReciver = convertToCustomerBL(customerReciver).Location;
-
+                    parcel.Scheduled = DateTime.Now;
                     CustomerAtParcel customerAtParcelSender = new CustomerAtParcel();
                     customerAtParcelSender.Id = customerSernder.Id;
                     CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel();
@@ -53,7 +54,7 @@ namespace BL
           
                     droneBL.ParcelInDelivery = parcelInDelivery;
                     droneBL.DroneStatus = DroneStatus.Delivery;
-                    //ParcelBL parcelBL = convertToParcelBL(parcel);
+                    dalObject.updateParcel(parcel);
                     if (parcel.PickedUp < DateTime.Now)
                     {
                         int senderID = parcel.SenderId;
@@ -161,10 +162,8 @@ namespace BL
             ;
             IDAL.DO.DroneDL droneDL = dalObject.findDroneBy(t=> t.Id==idDrone);
             IDAL.DO.ParcelDL parcelDL = dalObject.FindParcelBy(t => t.DroneId == droneBL.Id);
-
             IDAL.DO.CustomerDL customerSernder = dalObject.findCustomerById(parcelDL.SenderId); 
             Location locationSender = convertToCustomerBL(customerSernder).Location;
-            //double distance = distanceBetweenTwoLocationds(locationSender, locationReciver);
             IDAL.DO.WeightCategories weight = parcelDL.Weight;
             double useElectricity = CalculateElectricity(droneBL.Location, locationSender, weight);
             droneBL.Battery -= useElectricity;
@@ -297,7 +296,7 @@ namespace BL
                 stationBL = closestStationToLoacation(customerBLreciver.Location);
                 double electricidy1 = CalculateElectricity(customerBLsender.Location, customerBLreciver.Location, parcel.Weight) + distanceBetweenTwoLocationds(stationBL.Location, droneBL.Location) * this.ElectricityUseWhenFree + distanceBetweenTwoLocationds(droneBL.Location, customerBLsender.Location) * this.ElectricityUseWhenFree;
                 double distanceToCharging1 = distanceBetweenTwoLocationds(customerBLreciver.Location, stationBL.Location);
-                if (electricidy1 > droneBL.Battery)
+                if (electricidy1 < droneBL.Battery)
                 {
                     if (parcelDL.Pritority < p.Pritority)
                     {

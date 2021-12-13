@@ -150,6 +150,9 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = true;
                 timeOfCharging.IsEnabled = true;
                 timeCharging.IsEnabled = true;
+                timeOfCharging.Visibility = Visibility.Visible;
+                timeCharging.Visibility = Visibility.Visible;
+                timeOfCharging.Text = "";
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ButteryDroneL.Text = $"{drone.Battery}";
                 MessageBox.Show("The drone was sent for charging successfully");

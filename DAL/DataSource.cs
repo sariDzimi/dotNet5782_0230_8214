@@ -81,7 +81,7 @@ namespace DalObject
                 parcel.Id = parcels.Count + 1;
                 parcel.SenderId = customers[rand.Next() % (customers.Count-1)].Id;
                 parcel.TargetId = customers[rand.Next() % (customers.Count-1)].Id;
-                parcel.Weight = (WeightCategories)(rand.Next() % 3);
+                parcel.Weight = (WeightCategories)(rand.Next() % 3) + 1;
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
                 parcel.DroneId = rand.Next() % (drones.Count + 1);
