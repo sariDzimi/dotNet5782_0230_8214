@@ -58,9 +58,7 @@ namespace DalObject
             {
                 throw new IdAlreadyExist(parcel.Id);
             }
-
             DataSource.parcels.Add(parcel);
-
         }
 
         /// <summary>
