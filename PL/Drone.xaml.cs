@@ -43,7 +43,6 @@ namespace PL
             numberOfStationInput.Visibility = Visibility.Visible;
             numberOfStationLabel.Visibility = Visibility.Visible;
             addButton.IsEnabled = true;
-
         }
         public Drone(BL.BL bL1, IBL.BO.Drone droneBL)
         {
@@ -56,8 +55,6 @@ namespace PL
             idDroneL.IsReadOnly = true;
             WeightSelector.Visibility = Visibility.Hidden;
             numberOfStationInput.Visibility = Visibility.Hidden;
-
-            //hide all buttons
 
             //show relaed buttons
             switch (drone.DroneStatus)
@@ -85,29 +82,15 @@ namespace PL
 
                             supllyParcel.IsEnabled = true;
                     }
-                    //else
-                    //    (parcelBL.Delivered != null & parcelBL.PickedUp != null)
-                    //    MessageBox.Show("the parcel was supplied");
                     break;
-
-
             }
 
-            ShowDroneDetales(drone);
-
+            this.DataContext = drone;
+            ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            Location.Text = drone.Location.ToString();
         }
 
-        public void ShowDroneDetales(IBL.BO.Drone droneBL)
-        {
-
-            ButteryDroneL.Text = $"{droneBL.Battery}";
-            idDroneL.Text = $"{droneBL.Id}";
-            modelDroneL.Text = $"{droneBL.Model}";
-            MaxWeight.Text = $"{droneBL.MaxWeight}";
-            DroneStatusDroneL.Text = $"{droneBL.DroneStatus}";
-            Location.Text = $"{droneBL.Location}";
-            ParcelInDelivery.Text = $"{droneBL.ParcelInDelivery}";
-        }
+        
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -203,15 +186,10 @@ namespace PL
                 MessageBox.Show("Assign a drone to parcel successfully");
                 sendDroneToCharge.IsEnabled = false;
             }
-
-
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
@@ -231,8 +209,6 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
@@ -254,8 +230,6 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -271,8 +245,6 @@ namespace PL
             {
                 MessageBox.Show($"{ex}");
             }
-
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

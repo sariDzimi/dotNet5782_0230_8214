@@ -68,7 +68,7 @@
                 <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="498,281,0,0" VerticalAlignment="Top" Height="32" Width="273" Click="Button_Click" IsEnabled="False"/>
 
                 <Label Content="id :" Margin="32,29,1022,390"  Height="25"/>
-                <TextBox x:Name="idDroneL" Height="25"  Margin="80,26,622,388" RenderTransformOrigin="0.5,0.5">
+                <TextBox x:Name="idDroneL" Height="25"  Margin="80,26,622,388" RenderTransformOrigin="0.5,0.5" Text="{Binding Id}">
                     <TextBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1"/>
@@ -79,19 +79,19 @@
                     </TextBox.RenderTransform>
                 </TextBox>
                 <Label Content="model :" Margin="28,74,1021,333" Height="25" Width="165"/>
-                <TextBox x:Name="modelDroneL"  Margin="79,74,622,333" Height="25"></TextBox>
+                <TextBox x:Name="modelDroneL"  Margin="79,74,622,333" Height="25" Text="{Binding Model}"></TextBox>
                 <Label Content="Battery :" Margin="28,118,989,289" Height="25"/>
-                <TextBox x:Name="ButteryDroneL" Height="25" IsReadOnly="True" Margin="113,118,622,289" ></TextBox>
+                <TextBox x:Name="ButteryDroneL" Height="25" IsReadOnly="True" Margin="113,118,622,289" Text="{Binding Battery}"></TextBox>
                 <Label Content="MaxWeight :" Margin="28,166,972,241" Height="25" Width="165"/>
                 <TextBox x:Name="ParcelInDelivery" Height="25"  IsReadOnly="True" Margin="191,323,622,84" ></TextBox>
                 <Label Content="DroneStatus :" Margin="29,220,908,199" Height="25" Width="165"/>
-                <TextBox x:Name="Location"  IsReadOnly="True" Height="25" Margin="122,271,622,136"></TextBox>
+                <TextBox x:Name="Location"  IsReadOnly="True" Height="25" Margin="122,271,622,136" ></TextBox>
                 <Label Content="ParcelAtTransfor :" Margin="29,323,911,84" Height="25" Width="165"/>
-                <TextBox x:Name="DroneStatusDroneL"  IsReadOnly="True" Height="25" Margin="153,214,622,193"></TextBox>
+                <TextBox x:Name="DroneStatusDroneL"  IsReadOnly="True" Height="25" Margin="153,214,622,193" Text="{Binding DroneStatus}"></TextBox>
                 <Label Content="Location :" Margin="28,271,977,136" Height="25" Width="165"/>
-                <TextBox x:Name="MaxWeight"  IsReadOnly="True" Height="25" Margin="130,166,622,241"></TextBox>
+                <TextBox x:Name="MaxWeight"  IsReadOnly="True" Height="25" Margin="130,166,622,241" Text="{Binding MaxWeight}"></TextBox>
                 <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="130,172,0,0" VerticalAlignment="Top" Width="157" Height="25" />
-                <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged"/>
+                <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}"/>
                 <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="32,386,0,0" VerticalAlignment="Top" Height="30" Width="304" Visibility="Hidden"/>
                 <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="498,323,0,0" VerticalAlignment="Top" Height="28" Width="273" Click="Button_Click_1" IsEnabled="False"/>
 
