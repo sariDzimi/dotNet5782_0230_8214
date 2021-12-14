@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-        class DroneToList
+        public class DroneToList
         {
             public int Id { get; set; }
 
@@ -22,6 +22,13 @@ namespace IBL
 
             public int NumberOfSendedParcel { get; set; }
 
+            public override string ToString()
+            {
+                return $"id:{Id}, model:{Model}, battery:{Battery}, drone status:{DroneStatus}, location:{Location}, number of sended parcels:{NumberOfSendedParcel}";
+            }
+
         }
+
+
     }
 }

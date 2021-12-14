@@ -21,7 +21,7 @@ namespace BL
             droneDL.Model = model;
             dalObject.updateDrone(droneDL);
 
-            DroneBL droneBL = dronesBL.First(d => d.Id == id);
+            Drone droneBL = dronesBL.First(d => d.Id == id);
             droneBL.Model = model;
             updateDrone(droneBL);
         }
@@ -62,7 +62,7 @@ namespace BL
         /// update Drone
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(DroneBL drone)
+        public void updateDrone(Drone drone)
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
             dronesBL[index] = drone;

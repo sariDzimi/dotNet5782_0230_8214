@@ -30,15 +30,15 @@ namespace BL
         /// <returns></returns>
         public CustomerBL convertToCustomerBL(IDAL.DO.CustomerDL c)
         {
-            CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone  };
-            foreach(var p in dalObject.GetParcel().ToList())
+            CustomerBL CustomerBL = new CustomerBL() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
+            foreach (var p in dalObject.GetParcel().ToList())
             {
-                if(p.SenderId== CustomerBL.Id)
+                if (p.SenderId == CustomerBL.Id)
                 {
-                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name } , weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus= ParcelStatus.created };
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelStatus.created };
                     CustomerBL.parcelsSentedByCustomer.Add(parcelAtCustomer);
                 }
-                if(p.TargetId== CustomerBL.Id)
+                if (p.TargetId == CustomerBL.Id)
                 {
                     ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelStatus.Collected };
                     CustomerBL.parcelsSentedToCustomer.Add(parcelAtCustomer);
@@ -55,8 +55,8 @@ namespace BL
         /// <returns></returns>
         public ParcelBL convertToParcelBL(IDAL.DO.ParcelDL p)
         {
-            DroneBL droneBL = new DroneBL();
-            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location};
+            Drone droneBL = new Drone();
+            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };
             CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomerById(p.SenderId).Name };
             CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomerById(p.TargetId).Name };
 
@@ -79,5 +79,23 @@ namespace BL
             }
             return total;
         }
+
+        public DroneToList ConvertDroneToDroneToList(Drone drone)
+        {
+            DroneToList droneToList = new DroneToList() { Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Location = drone.Location, Model = drone.Model };
+            if (!drone.ParcelInDelivery.Equals(null))
+                droneToList.NumberOfSendedParcel = drone.ParcelInDelivery.Id;
+            else
+                droneToList.NumberOfSendedParcel = 0;
+            return droneToList;
+
+        }
+
+        public Drone ConvertDroneToListToDrone(DroneToList droneToList)
+        {
+            return FindDrone(droneToList.Id);
+        }
     }
+
+
 }

@@ -11,6 +11,7 @@ namespace IBL
 {
     public interface IBL
     {
+        public DroneToList ConvertDroneToDroneToList(Drone drone);
         public void ParcelToTransfor(int sendedId, int reciveId, int weigth, int prioty);
         public void releaseDroneFromCharging(int idDrone, double timeInCharging);
         public void collectParcleByDrone(int idDrone);
@@ -32,17 +33,17 @@ namespace IBL
         public IEnumerable<ParcelBL> GetNotAsignedParcels();
         public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots();
         public StationBL FindStationBy(Predicate<StationBL> predicate);
-        public DroneBL FindDroneBy(Predicate<DroneBL> predicate);
+        public Drone FindDroneBy(Predicate<Drone> predicate);
         public CustomerBL FindCuatomerBy(Predicate<CustomerBL> predicate);
         public ParcelBL FindParcelBy(Predicate<ParcelBL> predicate);
         public IEnumerable<StationBL> GetStations();
         public IEnumerable<ParcelBL> GetParcels();
         public IEnumerable<CustomerBL> GetCustomers();
-        public IEnumerable<DroneBL> GetDrones();
+        public IEnumerable<Drone> GetDrones();
         public void updateDroneModel(int id, string model);
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1);
         public void updateDataCustomer(int id, string name = null, string phone = null);
-        public void updateDrone(DroneBL drone);
+        public void updateDrone(Drone drone);
 
     }
 }

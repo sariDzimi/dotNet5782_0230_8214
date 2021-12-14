@@ -52,7 +52,7 @@ namespace BL
             if(dalObject.GetDrones().Any(d => d.Id == id))
                 throw new IdAlreadyExist(id);
 
-            DroneBL droneBL = new DroneBL() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
+            Drone droneBL = new Drone() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
 
             StationBL stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
             if (stationBL==null)

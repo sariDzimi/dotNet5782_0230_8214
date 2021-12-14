@@ -34,7 +34,7 @@ namespace PL
 
             InitializeComponent();
             bl = bL1;
-            DronesListView.ItemsSource = bl.GetDrones();
+            DronesListView.ItemsSource = bl.GetDroneToLists();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories)); 
         }
@@ -42,7 +42,7 @@ namespace PL
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (IBL.BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            DronesListView.ItemsSource = bl.GetDronesBy((d) => d.MaxWeight == selected);
+            DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.MaxWeight == selected);
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,8 +54,8 @@ namespace PL
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-            IBL.BO.DroneBL droneBL = (sender as ListView).SelectedValue as IBL.BO.DroneBL;
-           
+            IBL.BO.DroneToList droneToList = (sender as ListView).SelectedValue as IBL.BO.DroneToList;
+            IBL.BO.Drone droneBL = bl.ConvertDroneToListToDrone(droneToList);
             new Drone(bl, droneBL).Show();
             Close();
         }

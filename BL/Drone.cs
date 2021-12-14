@@ -9,10 +9,10 @@ namespace IBL
     namespace BO
     {
 
-        public class DroneBL
+        public class Drone
         {
 
-            public DroneBL(int id, string model, WeightCategories weightCategories, double battery)
+            public Drone(int id, string model, WeightCategories weightCategories, double battery)
             {
                 Id = id;
                 Model = model;
@@ -21,7 +21,7 @@ namespace IBL
                 ParcelInDelivery = new ParcelInDelivery();
 
             }
-            public DroneBL()
+            public Drone()
             {
                 ParcelInDelivery = new ParcelInDelivery();
                 battery = 100;

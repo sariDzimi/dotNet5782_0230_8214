@@ -53,11 +53,19 @@ namespace BL
         /// Get Drones
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DroneBL> GetDrones()
+        public IEnumerable<Drone> GetDrones()
         {
             foreach (var drone in dronesBL)
             {
                 yield return drone;
+            }
+        }
+
+        public IEnumerable<DroneToList> GetDroneToLists()
+        {
+            foreach (var drone in GetDrones())
+            {
+                yield return ConvertDroneToDroneToList(drone);
             }
         }
     }

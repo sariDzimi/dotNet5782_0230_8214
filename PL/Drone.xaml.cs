@@ -21,7 +21,7 @@ namespace PL
     public partial class Drone : Window
     {
         BL.BL bL;
-        DroneBL drone;
+        IBL.BO.Drone drone;
         public Drone()
         {
             WindowStyle = WindowStyle.None;
@@ -43,7 +43,7 @@ namespace PL
             addButton.IsEnabled = true;
 
         }
-        public Drone(BL.BL bL1, IBL.BO.DroneBL droneBL)
+        public Drone(BL.BL bL1, IBL.BO.Drone droneBL)
         {
             WindowStyle = WindowStyle.None;
 
@@ -94,7 +94,7 @@ namespace PL
 
         }
 
-        public void ShowDroneDetales(DroneBL droneBL)
+        public void ShowDroneDetales(IBL.BO.Drone droneBL)
         {
 
             ButteryDroneL.Text = $"{droneBL.Battery}";

@@ -14,7 +14,7 @@ namespace BL
         /// add Drone To DL
         /// </summary>
         /// <param name="drone"></param>
-        public void addDroneToDL(DroneBL drone)
+        public void addDroneToDL(Drone drone)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {

@@ -38,9 +38,9 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public DroneBL FindDrone(int id)
+        public Drone FindDrone(int id)
         {
-            DroneBL droneBL = new DroneBL();
+            Drone droneBL = new Drone();
             droneBL = dronesBL.Find(d => d.Id == id);
             if (droneBL==null)
             {
@@ -51,10 +51,10 @@ namespace BL
 
 
 
-        public DroneBL FindDroneBy(Predicate<DroneBL> findBy)
+        public Drone FindDroneBy(Predicate<Drone> findBy)
         {
 
-            DroneBL droneBL = new DroneBL();
+            Drone droneBL = new Drone();
 
             try
             {

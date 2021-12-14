@@ -9,13 +9,19 @@ namespace BL
 {
     public partial class BL
     { 
-        public IEnumerable<DroneBL> GetDronesBy(Predicate<DroneBL> findBy)
+        public IEnumerable<Drone> GetDronesBy(Predicate<Drone> findBy)
         {
             return from drone in GetDrones()
                    where findBy(drone)
                    select drone;
         }
 
+        public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy)
+        {
+            return from drone in GetDrones()
+                   where findBy(drone)
+                   select ConvertDroneToDroneToList(drone);
+        }
 
 
 

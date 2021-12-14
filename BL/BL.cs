@@ -9,7 +9,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        public List<DroneBL> dronesBL;
+        public List<Drone> dronesBL;
         Random rand = new Random();
         IDal.IDal dalObject;
 
@@ -28,12 +28,12 @@ namespace BL
             ElectricityUseWhenMedium = ElectricityUse[2];
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
-            dronesBL = new List<DroneBL>();
+            dronesBL = new List<Drone>();
             List<ParcelDL> parcelDLs = dalObject.GetParcel().ToList();
 
             foreach (var drone in dalObject.GetDrones())
             {
-                DroneBL droneBL = new DroneBL() { Id = drone.Id, Model = drone.Model, MaxWeight = (IBL.BO.WeightCategories)drone.MaxWeight };
+                Drone droneBL = new Drone() { Id = drone.Id, Model = drone.Model, MaxWeight = (IBL.BO.WeightCategories)drone.MaxWeight };
                 ParcelDL parcel = parcelDLs.Find(p => p.DroneId == drone.Id);
 
                 if (parcel.SenderId != 0 )
@@ -127,7 +127,7 @@ namespace BL
         /// <param name="timeInCharging"></param>
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
-            DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
+            Drone droneBL = dronesBL.Find(d => d.Id == idDrone);
             if (droneBL == null)
             {
                 throw new NotFound($" drone number {idDrone}");
@@ -151,7 +151,7 @@ namespace BL
         public void collectParcleByDrone(int idDrone)
         {
 
-            DroneBL droneBL = dronesBL.Find(d => d.Id == idDrone);
+            Drone droneBL = dronesBL.Find(d => d.Id == idDrone);
             if (droneBL == null)
             {
                 throw new NotFound($"drone number {idDrone}");
@@ -181,7 +181,7 @@ namespace BL
         /// <param name="droneId"></param>
         public void sendDroneToCharge(int droneId)
         {
-            DroneBL drone = dronesBL.Find(d => d.Id == droneId);
+            Drone drone = dronesBL.Find(d => d.Id == droneId);
             if (drone == null)
             {
                 throw new NotFound($"drone number {droneId}");
@@ -274,7 +274,7 @@ namespace BL
             IDAL.DO.ParcelDL parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
             List<CustomerBL> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = dalObject.GetParcel().ToList();
-            DroneBL droneBL = dronesBL.Find(s => s.Id == id);
+            Drone droneBL = dronesBL.Find(s => s.Id == id);
             if (droneBL == null)
             {
                 throw new NotFound($"drone number {id}");
@@ -349,7 +349,7 @@ namespace BL
         public void supplyParcelByDrone(int DroneID)
         {
 
-            DroneBL droneBL = dronesBL.Find(d => d.Id == DroneID);
+            Drone droneBL = dronesBL.Find(d => d.Id == DroneID);
             if (droneBL == null)
             {
                 throw new NotFound($"drone number {DroneID}");
