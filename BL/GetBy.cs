@@ -16,6 +16,17 @@ namespace BL
                    select drone;
         }
 
+        public IEnumerable<Customer> GetCustomersBy(Predicate<Customer> findBy)
+        {
+            return from customer in GetCustomers()
+                   where findBy(customer)
+                   select customer;
+        }
+
+        public Customer GetCustomerById(int id)
+        {
+            return GetCustomersBy(c => c.Id == id).ToList().First();
+        }
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy)
         {
             return from drone in GetDrones()

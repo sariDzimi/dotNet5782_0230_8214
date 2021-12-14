@@ -34,7 +34,7 @@ namespace IBL
         public IEnumerable<Station> GetStationsWithEmptyChargeSlots();
         public Station FindStationBy(Predicate<Station> predicate);
         public Drone FindDroneBy(Predicate<Drone> predicate);
-        public Customer FindCuatomerBy(Predicate<Customer> predicate);
+        public Customer FindCustomerBy(Predicate<Customer> predicate);
         public Parcel FindParcelBy(Predicate<Parcel> predicate);
         public IEnumerable<Station> GetStations();
         public IEnumerable<Parcel> GetParcels();

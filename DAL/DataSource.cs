@@ -35,9 +35,7 @@ namespace DalObject
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
             {
-
                 Station station = new Station();
-
                 station.Id = stations.Count + 1;
                 station.Name = stations.Count + 1;
                 station.Latitude = rand.Next()% maxRand +1;
@@ -84,10 +82,10 @@ namespace DalObject
                 parcel.Weight = (WeightCategories)(rand.Next() % 3) + 1;
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
-                parcel.DroneId = rand.Next() % (drones.Count + 1);
-                parcel.Scheduled = null;
-                parcel.PickedUp = null;
-                parcel.Delivered = null;
+                parcel.Scheduled = RandomDateOrNull(parcel.Requested);
+                parcel.PickedUp = RandomDateOrNull(parcel.Scheduled);
+                parcel.Delivered = RandomDateOrNull(parcel.PickedUp);
+                parcel.DroneId = parcel.Scheduled == null ? 0 : drones[rand.Next(0, drones.Count)].Id;
                 parcels.Add(parcel);
 
 
@@ -105,9 +103,31 @@ namespace DalObject
         {
             Random rand = new Random();
             DateTime start = new DateTime(1995, 1, 1);
-            int range = (DateTime.Today - start).Seconds;
+            int range = (DateTime.Today - start).Days;
             return start.AddDays(rand.Next(range));
         }
+
+        public static DateTime? RandomDate(DateTime? startDate)
+        {
+            if (startDate == null)
+                return null;
+            Random rand = new Random();
+            DateTime? start = startDate;
+            int range = (DateTime.Today - startDate).Value.Days;
+            return start.Value.AddDays(rand.Next(range));
+        }
+
+        public static DateTime? RandomDateOrNull(DateTime? startDate)
+        {
+            Random rand = new Random();
+            ;
+            int x = (int)(rand.Next(1, 4));
+            if (x < 2)
+                return null;
+            else
+                return RandomDate(startDate);
+        }
+        
     }
 
 }

@@ -31,16 +31,17 @@ namespace BL
         public Customer convertToCustomerBL(IDAL.DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
-            foreach (var p in dalObject.GetParcel().ToList())
+           
+            foreach (var p in GetParcels())
             {
-                if (p.SenderId == CustomerBL.Id)
+                if (p.customerAtParcelSender.Id == CustomerBL.Id)
                 {
-                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelStatus.created };
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelsStatus(p) };
                     CustomerBL.parcelsSentedByCustomer.Add(parcelAtCustomer);
                 }
-                if (p.TargetId == CustomerBL.Id)
+                if (p.customerAtParcelReciver.Id == CustomerBL.Id)
                 {
-                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelStatus.Collected };
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelsStatus(p) };
                     CustomerBL.parcelsSentedToCustomer.Add(parcelAtCustomer);
                 }
             }
@@ -94,6 +95,21 @@ namespace BL
         public Drone ConvertDroneToListToDrone(DroneToList droneToList)
         {
             return FindDrone(droneToList.Id);
+        }
+
+        public ParcelStatus ParcelsStatus(Parcel parcel)
+        {
+            ParcelStatus parcelStatus = ParcelStatus.created;
+            if (parcel.Requested != null)
+                parcelStatus = ParcelStatus.created;
+            if(parcel.Scheduled != null)
+                parcelStatus = ParcelStatus.Belonged;
+            if (parcel.PickedUp != null)
+                parcelStatus = ParcelStatus.Collected;
+            if (parcel.Delivered != null)
+                parcelStatus = ParcelStatus.Provided;
+            return parcelStatus;
+
         }
     }
 

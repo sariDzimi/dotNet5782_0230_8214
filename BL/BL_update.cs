@@ -42,6 +42,23 @@ namespace BL
             dalObject.updateStation(station);
         }
 
+        public void updateParcel(Parcel parcel)
+        {
+            dalObject.updateParcel(new IDAL.DO.Parcel()
+            {
+                Id = parcel.Id,
+                Delivered = parcel.Delivered,
+                DroneId = parcel.droneAtParcel.Id,
+                PickedUp = parcel.PickedUp,
+                Pritority = parcel.Pritority,
+                Requested = parcel.Requested,
+                Scheduled = parcel.Scheduled,
+                SenderId = parcel.customerAtParcelSender.Id,
+                TargetId = parcel.customerAtParcelReciver.Id,
+                Weight = parcel.Weight
+            });
+        }
+
         /// <summary>
         /// update Data Customer
         /// </summary>

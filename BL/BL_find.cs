@@ -49,6 +49,9 @@ namespace BL
             return droneBL;
         }
 
+   
+
+
 
 
         public Drone FindDroneBy(Predicate<Drone> findBy)
@@ -71,6 +74,8 @@ namespace BL
 
 
 
+
+
         /// <summary>
         /// Find Cuatomer
         /// </summary>
@@ -78,7 +83,7 @@ namespace BL
         /// <returns></returns>
 
 
-        public Customer FindCuatomerBy(Predicate<Customer> findBy)
+        public Customer FindCustomerBy(Predicate<Customer> findBy)
         {
 
             Customer customerBL = new Customer();
@@ -95,6 +100,8 @@ namespace BL
             }
             return customerBL;
         }
+
+
 
         /// <summary>
         /// Find Parcel
