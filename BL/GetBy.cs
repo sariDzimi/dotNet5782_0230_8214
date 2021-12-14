@@ -22,7 +22,12 @@ namespace BL
                    where findBy(drone)
                    select ConvertDroneToDroneToList(drone);
         }
-
+        public IEnumerable<Parcel> GetParcelsBy(Predicate<Parcel> findBy)
+        {
+            return from parcel in GetParcels()
+                   where findBy(parcel)
+                   select parcel;
+        }
 
 
 
