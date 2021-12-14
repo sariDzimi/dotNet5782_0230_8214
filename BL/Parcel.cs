@@ -11,7 +11,7 @@ namespace IBL
         public class Parcel
         {
 
-            public Parcel( IDAL.DO.ParcelDL parcel)
+            public Parcel( IDAL.DO.Parcel parcel)
             {
                 Id = parcel.Id;
                 customerAtParcelSender = new CustomerAtParcel();

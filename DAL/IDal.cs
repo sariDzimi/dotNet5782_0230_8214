@@ -11,57 +11,57 @@ namespace IDal
 {
     public interface IDal
     {
-        public void addDrone(DroneDL drone);
+        public void addDrone(Drone drone);
 
-        public void addCustomer(CustomerDL customer);
+        public void addCustomer(Customer customer);
 
-        public void addParcel(ParcelDL parcel);
+        public void addParcel(Parcel parcel);
 
-        public void addStation(StationDL station);
+        public void addStation(Station station);
 
-        public void addDronCharge(DroneChargeDL droneCharge);
+        public void addDronCharge(DroneCharge droneCharge);
 
-        public IEnumerable<StationDL> GetStations();
-
-
-        public IEnumerable<DroneDL> GetDrones();
+        public IEnumerable<Station> GetStations();
 
 
-        public IEnumerable<CustomerDL> GetCustomer();
+        public IEnumerable<Drone> GetDrones();
 
 
-        public IEnumerable<ParcelDL> GetParcel();
-
-        public IEnumerable<DroneChargeDL> GetDroneCharges();
+        public IEnumerable<Customer> GetCustomer();
 
 
-        public ParcelDL FindParcelBy(Predicate<ParcelDL> predicate);
+        public IEnumerable<Parcel> GetParcel();
+
+        public IEnumerable<DroneCharge> GetDroneCharges();
 
 
-        public StationDL findStationBy( Predicate<StationDL> predicate);
-        public StationDL findStationById( int id);
+        public Parcel FindParcelBy(Predicate<Parcel> predicate);
 
 
-        public CustomerDL findCustomerBy( Predicate<CustomerDL> predicate);
-        public CustomerDL findCustomerById( int id);
+        public Station findStationBy( Predicate<Station> predicate);
+        public Station findStationById( int id);
 
 
-        public DroneDL findDroneBy( Predicate<DroneDL> predicate);
-        public DroneDL findDroneById(int id);
+        public Customer findCustomerBy( Predicate<Customer> predicate);
+        public Customer findCustomerById( int id);
+
+
+        public Drone findDroneBy( Predicate<Drone> predicate);
+        public Drone findDroneById(int id);
 
         
 
-        public void updateDrone(DroneDL drone);
+        public void updateDrone(Drone drone);
 
-        public void updateParcel(ParcelDL parcel);
-        public void updateStation(StationDL parcel);
-        public IEnumerable<ParcelDL> GetParcelIdBy( Predicate<ParcelDL> predicate);
-        public IEnumerable<StationDL> GetStationIdBy(Predicate<StationDL> predicate);
+        public void updateParcel(Parcel parcel);
+        public void updateStation(Station parcel);
+        public IEnumerable<Parcel> GetParcelIdBy( Predicate<Parcel> predicate);
+        public IEnumerable<Station> GetStationIdBy(Predicate<Station> predicate);
 
-        public void updateCustomer(CustomerDL customer);
+        public void updateCustomer(Customer customer);
 
 
-        public void updateDronecharge(DroneChargeDL dronecharge);
+        public void updateDronecharge(DroneCharge dronecharge);
 
         public void removeDroneCharge(int id);
 

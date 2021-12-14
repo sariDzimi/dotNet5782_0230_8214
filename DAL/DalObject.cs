@@ -23,7 +23,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="drone"></param>
-        public void addDrone(DroneDL drone)
+        public void addDrone(Drone drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
             {
@@ -38,7 +38,7 @@ namespace DalObject
         ///  If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="customer"></param>
-        public void addCustomer(CustomerDL customer)
+        public void addCustomer(Customer customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
             {
@@ -52,7 +52,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="parcel"></param>
-        public void addParcel(ParcelDL parcel)
+        public void addParcel(Parcel parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
             {
@@ -68,7 +68,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="station"></param>
-        public void addStation(StationDL station)
+        public void addStation(Station station)
         {
             if (DataSource.customers.Any(st => st.Id == station.Id))
             {
@@ -84,7 +84,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="droneCharge"></param>
-        public void addDronCharge(DroneChargeDL droneCharge)
+        public void addDronCharge(DroneCharge droneCharge)
         {
             if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
             {
@@ -99,7 +99,7 @@ namespace DalObject
         /// returns stations form datasource
         /// </summary>
         /// <returns>DataSource.stations</returns>
-        public IEnumerable<StationDL> GetStations()
+        public IEnumerable<Station> GetStations()
         {
             foreach (var station in DataSource.stations)
             {
@@ -111,7 +111,7 @@ namespace DalObject
         /// returns drones form datasource
         /// </summary>
         /// <returns>DataSource.drones</returns>
-        public IEnumerable<DroneDL> GetDrones()
+        public IEnumerable<Drone> GetDrones()
         {
             foreach (var drone in DataSource.drones)
             {
@@ -123,7 +123,7 @@ namespace DalObject
         /// returns customers form datasource
         /// </summary>
         /// <returns>DataSource.customers</returns>
-        public IEnumerable<CustomerDL> GetCustomer()
+        public IEnumerable<Customer> GetCustomer()
         {
             foreach (var customer in DataSource.customers)
             {
@@ -135,7 +135,7 @@ namespace DalObject
         /// returns customers form datasource
         /// </summary>
         /// <returns>DataSource.customers</returns>
-        public IEnumerable<ParcelDL> GetParcel()
+        public IEnumerable<Parcel> GetParcel()
         {
             foreach (var parcel in DataSource.parcels)
             {
@@ -147,7 +147,7 @@ namespace DalObject
         /// returns droneCharges form datasource
         /// </summary>
         /// <returns>DataSource.droneCharges</returns>
-        public IEnumerable<DroneChargeDL> GetDroneCharges()
+        public IEnumerable<DroneCharge> GetDroneCharges()
         {
             foreach (var droneCharge in DataSource.droneCharges)
             {
@@ -163,10 +163,10 @@ namespace DalObject
         /// 
 
 
-        public ParcelDL FindParcelBy(Predicate<ParcelDL> findBy)
+        public Parcel FindParcelBy(Predicate<Parcel> findBy)
         {
 
-            ParcelDL parcelDL = new ParcelDL();
+            Parcel parcelDL = new Parcel();
 
             try
             {
@@ -181,7 +181,7 @@ namespace DalObject
             return parcelDL;
         }
 
-        public ParcelDL findParcelById(int id)
+        public Parcel findParcelById(int id)
         {
             return FindParcelBy(p => p.Id == id);
         }
@@ -191,10 +191,10 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>station</returns>
-        public StationDL findStationBy(Predicate<StationDL> findBy)
+        public Station findStationBy(Predicate<Station> findBy)
         {
 
-            StationDL stationDL = new StationDL();
+            Station stationDL = new Station();
 
             try
             {
@@ -209,7 +209,7 @@ namespace DalObject
             return stationDL;
         }
 
-        public StationDL findStationById(int id)
+        public Station findStationById(int id)
         {
             return findStationBy(s => s.Id == id);
         }
@@ -224,10 +224,10 @@ namespace DalObject
         /// <returns>customer</returns>
 
 
-        public CustomerDL findCustomerBy(Predicate<CustomerDL> findBy)
+        public Customer findCustomerBy(Predicate<Customer> findBy)
         {
 
-            CustomerDL customerDL = new CustomerDL();
+            Customer customerDL = new Customer();
 
             try
             {
@@ -242,7 +242,7 @@ namespace DalObject
             return customerDL;
         }
 
-        public CustomerDL findCustomerById(int id)
+        public Customer findCustomerById(int id)
         {
             return findCustomerBy(c => c.Id == id);
         }
@@ -254,10 +254,10 @@ namespace DalObject
         /// <returns>drone</returns>
 
 
-        public DroneDL findDroneBy(Predicate<DroneDL> findBy)
+        public Drone findDroneBy(Predicate<Drone> findBy)
         {
 
-            DroneDL droneDL = new DroneDL();
+            Drone droneDL = new Drone();
 
             try
             {
@@ -272,7 +272,7 @@ namespace DalObject
             return droneDL;
         }
 
-        public DroneDL findDroneById(int id)
+        public Drone findDroneById(int id)
         {
             return findDroneBy(d => d.Id == id);
         }
@@ -285,10 +285,10 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns>droneCharge</returns>
-        public DroneChargeDL findDroneChargeBy(Predicate<DroneChargeDL> findBy)
+        public DroneCharge findDroneChargeBy(Predicate<DroneCharge> findBy)
         {
 
-            DroneChargeDL droneChargeDL = new DroneChargeDL();
+            DroneCharge droneChargeDL = new DroneCharge();
 
             try
             {
@@ -307,7 +307,7 @@ namespace DalObject
         /// updates the drones list in the database
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(DroneDL drone)
+        public void updateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             DataSource.drones[index] = drone;
@@ -317,7 +317,7 @@ namespace DalObject
         /// updates the drones list in the database
         /// </summary>
         /// <param name="parcel"></param>
-        public void updateParcel(ParcelDL parcel)
+        public void updateParcel(Parcel parcel)
         {   
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             if (index == -1)
@@ -330,7 +330,7 @@ namespace DalObject
         /// updates the drones list in the database
         /// </summary>
         /// <param name="customer"></param>
-        public void updateCustomer(CustomerDL customer)
+        public void updateCustomer(Customer customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
             DataSource.customers[index] = customer;
@@ -341,7 +341,7 @@ namespace DalObject
         /// updates the stations list in the database
         /// </summary>
         /// <param name="station"></param>
-        public void updateStation(StationDL station)
+        public void updateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
             DataSource.stations[index] = station;
@@ -351,7 +351,7 @@ namespace DalObject
         /// updates the dronecharges list in the database
         /// </summary>
         /// <param name="dronecharge"></param>
-        public void updateDronecharge(DroneChargeDL dronecharge)
+        public void updateDronecharge(DroneCharge dronecharge)
         {
             int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
             DataSource.droneCharges[index] = dronecharge;
@@ -375,7 +375,7 @@ namespace DalObject
         /// <param name="id"></param>
         public void removeDroneCharge(int id)
         {
-            DroneChargeDL droneChargeDL= new DroneChargeDL();
+            DroneCharge droneChargeDL= new DroneCharge();
             try
             {
                 droneChargeDL = findDroneChargeBy(i => i.DroneId == id);
@@ -390,14 +390,14 @@ namespace DalObject
 
 
 
-        public IEnumerable<ParcelDL> GetParcelIdBy(Predicate<ParcelDL> findBy)
+        public IEnumerable<Parcel> GetParcelIdBy(Predicate<Parcel> findBy)
         {
             return from parcel in DataSource.parcels
                    where findBy(parcel)
                    select parcel;
         }
 
-        public IEnumerable<StationDL> GetStationIdBy(Predicate<StationDL> findBy)
+        public IEnumerable<Station> GetStationIdBy(Predicate<Station> findBy)
         {
             return from station in DataSource.stations
                    where findBy(station)

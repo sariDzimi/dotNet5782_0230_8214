@@ -17,7 +17,7 @@ namespace BL
         /// <param name="model"></param>
         public void updateDroneModel(int id, string model)
         {
-            IDAL.DO.DroneDL droneDL = dalObject.findDroneById(id);
+            IDAL.DO.Drone droneDL = dalObject.findDroneById(id);
             droneDL.Model = model;
             dalObject.updateDrone(droneDL);
 
@@ -34,7 +34,7 @@ namespace BL
         /// <param name="totalChargeSlots"></param>
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-            IDAL.DO.StationDL station = dalObject.findStationById(id);
+            IDAL.DO.Station station = dalObject.findStationById(id);
             if (name != -1)
                 station.Name = name;
             if (totalChargeSlots != -1)
@@ -50,7 +50,7 @@ namespace BL
         /// <param name="phone"></param>
         public void updateDataCustomer(int id, string name = null, string phone = null)
         {
-            IDAL.DO.CustomerDL customer = dalObject.findCustomerById(id);
+            IDAL.DO.Customer customer = dalObject.findCustomerById(id);
             if (name != null)
                 customer.Name = name;
             if (phone != null)

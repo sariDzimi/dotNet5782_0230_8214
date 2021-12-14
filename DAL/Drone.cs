@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct DroneDL
+        public struct Drone
         {
             public int Id { get; set; }
             public string Model { get; set; }

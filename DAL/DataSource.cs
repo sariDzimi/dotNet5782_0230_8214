@@ -9,11 +9,11 @@ namespace DalObject
 {
     public class DataSource
     {
-        static internal List<DroneDL> drones = new List<DroneDL>();
-        static internal List<StationDL> stations = new List<StationDL>();
-        static internal List<CustomerDL> customers = new List<CustomerDL>();
-        static internal List<ParcelDL> parcels = new List<ParcelDL>();
-        static internal List<DroneChargeDL> droneCharges = new List<DroneChargeDL>();
+        static internal List<Drone> drones = new List<Drone>();
+        static internal List<Station> stations = new List<Station>();
+        static internal List<Customer> customers = new List<Customer>();
+        static internal List<Parcel> parcels = new List<Parcel>();
+        static internal List<DroneCharge> droneCharges = new List<DroneCharge>();
 
 
         internal class Config
@@ -36,7 +36,7 @@ namespace DalObject
             for (int i = 0; i < 2; i++)
             {
 
-                StationDL station = new StationDL();
+                Station station = new Station();
 
                 station.Id = stations.Count + 1;
                 station.Name = stations.Count + 1;
@@ -50,7 +50,7 @@ namespace DalObject
             for (int i = 0; i < 5; i++)
             {
 
-                DroneDL drone = new DroneDL();
+                Drone drone = new Drone();
                 drone.Id = (drones.Count) + 1;
                 drone.Model = "MarvicAir2";
                 drone.MaxWeight = (WeightCategories)(rand.Next() % 3)+1;
@@ -63,7 +63,7 @@ namespace DalObject
             {
 
 
-                CustomerDL customer = new CustomerDL();
+                Customer customer = new Customer();
                 customer.Id = (customers.Count) + 1;
                 customer.Name = $"customer{i}";
                 customer.Phone = $"{rand.Next(111111111, 999999999)}";
@@ -77,7 +77,7 @@ namespace DalObject
             {
 
 
-                ParcelDL parcel = new ParcelDL();
+                Parcel parcel = new Parcel();
                 parcel.Id = parcels.Count + 1;
                 parcel.SenderId = customers[rand.Next() % (customers.Count-1)].Id;
                 parcel.TargetId = customers[rand.Next() % (customers.Count-1)].Id;

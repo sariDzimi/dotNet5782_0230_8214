@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public Station convertToStationBL(IDAL.DO.StationDL s)
+        public Station convertToStationBL(IDAL.DO.Station s)
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
             StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
@@ -28,7 +28,7 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        public Customer convertToCustomerBL(IDAL.DO.CustomerDL c)
+        public Customer convertToCustomerBL(IDAL.DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
             foreach (var p in dalObject.GetParcel().ToList())
@@ -53,7 +53,7 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public Parcel convertToParcelBL(IDAL.DO.ParcelDL p)
+        public Parcel convertToParcelBL(IDAL.DO.Parcel p)
         {
             Drone droneBL = new Drone();
             DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };

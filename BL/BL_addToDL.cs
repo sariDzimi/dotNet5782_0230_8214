@@ -25,7 +25,7 @@ namespace BL
             }
 
 
-            IDAL.DO.DroneDL droneDL = new IDAL.DO.DroneDL() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model };
+            IDAL.DO.Drone droneDL = new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model };
             dalObject.addDrone(droneDL);
 
         }
@@ -43,7 +43,7 @@ namespace BL
                 }
             }
 
-            IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
+            IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
             dalObject.addStation(stationDL);
 
         }
@@ -64,7 +64,7 @@ namespace BL
                 }
             }
 
-            IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL()
+            IDAL.DO.Parcel parcelDL = new IDAL.DO.Parcel()
             {
                 Id = parcel.Id,
                 SenderId = parcel.customerAtParcelSender.Id,
@@ -96,7 +96,7 @@ namespace BL
                 }
             }
 
-            IDAL.DO.CustomerDL customerDL = new IDAL.DO.CustomerDL() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
+            IDAL.DO.Customer customerDL = new IDAL.DO.Customer() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
             dalObject.addCustomer(customerDL);
 
         }
@@ -108,7 +108,7 @@ namespace BL
         public void addDroneChargeToDL(DroneCharge droneCharge)
         {
             
-            IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
+            IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
             dalObject.addDronCharge(droneChargeDL);
 
         }

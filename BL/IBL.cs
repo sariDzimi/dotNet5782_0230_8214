@@ -26,9 +26,9 @@ namespace IBL
         public void addParcelToDL(Parcel parcel);
         public void addCustomerToDL(Customer customer);
         public void addDroneChargeToDL(DroneCharge droneCharge);
-        public Station convertToStationBL(IDAL.DO.StationDL s);
-        public Customer convertToCustomerBL(IDAL.DO.CustomerDL c);
-        public Parcel convertToParcelBL(IDAL.DO.ParcelDL p);
+        public Station convertToStationBL(IDAL.DO.Station s);
+        public Customer convertToCustomerBL(IDAL.DO.Customer c);
+        public Parcel convertToParcelBL(IDAL.DO.Parcel p);
         public int calculateFreeChargeSlotsInStation(int statioinID);
         public IEnumerable<Parcel> GetNotAsignedParcels();
         public IEnumerable<Station> GetStationsWithEmptyChargeSlots();

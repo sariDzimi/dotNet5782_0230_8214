@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct ParcelDL
+        public struct Parcel
         {
             public int Id { get; set; }
             public int SenderId { get; set; }
