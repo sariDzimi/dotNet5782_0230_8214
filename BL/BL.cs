@@ -78,7 +78,7 @@ namespace BL
                 {
                     int numOfStations = dalObject.GetStations().ToList().Count;
                     IDAL.DO.StationDL stationDL = dalObject.GetStations().ToList()[rand.Next(0, numOfStations)];
-                    StationBL stationBL = convertToStationBL(stationDL);
+                    Station stationBL = convertToStationBL(stationDL);
                     droneBL.Location = stationBL.Location;
                     droneBL.Battery = rand.Next(0, 21);
                     IDAL.DO.DroneChargeDL droneChargeDL = new DroneChargeDL();
@@ -114,7 +114,7 @@ namespace BL
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
             CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = reciveId };
 
-            ParcelBL parcelBL = new ParcelBL() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
+            Parcel parcelBL = new Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
 
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
@@ -188,7 +188,7 @@ namespace BL
             }
             if (drone.DroneStatus == 0)
             {
-                StationBL stationMini = closestStationToLoacation(drone.Location);
+                Station stationMini = closestStationToLoacation(drone.Location);
                
                 if (dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(stationMini.Location, drone.Location) < drone.Battery)
                 {
@@ -223,10 +223,10 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        public StationBL closestStationToLoacation(Location location)
+        public Station closestStationToLoacation(Location location)
         {
-            StationBL stationMini;
-            StationBL station;
+            Station stationMini;
+            Station station;
 
 
             stationMini = convertToStationBL(dalObject.GetStations().ToList()[0]);
@@ -265,14 +265,14 @@ namespace BL
         /// <param name="id"></param>
         public void AssignAParcelToADrone(int id)
         {
-            StationBL stationBL = new StationBL();
-            ParcelBL parcel = new ParcelBL();
-            ParcelBL parcel1 = new ParcelBL();
-            CustomerBL customerBLsender = new CustomerBL();
+            Station stationBL = new Station();
+            Parcel parcel = new Parcel();
+            Parcel parcel1 = new Parcel();
+            Customer customerBLsender = new Customer();
             IDAL.DO.CustomerDL customerParcel = new IDAL.DO.CustomerDL();
-            CustomerBL customerBLreciver = new CustomerBL();
+            Customer customerBLreciver = new Customer();
             IDAL.DO.ParcelDL parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
-            List<CustomerBL> customerBLs = GetCustomers().ToList();
+            List<Customer> customerBLs = GetCustomers().ToList();
             List<IDAL.DO.ParcelDL> parcelDLs = dalObject.GetParcel().ToList();
             Drone droneBL = dronesBL.Find(s => s.Id == id);
             if (droneBL == null)

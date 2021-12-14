@@ -9,9 +9,9 @@ namespace IBL
 {
     namespace BO
     {
-        public class CustomerBL
+        public class Customer
         {
-            public CustomerBL(int id, string name, string phone, double Longitude, double Latitude)
+            public Customer(int id, string name, string phone, double Longitude, double Latitude)
             {
                 Id = id;
                 Name = name;
@@ -24,7 +24,7 @@ namespace IBL
 
             }
 
-            public CustomerBL()
+            public Customer()
             {
                 parcelsSentedByCustomer = new List<ParcelAtCustomer>();
                 

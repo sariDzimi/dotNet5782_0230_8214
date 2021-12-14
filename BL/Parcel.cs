@@ -8,10 +8,10 @@ namespace IBL
 {
     namespace BO
     {
-        public class ParcelBL
+        public class Parcel
         {
 
-            public ParcelBL( IDAL.DO.ParcelDL parcel)
+            public Parcel( IDAL.DO.ParcelDL parcel)
             {
                 Id = parcel.Id;
                 customerAtParcelSender = new CustomerAtParcel();
@@ -28,7 +28,7 @@ namespace IBL
                 Delivered = parcel.Delivered;
             }
 
-            public ParcelBL()
+            public Parcel()
             {
 
             }

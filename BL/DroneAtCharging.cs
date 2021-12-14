@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-    public class DroneAtChargingBL
+    public class DroneAtCharging
         {
 
        

@@ -15,10 +15,10 @@ namespace BL
         /// </summary>
         /// <param Predicate="id"></param>
         /// <returns></returns>
-        public StationBL FindStationBy(Predicate <StationBL> findBy)
+        public Station FindStationBy(Predicate <Station> findBy)
         {
 
-            StationBL stationBL = new StationBL();
+            Station stationBL = new Station();
 
             try
             {
@@ -78,10 +78,10 @@ namespace BL
         /// <returns></returns>
 
 
-        public CustomerBL FindCuatomerBy(Predicate<CustomerBL> findBy)
+        public Customer FindCuatomerBy(Predicate<Customer> findBy)
         {
 
-            CustomerBL customerBL = new CustomerBL();
+            Customer customerBL = new Customer();
 
             try
             {
@@ -102,10 +102,10 @@ namespace BL
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public ParcelBL FindParcelBy(Predicate<ParcelBL> findBy)
+        public Parcel FindParcelBy(Predicate<Parcel> findBy)
         {
 
-            ParcelBL parcelBL = new ParcelBL();
+            Parcel parcelBL = new Parcel();
 
             try
             {

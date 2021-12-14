@@ -33,7 +33,7 @@ namespace BL
         /// add Station To DL
         /// </summary>
         /// <param name="station"></param>
-        public void addStationToDL(StationBL station)
+        public void addStationToDL(Station station)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -52,7 +52,7 @@ namespace BL
         /// add Parcel To DL
         /// </summary>
         /// <param name="parcel"></param>
-        public void addParcelToDL(ParcelBL parcel)
+        public void addParcelToDL(Parcel parcel)
         {
 
 
@@ -86,7 +86,7 @@ namespace BL
         /// add Customer To DL
         /// </summary>
         /// <param name="customer"></param>
-        public void addCustomerToDL(CustomerBL customer)
+        public void addCustomerToDL(Customer customer)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -105,7 +105,7 @@ namespace BL
         /// add DroneCharge To DL
         /// </summary>
         /// <param name="droneCharge"></param>
-        public void addDroneChargeToDL(DroneChargeBL droneCharge)
+        public void addDroneChargeToDL(DroneCharge droneCharge)
         {
             
             IDAL.DO.DroneChargeDL droneChargeDL = new IDAL.DO.DroneChargeDL() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };

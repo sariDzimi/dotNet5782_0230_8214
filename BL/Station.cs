@@ -9,11 +9,11 @@ namespace IBL
     namespace BO
     {
 
-        public class StationBL
+        public class Station
         {
-            public StationBL()
+            public Station()
             {
-                droneAtChargings = new List<DroneAtChargingBL>();
+                droneAtChargings = new List<DroneAtCharging>();
             }
             private int chargeSlots;
             public int Id { get; set; }
@@ -49,7 +49,7 @@ namespace IBL
                     $"{droneAtCharging}  ";
             }
 
-            public List<DroneAtChargingBL> droneAtChargings;
+            public List<DroneAtCharging> droneAtChargings;
 
 
 

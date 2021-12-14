@@ -17,7 +17,7 @@ namespace BL
         /// Get Stations
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<StationBL> GetStations()
+        public IEnumerable<Station> GetStations()
         {
             foreach (var station in dalObject.GetStations())
             {
@@ -29,7 +29,7 @@ namespace BL
         /// Get Parcels
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ParcelBL> GetParcels()
+        public IEnumerable<Parcel> GetParcels()
         {
             foreach (var parcel in dalObject.GetParcel())
             {
@@ -41,7 +41,7 @@ namespace BL
         /// Get Customers
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CustomerBL> GetCustomers()
+        public IEnumerable<Customer> GetCustomers()
         {
             foreach (var customer in dalObject.GetCustomer())
             {

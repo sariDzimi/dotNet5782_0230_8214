@@ -29,8 +29,8 @@ namespace BL
             }
 
 
-            StationBL stationBL = new StationBL() { Id = id, Name = name, Location = location, ChargeSlots = slots };
-            List<DroneAtChargingBL> droneAtChargings = new List<DroneAtChargingBL>();
+            Station stationBL = new Station() { Id = id, Name = name, Location = location, ChargeSlots = slots };
+            List<DroneAtCharging> droneAtChargings = new List<DroneAtCharging>();
             IDAL.DO.StationDL stationDL = new IDAL.DO.StationDL() { Id = id, Name = name, ChargeSlots = slots, Latitude = location.Latitude, Longitude = location.Longitude };
             dalObject.addStation(stationDL);
         }
@@ -54,7 +54,7 @@ namespace BL
 
             Drone droneBL = new Drone() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
 
-            StationBL stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
+            Station stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
             if (stationBL==null)
             {
                 throw new NotFound($"station number {numberStaion} to put the drone");
@@ -66,7 +66,7 @@ namespace BL
             }
             else
             {
-                DroneAtChargingBL droneAtChargingBL = new DroneAtChargingBL() { ID = id, Battery = droneBL.Battery };
+                DroneAtCharging droneAtChargingBL = new DroneAtCharging() { ID = id, Battery = droneBL.Battery };
                 stationBL.droneAtChargings.Add(droneAtChargingBL);
                 stationBL.ChargeSlots -= 1;
             }
@@ -100,7 +100,7 @@ namespace BL
             if(dalObject.GetCustomer().Any(c => c.Id == id))
                 throw new IdAlreadyExist(id);
 
-            CustomerBL customerBL = new CustomerBL() { Id = id, Name = name, Phone = phone, Location = location };
+            Customer customerBL = new Customer() { Id = id, Name = name, Phone = phone, Location = location };
             IDAL.DO.CustomerDL customer = new IDAL.DO.CustomerDL() { Id = id, Latitude = location.Latitude, Longitude = location.Longitude, Name = name, Phone = phone };
             dalObject.addCustomer(customer);
         }
@@ -146,7 +146,7 @@ namespace BL
 
             CustomerAtParcel customerAtParcelSender = new CustomerAtParcel() { Id = SenderId };
             CustomerAtParcel customerAtParcelReciver = new CustomerAtParcel() { Id = reciverId };
-            ParcelBL parcelBL = new ParcelBL() {Id=id, customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity, PickedUp=null, Requested= DateTime.Now, Delivered=null, Scheduled=null };
+            Parcel parcelBL = new Parcel() {Id=id, customerAtParcelSender = customerAtParcelSender, customerAtParcelReciver = customerAtParcelReciver, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity, PickedUp=null, Requested= DateTime.Now, Delivered=null, Scheduled=null };
             IDAL.DO.ParcelDL parcelDL = new IDAL.DO.ParcelDL() {Id= id, SenderId = SenderId, TargetId = reciverId, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
             dalObject.addParcel(parcelDL);
             return id;

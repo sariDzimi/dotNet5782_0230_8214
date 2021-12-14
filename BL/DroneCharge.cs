@@ -8,10 +8,10 @@ namespace IBL
 {
     namespace BO
     {
-        public class DroneChargeBL
+        public class DroneCharge
         {
 
-            public DroneChargeBL(int droneId, int stationId1)
+            public DroneCharge(int droneId, int stationId1)
             {
                 DroneId = droneId;
                 stationId = stationId1;

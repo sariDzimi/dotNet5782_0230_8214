@@ -71,7 +71,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
                     
-                    IBL.BO.ParcelBL parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
+                    IBL.BO.Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {

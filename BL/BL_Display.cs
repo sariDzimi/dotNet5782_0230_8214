@@ -15,7 +15,7 @@ namespace BL
         /// Get Not Asigned Parcels
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ParcelBL> GetNotAsignedParcels()
+        public IEnumerable<Parcel> GetNotAsignedParcels()
         {
             foreach(var p in dalObject.GetParcelIdBy((x) => x.DroneId == 0))
             {
@@ -28,7 +28,7 @@ namespace BL
         /// GetS tations With Empty ChargeSlots
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<StationBL> GetStationsWithEmptyChargeSlots()
+        public IEnumerable<Station> GetStationsWithEmptyChargeSlots()
         {
             foreach (var station in dalObject.GetStationIdBy((x)=> x.ChargeSlots > 0))
             {
