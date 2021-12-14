@@ -84,7 +84,12 @@ namespace PL
                             supllyParcel.IsEnabled = true;
                     }
                     if (parcelBL.Delivered != null & parcelBL.PickedUp != null)
-                        MessageBox.Show("the parcel was supplied");
+                    {
+                        sendDroneForDelivery.IsEnabled = true;
+                        sendDroneToCharge.IsEnabled = true;
+                    }
+                       
+
                     break;
 
 
