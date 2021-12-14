@@ -10,7 +10,7 @@
     <Window.Resources>
         <Style TargetType="local:Drone">
             <Setter Property="Background"
-              Value= "#FFD3D6BF" />
+              Value= "#FFA6B748" />
         </Style>
         <Style x:Key="close" TargetType="Button">
             <Setter Property="Background"
@@ -31,7 +31,8 @@
         <Style TargetType="Label"
            BasedOn="{StaticResource commonStyle}">
             <Setter Property="Background"
-              Value= "#FFA6B748" />
+                    
+              Value= "#FFD3D6BF" />
             <Setter Property="Foreground"
               Value="Black" />
         </Style>
@@ -54,75 +55,12 @@
         </Style>
     </Window.Resources>
 
-    <!--<Grid Margin="0,0,-34,0">
-        <Grid x:Name="AddDrone"  Visibility="Hidden" HorizontalAlignment="Left" Width="464" Margin="239,10,0,-10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="90*"/>
-                <RowDefinition Height="127*"/>
-            </Grid.RowDefinitions>
-
-            <TextBox x:Name="IdInput" HorizontalAlignment="Left" Margin="126,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="30"/>
-            <Label Content="id drone:" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
-            <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="127,85,0,0" VerticalAlignment="Top" Width="157" Height="30" />
-            <Label Content="max weight" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
-            <TextBox x:Name="ModelInput" HorizontalAlignment="Center" Margin="126,145,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="30" />
-            <Label Content="model" HorizontalAlignment="Left" Margin="27,145,0,0" VerticalAlignment="Top" Height="30" Width="100"/>
-            <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="258,22,180,0" Grid.Row="1" TextChanged="numberOfStationInput_TextChanged"/>
-            <Label Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="27,22,0,0" VerticalAlignment="Top" Height="30" Width="231" Grid.Row="1" />
-
-            <Button Content="Add" HorizontalAlignment="Left" Margin="105,116,0,0" VerticalAlignment="Top" Height="32" Width="91" Click="Button_Click" Grid.Row="1"/>
-
-        </Grid>
-
-        <Grid x:Name="Actions" Visibility="Visible" HorizontalAlignment="Center" Margin="-21,0,-247,-10">
-            <Grid HorizontalAlignment="Center" >
-                -->
-    <!--<Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>-->
-    <!--
-                <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,74,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="37" Width="276"/>
-                <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,24,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery" Height="32" Width="276"/>
-                <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="498,182,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="39" Width="276"/>
-                <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="498,124,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel" Height="37" Width="276"/>
-                <Label Content="id :" Margin="32,26,1017,388"  Height="25" Width="2050"/>
-                <TextBox x:Name="idDroneL" Height="25"  IsReadOnly="True" Margin="80,26,622,388" RenderTransformOrigin="0.5,0.5">
-                    <TextBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBox.RenderTransform>
-                </TextBox>
-                <Label Content="model :" Margin="28,74,1021,333" Height="25" Width="165"/>
-                <TextBox x:Name="modelDroneL"  Margin="79,74,622,333" Height="25" ></TextBox>
-                <Label Content="Battery :" Margin="28,118,989,289" Height="25"/>
-                <TextBox x:Name="ButteryDroneL" Height="25" IsReadOnly="True" Margin="113,118,622,289"></TextBox>
-                <Label Content="MaxWeight :" Margin="28,166,972,241" Height="25" Width="165"/>
-                <TextBox x:Name="ParcelInDelivery" Height="25"  IsReadOnly="True" Margin="191,323,622,84"></TextBox>
-                <Label Content="DroneStatus :" Margin="29,220,908,199" Height="25" Width="165"/>
-                <TextBox x:Name="Location"  IsReadOnly="True" Height="25" Margin="122,271,622,136"></TextBox>
-                <Label Content="ParcelAtTransfor :" Margin="29,323,911,84" Height="25" Width="165"/>
-                <TextBox x:Name="DroneStatusDroneL"  IsReadOnly="True" Height="25" Margin="153,214,622,193"></TextBox>
-                <Label Content="Location :" Margin="28,271,977,136" Height="25" Width="165"/>
-                <TextBox x:Name="MaxWeight"  IsReadOnly="True" Height="25" Margin="130,166,622,241"></TextBox>
-                <Button Content="update" HorizontalAlignment="Left" Margin="498,243,0,0" VerticalAlignment="Top" Height="33" Width="276" Click="Button_Click_1"/>
-            </Grid>
-            <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="501,291,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="277"/>
-
-            <Label x:Name="timeCharging" Visibility="Hidden" Content="time of charging"  HorizontalAlignment="Left" Margin="521,323,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="timeOfCharging" Visibility="Hidden"   HorizontalAlignment="Left" Margin="665,324,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" Height="27" />
-        </Grid>
-        <Button x:Name="close" Content="X" Style="{StaticResource close}" HorizontalAlignment="Left"  Margin="746,1,0,410" Click="Button_Click_2" Width="37" RenderTransformOrigin="1.63,0.089"/>
-    </Grid>-->
-
-    <!--#########################################################################################################################-->
-
     <Grid Margin="0,0,-34,0">
 
         <Grid x:Name="Actions" Visibility="Visible" HorizontalAlignment="Center" Margin="-21,0,-247,-10">
             <Grid HorizontalAlignment="Center" >
                 <!--<Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>-->
+
                 <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,51,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="30" Width="276" IsEnabled="False"/>
                 <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,14,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery" Height="32" Width="276" IsEnabled="False"/>
                 <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="498,131,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="31" Width="273" IsEnabled="False"/>
@@ -156,6 +94,7 @@
                 <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged"/>
                 <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="32,386,0,0" VerticalAlignment="Top" Height="30" Width="304" Visibility="Hidden"/>
                 <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="498,323,0,0" VerticalAlignment="Top" Height="28" Width="273" Click="Button_Click_1" IsEnabled="False"/>
+
             </Grid>
             <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,181,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False"/>
 
