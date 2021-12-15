@@ -259,6 +259,7 @@ namespace BL
             IBL.BO.Customer customerBLsender = new IBL.BO.Customer();
             IDAL.DO.Customer customerParcel = new IDAL.DO.Customer();
             IBL.BO.Customer customerBLreciver = new IBL.BO.Customer();
+            List<IDAL.DO.Parcel> parcels= dalObject.GetParcel().ToList();
             IDAL.DO.Parcel parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
             List<IBL.BO.Customer> customerBLs = Enumerable.ToList<IBL.BO.Customer>(GetCustomers());
             List<IDAL.DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
