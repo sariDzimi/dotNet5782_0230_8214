@@ -22,9 +22,9 @@ namespace BL
 
             try
             {
-                 stationBL= (from station in GetStations().ToList()
-                        where findBy(station)
-                        select station).First();
+                stationBL = (from station in GetStations()
+                             where findBy(station)
+                             select station).First();
             }
             catch (Exception ex)
             {
@@ -33,6 +33,11 @@ namespace BL
             return stationBL;
         }
          
+
+        public Station FindStation(int id)
+        {
+            return FindStationBy(s => s.Id == id);
+        }
         /// <summary>
         /// Find Drone
         /// </summary>
@@ -126,7 +131,28 @@ namespace BL
             }
             return parcelBL;
         }
+
+        public Parcel FindParcel(int id)
+        {
+            return FindParcelBy(p => p.Id == id);
+        }
+
+        public DroneCharge FindDroneCharge(int droneId)
+        {
+            try
+            {
+                return (from droneCharge in GetDronesCharges()
+                        where droneCharge.DroneId == droneId
+                        select droneCharge).First();
+            }
+            catch (Exception ex)
+            {
+                throw new NotFound($"drone charge");
+            }
+        }
     }
+
+    
 
     
 }

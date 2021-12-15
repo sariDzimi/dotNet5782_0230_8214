@@ -17,7 +17,7 @@ namespace IBL
 
             public int Id { get; set; } 
 
-            public bool isWating { get; set; }
+            public bool IsWating { get; set; }
 
             public IDAL.DO.WeightCategories weightCategories { get; set; }
 

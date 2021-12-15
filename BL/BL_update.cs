@@ -83,6 +83,19 @@ namespace BL
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
             dronesBL[index] = drone;
+            dalObject.updateDrone(new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
+        }
+
+        public void updateStation(Station station)
+        {
+            dalObject.updateStation(new IDAL.DO.Station()
+            {
+                ChargeSlots = station.ChargeSlots,
+                Id = station.Id,
+                Latitude = station.Location.Latitude,
+                Longitude = station.Location.Longitude,
+                Name = station.Name
+            });
         }
     }
 }

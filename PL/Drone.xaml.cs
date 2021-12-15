@@ -142,20 +142,14 @@ namespace PL
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ButteryDroneL.Text = $"{drone.Battery}";
                 MessageBox.Show("The drone was sent for charging successfully");
-
-
             }
-
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-
         }
 
         private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
         {
             try
             {
-
                 double time = Convert.ToDouble(timeOfCharging.Text);
                 bL.releaseDroneFromCharging(drone.Id, time);
                 releaseDroneFromCharging.IsEnabled = false;

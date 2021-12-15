@@ -57,7 +57,16 @@ namespace BL
         public Parcel convertToParcelBL(IDAL.DO.Parcel p)
         {
             Drone droneBL = new Drone();
-            DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };
+            DroneAtParcel droneAtParcel;
+            if (p.DroneId == 0)
+            {
+                droneAtParcel = null;
+            }
+            else
+            {
+                droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
+            }
+            //DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };
             CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomerById(p.SenderId).Name };
             CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomerById(p.TargetId).Name };
 
@@ -84,7 +93,7 @@ namespace BL
         public DroneToList ConvertDroneToDroneToList(Drone drone)
         {
             DroneToList droneToList = new DroneToList() { Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Location = drone.Location, Model = drone.Model };
-            if (!drone.ParcelInDelivery.Equals(null))
+            if (!(drone.ParcelInDelivery == null))
                 droneToList.NumberOfSendedParcel = drone.ParcelInDelivery.Id;
             else
                 droneToList.NumberOfSendedParcel = 0;
@@ -110,6 +119,11 @@ namespace BL
                 parcelStatus = ParcelStatus.Provided;
             return parcelStatus;
 
+        }
+
+        public DroneCharge ConvertToDroneChargeBL(IDAL.DO.DroneCharge droneChargeDL)
+        {
+            return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
         }
     }
 

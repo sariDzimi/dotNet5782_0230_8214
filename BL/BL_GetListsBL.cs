@@ -61,6 +61,15 @@ namespace BL
             }
         }
 
+
+        public IEnumerable<IBL.BO.DroneCharge> GetDronesCharges()
+        {
+            foreach (var drone in dalObject.GetDroneCharges())
+            {
+                yield return ConvertToDroneChargeBL(drone);
+            }
+        }
+
         public IEnumerable<DroneToList> GetDroneToLists()
         {
             foreach (var drone in GetDrones())

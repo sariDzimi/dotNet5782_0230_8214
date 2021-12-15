@@ -42,7 +42,7 @@ namespace IBL
                 {
                     if (value < 0 || value > 100)
                         throw new OutOfRange("battery");
-                    battery = value;
+                    battery = Math.Floor((double)value * 100) / 100;
                 }
             }
             public DroneStatus DroneStatus { get; set; }

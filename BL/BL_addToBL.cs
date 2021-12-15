@@ -151,5 +151,10 @@ namespace BL
             dalObject.addParcel(parcelDL);
             return id;
         }
+
+        public void AddDroneCharge(DroneCharge droneCharge)
+        {
+            dalObject.addDronCharge(new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId});
+        }
     }
 }
