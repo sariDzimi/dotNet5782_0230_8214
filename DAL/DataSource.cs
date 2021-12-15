@@ -82,10 +82,11 @@ namespace DalObject
                 parcel.Weight = (WeightCategories)(rand.Next() % 3) + 1;
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
-                parcel.Scheduled = RandomDateOrNull(parcel.Requested);
+                List<Drone> notAssignDrones = getNotAssignedDrones();
+                parcel.Scheduled = (notAssignDrones.Count == 0) ? null : RandomDateOrNull(parcel.Requested);
                 parcel.PickedUp = RandomDateOrNull(parcel.Scheduled);
                 parcel.Delivered = RandomDateOrNull(parcel.PickedUp);
-                parcel.DroneId = parcel.Scheduled == null ? 0 : drones[rand.Next(0, drones.Count)].Id;
+                parcel.DroneId = parcel.Scheduled == null ? 0 : notAssignDrones[rand.Next(0, notAssignDrones.Count)].Id;
                 parcels.Add(parcel);
 
 
@@ -126,6 +127,27 @@ namespace DalObject
                 return null;
             else
                 return RandomDate(startDate);
+        }
+
+        public static List<Drone> getNotAssignedDrones()
+        {
+            List<Drone> notAssignDrones = new List<Drone>();
+            foreach (var drone in drones)
+            {
+                bool assigned = false;
+                foreach (var parcel in parcels)
+                {
+                    if(parcel.DroneId == drone.Id)
+                    {
+                        assigned = true;
+                        break;
+                    }
+                        
+                }
+                if (!assigned)
+                    notAssignDrones.Add(drone);
+            }
+            return notAssignDrones;
         }
         
     }

@@ -145,7 +145,7 @@ namespace BL
                         where droneCharge.DroneId == droneId
                         select droneCharge).First();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new NotFound($"drone charge");
             }

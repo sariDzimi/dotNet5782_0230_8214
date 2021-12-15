@@ -12,22 +12,22 @@ namespace IBL
         {
             public ParcelAtTransfor()
             {
-                customerAtDeliverySender = new CustomerAtParcel();
-                customerAtDeliveryReciver = new CustomerAtParcel();
+                CustomerAtDeliverySender = new CustomerAtParcel();
+                CustomerAtDeliveryReciver = new CustomerAtParcel();
             }
 
             public int ID { get; set; }
 
-            public IDAL.DO.Pritorities pritorities { get; set; }
+            public IDAL.DO.Pritorities Pritorities { get; set; }
 
-            public CustomerAtParcel customerAtDeliverySender { get; set; }
-            public CustomerAtParcel customerAtDeliveryReciver { get; set; }
+            public CustomerAtParcel CustomerAtDeliverySender { get; set; }
+            public CustomerAtParcel CustomerAtDeliveryReciver { get; set; }
 
             public override string ToString()
             {
                 return $"ID  : {ID}, " +
-                    $" pritorities: {pritorities}, customerAtDeliverySender: {customerAtDeliverySender}," +
-                    $" customerAtDeliveryReciver: {customerAtDeliveryReciver}, " 
+                    $" pritorities: {Pritorities}, customerAtDeliverySender: {CustomerAtDeliverySender}," +
+                    $" customerAtDeliveryReciver: {CustomerAtDeliveryReciver}, " 
                  
 
                 ;

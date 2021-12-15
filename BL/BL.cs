@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IBL.BO;
 
 
 namespace BL
@@ -95,7 +94,7 @@ namespace BL
                         Customer customer = customers[(int)rand.Next(0, customers.Count)];
                         droneBL.Location = customer.Location;
                     }
-                    catch (Exception e)
+                    catch (Exception )
                     {
                         droneBL.Location = GetRandomStation().Location;
                     }
