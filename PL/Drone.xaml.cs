@@ -86,8 +86,9 @@ namespace PL
             }
 
             this.DataContext = drone;
-            ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
-            Location.Text = Convert.ToString(drone.Location);
+            if(drone.ParcelInDelivery != null)
+                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            Location.Text = drone.Location.ToString();
         }
 
         
