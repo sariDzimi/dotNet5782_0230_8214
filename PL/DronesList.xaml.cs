@@ -48,7 +48,7 @@ namespace PL
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (IBL.BO.DroneStatus)StatusSelector.SelectedItem;
-            DronesListView.ItemsSource = bl.GetDronesBy((d) => d.DroneStatus == selected);
+            DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.DroneStatus == selected);
         }
 
 
