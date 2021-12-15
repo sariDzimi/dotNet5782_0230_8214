@@ -48,7 +48,7 @@ namespace BL
             {
                 Id = parcel.Id,
                 Delivered = parcel.Delivered,
-                DroneId = parcel.droneAtParcel.Id,
+                DroneId = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id,
                 PickedUp = parcel.PickedUp,
                 Pritority = parcel.Pritority,
                 Requested = parcel.Requested,
