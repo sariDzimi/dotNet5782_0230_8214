@@ -64,7 +64,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Name="StatusSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="0" Margin="136,70,0,0" Grid.ColumnSpan="2" Height="31"/>
+            <ComboBox Name="StatusSelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="150" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="0" Margin="136,70,0,0" Grid.ColumnSpan="2" Height="31"/>
             <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="0" Margin="138,22,0,0" HorizontalAlignment="Left" Width="148" Height="31"/>
             <Button x:Name="addADrone" Content="Add a drone"  Click="addADrone_Click"   Height="31" Grid.Column="2"/>
         </Grid>
