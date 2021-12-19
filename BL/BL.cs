@@ -1,4 +1,4 @@
-﻿using BlApi.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,12 @@ using System.Linq;
 
 namespace BL
 {
+    
      partial class BL : BlApi.IBL
     {
+        internal static BL instance;
+
+
         private List<BO.Drone> dronesBL;
         private Random rand = new Random();
         private DalApi.IDal dalObject;
@@ -30,12 +34,12 @@ namespace BL
             ElectricityUseWhenMedium = ElectricityUse[2];
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
-            dronesBL = new List<IBL.BO.Drone>();
+            dronesBL = new List<BO.Drone>();
             List<DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
 
             foreach (var droneDL in dalObject.GetDrones())
             {
-                Drone droneBL = new Drone() { Id = droneDL.Id, Model = droneDL.Model, MaxWeight = (BlApi.BO.WeightCategories)droneDL.MaxWeight };
+                BO.Drone droneBL = new BO.Drone() { Id = droneDL.Id, Model = droneDL.Model, MaxWeight = (BO.WeightCategories)droneDL.MaxWeight };
                 if (GetParcelsBy(p => (p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id)).Any())
                 {
                     Parcel parcel = GetParcelsBy(p => (p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id)).First();
@@ -89,7 +93,7 @@ namespace BL
                 {
                     try
                     {
-                        List<BlApi.BO.Customer> customers = GetCustomersBy(c => c.parcelsSentedToCustomer.Any(p => p.parcelStatus == ParcelStatus.Provided)).ToList();
+                        List<BO.Customer> customers = GetCustomersBy(c => c.parcelsSentedToCustomer.Any(p => p.parcelStatus == ParcelStatus.Provided)).ToList();
                         double u = rand.Next(0, customers.Count);
                         Customer customer = customers[(int)rand.Next(0, customers.Count)];
                         droneBL.Location = customer.Location;
@@ -108,6 +112,18 @@ namespace BL
         }
 
 
+        public static BL GetInstance
+        {
+           get 
+            {
+                if (instance == null)
+                {
+                    instance = new BL();
+                }
+                return instance;
+            }
+        }
+
         /// <summary>
         /// Parcel To Transfor
         /// </summary>
@@ -120,7 +136,7 @@ namespace BL
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
             CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = reciveId };
 
-            Parcel parcelBL = new IBL.BO.Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (DO.WeightCategories)weigth, Pritority = (DO.Pritorities)prioty };
+            Parcel parcelBL = new Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (DO.WeightCategories)weigth, Pritority = (DO.Pritorities)prioty };
 
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
@@ -133,10 +149,10 @@ namespace BL
         /// <param name="timeInCharging"></param>
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
-            BlApi.BO.Drone droneBL = FindDrone(idDrone);
+           Drone droneBL = FindDrone(idDrone);
 
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
-                throw new BlApi.BO.DroneIsNotInCorrectStatus("drone is not in Maintenance ");
+                throw new BO.DroneIsNotInCorrectStatus("drone is not in Maintenance ");
 
             droneBL.Battery += timeInCharging * RateOfCharching;
             droneBL.DroneStatus = DroneStatus.Free;
@@ -155,10 +171,10 @@ namespace BL
         /// <param name="idDrone"></param>
         public void collectParcleByDrone(int idDrone)
         {
-            BlApi.BO.Drone droneBL = FindDrone(idDrone);
+            Drone droneBL = FindDrone(idDrone);
             Parcel parcel = FindParcel(droneBL.ParcelInDelivery.Id);
             if (droneBL.DroneStatus != DroneStatus.Delivery || droneBL.ParcelInDelivery == null)
-                throw new BlApi.BO.DroneIsNotInCorrectStatus("drone is not in Delivery");
+                throw new DroneIsNotInCorrectStatus("drone is not in Delivery");
 
             Location locationSender = droneBL.ParcelInDelivery.locationCollect;
             double useElectricity = CalculateElectricity(droneBL.Location, locationSender, droneBL.ParcelInDelivery.weightCategories);
@@ -200,12 +216,12 @@ namespace BL
                 }
                 else
                 {
-                    throw new BlApi.BO.DroneDoesNotHaveEnoughBattery();
+                    throw new DroneDoesNotHaveEnoughBattery();
                 }
             }
             else
             {
-                throw new BlApi.BO.DroneIsNotInCorrectStatus("drone is not free");
+                throw new DroneIsNotInCorrectStatus("drone is not free");
             }
         }
 
@@ -214,15 +230,15 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        private BlApi.BO.Station closestStationToLoacation(Location location)
+        private Station closestStationToLoacation(Location location)
         {
-            BlApi.BO.Station closestStation;
+            Station closestStation;
 
             closestStation = GetStations().ToList().First();
 
             
 
-            foreach (BlApi.BO.Station station in GetStations())
+            foreach (Station station in GetStations())
             {
                 double distance1 = distanceBetweenTwoLocationds(station.Location, location);
                 double distance2 = distanceBetweenTwoLocationds(closestStation.Location, location);
@@ -255,24 +271,24 @@ namespace BL
         /// <param name="id"></param>
         public void AssignAParcelToADrone(int id)
         {
-            IBL.BO.Station stationBL = new IBL.BO.Station();
-            IBL.BO.Parcel parcel = new IBL.BO.Parcel();
-            IBL.BO.Parcel parcel1 = new IBL.BO.Parcel();
-            IBL.BO.Customer customerBLsender = new IBL.BO.Customer();
+            Station stationBL = new Station();
+            Parcel parcel = new Parcel();
+            Parcel parcel1 = new Parcel();
+            Customer customerBLsender = new Customer();
             DO.Customer customerParcel = new DO.Customer();
-            IBL.BO.Customer customerBLreciver = new IBL.BO.Customer();
+            Customer customerBLreciver = new Customer();
             List<DO.Parcel> parcels= dalObject.GetParcel().ToList();
             DO.Parcel parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
-            List<IBL.BO.Customer> customerBLs = Enumerable.ToList<IBL.BO.Customer>(GetCustomers());
+            List<Customer> customerBLs = Enumerable.ToList<Customer>(GetCustomers());
             List<DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
-            IBL.BO.Drone droneBL = dronesBL.Find(s => s.Id == id);
+            Drone droneBL = dronesBL.Find(s => s.Id == id);
             if (droneBL == null)
             {
                 throw new NotFound($"drone number {id}");
             }
             if (droneBL.DroneStatus != DroneStatus.Free)
             {
-                throw new BlApi.BO.DroneIsNotInCorrectStatus("drone is not free");
+                throw new DroneIsNotInCorrectStatus("drone is not free");
             }
             foreach (var p in parcelDLs)
             {
@@ -340,10 +356,10 @@ namespace BL
         public void supplyParcelByDrone(int DroneID)
         {
 
-            BlApi.BO.Drone droneBL = FindDrone(DroneID);
+            Drone droneBL = FindDrone(DroneID);
 
             if (droneBL.DroneStatus != DroneStatus.Delivery)
-                throw new BlApi.BO.DroneIsNotInCorrectStatus("drone is not in delivery");
+                throw new DroneIsNotInCorrectStatus("drone is not in delivery");
             if (droneBL.ParcelInDelivery == null)
                 throw new NotFound("parcel in drone");
 
@@ -355,7 +371,7 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Free;
             droneBL.ParcelInDelivery = null;
             updateDrone(droneBL);
-            BlApi.BO.Parcel parcel = FindParcel(droneBL.Id);
+            Parcel parcel = FindParcel(droneBL.Id);
             parcel.Delivered = DateTime.Now;
             updateParcel(parcel);
 
@@ -388,10 +404,10 @@ namespace BL
             }
         }
 
-        private BlApi.BO.Station GetRandomStation()
+        private Station GetRandomStation()
         {
             int numOfStations = GetStations().ToList().Count;
-            BlApi.BO.Station station = GetStations().ToList()[rand.Next(0, numOfStations)];
+            Station station = GetStations().ToList()[rand.Next(0, numOfStations)];
             return station;
         }
     }

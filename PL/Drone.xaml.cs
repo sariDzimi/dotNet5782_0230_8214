@@ -1,4 +1,4 @@
-﻿using BlApi.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +21,12 @@ namespace PL
     public partial class Drone : Window
     {
         BL.BL bL;
-        BlApi.BO.Drone drone;
+        BO.Drone drone;
         public bool boo = false;
         public Drone()
         {
             WindowStyle = WindowStyle.None;
-            drone = new BlApi.BO.Drone() { };
+            drone = new BO.Drone() { };
 
             InitializeComponent();
         }
@@ -38,13 +38,13 @@ namespace PL
             timeOfCharging.Visibility = Visibility.Hidden;
 
             bL = bL1;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(BlApi.BO.WeightCategories));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             MaxWeight.Visibility = Visibility.Hidden;
             numberOfStationInput.Visibility = Visibility.Visible;
             numberOfStationLabel.Visibility = Visibility.Visible;
             addButton.IsEnabled = true;
         }
-        public Drone(BL.BL bL1, BlApi.BO.Drone droneBL)
+        public Drone(BL.BL bL1, BO.Drone droneBL)
         {
             WindowStyle = WindowStyle.None;
 
@@ -70,7 +70,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
 
-                    BlApi.BO.Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -96,7 +96,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var maxWeight = (int)(BlApi.BO.WeightCategories)WeightSelector.SelectedItem;
+            var maxWeight = (int)(WeightCategories)WeightSelector.SelectedItem;
             int id = Convert.ToInt32(idDroneL.Text);
             string model = modelDroneL.Text;
             int numOfStationForCharching = Convert.ToInt32(numberOfStationInput.Text);

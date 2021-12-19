@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
 
 namespace PL
 {
@@ -35,27 +36,27 @@ namespace PL
             InitializeComponent();
             bl = bL1;
             DronesListView.ItemsSource = bl.GetDroneToLists();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(BlApi.BO.DroneStatus));
-            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BlApi.BO.WeightCategories)); 
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
+            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories)); 
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (BlApi.BO.WeightCategories)MaxWeightSelector.SelectedItem;
+            var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
             DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.MaxWeight == selected);
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (BlApi.BO.DroneStatus)StatusSelector.SelectedItem;
+            var selected = (BO.DroneStatus)StatusSelector.SelectedItem;
             DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.DroneStatus == selected);
         }
 
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-            BlApi.BO.DroneToList droneToList = (sender as ListView).SelectedValue as BlApi.BO.DroneToList;
-            BlApi.BO.Drone droneBL = bl.ConvertDroneToListToDrone(droneToList);
+           BO.DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
+           BO.Drone droneBL = bl.ConvertDroneToListToDrone(droneToList);
             new Drone(bl, droneBL).Show();
             Close();
         }
