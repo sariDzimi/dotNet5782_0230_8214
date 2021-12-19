@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using BlApi;
 
 namespace PL
 {
@@ -20,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class DronesList : Window
     {
-        private BL.BL bl;
+        private IBL bl;
         public DronesList()
         {
             WindowStyle = WindowStyle.None;
@@ -29,7 +30,7 @@ namespace PL
             
         }
 
-        public DronesList(BL.BL bL1)
+        public DronesList(IBL bL1)
         {
             WindowStyle = WindowStyle.None;
 

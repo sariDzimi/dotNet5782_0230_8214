@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -20,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        BL.BL bL;
+        IBL bL;
         BO.Drone drone;
         public bool boo = false;
         public Drone()
@@ -30,7 +31,7 @@ namespace PL
 
             InitializeComponent();
         }
-        public Drone(BL.BL bL1)
+        public Drone(IBL bL1)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -44,7 +45,7 @@ namespace PL
             numberOfStationLabel.Visibility = Visibility.Visible;
             addButton.IsEnabled = true;
         }
-        public Drone(BL.BL bL1, BO.Drone droneBL)
+        public Drone(IBL bL1, BO.Drone droneBL)
         {
             WindowStyle = WindowStyle.None;
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DalObject;
 
 
 namespace BL
@@ -27,7 +28,7 @@ namespace BL
         public BL()
         {
             //intlizing BL members
-            dalObject = new DalObject.DalObject();
+            dalObject = DAL.DalFactory.GetDal("DalObject");
             double[] ElectricityUse = dalObject.RequestElectricityUse();
             ElectricityUseWhenFree = ElectricityUse[0];
             ElectricityUseWhenLight = ElectricityUse[1];

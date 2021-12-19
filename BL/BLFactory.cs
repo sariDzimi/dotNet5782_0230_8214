@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BlApi;
 namespace BL
 {
-     static class BLFactory
+     public static class BLFactory
     {
         public static IBL GetBl()
         {
