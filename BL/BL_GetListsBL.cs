@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace BL
         /// Get Stations
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IBL.BO.Station> GetStations()
+        public IEnumerable<BlApi.BO.Station> GetStations()
         {
             return from station in dalObject.GetStations()
                    select ConvertToStationBL(station);
@@ -26,7 +26,7 @@ namespace BL
         /// Get Parcels
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IBL.BO.Parcel> GetParcels()
+        public IEnumerable<BlApi.BO.Parcel> GetParcels()
         {
 
             return from parcel in dalObject.GetParcel()
@@ -38,7 +38,7 @@ namespace BL
         /// Get Customers
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IBL.BO.Customer> GetCustomers()
+        public IEnumerable<BlApi.BO.Customer> GetCustomers()
         {
 
             return from customer in dalObject.GetCustomer()
@@ -51,7 +51,7 @@ namespace BL
         /// Get Drones
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IBL.BO.Drone> GetDrones()
+        public IEnumerable<BlApi.BO.Drone> GetDrones()
         {
             return from drone in dronesBL
                    select drone;
@@ -59,7 +59,7 @@ namespace BL
         }
 
 
-        public IEnumerable<IBL.BO.DroneCharge> GetDronesCharges()
+        public IEnumerable<BlApi.BO.DroneCharge> GetDronesCharges()
         {
             return from drone in dalObject.GetDroneCharges()
                    select ConvertToDroneChargeBL(drone);
