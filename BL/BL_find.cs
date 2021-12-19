@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
         /// <summary>
         /// Find Station
         /// </summary>
         /// <param Predicate="id"></param>
         /// <returns></returns>
-        public Station FindStationBy(Predicate <Station> findBy)
+        private Station FindStationBy(Predicate <Station> findBy)
         {
 
             Station stationBL = new Station();
@@ -32,9 +32,9 @@ namespace BL
             }
             return stationBL;
         }
-         
 
-        public Station FindStation(int id)
+
+        private Station FindStation(int id)
         {
             return FindStationBy(s => s.Id == id);
         }
@@ -43,7 +43,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Drone FindDrone(int id)
+        private Drone FindDrone(int id)
         {
             Drone droneBL = new Drone();
             droneBL = dronesBL.Find(d => d.Id == id);
@@ -54,12 +54,12 @@ namespace BL
             return droneBL;
         }
 
-   
 
 
 
 
-        public Drone FindDroneBy(Predicate<Drone> findBy)
+
+        private Drone FindDroneBy(Predicate<Drone> findBy)
         {
 
             Drone droneBL = new Drone();
@@ -88,7 +88,7 @@ namespace BL
         /// <returns></returns>
 
 
-        public Customer FindCustomerBy(Predicate<Customer> findBy)
+        private Customer FindCustomerBy(Predicate<Customer> findBy)
         {
 
             Customer customerBL = new Customer();

@@ -141,7 +141,7 @@ namespace PL
                 timeCharging.Visibility = Visibility.Visible;
                 timeOfCharging.Text = "";
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -159,7 +159,7 @@ namespace PL
                 timeCharging.Visibility = Visibility.Hidden;
                 timeOfCharging.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (Exception)
@@ -177,7 +177,7 @@ namespace PL
                 colectParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Assign a drone to parcel successfully");
                 sendDroneToCharge.IsEnabled = false;
             }
@@ -196,7 +196,7 @@ namespace PL
                 supllyParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("collect a parcel by drone successfully");
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
 
 
             }
@@ -218,7 +218,7 @@ namespace PL
                 MessageBox.Show("suplly a parcel by drone successfully");
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
 
             }
             catch (Exception ex)

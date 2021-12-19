@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public Station convertToStationBL(IDAL.DO.Station s)
+        private Station ConvertToStationBL(IDAL.DO.Station s)
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
             StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
@@ -28,7 +28,7 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        public Customer convertToCustomerBL(IDAL.DO.Customer c)
+        private Customer convertToCustomerBL(IDAL.DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
            
@@ -54,7 +54,7 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public Parcel convertToParcelBL(IDAL.DO.Parcel p)
+        private Parcel convertToParcelBL(IDAL.DO.Parcel p)
         {
             Drone droneBL = new Drone();
             DroneAtParcel droneAtParcel;
@@ -79,7 +79,7 @@ namespace BL
         /// </summary>
         /// <param name="statioinID"></param>
         /// <returns></returns>
-        public int calculateFreeChargeSlotsInStation(int statioinID)
+        private int calculateFreeChargeSlotsInStation(int statioinID)
         {
             int total = dalObject.findStationById(statioinID).ChargeSlots;
             foreach (var chargeDrone in dalObject.GetDroneCharges())
@@ -106,7 +106,7 @@ namespace BL
             return FindDrone(droneToList.Id);
         }
 
-        public ParcelStatus ParcelsStatus(Parcel parcel)
+        private ParcelStatus ParcelsStatus(Parcel parcel)
         {
             ParcelStatus parcelStatus = ParcelStatus.created;
             if (parcel.Requested != null)
@@ -121,7 +121,7 @@ namespace BL
 
         }
 
-        public DroneCharge ConvertToDroneChargeBL(IDAL.DO.DroneCharge droneChargeDL)
+        private DroneCharge ConvertToDroneChargeBL(IDAL.DO.DroneCharge droneChargeDL)
         {
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
         }

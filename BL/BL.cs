@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+     partial class BL : IBL.IBL
     {
-        public List<IBL.BO.Drone> dronesBL;
-        Random rand = new Random();
-        IDal.IDal dalObject;
+        private List<IBL.BO.Drone> dronesBL;
+        private Random rand = new Random();
+        private IDal.IDal dalObject;
 
-        double ElectricityUseWhenFree = 0;
-        double ElectricityUseWhenLight = 0;
-        double ElectricityUseWhenMedium = 0;
-        double ElectricityUseWhenheavy = 0;
-        double RateOfCharching = 0.1;
+        private double ElectricityUseWhenFree = 0;
+        private double ElectricityUseWhenLight = 0;
+        private double ElectricityUseWhenMedium = 0;
+        private double ElectricityUseWhenheavy = 0;
+        private double RateOfCharching = 0.1;
         
 
 
@@ -214,11 +214,13 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        public IBL.BO.Station closestStationToLoacation(Location location)
+        private IBL.BO.Station closestStationToLoacation(Location location)
         {
             IBL.BO.Station closestStation;
 
             closestStation = GetStations().ToList().First();
+
+            
 
             foreach (IBL.BO.Station station in GetStations())
             {
@@ -239,7 +241,7 @@ namespace BL
         /// <param name="location1"></param>
         /// <param name="location2"></param>
         /// <returns></returns>
-        public double distanceBetweenTwoLocationds(Location location1, Location location2)
+        private double distanceBetweenTwoLocationds(Location location1, Location location2)
         {
             return Math.Sqrt(Math.Pow(location1.Longitude - location2.Longitude, 2)
                 + Math.Pow(location1.Latitude - location2.Latitude, 2) * 1.0);
@@ -366,7 +368,7 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns></returns>
-        public double CalculateElectricity(Location location1, Location location2, IDAL.DO.WeightCategories weight)
+        private double CalculateElectricity(Location location1, Location location2, IDAL.DO.WeightCategories weight)
         {
 
             double distance = distanceBetweenTwoLocationds(location1, location2);
@@ -386,7 +388,7 @@ namespace BL
             }
         }
 
-        public IBL.BO.Station GetRandomStation()
+        private IBL.BO.Station GetRandomStation()
         {
             int numOfStations = GetStations().ToList().Count;
             IBL.BO.Station station = GetStations().ToList()[rand.Next(0, numOfStations)];

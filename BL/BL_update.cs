@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
         /// <summary>
         /// updat eDrone Model

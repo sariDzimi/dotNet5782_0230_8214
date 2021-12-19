@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
 
 
 namespace BL
 {
-    public partial class BL
+    partial class BL
     {
-
 
         /// <summary>
         /// Get Stations
@@ -19,10 +17,9 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<IBL.BO.Station> GetStations()
         {
-            foreach (var station in dalObject.GetStations())
-            {
-                yield return convertToStationBL(station);
-            }
+            return from station in dalObject.GetStations()
+                   select ConvertToStationBL(station);
+           
         }
 
         /// <summary>
@@ -31,10 +28,10 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<IBL.BO.Parcel> GetParcels()
         {
-            foreach (var parcel in dalObject.GetParcel())
-            {
-                yield return convertToParcelBL(parcel);
-            }
+
+            return from parcel in dalObject.GetParcel()
+                   select convertToParcelBL(parcel);
+            
         }
 
         /// <summary>
@@ -43,10 +40,11 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<IBL.BO.Customer> GetCustomers()
         {
-            foreach (var customer in dalObject.GetCustomer())
-            {
-                yield return convertToCustomerBL(customer);
-            }
+
+            return from customer in dalObject.GetCustomer()
+                   select convertToCustomerBL(customer);
+
+           
         }
 
         /// <summary>
@@ -55,30 +53,27 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<IBL.BO.Drone> GetDrones()
         {
-            foreach (var drone in dronesBL)
-            {
-                yield return drone;
-            }
+            return from drone in dronesBL
+                   select drone;
+
         }
 
 
         public IEnumerable<IBL.BO.DroneCharge> GetDronesCharges()
         {
-            foreach (var drone in dalObject.GetDroneCharges())
-            {
-                yield return ConvertToDroneChargeBL(drone);
-            }
+            return from drone in dalObject.GetDroneCharges()
+                   select ConvertToDroneChargeBL(drone);
+
         }
 
         public IEnumerable<DroneToList> GetDroneToLists()
         {
-            foreach (var drone in GetDrones())
-            {
-                yield return ConvertDroneToDroneToList(drone);
-            }
+            return from drone in GetDrones()
+                   select ConvertDroneToDroneToList(drone);
+            
         }
     }
 }
 
-   
+
 

@@ -53,8 +53,8 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"drone  : {Id}, " +
-                    $" battery: {battery}, Model: {Model}, MaxWeight: {MaxWeight}, " +
+                return $"drone  : {Id}, "+
+                    $" battery: {battery}%, Model: {Model}, MaxWeight: {MaxWeight}, " +
                     $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelInDelivery}," +
                     $"Location: {Location}";
 
