@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        private Station ConvertToStationBL(IDAL.DO.Station s)
+        private Station ConvertToStationBL(DO.Station s)
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
             StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
@@ -28,7 +28,7 @@ namespace BL
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        private Customer convertToCustomerBL(IDAL.DO.Customer c)
+        private Customer convertToCustomerBL(DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
            
@@ -54,7 +54,7 @@ namespace BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        private Parcel convertToParcelBL(IDAL.DO.Parcel p)
+        private Parcel convertToParcelBL(DO.Parcel p)
         {
             Drone droneBL = new Drone();
             DroneAtParcel droneAtParcel;
@@ -121,7 +121,7 @@ namespace BL
 
         }
 
-        private DroneCharge ConvertToDroneChargeBL(IDAL.DO.DroneCharge droneChargeDL)
+        private DroneCharge ConvertToDroneChargeBL(DO.DroneCharge droneChargeDL)
         {
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
         }

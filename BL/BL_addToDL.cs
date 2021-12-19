@@ -14,7 +14,7 @@ namespace BL
         /// add Drone To DL
         /// </summary>
         /// <param name="drone"></param>
-        public void addDroneToDL(Drone drone)
+      /*  public void addDroneToDL(Drone drone)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -27,13 +27,13 @@ namespace BL
 
             IDAL.DO.Drone droneDL = new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model };
             dalObject.addDrone(droneDL);
-
+*/
         }
         /// <summary>
         /// add Station To DL
         /// </summary>
         /// <param name="station"></param>
-        public void addStationToDL(Station station)
+/*        public void addStationToDL(Station station)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -46,13 +46,13 @@ namespace BL
             IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
             dalObject.addStation(stationDL);
 
-        }
+        }*/
 
         /// <summary>
         /// add Parcel To DL
         /// </summary>
         /// <param name="parcel"></param>
-        public void addParcelToDL(Parcel parcel)
+/*        public void addParcelToDL(Parcel parcel)
         {
 
 
@@ -80,13 +80,13 @@ namespace BL
             };
             dalObject.addParcel(parcelDL);
 
-        }
+        }*/
 
         /// <summary>
         /// add Customer To DL
         /// </summary>
         /// <param name="customer"></param>
-        public void addCustomerToDL(Customer customer)
+/*        public void addCustomerToDL(Customer customer)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -99,18 +99,18 @@ namespace BL
             IDAL.DO.Customer customerDL = new IDAL.DO.Customer() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
             dalObject.addCustomer(customerDL);
 
-        }
+        }*/
 
         /// <summary>
         /// add DroneCharge To DL
         /// </summary>
         /// <param name="droneCharge"></param>
-        public void addDroneChargeToDL(DroneCharge droneCharge)
+/*        public void addDroneChargeToDL(DroneCharge droneCharge)
         {
             
             IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
             dalObject.addDronCharge(droneChargeDL);
 
-        }
+        }*/
     }
-}
+

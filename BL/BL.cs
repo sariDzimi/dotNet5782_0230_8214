@@ -10,7 +10,7 @@ namespace BL
     {
         private List<IBL.BO.Drone> dronesBL;
         private Random rand = new Random();
-        private IDal.IDal dalObject;
+        private DalApi.IDal dalObject;
 
         private double ElectricityUseWhenFree = 0;
         private double ElectricityUseWhenLight = 0;
@@ -31,7 +31,7 @@ namespace BL
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<IBL.BO.Drone>();
-            List<IDAL.DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
+            List<DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
 
             foreach (var droneDL in dalObject.GetDrones())
             {
@@ -80,7 +80,7 @@ namespace BL
                     Station station = GetRandomStation();
                     droneBL.Location = station.Location;
                     droneBL.Battery = rand.Next(0, 21);
-                    IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneDL.Id, stationId = station.Id };
+                    DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneDL.Id, stationId = station.Id };
                     dalObject.addDronCharge(droneChargeDL);
                     droneBL.Location = station.Location;
                 }
@@ -120,7 +120,7 @@ namespace BL
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
             CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = reciveId };
 
-            Parcel parcelBL = new IBL.BO.Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (IDAL.DO.WeightCategories)weigth, Pritority = (IDAL.DO.Pritorities)prioty };
+            Parcel parcelBL = new IBL.BO.Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (DO.WeightCategories)weigth, Pritority = (DO.Pritorities)prioty };
 
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
@@ -259,12 +259,12 @@ namespace BL
             IBL.BO.Parcel parcel = new IBL.BO.Parcel();
             IBL.BO.Parcel parcel1 = new IBL.BO.Parcel();
             IBL.BO.Customer customerBLsender = new IBL.BO.Customer();
-            IDAL.DO.Customer customerParcel = new IDAL.DO.Customer();
+            DO.Customer customerParcel = new DO.Customer();
             IBL.BO.Customer customerBLreciver = new IBL.BO.Customer();
-            List<IDAL.DO.Parcel> parcels= dalObject.GetParcel().ToList();
-            IDAL.DO.Parcel parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
+            List<DO.Parcel> parcels= dalObject.GetParcel().ToList();
+            DO.Parcel parcelDL = dalObject.GetParcel().ToList().First(t => t.Scheduled == null);
             List<IBL.BO.Customer> customerBLs = Enumerable.ToList<IBL.BO.Customer>(GetCustomers());
-            List<IDAL.DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
+            List<DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
             IBL.BO.Drone droneBL = dronesBL.Find(s => s.Id == id);
             if (droneBL == null)
             {
@@ -368,17 +368,17 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns></returns>
-        private double CalculateElectricity(Location location1, Location location2, IDAL.DO.WeightCategories weight)
+        private double CalculateElectricity(Location location1, Location location2, DO.WeightCategories weight)
         {
 
             double distance = distanceBetweenTwoLocationds(location1, location2);
             switch (weight)
             {
-                case IDAL.DO.WeightCategories.Light:
+                case DO.WeightCategories.Light:
                     return (distance * this.ElectricityUseWhenLight);
-                case IDAL.DO.WeightCategories.Medium:
+                case DO.WeightCategories.Medium:
                     return (distance * this.ElectricityUseWhenMedium);
-                case IDAL.DO.WeightCategories.Heavy:
+                case DO.WeightCategories.Heavy:
                     return (distance * this.ElectricityUseWhenheavy);
 
                 default:

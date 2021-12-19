@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DalObject;
-using IDAL.DO;
+using DO;
 
 namespace DalObject
 {
-    public class DalObject : IDal.IDal
+    public class DalObject : DalApi.IDal
     {
         private static DalObject instance;
 
