@@ -27,6 +27,18 @@ namespace BlApi
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1);
         public void updateDataCustomer(int id, string name = null, string phone = null);
         public void updateDrone(Drone drone);
+        public IEnumerable<DroneToList> GetDroneToLists();
+        public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy);
+        public Drone ConvertDroneToListToDrone(DroneToList droneToList);
+
+        public Station FindStationBy(Predicate<Station> findBy);
+        public Station FindStation(int id);
+        public Drone FindDrone(int id);
+        public Drone FindDroneBy(Predicate<Drone> findBy);
+        public Customer FindCustomerBy(Predicate<Customer> findBy);
+        public Parcel FindParcelBy(Predicate<Parcel> findBy);
+        public Parcel FindParcel(int id);
+        public DroneCharge FindDroneCharge(int droneId);
 
     }
 }

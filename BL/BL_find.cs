@@ -15,7 +15,7 @@ namespace BL
         /// </summary>
         /// <param Predicate="id"></param>
         /// <returns></returns>
-        private Station FindStationBy(Predicate <Station> findBy)
+        public Station FindStationBy(Predicate <Station> findBy)
         {
 
             Station stationBL = new Station();
@@ -34,7 +34,7 @@ namespace BL
         }
 
 
-        private Station FindStation(int id)
+        public Station FindStation(int id)
         {
             return FindStationBy(s => s.Id == id);
         }
@@ -43,7 +43,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private Drone FindDrone(int id)
+        public Drone FindDrone(int id)
         {
             Drone droneBL = new Drone();
             droneBL = dronesBL.Find(d => d.Id == id);
@@ -59,7 +59,7 @@ namespace BL
 
 
 
-        private Drone FindDroneBy(Predicate<Drone> findBy)
+        public Drone FindDroneBy(Predicate<Drone> findBy)
         {
 
             Drone droneBL = new Drone();
@@ -88,7 +88,7 @@ namespace BL
         /// <returns></returns>
 
 
-        private Customer FindCustomerBy(Predicate<Customer> findBy)
+        public Customer FindCustomerBy(Predicate<Customer> findBy)
         {
 
             Customer customerBL = new Customer();
