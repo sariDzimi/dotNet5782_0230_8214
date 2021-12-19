@@ -9,8 +9,8 @@ using System.Threading.Tasks;
     {
         public class Parcel
         {
-
-            public Parcel( IDAL.DO.Parcel parcel)
+/*
+            public Parcel(DO.Parcel parcel)
             {
                 Id = parcel.Id;
                 customerAtParcelSender = new CustomerAtParcel();
@@ -25,7 +25,7 @@ using System.Threading.Tasks;
                 Scheduled = parcel.Scheduled;
                 PickedUp = parcel.PickedUp;
                 Delivered = parcel.Delivered;
-            }
+            }*/
 
             public Parcel()
             {
@@ -35,8 +35,8 @@ using System.Threading.Tasks;
             public int Id { get; set; }
             public CustomerAtParcel customerAtParcelSender { get; set; } 
             public CustomerAtParcel customerAtParcelReciver { get; set; }
-            public IDAL.DO.WeightCategories Weight { get; set; }
-            public IDAL.DO.Pritorities Pritority { get; set; }
+            public DO.WeightCategories Weight { get; set; }
+            public DO.Pritorities Pritority { get; set; }
             public DateTime? Requested { get; set; }
             public DroneAtParcel droneAtParcel { get; set; }
 

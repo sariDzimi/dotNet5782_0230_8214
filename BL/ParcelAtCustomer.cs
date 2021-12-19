@@ -18,9 +18,9 @@ using System.Threading.Tasks;
 
             public int ID { get; set; }
 
-            public IDAL.DO.WeightCategories weightCategories { get; set; }
+            public DO.WeightCategories weightCategories { get; set; }
 
-            public IDAL.DO.Pritorities pritorities { get; set; }
+            public DO.Pritorities pritorities { get; set; }
 
             public ParcelStatus parcelStatus { get; set; }
 

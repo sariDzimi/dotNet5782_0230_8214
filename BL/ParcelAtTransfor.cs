@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
             public int ID { get; set; }
 
-            public IDAL.DO.Pritorities Pritorities { get; set; }
+            public DO.Pritorities Pritorities { get; set; }
 
             public CustomerAtParcel CustomerAtDeliverySender { get; set; }
             public CustomerAtParcel CustomerAtDeliveryReciver { get; set; }
