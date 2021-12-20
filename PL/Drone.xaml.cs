@@ -82,35 +82,35 @@ namespace PL
                         if (parcelBL.Delivered == null)
 
                             supllyParcel.IsEnabled = true;
-                    }
+                    } 
                     break;
             }
 
             this.DataContext = drone;
-            if(drone.ParcelInDelivery != null)
+            if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             Location.Text = drone.Location.ToString();
         }
 
-        
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var maxWeight = (int)(WeightCategories)WeightSelector.SelectedItem;
-            int id = Convert.ToInt32(idDroneL.Text);
-            string model = modelDroneL.Text;
-            int numOfStationForCharching = Convert.ToInt32(numberOfStationInput.Text);
             try
             {
-                bL.addDroneToBL(id, maxWeight, model, numOfStationForCharching);
+                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 MessageBox.Show("the drone was added succesfuly!!!");
                 new DronesList(bL).Show();
                 Close();
             }
-            catch (Exception)
+            catch (NotValidInput ex)
             {
-                MessageBox.Show("couldn't add the drone");
+                MessageBox.Show(ex.Message);
+            }
+            catch (IdAlreadyExist)
+            {
+                MessageBox.Show("id already exist");
 
             }
 
@@ -152,7 +152,7 @@ namespace PL
         {
             try
             {
-                double time = Convert.ToDouble(timeOfCharging.Text);
+                double time = getTime();
                 bL.releaseDroneFromCharging(drone.Id, time);
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
@@ -163,9 +163,13 @@ namespace PL
                 ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Release the drone from charging successfully");
             }
-            catch (Exception)
+            catch (OutOfRange)
             {
-                MessageBox.Show("please enter time of charging");
+                MessageBox.Show("Time entered is too long");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -232,14 +236,12 @@ namespace PL
         {
             try
             {
-                string newModel = modelDroneL.Text;
-                int i = Convert.ToInt32(idDroneL.Text);
-                bL.updateDroneModel(i, newModel);
-                MessageBox.Show($"the model drone : {newModel} updated successfully");
+                bL.updateDroneModel(getId(), getModel());
+                MessageBox.Show($"the model drone updated successfully");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex}");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -253,6 +255,60 @@ namespace PL
         {
             MessageBox.Show("djfdl");
         }
+
+        private int getId()
+        {
+            try
+            {
+                return Convert.ToInt32(idDroneL.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("id");
+            }
+        }
+
+        private int getMaxWeight()
+        {
+            try
+            {
+                return (int)(WeightCategories)WeightSelector.SelectedItem;
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("Max Weight");
+            }
+        }
+
+        private int getNumberOfStation()
+        {
+            try
+            {
+                return (int)(WeightCategories)WeightSelector.SelectedItem;
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("station number");
+            }
+        }
+
+        private double getTime()
+        {
+            try
+            {
+                return Convert.ToDouble(timeOfCharging.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("time");
+            }
+        }
+
+        private string getModel()
+        {
+            return modelDroneL.Text;
+        }
+
     }
 }
 
