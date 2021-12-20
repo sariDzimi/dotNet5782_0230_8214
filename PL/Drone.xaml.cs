@@ -56,18 +56,10 @@ namespace PL
             WeightSelector.Visibility = Visibility.Hidden;
             numberOfStationInput.Visibility = Visibility.Hidden;
 
+            
             //show relaed buttons
             switch (drone.DroneStatus)
             {
-                case DroneStatus.Free:
-                    sendDroneForDelivery.IsEnabled = true;
-                    sendDroneToCharge.IsEnabled = true;
-                    break;
-                case DroneStatus.Maintenance:
-                    releaseDroneFromCharging.IsEnabled = true;
-                    timeCharging.IsEnabled = true;
-                    timeOfCharging.IsEnabled = true;
-                    break;
                 case DroneStatus.Delivery:
 
                     IBL.BO.Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
@@ -81,8 +73,24 @@ namespace PL
                         if (parcelBL.Delivered == null)
 
                             supllyParcel.IsEnabled = true;
+                        /*if (parcelBL.Delivered != null && parcelBL.PickedUp != null)
+                        {
+                            drone.DroneStatus = DroneStatus.Free;
+                        }*/
                     }
+
                     break;
+
+                case DroneStatus.Free:
+                    sendDroneForDelivery.IsEnabled = true;
+                    sendDroneToCharge.IsEnabled = true;
+                    break;
+                case DroneStatus.Maintenance:
+                    releaseDroneFromCharging.IsEnabled = true;
+                    timeCharging.IsEnabled = true;
+                    timeOfCharging.IsEnabled = true;
+                    break;
+               
             }
 
             this.DataContext = drone;
@@ -250,7 +258,7 @@ namespace PL
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("djfdl");
+            MessageBox.Show("hello");
         }
     }
 }
