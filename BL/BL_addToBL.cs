@@ -54,11 +54,7 @@ namespace BL
 
             Drone droneBL = new Drone() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
 
-            Station stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
-            if (stationBL==null)
-            {
-                throw new NotFound($"station number {numberStaion} to put the drone");
-            }
+            Station stationBL = FindStation(numberStaion);
 
             if (stationBL.ChargeSlots == 0)
             {

@@ -116,6 +116,10 @@ namespace PL
                 MessageBox.Show("id already exist");
 
             }
+            catch (NotFound)
+            {
+                MessageBox.Show("station number not found");
+            }
 
         }
 
@@ -274,8 +278,11 @@ namespace PL
 
         private int getMaxWeight()
         {
+            if (WeightSelector.SelectedItem == null)
+                throw new NotValidInput("Max Weight");
             try
             {
+
                 return (int)(WeightCategories)WeightSelector.SelectedItem;
             }
             catch (Exception)
@@ -288,7 +295,7 @@ namespace PL
         {
             try
             {
-                return (int)(WeightCategories)WeightSelector.SelectedItem;
+                return Convert.ToInt32(numberOfStationInput.Text);
             }
             catch (Exception)
             {
