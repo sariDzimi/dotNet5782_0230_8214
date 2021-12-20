@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
         /// <summary>
         /// updat eDrone Model
@@ -17,7 +17,7 @@ namespace BL
         /// <param name="model"></param>
         public void updateDroneModel(int id, string model)
         {
-            IDAL.DO.Drone droneDL = dalObject.findDroneById(id);
+            DO.Drone droneDL = dalObject.findDroneById(id);
             droneDL.Model = model;
             dalObject.updateDrone(droneDL);
 
@@ -34,7 +34,7 @@ namespace BL
         /// <param name="totalChargeSlots"></param>
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-            IDAL.DO.Station station = dalObject.findStationById(id);
+            DO.Station station = dalObject.findStationById(id);
             if (name != -1)
                 station.Name = name;
             if (totalChargeSlots != -1)
@@ -44,7 +44,7 @@ namespace BL
 
         public void updateParcel(Parcel parcel)
         {
-            dalObject.updateParcel(new IDAL.DO.Parcel()
+            dalObject.updateParcel(new DO.Parcel()
             {
                 Id = parcel.Id,
                 Delivered = parcel.Delivered,
@@ -67,7 +67,7 @@ namespace BL
         /// <param name="phone"></param>
         public void updateDataCustomer(int id, string name = null, string phone = null)
         {
-            IDAL.DO.Customer customer = dalObject.findCustomerById(id);
+            DO.Customer customer = dalObject.findCustomerById(id);
             if (name != null)
                 customer.Name = name;
             if (phone != null)
@@ -83,12 +83,12 @@ namespace BL
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
             dronesBL[index] = drone;
-            dalObject.updateDrone(new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
+            dalObject.updateDrone(new DO.Drone() { Id = drone.Id, MaxWeight = (DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
         }
 
         public void updateStation(Station station)
         {
-            dalObject.updateStation(new IDAL.DO.Station()
+            dalObject.updateStation(new DO.Station()
             {
                 ChargeSlots = station.ChargeSlots,
                 Id = station.Id,

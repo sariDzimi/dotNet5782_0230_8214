@@ -5,17 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DalObject;
-using IDAL.DO;
+using DO;
 
 namespace DalObject
 {
-    public class DalObject : IDal.IDal
+    internal class DalObject : DalApi.IDal
     {
-        private static DalObject instance;
+        internal static DalObject instance;
+
 
         public DalObject()
         {
             DataSource.Initialize();
+        }
+
+
+        public static DalObject GetInstance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new DalObject();
+                return instance;
+            }
         }
 
         /// <summary>

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL 
-{
+
     namespace BO
     {
         public class ParcelToList
@@ -22,9 +21,9 @@ namespace IBL
             public string NameOfCustomerSended{ get; set; }
             public string NameOfCustomerReciver{ get; set; }
 
-            public IDAL.DO.WeightCategories weightCategories { get; set; }
+            public DO.WeightCategories weightCategories { get; set; }
 
-            public IDAL.DO.Pritorities pritorities { get; set; }
+            public DO.Pritorities pritorities { get; set; }
 
             public ParcelStatus parcelStatus{ get; set; }
 
@@ -38,4 +37,4 @@ namespace IBL
         }
     }
 
-}
+

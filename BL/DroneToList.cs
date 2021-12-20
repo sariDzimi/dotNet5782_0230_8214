@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
+
     namespace BO
     {
         public class DroneToList
@@ -24,11 +23,11 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"id:{Id}, model:{Model}, battery:{Battery}, drone status:{DroneStatus}, location:{Location}, number of sended parcels:{NumberOfSendedParcel}";
+                return $"id:{Id}, model:{Model}, battery:{Battery}%, drone status:{DroneStatus}, location:{Location}, number of sended parcels:{NumberOfSendedParcel}";
             }
 
         }
 
 
     }
-}
+

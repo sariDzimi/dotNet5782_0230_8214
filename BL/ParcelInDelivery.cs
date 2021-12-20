@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
     namespace BO{
 
         public class ParcelInDelivery
@@ -19,9 +17,9 @@ namespace IBL
 
             public bool IsWating { get; set; }
 
-            public IDAL.DO.WeightCategories weightCategories { get; set; }
+            public DO.WeightCategories weightCategories { get; set; }
 
-            public IDAL.DO.Pritorities pritorities { get; set; }
+            public DO.Pritorities pritorities { get; set; }
 
            public CustomerAtParcel customerAtParcelTheSender { get; set; }
            public CustomerAtParcel customerAtParcelTheReciver { get; set; }
@@ -47,4 +45,4 @@ namespace IBL
         }
     }
 
-}
+

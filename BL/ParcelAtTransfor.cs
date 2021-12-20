@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
+
     namespace BO {
 
         public class ParcelAtTransfor
@@ -18,7 +17,7 @@ namespace IBL
 
             public int ID { get; set; }
 
-            public IDAL.DO.Pritorities Pritorities { get; set; }
+            public DO.Pritorities Pritorities { get; set; }
 
             public CustomerAtParcel CustomerAtDeliverySender { get; set; }
             public CustomerAtParcel CustomerAtDeliveryReciver { get; set; }
@@ -36,4 +35,3 @@ namespace IBL
 
         }
     }
-}

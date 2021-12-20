@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
         /// <summary>
         /// Find Station
@@ -32,7 +32,7 @@ namespace BL
             }
             return stationBL;
         }
-         
+
 
         public Station FindStation(int id)
         {
@@ -54,7 +54,7 @@ namespace BL
             return droneBL;
         }
 
-   
+
 
 
 
@@ -107,6 +107,12 @@ namespace BL
         }
 
 
+
+        public Customer FindCustomer(int id)
+        {
+
+            return FindCustomerBy(c => id == c.Id);
+        }
 
         /// <summary>
         /// Find Parcel

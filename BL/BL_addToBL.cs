@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+     partial class BL
     {
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="location"></param>
         /// <param name="slots"></param>
-        public void addStationToBL(int id, int name, Location location, int slots)
+/*        public void addStationToBL(int id, int name, Location location, int slots)
         {
             foreach (var item in dalObject.GetStations().ToList())
             {
@@ -33,7 +33,7 @@ namespace BL
             List<DroneAtCharging> droneAtChargings = new List<DroneAtCharging>();
             IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = id, Name = name, ChargeSlots = slots, Latitude = location.Latitude, Longitude = location.Longitude };
             dalObject.addStation(stationDL);
-        }
+        }*/
 
         /// <summary>
         /// add Drone To BL
@@ -54,11 +54,7 @@ namespace BL
 
             Drone droneBL = new Drone() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
 
-            Station stationBL = GetStations().ToList().Find(p => p.Id == numberStaion);
-            if (stationBL==null)
-            {
-                throw new NotFound($"station number {numberStaion} to put the drone");
-            }
+            Station stationBL = FindStation(numberStaion);
 
             if (stationBL.ChargeSlots == 0)
             {
@@ -75,14 +71,14 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Maintenance;
             
             droneBL.Battery = rand.Next(20, 40);
-            IDAL.DO.Station stationDL = new IDAL.DO.Station();
+            DO.Station stationDL = new DO.Station();
             stationDL = dalObject.findStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
-            IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneBL.Id, stationId = stationDL.Id };
+            DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneBL.Id, stationId = stationDL.Id };
             dalObject.addDronCharge(droneChargeDL);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
-            IDAL.DO.Drone drone = new IDAL.DO.Drone() { Id = id, MaxWeight = (IDAL.DO.WeightCategories)maxWeight, Model = model };
+            DO.Drone drone = new DO.Drone() { Id = id, MaxWeight = (DO.WeightCategories)maxWeight, Model = model };
             dalObject.addDrone(drone);
             dronesBL.Add(droneBL);
             dalObject.updateStation(stationDL);
@@ -95,7 +91,7 @@ namespace BL
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <param name="location"></param>
-        public void addCustomerToBL(int id, string name, string phone, Location location)
+/*        public void addCustomerToBL(int id, string name, string phone, Location location)
         {
             if(dalObject.GetCustomer().Any(c => c.Id == id))
                 throw new IdAlreadyExist(id);
@@ -103,7 +99,7 @@ namespace BL
             Customer customerBL = new Customer() { Id = id, Name = name, Phone = phone, Location = location };
             IDAL.DO.Customer customer = new IDAL.DO.Customer() { Id = id, Latitude = location.Latitude, Longitude = location.Longitude, Name = name, Phone = phone };
             dalObject.addCustomer(customer);
-        }
+        }*/
 
         /// <summary>
         /// add Parcel To BL
@@ -112,7 +108,7 @@ namespace BL
         /// <param name="reciverId"></param>
         /// <param name="weight"></param>
         /// <param name="prionity"></param>
-        public int addParcelToBL(int SenderId, int reciverId, int weight, int prionity)
+/*        public int addParcelToBL(int SenderId, int reciverId, int weight, int prionity)
         {
             if(weight <1 || weight > 3)
             {
@@ -150,11 +146,11 @@ namespace BL
             IDAL.DO.Parcel parcelDL = new IDAL.DO.Parcel() {Id= id, SenderId = SenderId, TargetId = reciverId, Weight = (IDAL.DO.WeightCategories)weight, Pritority = (IDAL.DO.Pritorities)prionity };
             dalObject.addParcel(parcelDL);
             return id;
-        }
+        }*/
 
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            dalObject.addDronCharge(new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId});
+            dalObject.addDronCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId});
         }
     }
 }

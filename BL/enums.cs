@@ -1,6 +1,5 @@
 ﻿
-namespace IBL
-{
+
     namespace BO
     {
         public enum WeightCategories { Light= 1, Medium, Heavy }
@@ -9,4 +8,3 @@ namespace IBL
 
         public enum ParcelStatus { created , Belonged, Collected , Provided }
     }
-}

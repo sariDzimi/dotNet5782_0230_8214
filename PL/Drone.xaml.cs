@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -20,49 +21,60 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        BL.BL bL;
-        IBL.BO.Drone drone;
+        IBL bL;
+        BO.Drone drone;
         public bool boo = false;
         public Drone()
         {
             WindowStyle = WindowStyle.None;
-            drone = new IBL.BO.Drone() { };
+            drone = new BO.Drone() { };
 
             InitializeComponent();
         }
-        public Drone(BL.BL bL1)
+        public Drone(IBL bL1)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            timeCharging.Visibility = Visibility.Hidden;
-            timeOfCharging.Visibility = Visibility.Hidden;
+            //timeCharging.Visibility = Visibility.Hidden;
+            //timeOfCharging.Visibility = Visibility.Hidden;
+            DroneStatusDroneL.Visibility = Visibility.Hidden;
 
             bL = bL1;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             MaxWeight.Visibility = Visibility.Hidden;
-            numberOfStationInput.Visibility = Visibility.Visible;
-            numberOfStationLabel.Visibility = Visibility.Visible;
+            //numberOfStationInput.Visibility = Visibility.Visible;
+            //numberOfStationLabel.Visibility = Visibility.Visible;
             addButton.IsEnabled = true;
+            
         }
-        public Drone(BL.BL bL1, IBL.BO.Drone droneBL)
+        public Drone(IBL bL1, BO.Drone droneBL)
         {
             WindowStyle = WindowStyle.None;
 
             drone = droneBL;
             InitializeComponent();
             bL = bL1;
+            addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-            idDroneL.IsReadOnly = true;
-            WeightSelector.Visibility = Visibility.Hidden;
-            numberOfStationInput.Visibility = Visibility.Hidden;
-
+            //idDroneL.IsReadOnly = true;
             
+            //WeightSelector.Visibility = Visibility.Hidden;
+            //numberOfStationInput.Visibility = Visibility.Hidden;
+            DroneStatusDroneL.Visibility = Visibility.Visible;
             //show relaed buttons
             switch (drone.DroneStatus)
             {
+                case DroneStatus.Free:
+                    sendDroneForDelivery.IsEnabled = true;
+                   
+                    break;
+                case DroneStatus.Maintenance:
+                    releaseDroneFromCharging.IsEnabled = true;
+                    
+                    break;
                 case DroneStatus.Delivery:
 
-                    IBL.BO.Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -73,52 +85,41 @@ namespace PL
                         if (parcelBL.Delivered == null)
 
                             supllyParcel.IsEnabled = true;
-                        /*if (parcelBL.Delivered != null && parcelBL.PickedUp != null)
-                        {
-                            drone.DroneStatus = DroneStatus.Free;
-                        }*/
-                    }
-
-                    break;
-
-                case DroneStatus.Free:
-                    sendDroneForDelivery.IsEnabled = true;
-                    sendDroneToCharge.IsEnabled = true;
-                    break;
-                case DroneStatus.Maintenance:
-                    releaseDroneFromCharging.IsEnabled = true;
-                    timeCharging.IsEnabled = true;
-                    timeOfCharging.IsEnabled = true;
+                    } 
                     break;
                
             }
 
             this.DataContext = drone;
-            if(drone.ParcelInDelivery != null)
+            if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             Location.Text = drone.Location.ToString();
         }
 
-        
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var maxWeight = (int)(IBL.BO.WeightCategories)WeightSelector.SelectedItem;
-            int id = Convert.ToInt32(idDroneL.Text);
-            string model = modelDroneL.Text;
-            int numOfStationForCharching = Convert.ToInt32(numberOfStationInput.Text);
             try
             {
-                bL.addDroneToBL(id, maxWeight, model, numOfStationForCharching);
+                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 MessageBox.Show("the drone was added succesfuly!!!");
                 new DronesList(bL).Show();
                 Close();
             }
-            catch (Exception)
+            catch (NotValidInput ex)
             {
-                MessageBox.Show("couldn't add the drone");
+                MessageBox.Show(ex.Message);
+            }
+            catch (IdAlreadyExist)
+            {
+                MessageBox.Show("id already exist");
 
+            }
+            catch (NotFound)
+            {
+                MessageBox.Show("station number not found");
             }
 
         }
@@ -143,13 +144,13 @@ namespace PL
                 sendDroneToCharge.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
-                timeOfCharging.IsEnabled = true;
-                timeCharging.IsEnabled = true;
-                timeOfCharging.Visibility = Visibility.Visible;
-                timeCharging.Visibility = Visibility.Visible;
+                //timeOfCharging.IsEnabled = true;
+                //timeCharging.IsEnabled = true;
+                //timeOfCharging.Visibility = Visibility.Visible;
+                //timeCharging.Visibility = Visibility.Visible;
                 timeOfCharging.Text = "";
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -159,20 +160,25 @@ namespace PL
         {
             try
             {
-                double time = Convert.ToDouble(timeOfCharging.Text);
+                double time = getTime();
                 bL.releaseDroneFromCharging(drone.Id, time);
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
-                sendDroneToCharge.IsEnabled = true;
-                timeCharging.Visibility = Visibility.Hidden;
-                timeOfCharging.Visibility = Visibility.Hidden;
+                timeOfCharging.Text = "";
+                //sendDroneToCharge.IsEnabled = true;
+                //timeCharging.Visibility = Visibility.Hidden;
+                //timeOfCharging.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Release the drone from charging successfully");
             }
-            catch (Exception)
+            catch (OutOfRange)
             {
-                MessageBox.Show("please enter time of charging");
+                MessageBox.Show("Time entered is too long");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -185,7 +191,7 @@ namespace PL
                 colectParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Assign a drone to parcel successfully");
                 sendDroneToCharge.IsEnabled = false;
             }
@@ -204,7 +210,7 @@ namespace PL
                 supllyParcel.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("collect a parcel by drone successfully");
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
 
 
             }
@@ -220,13 +226,13 @@ namespace PL
             {
                 bL.supplyParcelByDrone(drone.Id);
                 supllyParcel.IsEnabled = false;
-                sendDroneForDelivery.IsEnabled = true;
+                //sendDroneForDelivery.IsEnabled = true;
                 sendDroneToCharge.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("suplly a parcel by drone successfully");
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
-                ButteryDroneL.Text = $"{drone.Battery}";
+                ButteryDroneL.Text = $"{drone.Battery}%";
 
             }
             catch (Exception ex)
@@ -239,14 +245,12 @@ namespace PL
         {
             try
             {
-                string newModel = modelDroneL.Text;
-                int i = Convert.ToInt32(idDroneL.Text);
-                bL.updateDroneModel(i, newModel);
-                MessageBox.Show($"the model drone : {newModel} updated successfully");
+                bL.updateDroneModel(getId(), getModel());
+                MessageBox.Show($"the model drone updated successfully");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex}");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -260,6 +264,63 @@ namespace PL
         {
             MessageBox.Show("hello");
         }
+
+        private int getId()
+        {
+            try
+            {
+                return Convert.ToInt32(idDroneL.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("id");
+            }
+        }
+
+        private int getMaxWeight()
+        {
+            if (WeightSelector.SelectedItem == null)
+                throw new NotValidInput("Max Weight");
+            try
+            {
+
+                return (int)(WeightCategories)WeightSelector.SelectedItem;
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("Max Weight");
+            }
+        }
+
+        private int getNumberOfStation()
+        {
+            try
+            {
+                return Convert.ToInt32(numberOfStationInput.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("station number");
+            }
+        }
+
+        private double getTime()
+        {
+            try
+            {
+                return Convert.ToDouble(timeOfCharging.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("time");
+            }
+        }
+
+        private string getModel()
+        {
+            return modelDroneL.Text;
+        }
+
     }
 }
 
