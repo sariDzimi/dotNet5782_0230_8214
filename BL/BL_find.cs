@@ -108,6 +108,12 @@ namespace BL
 
 
 
+        public Customer FindCustomer(int id)
+        {
+
+            return FindCustomerBy(c => id == c.Id);
+        }
+
         /// <summary>
         /// Find Parcel
         /// </summary>
