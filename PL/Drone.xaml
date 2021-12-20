@@ -61,14 +61,14 @@
             <Grid HorizontalAlignment="Center" >
                 <!--<Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>-->
 
-                <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,51,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="30" Width="276" IsEnabled="False"/>
-                <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,14,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery" Height="32" Width="276" IsEnabled="False"/>
-                <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="498,131,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="31" Width="273" IsEnabled="False"/>
-                <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="498,88,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel" Height="31" Width="273" IsEnabled="False"/>
-                <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="498,281,0,0" VerticalAlignment="Top" Height="32" Width="273" Click="Button_Click" IsEnabled="False"/>
+                <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,51,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="30" Width="276" IsEnabled="{Binding ElementName= sendDroneForDelivery , Path=IsEnabled}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,14,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery" Height="32" Width="276" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="498,131,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="498,88,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="498,281,0,0" VerticalAlignment="Top" Height="32" Width="273" Click="Button_Click"   />
 
                 <Label Content="id :" Margin="32,29,1022,390"  Height="25"/>
-                <TextBox x:Name="idDroneL" Height="25"  Margin="80,26,622,388" RenderTransformOrigin="0.5,0.5" Text="{Binding Id}">
+                <TextBox x:Name="idDroneL" Height="25"  Margin="80,26,622,388" RenderTransformOrigin="0.5,0.5" IsReadOnly="{Binding ElementName= updateBottun , Path=IsEnabled}" Text="{Binding Id}">
                     <TextBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1"/>
@@ -80,26 +80,27 @@
                 </TextBox>
                 <Label Content="model :" Margin="28,74,1021,333" Height="25" Width="165"/>
                 <TextBox x:Name="modelDroneL"  Margin="79,74,622,333" Height="25" Text="{Binding Model}"></TextBox>
-                <Label Content="Battery :" Margin="28,118,989,289" Height="25"/>
-                <TextBox x:Name="ButteryDroneL" Height="25" IsReadOnly="True" Margin="113,118,622,289" Text="{Binding Battery}"></TextBox>
-                <Label Content="MaxWeight :" Margin="28,166,972,241" Height="25" Width="165"/>
-                <TextBox x:Name="ParcelInDelivery" Height="25"  IsReadOnly="True" Margin="191,323,622,84" ></TextBox>
-                <Label Content="DroneStatus :" Margin="29,220,908,199" Height="25" Width="165"/>
-                <TextBox x:Name="Location"  IsReadOnly="True" Height="25" Margin="122,271,622,136" ></TextBox>
-                <Label Content="ParcelAtTransfor :" Margin="29,323,911,84" Height="25" Width="165"/>
+                <Label Content="Battery :" Margin="28,118,989,289" Height="25" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <TextBox x:Name="ButteryDroneL" Height="25" IsReadOnly="True" Margin="113,118,622,289" Text="{Binding Battery}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"></TextBox>
+                <Label x:Name="MaxWeightLabel" Visibility="Visible" Content="MaxWeight :" Margin="28,166,972,241" Height="25" Width="165"/>
+                <TextBox x:Name="ParcelInDelivery" Height="25"  IsReadOnly="True" Margin="191,323,622,84" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" ></TextBox>
+                <Label Content="DroneStatus :" Margin="29,220,908,199" Height="25" Width="165" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <TextBox x:Name="Location"  IsReadOnly="True" Height="25" Margin="122,271,622,136" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" ></TextBox>
+                <Label Content="ParcelAtTransfor :" Margin="29,323,911,84" Height="25" Width="165" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                 <TextBox x:Name="DroneStatusDroneL"  IsReadOnly="True" Height="25" Margin="153,214,622,193" Text="{Binding DroneStatus}"></TextBox>
-                <Label Content="Location :" Margin="28,271,977,136" Height="25" Width="165"/>
-                <TextBox x:Name="MaxWeight"  IsReadOnly="True" Height="25" Margin="130,166,622,241" Text="{Binding MaxWeight}"></TextBox>
+                <Label Content="Location :" Margin="28,271,977,136" Height="25" Width="165" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <!--<TextBox x:Name="MaxWeight"  IsReadOnly="True" Height="25" Margin="130,166,622,241" Text="{Binding MaxWeight}"></TextBox>-->
+                <TextBox  x:Name = "MaxWeight" IsReadOnly="True" Height="25" Margin="130,166,622,241"  Visibility="{Binding ElementName= numberOfStationInput , Path=Visibility}"/>
                 <ComboBox x:Name="WeightSelector" HorizontalAlignment="Left" Margin="130,172,0,0" VerticalAlignment="Top" Width="157" Height="25" />
-                <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}"/>
-                <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="32,386,0,0" VerticalAlignment="Top" Height="30" Width="304" Visibility="Hidden"/>
-                <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="498,323,0,0" VerticalAlignment="Top" Height="28" Width="273" Click="Button_Click_1" IsEnabled="False"/>
+                <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}"/>
+                <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="32,386,0,0" VerticalAlignment="Top" Height="30" Width="304"  Visibility="{Binding ElementName= addButton , Path= Visibility}"/>
+                <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="498,323,0,0" VerticalAlignment="Top" Height="28" Width="273" Click="Button_Click_1" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
 
             </Grid>
-            <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,181,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False"/>
+            <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,181,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
 
-            <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,222,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,222,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28" />
+            <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,222,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+            <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,222,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28"  IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
         </Grid>
         <Button x:Name="close" Content="X" Style="{StaticResource close}" HorizontalAlignment="Left"  Margin="758,10,0,401" Click="Button_Click_2" Width="37" RenderTransformOrigin="1.63,0.089"/>
     </Grid>
