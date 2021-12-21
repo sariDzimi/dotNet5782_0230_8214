@@ -40,6 +40,10 @@ namespace BlApi
         public Parcel FindParcel(int id);
         public DroneCharge FindDroneCharge(int droneId);
         public IEnumerable<StationToList> GetStationToLists();
+        public IEnumerable<Parcel> GetParcelsBy(Predicate<Parcel> findBy);
+        public IEnumerable<ParcelToList> GetParcelToLists();
+
+        public IEnumerable<ParcelToList> GetParcelsToListBy(Predicate<ParcelToList> findBy);
 
     }
 }

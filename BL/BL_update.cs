@@ -50,12 +50,12 @@ namespace BL
                 Delivered = parcel.Delivered,
                 DroneId = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id,
                 PickedUp = parcel.PickedUp,
-                Pritority = parcel.Pritority,
+                Pritority =  (DO.Pritorities)parcel.Pritority,
                 Requested = parcel.Requested,
                 Scheduled = parcel.Scheduled,
                 SenderId = parcel.customerAtParcelSender.Id,
                 TargetId = parcel.customerAtParcelReciver.Id,
-                Weight = parcel.Weight
+                Weight = (DO.WeightCategories)parcel.Weight
             });
         }
 

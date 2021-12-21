@@ -311,6 +311,12 @@ namespace PL
             return modelDroneL.Text;
         }
 
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Parcel parcel = new Parcel();
+            parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
+            new ParcelWindow(bL, parcel).Show();
+        }
     }
 }
 

@@ -44,6 +44,11 @@ namespace PL
             Close();
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new ParcelsList(bL).Show();
+            Close();
+        }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {
             new StationsList(bL).Show();

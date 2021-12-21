@@ -21,9 +21,9 @@ namespace BO
         public string NameOfCustomerSended { get; set; }
         public string NameOfCustomerReciver { get; set; }
 
-        public DO.WeightCategories weightCategories { get; set; }
+        public WeightCategories weightCategories { get; set; }
 
-        public DO.Pritorities pritorities { get; set; }
+        public Pritorities pritorities { get; set; }
 
         public ParcelStatus parcelStatus { get; set; }
 

@@ -40,6 +40,13 @@ namespace BL
                    select parcel;
         }
 
+        public IEnumerable<ParcelToList> GetParcelsToListBy(Predicate<ParcelToList> findBy)
+        {
+            return from parcel in GetParcelToLists()
+                   where findBy(parcel)
+                   select parcel;
+        }
+
 
 
     }
