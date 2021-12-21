@@ -56,7 +56,7 @@ namespace DalObject
             {
                 throw new IdAlreadyExist(customer.Id);
             }
-        DataSource.customers.Add(customer);
+            DataSource.customers.Add(customer);
         }
 
         /// <summary>
@@ -111,10 +111,8 @@ namespace DalObject
         /// <returns>DataSource.stations</returns>
         public IEnumerable<Station> GetStations()
         {
-            foreach (var station in DataSource.stations)
-            {
-                yield return station;
-            }
+            return from station in DataSource.stations
+                   select station;
         }
 
         /// <summary>
@@ -123,10 +121,8 @@ namespace DalObject
         /// <returns>DataSource.drones</returns>
         public IEnumerable<Drone> GetDrones()
         {
-            foreach (var drone in DataSource.drones)
-            {
-                yield return drone;
-            }
+            return from drone in DataSource.drones
+                   select drone;
         }
 
         /// <summary>
@@ -135,10 +131,8 @@ namespace DalObject
         /// <returns>DataSource.customers</returns>
         public IEnumerable<Customer> GetCustomer()
         {
-            foreach (var customer in DataSource.customers)
-            {
-                yield return customer;
-            }
+            return from customer in DataSource.customers
+                   select customer;
         }
 
         /// <summary>
@@ -147,10 +141,8 @@ namespace DalObject
         /// <returns>DataSource.customers</returns>
         public IEnumerable<Parcel> GetParcel()
         {
-            foreach (var parcel in DataSource.parcels)
-            {
-                yield return parcel;
-            }
+            return from parcel in DataSource.parcels
+                   select parcel;
         }
 
         /// <summary>
@@ -159,10 +151,8 @@ namespace DalObject
         /// <returns>DataSource.droneCharges</returns>
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
-            foreach (var droneCharge in DataSource.droneCharges)
-            {
-                yield return droneCharge;
-            }
+            return from droneCharge in DataSource.droneCharges
+                   select droneCharge;
         }
 
         /// <summary>
@@ -209,8 +199,8 @@ namespace DalObject
             try
             {
                 stationDL = (from station in DataSource.stations
-                            where findBy(station)
-                            select station).First();
+                             where findBy(station)
+                             select station).First();
             }
             catch (Exception ex)
             {
@@ -242,8 +232,8 @@ namespace DalObject
             try
             {
                 customerDL = (from customer in DataSource.customers
-                             where findBy(customer)
-                             select customer).First();
+                              where findBy(customer)
+                              select customer).First();
             }
             catch (Exception ex)
             {
@@ -272,8 +262,8 @@ namespace DalObject
             try
             {
                 droneDL = (from drone in DataSource.drones
-                              where findBy(drone)
-                              select drone).First();
+                           where findBy(drone)
+                           select drone).First();
             }
             catch (Exception ex)
             {
@@ -303,8 +293,8 @@ namespace DalObject
             try
             {
                 droneChargeDL = (from droneCharge in DataSource.droneCharges
-                           where findBy(droneCharge)
-                           select droneCharge).First();
+                                 where findBy(droneCharge)
+                                 select droneCharge).First();
             }
             catch (Exception ex)
             {
@@ -328,7 +318,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcel"></param>
         public void updateParcel(Parcel parcel)
-        {   
+        {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             if (index == -1)
                 throw new NotFoundException("parcel");
@@ -374,7 +364,7 @@ namespace DalObject
         /// <returns>Electricity</returns>
         public double[] RequestElectricityUse()
         {
-            double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium,DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
+            double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
             return Electricity;
 
         }
@@ -385,13 +375,13 @@ namespace DalObject
         /// <param name="id"></param>
         public void removeDroneCharge(int id)
         {
-            DroneCharge droneChargeDL= new DroneCharge();
+            DroneCharge droneChargeDL = new DroneCharge();
             try
             {
                 droneChargeDL = findDroneChargeBy(i => i.DroneId == id);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new NotFoundException($"{ex}");
             }
