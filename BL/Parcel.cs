@@ -15,8 +15,7 @@ using System.Threading.Tasks;
                 Id = parcel.Id;
                 customerAtParcelSender = new CustomerAtParcel();
                 customerAtParcelSender.Id = parcel.SenderId;
-
-                customerAtParcelReciver= new CustomerAtParcel();
+                customerAtParcelReciver = new CustomerAtParcel();
                 customerAtParcelReciver.Id = parcel.TargetId;
 
                 Weight = parcel.Weight;

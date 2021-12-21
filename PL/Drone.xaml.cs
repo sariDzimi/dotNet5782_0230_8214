@@ -35,15 +35,11 @@ namespace PL
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            //timeCharging.Visibility = Visibility.Hidden;
-            //timeOfCharging.Visibility = Visibility.Hidden;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
 
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             MaxWeight.Visibility = Visibility.Hidden;
-            //numberOfStationInput.Visibility = Visibility.Visible;
-            //numberOfStationLabel.Visibility = Visibility.Visible;
             addButton.IsEnabled = true;
             
         }
@@ -56,10 +52,7 @@ namespace PL
             bL = bL1;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-            //idDroneL.IsReadOnly = true;
-            
-            //WeightSelector.Visibility = Visibility.Hidden;
-            //numberOfStationInput.Visibility = Visibility.Hidden;
+           
             DroneStatusDroneL.Visibility = Visibility.Visible;
             //show relaed buttons
             switch (drone.DroneStatus)
@@ -86,7 +79,9 @@ namespace PL
 
                             supllyParcel.IsEnabled = true;
                     } 
+                    
                     break;
+               
             }
 
             this.DataContext = drone;
@@ -140,13 +135,9 @@ namespace PL
             try
             {
                 bL.sendDroneToCharge(drone.Id);
-                sendDroneToCharge.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
-                //timeOfCharging.IsEnabled = true;
-                //timeCharging.IsEnabled = true;
-                //timeOfCharging.Visibility = Visibility.Visible;
-                //timeCharging.Visibility = Visibility.Visible;
+     
                 timeOfCharging.Text = "";
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ButteryDroneL.Text = $"{drone.Battery}%";
@@ -164,9 +155,6 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                //sendDroneToCharge.IsEnabled = true;
-                //timeCharging.Visibility = Visibility.Hidden;
-                //timeOfCharging.Visibility = Visibility.Hidden;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Release the drone from charging successfully");
@@ -192,7 +180,6 @@ namespace PL
                 ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
                 ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Assign a drone to parcel successfully");
-                sendDroneToCharge.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -225,8 +212,8 @@ namespace PL
             {
                 bL.supplyParcelByDrone(drone.Id);
                 supllyParcel.IsEnabled = false;
-                //sendDroneForDelivery.IsEnabled = true;
-                sendDroneToCharge.IsEnabled = true;
+                sendDroneForDelivery.IsEnabled = true;
+                //sendDroneToCharge.IsEnabled = true;
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("suplly a parcel by drone successfully");
                 DroneStatusDroneL.Text = $"{drone.DroneStatus}";

@@ -44,7 +44,5 @@ namespace PL
             Close();
         }
 
-     
-
     }
 }
