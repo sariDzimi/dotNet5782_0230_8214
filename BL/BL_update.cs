@@ -90,7 +90,7 @@ namespace BL
         {
             dalObject.updateStation(new DO.Station()
             {
-                ChargeSlots = station.ChargeSlots,
+                ChargeSlots = station.FreeChargeSlots,
                 Id = station.Id,
                 Latitude = station.Location.Latitude,
                 Longitude = station.Location.Longitude,

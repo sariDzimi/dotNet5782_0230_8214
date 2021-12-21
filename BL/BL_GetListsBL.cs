@@ -79,6 +79,13 @@ namespace BL
                    select convertStationToStationToList(station);
 
         }
+
+        public IEnumerable<ParcelToList> GetParcelToLists()
+        {
+            return from parcel in GetParcels()
+                   select convertParcelToParcelToList(parcel);
+
+        }
     }
 }
 

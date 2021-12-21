@@ -109,6 +109,11 @@ namespace BL
 
                 dronesBL.Add(droneBL);
             }
+            //debuuging
+           /* List<Drone> dr = GetDrones().ToList();
+            List<DroneCharge> drg = GetDronesCharges().ToList();
+            List<DO.Station> st = dalObject.GetStations().ToList();
+            List<Station> sts = GetStations().ToList();*/
         }
 
 
@@ -158,10 +163,10 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Free;
             updateDrone(droneBL);
 
-            Station station = FindStation(FindDroneCharge(droneBL.Id).stationId);
-            station.ChargeSlots += 1;
+/*            Station station = FindStation(FindDroneCharge(droneBL.Id).stationId);
+            station.FreeChargeSlots += 1;
             updateStation(station);
-
+*/
             dalObject.removeDroneCharge(idDrone);
         }
 
@@ -207,9 +212,9 @@ namespace BL
                     drone.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(closestStation.Location, drone.Location);
                     drone.Location = closestStation.Location;
                     drone.DroneStatus = DroneStatus.Maintenance;
-                    updateDrone(drone);
-                    closestStation.ChargeSlots = closestStation.ChargeSlots - 1;
-                    updateStation(closestStation);
+                    updateDrone(drone);/*
+                    closestStation.FreeChargeSlots = closestStation.FreeChargeSlots - 1;
+                    updateStation(closestStation);*/
                     //DL
                     DroneCharge droneCharge = new DroneCharge(droneId, closestStation.Id);
                     AddDroneCharge(droneCharge);
@@ -242,7 +247,7 @@ namespace BL
             {
                 double distance1 = distanceBetweenTwoLocationds(station.Location, location);
                 double distance2 = distanceBetweenTwoLocationds(closestStation.Location, location);
-                if (distance1 < distance2 && station.ChargeSlots > 0)
+                if (distance1 < distance2 && station.FreeChargeSlots > 0)
                 {
                     closestStation = station;
                 }

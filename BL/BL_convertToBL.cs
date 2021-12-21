@@ -19,7 +19,7 @@ namespace BL
         private Station ConvertToStationBL(DO.Station s)
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
-            StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
+            StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
             return StationBL;
         }
 
@@ -112,8 +112,8 @@ namespace BL
             {
                 ID = station.Id,
                 Name = station.Name,
-                numberOfFreeChargeSlots = station.ChargeSlots,
-                numberOfUsedChargeSlots = dalObject.findStationById(station.Id).ChargeSlots - station.ChargeSlots
+                numberOfFreeChargeSlots = station.FreeChargeSlots,
+                numberOfUsedChargeSlots = dalObject.findStationById(station.Id).ChargeSlots - station.FreeChargeSlots
             };
             return stationToList;
         }
@@ -136,6 +136,19 @@ namespace BL
         private DroneCharge ConvertToDroneChargeBL(DO.DroneCharge droneChargeDL)
         {
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
+        }
+
+        private ParcelToList convertParcelToParcelToList(Parcel parcel)
+        {
+            return new ParcelToList()
+            {
+                ID = parcel.Id,
+                NameOfCustomerReciver = parcel.customerAtParcelReciver.Name,
+                NameOfCustomerSended = parcel.customerAtParcelSender.Name,
+                parcelStatus = ParcelsStatus(parcel),
+                pritorities = parcel.Pritority,
+                weightCategories = parcel.Weight
+            };
         }
     }
 

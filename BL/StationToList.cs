@@ -26,7 +26,7 @@ namespace BO
 
         public override string ToString()
         {
-            return $"id:{ID} name:{Name} numbercharge slots- free:{numberOfFreeChargeSlots}, used{numberOfFreeChargeSlots}";
+            return $"id:{ID} name:{Name} numbercharge slots- free:{numberOfFreeChargeSlots}, used{numberOfUsedChargeSlots}";
         }
 
     }
