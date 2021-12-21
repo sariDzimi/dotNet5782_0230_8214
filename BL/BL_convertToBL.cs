@@ -48,7 +48,6 @@ namespace BL
             return CustomerBL;
         }
 
-
         /// <summary>
         /// convert To Parcel BL
         /// </summary>
