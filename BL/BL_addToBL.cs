@@ -56,7 +56,7 @@ namespace BL
 
             Station stationBL = FindStation(numberStaion);
 
-            if (stationBL.ChargeSlots == 0)
+            if (stationBL.FreeChargeSlots == 0)
             {
                 throw new NotFound($"space in the station number {numberStaion} to put the drone");
             }
@@ -64,7 +64,7 @@ namespace BL
             {
                 DroneAtCharging droneAtChargingBL = new DroneAtCharging() { ID = id, Battery = droneBL.Battery };
                 stationBL.droneAtChargings.Add(droneAtChargingBL);
-                stationBL.ChargeSlots -= 1;
+                stationBL.FreeChargeSlots -= 1;
             }
            
 

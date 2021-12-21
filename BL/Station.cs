@@ -5,54 +5,54 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    namespace BO
+namespace BO
+{
+
+    public class Station
     {
-
-        public class Station
+        public Station()
         {
-            public Station()
-            {
-                droneAtChargings = new List<DroneAtCharging>();
-            }
-            private int chargeSlots;
-            public int Id { get; set; }
-            public int Name { get; set; }
-            public Location Location { get; set; }
+            droneAtChargings = new List<DroneAtCharging>();
+        }
+        private int freeChargeSlots;
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public Location Location { get; set; }
 
-            public int ChargeSlots
+        public int FreeChargeSlots
+        {
+            get
             {
-                get
-                {
-                    return chargeSlots;
-                }
-                set
-                {
-                    if (value < 0)
-                        throw new OutOfRange("chargeSlots");
-                    chargeSlots = value;
-                }
+                return freeChargeSlots;
             }
-            public override string ToString()
+            set
             {
-                string droneAtCharging = " ";
-                if (droneAtChargings.Count != 0)
+                if (value < 0)
+                    throw new OutOfRange("chargeSlots");
+                freeChargeSlots = value;
+            }
+        }
+        public override string ToString()
+        {
+            string droneAtCharging = " ";
+            if (droneAtChargings.Count != 0)
+            {
+                foreach (var d in droneAtChargings)
                 {
-                    foreach (var d in droneAtChargings)
-                    {
-                        droneAtCharging += d;
-                        droneAtCharging += " ";
-                    }
+                    droneAtCharging += d;
+                    droneAtCharging += " ";
                 }
-               
-                return $"station {Name} : {Id}, 'Location' {Location} , 'ChargeSlots': {ChargeSlots}," +
-                    $"{droneAtCharging}  ";
             }
 
-            public List<DroneAtCharging> droneAtChargings;
-
-
-
+            return $"station {Name} : {Id}, 'Location' {Location} , 'ChargeSlots': {FreeChargeSlots}," +
+                $"{droneAtCharging}  ";
         }
 
-    
+        public List<DroneAtCharging> droneAtChargings;
+
+
+
+    }
+
+
 }

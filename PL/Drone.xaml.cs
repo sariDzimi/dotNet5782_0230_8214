@@ -88,6 +88,10 @@ namespace PL
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             Location.Text = drone.Location.ToString();
+            MaxWeight.Visibility = Visibility.Visible;
+            MaxWeight.Text = drone.MaxWeight.ToString();
+            WeightSelector.Visibility = Visibility.Hidden;
+
         }
 
 

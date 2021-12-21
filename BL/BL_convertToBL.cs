@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-     partial class BL
+    partial class BL
     {
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace BL
         private Station ConvertToStationBL(DO.Station s)
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
-            StationBL.ChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
+            StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
             return StationBL;
         }
 
@@ -31,7 +31,7 @@ namespace BL
         private Customer convertToCustomerBL(DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
-           
+
             foreach (var p in GetParcels())
             {
                 if (p.customerAtParcelSender.Id == CustomerBL.Id)
@@ -47,7 +47,6 @@ namespace BL
             }
             return CustomerBL;
         }
-
 
         /// <summary>
         /// convert To Parcel BL
@@ -106,12 +105,24 @@ namespace BL
             return FindDrone(droneToList.Id);
         }
 
+        private StationToList convertStationToStationToList(Station station)
+        {
+            StationToList stationToList = new StationToList()
+            {
+                ID = station.Id,
+                Name = station.Name,
+                numberOfFreeChargeSlots = station.FreeChargeSlots,
+                numberOfUsedChargeSlots = dalObject.findStationById(station.Id).ChargeSlots - station.FreeChargeSlots
+            };
+            return stationToList;
+        }
+
         private ParcelStatus ParcelsStatus(Parcel parcel)
         {
             ParcelStatus parcelStatus = ParcelStatus.created;
             if (parcel.Requested != null)
                 parcelStatus = ParcelStatus.created;
-            if(parcel.Scheduled != null)
+            if (parcel.Scheduled != null)
                 parcelStatus = ParcelStatus.Belonged;
             if (parcel.PickedUp != null)
                 parcelStatus = ParcelStatus.Collected;
@@ -124,6 +135,19 @@ namespace BL
         private DroneCharge ConvertToDroneChargeBL(DO.DroneCharge droneChargeDL)
         {
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
+        }
+
+        private ParcelToList convertParcelToParcelToList(Parcel parcel)
+        {
+            return new ParcelToList()
+            {
+                ID = parcel.Id,
+                NameOfCustomerReciver = parcel.customerAtParcelReciver.Name,
+                NameOfCustomerSended = parcel.customerAtParcelSender.Name,
+                parcelStatus = ParcelsStatus(parcel),
+                pritorities = parcel.Pritority,
+                weightCategories = parcel.Weight
+            };
         }
     }
 

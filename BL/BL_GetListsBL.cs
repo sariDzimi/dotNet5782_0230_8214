@@ -72,6 +72,20 @@ namespace BL
                    select ConvertDroneToDroneToList(drone);
             
         }
+
+        public IEnumerable<StationToList> GetStationToLists()
+        {
+            return from station in GetStations()
+                   select convertStationToStationToList(station);
+
+        }
+
+        public IEnumerable<ParcelToList> GetParcelToLists()
+        {
+            return from parcel in GetParcels()
+                   select convertParcelToParcelToList(parcel);
+
+        }
     }
 }
 
