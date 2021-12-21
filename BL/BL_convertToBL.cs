@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-     partial class BL
+    partial class BL
     {
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BL
         private Customer convertToCustomerBL(DO.Customer c)
         {
             Customer CustomerBL = new Customer() { Id = c.Id, Name = c.Name, Location = new Location(c.Latitude, c.Longitude), Phone = c.Phone };
-           
+
             foreach (var p in GetParcels())
             {
                 if (p.customerAtParcelSender.Id == CustomerBL.Id)
@@ -106,12 +106,24 @@ namespace BL
             return FindDrone(droneToList.Id);
         }
 
+        private StationToList convertStationToStationToList(Station station)
+        {
+            StationToList stationToList = new StationToList()
+            {
+                ID = station.Id,
+                Name = station.Name,
+                numberOfFreeChargeSlots = station.ChargeSlots,
+                numberOfUsedChargeSlots = dalObject.findStationById(station.Id).ChargeSlots - station.ChargeSlots
+            };
+            return stationToList;
+        }
+
         private ParcelStatus ParcelsStatus(Parcel parcel)
         {
             ParcelStatus parcelStatus = ParcelStatus.created;
             if (parcel.Requested != null)
                 parcelStatus = ParcelStatus.created;
-            if(parcel.Scheduled != null)
+            if (parcel.Scheduled != null)
                 parcelStatus = ParcelStatus.Belonged;
             if (parcel.PickedUp != null)
                 parcelStatus = ParcelStatus.Collected;
