@@ -86,6 +86,12 @@ namespace BL
                    select convertParcelToParcelToList(parcel);
 
         }
+        public IEnumerable<CustomerToList> GetCustomerToLists()
+        {
+            return from customer in GetCustomers()
+                   select convertCustomerToCustomerToList(customer);
+
+        }
     }
 }
 
