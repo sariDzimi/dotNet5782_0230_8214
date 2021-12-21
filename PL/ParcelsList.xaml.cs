@@ -51,38 +51,47 @@ namespace PL
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ParcelsListView.Items.Clear();
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
             ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.weightCategories == selected);
         }
 
         private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //ParcelsListView.Items.Clear();
+        { 
+
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
             ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.pritorities == selected);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-            //ParcelsListView.ItemsSource = items;
+            clearListView();
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
             view.GroupDescriptions.Add(groupDescription);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            //ParcelsListView.ItemsSource = items;
+            clearListView();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-           // ParcelsListView.ItemsSource = items;
+            clearListView();
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
             view.GroupDescriptions.Add(groupDescription);
 
+        }
+        private void clearListView()
+        {
+            items.Clear();
+            items = new List<ParcelToList>();
+            foreach (var parcel in bl.GetParcelToLists())
+            {
+                items.Add(new ParcelToList() { ID = parcel.ID, weightCategories = parcel.weightCategories, NameOfCustomerReciver = parcel.NameOfCustomerReciver, NameOfCustomerSended = parcel.NameOfCustomerSended, parcelStatus = parcel.parcelStatus, pritorities = parcel.pritorities });
+            }
+
+            ParcelsListView.ItemsSource = items;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
         }
     }
 }
