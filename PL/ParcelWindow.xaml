@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="Parcel" Height="450" Width="800">
     <Grid>
-        
+
+
+
+        <TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="173,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" />
+
+
+
+        <Grid Margin="199,166,252,40">
+            <Label x:Name="weightText" HorizontalAlignment="Left" Margin="87,14,0,0"  VerticalAlignment="Top" Width="57" Content="Weight"/>
+            <TextBox x:Name="weightLabel" HorizontalAlignment="Left" Margin="157,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167"/>
+            <Label x:Name="priorityText" Content="priority" HorizontalAlignment="Left" Margin="87,40,0,0" VerticalAlignment="Top" Width="57"/>
+            <TextBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label x:Name="ScheduledTrxt" Content="Scheduled" HorizontalAlignment="Left" Margin="87,73,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="ScheduledLabel" HorizontalAlignment="Left" Margin="157,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label  x:Name="PickedUpText" Content="PickedUp" HorizontalAlignment="Left" Margin="87,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.033,0.464"/>
+            <TextBox  x:Name="PickedUpLabel" HorizontalAlignment="Left" Margin="157,103,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label x:Name="DeliveredText" Content="Delivered" HorizontalAlignment="Left" Margin="92,125,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="DeliveredLabel" HorizontalAlignment="Left" Margin="157,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+        </Grid>
+        <Grid Margin="234,54,133,255" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="430*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="customerAtParcelSenderText" Content="customer At Parcel Sender" HorizontalAlignment="Left" Margin="5,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBox x:Name="customerAtParcelSenderLabel" HorizontalAlignment="Left" Margin="159,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
+            <Label x:Name="customerAtParcelReciverLabel" Content="customer At Parcel Reciver" HorizontalAlignment="Left" Margin="4,76,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBox x:Name="customerAtParcelReciverText" HorizontalAlignment="Left" Margin="159,84,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
+
+        </Grid>
+        <Label Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
     </Grid>
 </Window>

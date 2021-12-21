@@ -1,0 +1,43 @@
+﻿<Window x:Class="PL.ParcelsList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelsList" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <ComboBox Name="PrioritySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="150" SelectionChanged="PrioritySelector_SelectionChanged" Grid.Column="0" Margin="617,69,0,0" Height="31" />
+            <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.Column="0" Margin="617,21,0,0" HorizontalAlignment="Left" Width="148" Height="30"/>
+            <ListView x:Name="ParcelsListView" Margin="0,144,0,0">
+                <ListView.View>
+                    <GridView>
+
+
+                        <GridViewColumn Header="Id" Width="30" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="PickedUp" Width="100" DisplayMemberBinding="{Binding PickedUp}" />
+                        <GridViewColumn Header="customerAtParcelReciver" Width="100" DisplayMemberBinding="{Binding customerAtParcelReciver}" />
+                        <GridViewColumn Header="customerAtParcelSender" Width="100" DisplayMemberBinding="{Binding customerAtParcelSender}" />
+                        <GridViewColumn Header="Delivered" Width="100" DisplayMemberBinding="{Binding Delivered}" />
+                        <GridViewColumn Header="Pritority" Width="100" DisplayMemberBinding="{Binding Pritority}" />
+                        <GridViewColumn Header="Requested" Width="100" DisplayMemberBinding="{Binding Requested}" />
+                        <GridViewColumn Header="Scheduled" Width="100" DisplayMemberBinding="{Binding Scheduled}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+            <Button Content="Group By Sender" HorizontalAlignment="Left" Margin="26,27,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="Button_Click" />
+            <Label Content="Priority" HorizontalAlignment="Left" Margin="520,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
+        </Grid>
+    </Grid>
+</Window>

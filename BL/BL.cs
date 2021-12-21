@@ -136,7 +136,7 @@ namespace BL
             CustomerAtParcel customerAtParcelsendedr = new CustomerAtParcel() { Id = sendedId };
             CustomerAtParcel customerAtParcelreciver = new CustomerAtParcel() { Id = reciveId };
 
-            Parcel parcelBL = new Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (DO.WeightCategories)weigth, Pritority = (DO.Pritorities)prioty };
+            Parcel parcelBL = new Parcel() { customerAtParcelSender = customerAtParcelsendedr, customerAtParcelReciver = customerAtParcelreciver, Weight = (BO.WeightCategories)weigth, Pritority = (BO.Pritorities)prioty };
 
             parcelBL.Requested = DateTime.Now;
             parcelBL.droneAtParcel = null;
@@ -375,17 +375,17 @@ namespace BL
         /// <param name="location2"></param>
         /// <param name="weight"></param>
         /// <returns></returns>
-        private double CalculateElectricity(Location location1, Location location2, DO.WeightCategories weight)
+        private double CalculateElectricity(Location location1, Location location2, WeightCategories weight)
         {
 
             double distance = distanceBetweenTwoLocationds(location1, location2);
             switch (weight)
             {
-                case DO.WeightCategories.Light:
+                case WeightCategories.Light:
                     return (distance * this.ElectricityUseWhenLight);
-                case DO.WeightCategories.Medium:
+                case WeightCategories.Medium:
                     return (distance * this.ElectricityUseWhenMedium);
-                case DO.WeightCategories.Heavy:
+                case WeightCategories.Heavy:
                     return (distance * this.ElectricityUseWhenheavy);
 
                 default:

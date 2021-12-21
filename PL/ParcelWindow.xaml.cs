@@ -20,11 +20,59 @@ namespace PL
     /// <summary>
     /// Interaction logic for Parcel.xaml
     /// </summary>
+    /// 
     public partial class ParcelWindow : Window
     {
         public ParcelWindow()
         {
             InitializeComponent();
         }
+
+        public ParcelWindow( IBL bl, Parcel parcel )
+        {
+            InitializeComponent();
+            idParcelLabel.Text = $"{parcel.Id}";
+            weightLabel.Text = $"{parcel.Weight}";
+            priorityLabel.Text = $"{parcel.Pritority}";
+            ScheduledLabel.Text = $"{parcel.Scheduled}";
+            PickedUpLabel.Text = $"{parcel.PickedUp}";
+            DeliveredLabel.Text = $"{parcel.Delivered}";
+            customerAtParcelSenderLabel.Text = $"{parcel.customerAtParcelSender}";
+            customerAtParcelReciverText.Text = $"{parcel.customerAtParcelReciver}";
+
+        }
+
     }
 }
+
+
+
+    
+        
+    
+
+
+
+        
+                
+
+
+
+                 
+                          
+                                         
+                                                  
+                                                                   
+                                                                                           
+                                                                                                       
+                                                                                                                   
+                               
+                                                                                                                                           
+                                                                                                                                                  
+                                                                                                                                           
+                                                                                                                                                
+                                                                                                                                              
+
+                                                                                                                                                                                                    
+
+                                                                                                                                                                                                          

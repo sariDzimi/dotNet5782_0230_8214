@@ -34,8 +34,8 @@ using System.Threading.Tasks;
             public int Id { get; set; }
             public CustomerAtParcel customerAtParcelSender { get; set; } 
             public CustomerAtParcel customerAtParcelReciver { get; set; }
-            public DO.WeightCategories Weight { get; set; }
-            public DO.Pritorities Pritority { get; set; }
+            public WeightCategories Weight { get; set; }
+            public Pritorities Pritority { get; set; }
             public DateTime? Requested { get; set; }
             public DroneAtParcel droneAtParcel { get; set; }
 

@@ -95,6 +95,7 @@
                 <TextBox x:Name="numberOfStationInput" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="336,386,398,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}"/>
                 <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging" HorizontalAlignment="Left" Margin="32,386,0,0" VerticalAlignment="Top" Height="30" Width="304"  Visibility="{Binding ElementName= addButton , Path= Visibility}"/>
                 <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="498,323,0,0" VerticalAlignment="Top" Height="28" Width="273" Click="Button_Click_1" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                <Button Content="open" HorizontalAlignment="Left" Margin="28,354,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="Button_Click_4"/>
 
             </Grid>
             <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,181,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
