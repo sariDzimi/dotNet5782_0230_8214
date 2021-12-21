@@ -24,7 +24,7 @@ namespace PL
     {
         private IBL bl;
         CollectionView view;
-        List<Parcel> items;
+        List<ParcelToList> items;
         public ParcelsList()
         {
             InitializeComponent();
@@ -36,36 +36,53 @@ namespace PL
 
             InitializeComponent();
             bl = bL1;
-/*            items = new List<Parcel>();
-            foreach(Parcel parcel in bl.GetParcels())
+            items = new List<ParcelToList>();
+            foreach (var parcel in bl.GetParcelToLists())
             {
-                items.Add(new Parcel() {Id = parcel.Id, Weight = parcel.Weight, PickedUp = parcel.PickedUp, customerAtParcelReciver = parcel.customerAtParcelReciver, customerAtParcelSender= parcel.customerAtParcelSender, Delivered = parcel.Delivered, Pritority= parcel.Pritority, Requested= parcel.Requested, Scheduled= parcel.Scheduled  });
-            }*/
+                items.Add(new ParcelToList() { ID = parcel.ID, weightCategories = parcel.weightCategories, NameOfCustomerReciver = parcel.NameOfCustomerReciver, NameOfCustomerSended = parcel.NameOfCustomerSended, parcelStatus = parcel.parcelStatus, pritorities = parcel.pritorities});
+            }
 
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
-            
+
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //ParcelsListView.Items.Clear();
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            ParcelsListView.ItemsSource = bl.GetParcelsBy((d) => d.Weight == selected);
+            ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.weightCategories == selected);
         }
 
         private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //ParcelsListView.Items.Clear();
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
-            ParcelsListView.ItemsSource = bl.GetParcelsBy((d) => d.Pritority== selected);
+            ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.pritorities == selected);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ParcelsListView.ItemsSource = items;
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("customerAtParcelSender.Id");
+           
+            //ParcelsListView.ItemsSource = items;
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
             view.GroupDescriptions.Add(groupDescription);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            //ParcelsListView.ItemsSource = items;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+           // ParcelsListView.ItemsSource = items;
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
+            view.GroupDescriptions.Add(groupDescription);
+
         }
     }
 }

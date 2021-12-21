@@ -15,15 +15,13 @@
                     <GridView>
 
 
-                        <GridViewColumn Header="Id" Width="30" DisplayMemberBinding="{Binding Id}" />
-                        <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Weight}" />
-                        <GridViewColumn Header="PickedUp" Width="100" DisplayMemberBinding="{Binding PickedUp}" />
-                        <GridViewColumn Header="customerAtParcelReciver" Width="100" DisplayMemberBinding="{Binding customerAtParcelReciver}" />
-                        <GridViewColumn Header="customerAtParcelSender" Width="100" DisplayMemberBinding="{Binding customerAtParcelSender}" />
-                        <GridViewColumn Header="Delivered" Width="100" DisplayMemberBinding="{Binding Delivered}" />
-                        <GridViewColumn Header="Pritority" Width="100" DisplayMemberBinding="{Binding Pritority}" />
-                        <GridViewColumn Header="Requested" Width="100" DisplayMemberBinding="{Binding Requested}" />
-                        <GridViewColumn Header="Scheduled" Width="100" DisplayMemberBinding="{Binding Scheduled}" />
+                        <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                        <GridViewColumn Header="weightCategories" Width="150" DisplayMemberBinding="{Binding weightCategories}" />
+                        <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
+                        <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfCustomerSended}" />
+                        <GridViewColumn Header="parcelStatus" Width="150" DisplayMemberBinding="{Binding parcelStatus}" />
+                        <GridViewColumn Header="pritorities" Width="150" DisplayMemberBinding="{Binding pritorities}" />
+
                     </GridView>
                 </ListView.View>
                 <ListView.GroupStyle>
@@ -37,7 +35,10 @@
                 </ListView.GroupStyle>
             </ListView>
             <Button Content="Group By Sender" HorizontalAlignment="Left" Margin="26,27,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="Button_Click" />
-            <Label Content="Priority" HorizontalAlignment="Left" Margin="520,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
+            <Label Content="Priority" HorizontalAlignment="Left" Margin="550,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
+            <Label Content="Weight" HorizontalAlignment="Left" Margin="548,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.259,0.347"/>
+            <Button Content="All List" HorizontalAlignment="Left" Margin="26,78,0,0" VerticalAlignment="Top" Width="116" Height="22" Click="Button_Click_1"/>
+            <Button Content="Group By Reciver" HorizontalAlignment="Left" Margin="154,27,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.376,-2.148" Width="119" Height="35" Click="Button_Click_2"/>
         </Grid>
     </Grid>
 </Window>
