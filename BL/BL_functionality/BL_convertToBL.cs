@@ -20,6 +20,12 @@ namespace BL
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
             StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
+            foreach (var dronecharge in dalObject.GetDroneCharges())
+            {
+                if (dronecharge.stationId == s.Id)
+                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId });
+                //TODO battery
+            }
             return StationBL;
         }
 

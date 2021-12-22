@@ -7,12 +7,26 @@
         mc:Ignorable="d"
         Title="StationWindow" Height="450" Width="800">
     <Grid Margin="10,10,0,0">
-        <Label Content="id" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top"/>
-        <Label Content="name" HorizontalAlignment="Left" Margin="88,140,0,0" VerticalAlignment="Top"/>
-        <Label Content="location" HorizontalAlignment="Left" Margin="88,171,0,0" VerticalAlignment="Top"/>
-        <Label Content="free charge slots" HorizontalAlignment="Left" Margin="88,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.693,1.06"/>
-        <Label Content="Drones in charge" HorizontalAlignment="Left" Margin="88,268,0,0" VerticalAlignment="Top" Width="52"/>
-        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0">
+        <Label x:Name="addStationLabel" Content="add station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
+        <Label x:Name="updateStationLabel" Content="update station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
+        <Label x:Name="idLabel" Content="id" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nameLabel" Content="name" HorizontalAlignment="Left" Margin="88,140,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="locationLabel" Content="location" HorizontalAlignment="Left" Margin="88,171,0,0" VerticalAlignment="Top" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Label x:Name="freeChargeSlotsLabel" Content="free charge slots" HorizontalAlignment="Left" Margin="88,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.693,1.06" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Label x:Name="DronesLabel" Content="Drones in charge" HorizontalAlignment="Left" Margin="88,268,0,0" VerticalAlignment="Top" Width="52" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Label Content="longitude" HorizontalAlignment="Left" Margin="88,0,0,0" VerticalAlignment="Center" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+        <Label Content="landitude" HorizontalAlignment="Left" Margin="332,190,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,-0.076" Width="63" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+        <Label x:Name="ChargeSlotsLabel" Content="charge slots" HorizontalAlignment="Left" Margin="88,242,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.693,1.06" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+
+        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="175,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="191,142,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="175,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <TextBox x:Name="freeChargeStolsTextBox" HorizontalAlignment="Left" Margin="208,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Margin="175,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+        <TextBox x:Name="laditudeTextBox" HorizontalAlignment="Left" Margin="395,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+        <TextBox x:Name="ChargeStolsTextBox" HorizontalAlignment="Left" Margin="191,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
+
+        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding ID}"/>

@@ -77,5 +77,11 @@ namespace PL
             new StationWindow(bL, station).Show();
             Close();
         }
+
+        private void adddStation_Click(object sender, RoutedEventArgs e)
+        {
+            new StationWindow(bL).Show();
+            Close();
+        }
     }
 }

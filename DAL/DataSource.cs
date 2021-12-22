@@ -40,9 +40,8 @@ namespace DalObject
                 station.Name = stations.Count + 1;
                 station.Latitude = rand.Next()% maxRand +1;
                 station.Longitude = rand.Next() % maxRand +1;
-                station.ChargeSlots = rand.Next(2);
+                station.ChargeSlots = rand.Next(100);
                 stations.Add(station);
-
             }
 
             for (int i = 0; i < 5; i++)
@@ -53,14 +52,10 @@ namespace DalObject
                 drone.Model = "MarvicAir2";
                 drone.MaxWeight = (WeightCategories)(rand.Next() % 3)+1;
                 drones.Add(drone);
-          
-
             }
 
             for (int i = 0; i < 10; i++)
             {
-
-
                 Customer customer = new Customer();
                 customer.Id = (customers.Count) + 1;
                 customer.Name = $"customer{i}";
@@ -68,13 +63,10 @@ namespace DalObject
                 customer.Latitude = rand.Next() % maxRand+1;
                 customer.Longitude = rand.Next() % maxRand+1;
                 customers.Add(customer);
-
             }
 
             for (int i = 0; i < 10; i++)
             {
-
-
                 Parcel parcel = new Parcel();
                 parcel.Id = parcels.Count + 1;
                 parcel.SenderId = customers[rand.Next() % (customers.Count-1)].Id;
@@ -88,11 +80,7 @@ namespace DalObject
                 parcel.Delivered = RandomDateOrNull(parcel.PickedUp);
                 parcel.DroneId = parcel.Scheduled == null ? 0 : notAssignDrones[rand.Next(0, notAssignDrones.Count)].Id;
                 parcels.Add(parcel);
-
-
             }
-
-
         }
 
 

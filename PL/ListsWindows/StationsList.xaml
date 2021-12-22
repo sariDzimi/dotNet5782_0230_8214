@@ -21,7 +21,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="StationsListView" Height="400" VerticalAlignment="Top" Margin="0,101,0,0" Grid.Row="1" MouseDoubleClick="MouseDoubleClick_stationChoosen">
+        <ListView x:Name="StationsListView" Height="333" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_stationChoosen">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
@@ -37,6 +37,7 @@
         <CheckBox Content="show only stations with free charge slots" HorizontalAlignment="Left" Margin="315,35,0,0" VerticalAlignment="Top" Height="19" Width="237" Checked="Cheked_onlyStationsWithFreeSlots" Unchecked="unChecked_onlyFreeChargeSlots"/>
         <Button Content="group by number of free charge slots" HorizontalAlignment="Left" Margin="315,59,0,0" VerticalAlignment="Top" Height="27" Width="214" Click="Button_Click_groupByNumberOfFree"/>
         <Button Content="clear group by" HorizontalAlignment="Left" Margin="560,59,0,0" VerticalAlignment="Top" Height="27" Width="89" Click="Button_Click_ClearGroupBy"/>
+        <Button Content="add station" HorizontalAlignment="Left" Margin="214,63,0,0" VerticalAlignment="Top" Height="19" Width="74" Click="adddStation_Click"/>
     </Grid>
 
 </Window>
