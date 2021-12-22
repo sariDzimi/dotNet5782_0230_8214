@@ -109,11 +109,6 @@ namespace BL
 
                 dronesBL.Add(droneBL);
             }
-            //debuuging
-           /* List<Drone> dr = GetDrones().ToList();
-            List<DroneCharge> drg = GetDronesCharges().ToList();
-            List<DO.Station> st = dalObject.GetStations().ToList();
-            List<Station> sts = GetStations().ToList();*/
         }
 
 

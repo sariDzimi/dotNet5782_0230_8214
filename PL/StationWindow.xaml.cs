@@ -34,6 +34,8 @@ namespace PL
             station = stationArg;
             DroneChargingListView.ItemsSource = station.droneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
+            DataContext = station;
+            Location l = station.Location;
         }
 
         public StationWindow(IBL blArg)

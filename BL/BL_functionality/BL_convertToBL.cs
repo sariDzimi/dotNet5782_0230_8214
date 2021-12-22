@@ -23,8 +23,7 @@ namespace BL
             foreach (var dronecharge in dalObject.GetDroneCharges())
             {
                 if (dronecharge.stationId == s.Id)
-                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId });
-                //TODO battery
+                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = FindDrone(dronecharge.DroneId).Battery });
             }
             return StationBL;
         }
