@@ -40,7 +40,7 @@ namespace DalObject
                 station.Name = stations.Count + 1;
                 station.Latitude = rand.Next()% maxRand +1;
                 station.Longitude = rand.Next() % maxRand +1;
-                station.ChargeSlots = rand.Next(300);
+                station.ChargeSlots = rand.Next(2);
                 stations.Add(station);
 
             }

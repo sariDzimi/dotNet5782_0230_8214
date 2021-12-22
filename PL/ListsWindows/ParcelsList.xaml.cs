@@ -36,12 +36,7 @@ namespace PL
 
             InitializeComponent();
             bl = bL1;
-            items = new List<ParcelToList>();
-            foreach (var parcel in bl.GetParcelToLists())
-            {
-                items.Add(new ParcelToList() { ID = parcel.ID, weightCategories = parcel.weightCategories, NameOfCustomerReciver = parcel.NameOfCustomerReciver, NameOfCustomerSended = parcel.NameOfCustomerSended, parcelStatus = parcel.parcelStatus, pritorities = parcel.pritorities});
-            } 
-
+            items = bl.GetParcelToLists().ToList();
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
 
@@ -53,7 +48,7 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcelBL = bl.ConvertParcelToListToParcel(parcelToList);
+            BO.Parcel parcelBL = bl.FindParcel(parcelToList.ID);
             new ParcelWindow(bl, parcelBL).Show();
             Close();
         }
@@ -91,13 +86,7 @@ namespace PL
         }
         private void clearListView()
         {
-            items.Clear();
-            items = new List<ParcelToList>();
-            foreach (var parcel in bl.GetParcelToLists())
-            {
-                items.Add(new ParcelToList() { ID = parcel.ID, weightCategories = parcel.weightCategories, NameOfCustomerReciver = parcel.NameOfCustomerReciver, NameOfCustomerSended = parcel.NameOfCustomerSended, parcelStatus = parcel.parcelStatus, pritorities = parcel.pritorities });
-            }
-
+            items = bl.GetParcelToLists().ToList();
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
         }

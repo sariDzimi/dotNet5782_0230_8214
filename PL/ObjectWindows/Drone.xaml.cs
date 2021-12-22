@@ -26,7 +26,7 @@ namespace PL
         public bool boo = false;
         public Drone()
         {
-            WindowStyle = WindowStyle.None;
+            //WindowStyle = WindowStyle.None;
             drone = new BO.Drone() { };
 
             InitializeComponent();

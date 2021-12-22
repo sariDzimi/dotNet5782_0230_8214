@@ -1,0 +1,25 @@
+﻿<Window x:Class="PL.StationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="StationWindow" Height="450" Width="800">
+    <Grid Margin="10,10,0,0">
+        <Label Content="id" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="name" HorizontalAlignment="Left" Margin="88,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="location" HorizontalAlignment="Left" Margin="88,171,0,0" VerticalAlignment="Top"/>
+        <Label Content="free charge slots" HorizontalAlignment="Left" Margin="88,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.693,1.06"/>
+        <Label Content="Drones in charge" HorizontalAlignment="Left" Margin="88,268,0,0" VerticalAlignment="Top" Width="52"/>
+        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="battery" DisplayMemberBinding="{Binding Batery}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

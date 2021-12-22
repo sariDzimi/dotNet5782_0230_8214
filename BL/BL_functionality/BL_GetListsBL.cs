@@ -80,6 +80,14 @@ namespace BL
 
         }
 
+        public IEnumerable<StationToList> GetStationToListBy(Predicate<StationToList> findBy)
+        {
+            return from station in GetStationToLists()
+                   where findBy(station)
+                   select station;
+                   
+        }
+
         public IEnumerable<ParcelToList> GetParcelToLists()
         {
             return from parcel in GetParcels()

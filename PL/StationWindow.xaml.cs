@@ -11,27 +11,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BO;
 using BlApi;
+using BO;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for StationsList.xaml
+    /// Interaction logic for StationWindow.xaml
     /// </summary>
-    public partial class StationsList : Window
+    public partial class StationWindow : Window
     {
-        private IBL bL;
-        public StationsList()
+        IBL bl;
+        Station station;
+        public StationWindow()
         {
             InitializeComponent();
+        }
+        public StationWindow(IBL blArg, Station station)
+        {
+            InitializeComponent();
+            bl = blArg;
+            DroneChargingListView.ItemsSource = station.droneAtChargings;
         }
 
-        public StationsList(IBL bl)
-        {
-            InitializeComponent();
-            bL = bl;
-            StationsListView.ItemsSource = bL.GetStationToLists();
-        }
     }
 }

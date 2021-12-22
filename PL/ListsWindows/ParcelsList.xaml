@@ -41,12 +41,6 @@
                 </ListView.View>
                 <ListView.GroupStyle>
                     <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
-                    <!--<GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                        </DataTemplate>
-                        </GroupStyle.HeaderTemplate>-->
-
                 </ListView.GroupStyle>
             </ListView>
 
