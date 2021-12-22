@@ -27,12 +27,20 @@ namespace PL
         {
             InitializeComponent();
         }
-        public StationWindow(IBL blArg, Station station)
+        public StationWindow(IBL blArg, Station stationArg)
         {
             InitializeComponent();
             bl = blArg;
+            station = stationArg;
             DroneChargingListView.ItemsSource = station.droneAtChargings;
+            updateStationLabel.Visibility = Visibility.Visible;
         }
 
+        public StationWindow(IBL blArg)
+        {
+            InitializeComponent();
+            bl = blArg;
+            addStationLabel.Visibility = Visibility.Visible;
+        }
     }
 }
