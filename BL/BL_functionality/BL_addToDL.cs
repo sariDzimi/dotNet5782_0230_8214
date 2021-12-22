@@ -70,12 +70,11 @@ namespace BL
                 TargetId = parcel.customerAtParcelReciver.Id,
                 Weight = (DO.WeightCategories)parcel.Weight,
                 Pritority = (DO.Pritorities)parcel.Pritority,
-
-                Requested = parcel.Requested,
-                DroneId = parcel.droneAtParcel.Id,
-                Scheduled = parcel.Scheduled,
-                Delivered = parcel.Delivered,
-                PickedUp = parcel.PickedUp
+                Requested = parcel.Requested == null ? null : parcel.Requested,
+                DroneId = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id,
+                Scheduled = parcel.Scheduled == null ? null : parcel.Scheduled,
+                Delivered = parcel.Delivered == null ? null : parcel.Delivered,
+                PickedUp = parcel.PickedUp== null ? null : parcel.PickedUp
             };
             dalObject.addParcel(parcelDL);
 

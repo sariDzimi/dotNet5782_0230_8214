@@ -40,7 +40,7 @@
         <Button x:Name="close" Content="X"  Margin="758,10,5,401" RenderTransformOrigin="1.63,0.089" Click="close_Click"/>
 
         <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
-        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click_1"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="Button_Click"/>
     </Grid>

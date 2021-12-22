@@ -62,6 +62,7 @@ namespace BL
                             weightCategories = parcel.Weight,
                             IsWating = false
                         };
+
                         droneBL.ParcelInDelivery = parcelInDelivery;
                         updateParcel(parcel);
 

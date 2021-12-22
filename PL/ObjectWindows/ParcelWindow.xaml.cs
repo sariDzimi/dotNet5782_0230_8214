@@ -34,7 +34,8 @@ namespace PL
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             //DroneStatusDroneL.Visibility = Visibility.Hidden;
-
+            weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
             bL1 = bL;
 
             //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -53,6 +54,8 @@ namespace PL
             DeliveredLabel.Text = $"{parcel.Delivered}";
             customerAtParcelSenderLabel.Text = $"{parcel.customerAtParcelSender}";
             customerAtParcelReciverText.Text = $"{parcel.customerAtParcelReciver}";
+            weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
 
         }
 
@@ -69,8 +72,8 @@ namespace PL
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
                 bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1 });
-                MessageBox.Show("the drone was added succesfuly!!!");
-                new DronesList(bL1).Show();
+                MessageBox.Show("the parcel was added succesfuly!!!");
+                new ParcelsList(bL1).Show();
                 Close();
             }
             catch (NotValidInput ex)
@@ -150,6 +153,18 @@ namespace PL
             {
                 throw new NotValidInput("Id Sender");
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+
+            //}
+            //catch ()
+            //{
+
+            //}
         }
     }
 }
