@@ -40,7 +40,7 @@ namespace PL
             foreach (var parcel in bl.GetParcelToLists())
             {
                 items.Add(new ParcelToList() { ID = parcel.ID, weightCategories = parcel.weightCategories, NameOfCustomerReciver = parcel.NameOfCustomerReciver, NameOfCustomerSended = parcel.NameOfCustomerSended, parcelStatus = parcel.parcelStatus, pritorities = parcel.pritorities});
-            }
+            } 
 
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
@@ -48,6 +48,14 @@ namespace PL
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
+        }
+
+        private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
+        {
+            ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
+            BO.Parcel parcelBL = bl.ConvertParcelToListToParcel(parcelToList);
+            new ParcelWindow(bl, parcelBL).Show();
+            Close();
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -92,6 +100,12 @@ namespace PL
 
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bl).Show();
+            Close();
         }
     }
 }

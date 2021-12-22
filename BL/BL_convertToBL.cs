@@ -105,6 +105,11 @@ namespace BL
             return FindDrone(droneToList.Id);
         }
 
+        public Parcel ConvertParcelToListToParcel(ParcelToList parcelToList)
+        {
+            return FindParcel(parcelToList.ID);
+        }
+
         private StationToList convertStationToStationToList(Station station)
         {
             StationToList stationToList = new StationToList()
@@ -137,7 +142,7 @@ namespace BL
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
         }
 
-        private ParcelToList convertParcelToParcelToList(Parcel parcel)
+        public ParcelToList convertParcelToParcelToList(Parcel parcel)
         {
             return new ParcelToList()
             {
@@ -149,7 +154,7 @@ namespace BL
                 weightCategories = parcel.Weight
             };
         }
-        private CustomerToList convertCustomerToCustomerToList(Customer customer)
+        public CustomerToList convertCustomerToCustomerToList(Customer customer)
         {
             return new CustomerToList()
             {

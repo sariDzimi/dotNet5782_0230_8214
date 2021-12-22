@@ -23,9 +23,22 @@ namespace PL
     /// 
     public partial class ParcelWindow : Window
     {
+        IBL bL1;
         public ParcelWindow()
         {
             InitializeComponent();
+        }
+
+        public ParcelWindow(IBL bL)
+        {
+            InitializeComponent();
+            WindowStyle = WindowStyle.None;
+            //DroneStatusDroneL.Visibility = Visibility.Hidden;
+
+            bL1 = bL;
+            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            //MaxWeight.Visibility = Visibility.Hidden;
+            //addButton.IsEnabled = true;
         }
 
         public ParcelWindow( IBL bl, Parcel parcel )
@@ -42,6 +55,11 @@ namespace PL
 
         }
 
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelsList(bL1).Show();
+            Close();
+        }
     }
 }
 

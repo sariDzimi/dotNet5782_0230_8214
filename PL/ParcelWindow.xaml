@@ -37,6 +37,10 @@
             <TextBox x:Name="customerAtParcelReciverText" HorizontalAlignment="Left" Margin="159,84,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
 
         </Grid>
+        <Button x:Name="close" Content="X"  Margin="758,10,5,401" RenderTransformOrigin="1.63,0.089" Click="close_Click"/>
+
         <Label Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70"/>
     </Grid>
 </Window>

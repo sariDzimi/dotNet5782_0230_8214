@@ -46,6 +46,10 @@ namespace BlApi
         public IEnumerable<ParcelToList> GetParcelsToListBy(Predicate<ParcelToList> findBy);
         public IEnumerable<CustomerToList> GetCustomerToLists();
 
+        public ParcelToList convertParcelToParcelToList(Parcel parcel);
+
+        public Parcel ConvertParcelToListToParcel(ParcelToList parcelToList);
+
     }
 }
 
