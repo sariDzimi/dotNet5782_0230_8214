@@ -5,58 +5,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BL
 {
-     partial class BL
+    partial class BL
     {
         /// <summary>
         /// add Drone To DL
         /// </summary>
         /// <param name="drone"></param>
-      /*  public void addDroneToDL(Drone drone)
-        {
-            foreach (var item in dalObject.GetStations().ToList())
-            {
-                if (item.Id == drone.Id)
-                {
-                    throw new IdAlreadyExist(drone.Id);
-                }
-            }
+        /*  public void addDroneToDL(Drone drone)
+          {
+              foreach (var item in dalObject.GetStations().ToList())
+              {
+                  if (item.Id == drone.Id)
+                  {
+                      throw new IdAlreadyExist(drone.Id);
+                  }
+              }
 
 
-            IDAL.DO.Drone droneDL = new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model };
-            dalObject.addDrone(droneDL);
-*/
-        }
+              IDAL.DO.Drone droneDL = new IDAL.DO.Drone() { Id = drone.Id, MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight, Model = drone.Model };
+              dalObject.addDrone(droneDL);
+  */
+
         /// <summary>
         /// add Station To DL
         /// </summary>
         /// <param name="station"></param>
-/*        public void addStationToDL(Station station)
-        {
-            foreach (var item in dalObject.GetStations().ToList())
-            {
-                if (item.Id == station.Id)
+        /*        public void addStationToDL(Station station)
                 {
-                    throw new IdAlreadyExist(station.Id);
-                }
-            }
+                    foreach (var item in dalObject.GetStations().ToList())
+                    {
+                        if (item.Id == station.Id)
+                        {
+                            throw new IdAlreadyExist(station.Id);
+                        }
+                    }
 
-            IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
-            dalObject.addStation(stationDL);
+                    IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
+                    dalObject.addStation(stationDL);
 
-        }*/
+                }*/
 
         /// <summary>
         /// add Parcel To DL
         /// </summary>
         /// <param name="parcel"></param>
-/*        public void addParcelToDL(Parcel parcel)
+        public void addParcelToDL(Parcel parcel)
         {
 
 
-            foreach (var item in dalObject.GetStations().ToList())
+            foreach (var item in dalObject.GetParcel().ToList() )
             {
                 if (item.Id == parcel.Id)
                 {
@@ -64,13 +63,13 @@ namespace BL
                 }
             }
 
-            IDAL.DO.Parcel parcelDL = new IDAL.DO.Parcel()
+            DO.Parcel parcelDL = new DO.Parcel()
             {
                 Id = parcel.Id,
                 SenderId = parcel.customerAtParcelSender.Id,
                 TargetId = parcel.customerAtParcelReciver.Id,
-                Weight = parcel.Weight,
-                Pritority = parcel.Pritority,
+                Weight = (DO.WeightCategories)parcel.Weight,
+                Pritority = (DO.Pritorities)parcel.Pritority,
 
                 Requested = parcel.Requested,
                 DroneId = parcel.droneAtParcel.Id,
@@ -80,7 +79,8 @@ namespace BL
             };
             dalObject.addParcel(parcelDL);
 
-        }*/
+        }
+    }
 
         /// <summary>
         /// add Customer To DL

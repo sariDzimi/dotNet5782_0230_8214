@@ -66,6 +66,7 @@ namespace DalApi
         public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();
+
     }
 
 }
