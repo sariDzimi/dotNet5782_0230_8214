@@ -32,9 +32,9 @@ namespace PL
 
         public DronesList(IBL bL1)
         {
-            WindowStyle = WindowStyle.None;
 
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
             bl = bL1;
             DronesListView.ItemsSource = bl.GetDroneToLists();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
