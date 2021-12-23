@@ -27,11 +27,12 @@ namespace PL
         public StationsList()
         {
             InitializeComponent();
-
+            
         }
 
         public StationsList(IBL bl)
         {
+            WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
             StationsListView.ItemsSource = bL.GetStationToLists();
@@ -80,6 +81,12 @@ namespace PL
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
             new StationWindow(bL).Show();
+            Close();
+        }
+
+        private void closeButton_click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow(bL).Show();
             Close();
         }
     }

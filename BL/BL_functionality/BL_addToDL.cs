@@ -32,20 +32,22 @@ namespace BL
         /// add Station To DL
         /// </summary>
         /// <param name="station"></param>
-        /*        public void addStationToDL(Station station)
-                {
-                    foreach (var item in dalObject.GetStations().ToList())
-                    {
-                        if (item.Id == station.Id)
-                        {
-                            throw new IdAlreadyExist(station.Id);
-                        }
-                    }
+        public void addStationToDL(Station station)
+        {
+            if (dalObject.GetStations().Any(s => s.Id == station.Id)) 
+                throw new IdAlreadyExist(station.Id);
 
-                    IDAL.DO.Station stationDL = new IDAL.DO.Station() { Id = station.Id, Name = station.Name, Longitude = station.Location.Longitude, ChargeSlots = station.ChargeSlots, Latitude = station.Location.Latitude };
-                    dalObject.addStation(stationDL);
+            DO.Station stationDL = new DO.Station()
+            {
+                Id = station.Id,
+                Name = station.Name,
+                ChargeSlots = station.FreeChargeSlots,
+                Longitude = station.Location.Longitude,
+                Latitude = station.Location.Latitude
+            };
+            dalObject.addStation(stationDL);
 
-                }*/
+        }
 
         /// <summary>
         /// add Parcel To DL
@@ -54,14 +56,8 @@ namespace BL
         public void addParcelToDL(Parcel parcel)
         {
 
-
-            foreach (var item in dalObject.GetParcel().ToList() )
-            {
-                if (item.Id == parcel.Id)
-                {
-                    throw new IdAlreadyExist(parcel.Id);
-                }
-            }
+            if (dalObject.GetParcel().Any(p => p.Id == parcel.Id))
+                throw new IdAlreadyExist(parcel.Id);
 
             DO.Parcel parcelDL = new DO.Parcel()
             {
@@ -74,42 +70,41 @@ namespace BL
                 DroneId = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id,
                 Scheduled = parcel.Scheduled == null ? null : parcel.Scheduled,
                 Delivered = parcel.Delivered == null ? null : parcel.Delivered,
-                PickedUp = parcel.PickedUp== null ? null : parcel.PickedUp
+                PickedUp = parcel.PickedUp == null ? null : parcel.PickedUp
             };
             dalObject.addParcel(parcelDL);
-
         }
     }
 
-        /// <summary>
-        /// add Customer To DL
-        /// </summary>
-        /// <param name="customer"></param>
-/*        public void addCustomerToDL(Customer customer)
-        {
-            foreach (var item in dalObject.GetStations().ToList())
+    /// <summary>
+    /// add Customer To DL
+    /// </summary>
+    /// <param name="customer"></param>
+    /*        public void addCustomerToDL(Customer customer)
             {
-                if (item.Id == customer.Id)
+                foreach (var item in dalObject.GetStations().ToList())
                 {
-                    throw new IdAlreadyExist(customer.Id);
+                    if (item.Id == customer.Id)
+                    {
+                        throw new IdAlreadyExist(customer.Id);
+                    }
                 }
-            }
 
-            IDAL.DO.Customer customerDL = new IDAL.DO.Customer() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
-            dalObject.addCustomer(customerDL);
+                IDAL.DO.Customer customerDL = new IDAL.DO.Customer() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
+                dalObject.addCustomer(customerDL);
 
-        }*/
+            }*/
 
-        /// <summary>
-        /// add DroneCharge To DL
-        /// </summary>
-        /// <param name="droneCharge"></param>
-/*        public void addDroneChargeToDL(DroneCharge droneCharge)
-        {
-            
-            IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
-            dalObject.addDronCharge(droneChargeDL);
+    /// <summary>
+    /// add DroneCharge To DL
+    /// </summary>
+    /// <param name="droneCharge"></param>
+    /*        public void addDroneChargeToDL(DroneCharge droneCharge)
+            {
 
-        }*/
-    }
+                IDAL.DO.DroneCharge droneChargeDL = new IDAL.DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId };
+                dalObject.addDronCharge(droneChargeDL);
+
+            }*/
+}
 

@@ -30,17 +30,20 @@ namespace PL
         public StationWindow(IBL blArg, Station stationArg)
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
             bl = blArg;
             station = stationArg;
             DroneChargingListView.ItemsSource = station.droneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
             DataContext = station;
-            Location l = station.Location;
+            laditudeTextBox.DataContext = station.Location;
+            longitudeTextBox.DataContext = station.Location;
         }
 
         public StationWindow(IBL blArg)
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;
         }
@@ -50,21 +53,115 @@ namespace PL
 
         }
 
-       private void DroneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DroneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
+
             new Drone(bl, bl.FindDrone(droneAtCharging.ID)).Show();
-            
+
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                bl.updateStation(new Station()
+                {
+                    Id = getId(),
+                    Name = getName(),
+                    droneAtChargings = null,
+                    Location = getLocation(),
+                    FreeChargeSlots = getChargeSlots()
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.addStationToDL(new Station()
+                {
+                    Id = getId(),
+                    Name = getName(),
+                    droneAtChargings = null,
+                    Location = getLocation(),
+                    FreeChargeSlots = getChargeSlots()
+                });
+                new StationsList(bl).Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            new StationsList(bl).Show();
+            Close();
+        }
+
+        private Location getLocation()
+        {
+            try
+            {
+                double longitude = Convert.ToDouble(longitudeTextBox.Text);
+                double latitude = Convert.ToDouble(laditudeTextBox.Text);
+                return new Location(longitude, latitude);
+            }
+            catch
+            {
+                throw new NotValidInput("Location");
+            }
+        }
+
+
+
+        private int getId()
+        {
+            try
+            {
+                return Convert.ToInt32(idTextBox.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("longitude");
+            }
+        }
+
+        private int getName()
+        {
+            try
+            {
+                return Convert.ToInt32(nameTextBox.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("name");
+            }
+        }
+
+        private int getChargeSlots()
+        {
+            try
+            {
+                return Convert.ToInt32(ChargeStolsTextBox.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("charge slots");
+            }
         }
     }
 }

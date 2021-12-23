@@ -150,7 +150,7 @@ namespace BL
 
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            dalObject.addDronCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.stationId});
+            dalObject.addDronCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId});
         }
     }
 }

@@ -11,6 +11,8 @@ namespace DO
     {
         public int DroneId { get; set; }
         public int stationId { get; set; }
+
+        public DateTime StartCharging { get; set; }
         public override string ToString()
         {
             return $"DroneCharge {DroneId} : {stationId}";

@@ -38,6 +38,7 @@
         <Button Content="group by number of free charge slots" HorizontalAlignment="Left" Margin="315,59,0,0" VerticalAlignment="Top" Height="27" Width="214" Click="Button_Click_groupByNumberOfFree"/>
         <Button Content="clear group by" HorizontalAlignment="Left" Margin="560,59,0,0" VerticalAlignment="Top" Height="27" Width="89" Click="Button_Click_ClearGroupBy"/>
         <Button Content="add station" HorizontalAlignment="Left" Margin="214,63,0,0" VerticalAlignment="Top" Height="19" Width="74" Click="adddStation_Click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_click"/>
     </Grid>
 
 </Window>

@@ -52,6 +52,9 @@ namespace BlApi
         public IEnumerable<StationToList> GetStationToListBy(Predicate<StationToList> findBy);
 
         public void addParcelToDL(Parcel parcel);
+        public void addStationToDL(Station station);
+
+        public void updateStation(Station station);
 
     }
 }
