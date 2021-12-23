@@ -28,7 +28,6 @@ namespace PL
 
             bL = BLFactory.GetBl();
             InitializeComponent();
-            
 
         }
         public MainWindow( IBL bL1)
