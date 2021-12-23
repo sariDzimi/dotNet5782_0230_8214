@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="images\drone.png" />
+    <None Remove="images\drone2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
 
   <ItemGroup>
     <Resource Include="images\drone.png" />
+    <Resource Include="images\drone2.jpg" />
   </ItemGroup>
 
 </Project>

@@ -44,5 +44,27 @@ namespace PL
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;
         }
+
+        private void DroneChargingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+       private void DroneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
+            new Drone(bl, bl.FindDrone(droneAtCharging.ID)).Show();
+            
+        }
+
+        private void updateButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

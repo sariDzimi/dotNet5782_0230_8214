@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="StationWindow" Height="450" Width="800">
     <Grid Margin="10,10,0,0">
-        <Label x:Name="addStationLabel" Content="add station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
-        <Label x:Name="updateStationLabel" Content="update station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
+        <Label x:Name="addStationLabel" Content="add station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141"  Visibility="Collapsed"/>
+        <Label x:Name="updateStationLabel" Content="update station!!!" HorizontalAlignment="Left" Height="24" Margin="268,34,0,0" VerticalAlignment="Top" Width="141"/>
         <Label x:Name="idLabel" Content="id" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top"/>
         <Label x:Name="nameLabel" Content="name" HorizontalAlignment="Left" Margin="88,140,0,0" VerticalAlignment="Top"/>
         <Label x:Name="locationLabel" Content="location" HorizontalAlignment="Left" Margin="88,171,0,0" VerticalAlignment="Top" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
@@ -26,7 +26,7 @@
         <TextBox x:Name="laditudeTextBox" HorizontalAlignment="Left" Margin="395,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
         <TextBox x:Name="ChargeStolsTextBox" HorizontalAlignment="Left" Margin="191,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=addStationLabel, Path=Visibility}"/>
 
-        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}">
+        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}" MouseDoubleClick="DroneChargingListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding ID}"/>
@@ -34,6 +34,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="425,123,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="updateButton_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="425,195,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="deleteButton_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="deleteButton_Click" Visibility="{Binding Visibility, ElementName=addStationLabel}"/>
 
     </Grid>
 </Window>
