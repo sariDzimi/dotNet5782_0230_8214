@@ -20,10 +20,11 @@
             <Setter Property="Background"
               Value="#FF272624" />
             <Setter Property="Foreground"
-              Value= "#FFCFAD80" />
-            <Setter Property="FontWeight" Value="Regular"/>
+              Value= "#FF272624" />
+            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="BorderBrush" Value="#FF272624"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -46,11 +47,11 @@
         <Grid.Background>
             <ImageBrush x:Name="imageDrone" ImageSource="./images/drone2.jpg"/>
         </Grid.Background>
-        <Button x:Name="DronesList" Content="Drones List" HorizontalAlignment="Left" Height="40" Margin="94,135,0,0" VerticalAlignment="Top" Width="168" Click="Button_Click" />
-        <Button Content="Parcels List" HorizontalAlignment="Left" Height="40" Margin="75,206,0,0" VerticalAlignment="Top" Width="206" Click="Button_Click_1" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
-        <Button Content="Stations List" HorizontalAlignment="Left" Height="52" Margin="75,361,0,0" VerticalAlignment="Top" Width="206" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
-        <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="75,284,0,0" VerticalAlignment="Top" Width="206" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
-        <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="34,24,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="ExtraBlack" Click="Button_Click_3" />
+        <Button x:Name="DronesList" Content="Drones List" HorizontalAlignment="Left" Height="35" Margin="99,43,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click" />
+        <Button Content="Parcels List" HorizontalAlignment="Left" Height="36" Margin="99,81,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click_1" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
+        <Button Content="Stations List" HorizontalAlignment="Left" Height="36" Margin="94,153,0,0" VerticalAlignment="Top" Width="102" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
+        <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="99,117,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
+        <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />
 
     </Grid>
 </Window>

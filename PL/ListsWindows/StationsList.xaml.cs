@@ -51,7 +51,6 @@ namespace PL
             view.GroupDescriptions.Add(groupDescription);
         }
 
-
         private void clearListView()
         {
             items = bL.GetStationToLists().ToList();
