@@ -10,7 +10,11 @@ namespace BL
 {
      partial class BL
     {
+        public void DeleateParcel(Parcel parcel)
+        {
 
+            
+        }
         /// <summary>
         /// Get Not Asigned Parcels
         /// </summary>

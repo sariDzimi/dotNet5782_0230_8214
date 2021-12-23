@@ -12,6 +12,8 @@
 
         <TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="173,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" />
 
+        <TextBox x:Name="iddroneLabel" HorizontalAlignment="Left" Margin="173,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" />
+
 
 
         <Grid Margin="199,166,252,40">
@@ -20,11 +22,13 @@
             <Label x:Name="priorityText" Content="priority" HorizontalAlignment="Left" Margin="87,40,0,0" VerticalAlignment="Top" Width="57"/>
             <ComboBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0"  VerticalAlignment="Top" Width="168"/>
             <Label x:Name="ScheduledTrxt" Content="Scheduled" HorizontalAlignment="Left" Margin="87,73,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="ScheduledLabel" HorizontalAlignment="Left" Margin="157,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <TextBox x:Name="ScheduledLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
             <Label  x:Name="PickedUpText" Content="PickedUp" HorizontalAlignment="Left" Margin="87,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.033,0.464"/>
-            <TextBox  x:Name="PickedUpLabel" HorizontalAlignment="Left" Margin="157,103,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
-            <Label x:Name="DeliveredText" Content="Delivered" HorizontalAlignment="Left" Margin="92,125,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="DeliveredLabel" HorizontalAlignment="Left" Margin="157,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <TextBox  x:Name="PickedUpLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,103,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label x:Name="DeliveredText" Content="Delivered" HorizontalAlignment="Left" Margin="90,125,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="DeliveredLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label x:Name="RequestedText" Content="Requested" HorizontalAlignment="Left" Margin="90,156,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="RequestedLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,160,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
         </Grid>
         <Grid Margin="234,54,133,255" >
             <Grid.ColumnDefinitions>
@@ -35,13 +39,20 @@
             <TextBox x:Name="customerAtParcelSenderLabel" HorizontalAlignment="Left" Margin="159,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
             <Label x:Name="customerAtParcelReciverLabel" Content="customer At Parcel Reciver" HorizontalAlignment="Left" Margin="4,76,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             <TextBox x:Name="customerAtParcelReciverText" HorizontalAlignment="Left" Margin="159,84,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
+            <Button x:Name="OpenDrone" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="-160,47,0,0" VerticalAlignment="Top" Click="OpenDrone_Click"/>
 
         </Grid>
         <Button x:Name="close" Content="X"  Margin="758,10,5,401" RenderTransformOrigin="1.63,0.089" Click="close_Click"/>
 
         <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
+        <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="109,99,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
+
         <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click_1"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="Button_Click"/>
+        <CheckBox x:Name="DeliveredC"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,297,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
+        <Button Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender"/>
+        <Button Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver"/>
     </Grid>
 </Window>

@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 
             public Parcel()
             {
-
             }
 
             public int Id { get; set; }

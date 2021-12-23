@@ -183,7 +183,7 @@ namespace DalObject
 
         public Parcel findParcelById(int id)
         {
-            return FindParcelBy(p => p.Id == id);
+            return FindParcelBy(p => p.Id == id && p.IsActive == true );
         }
 
         /// <summary>

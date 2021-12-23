@@ -129,15 +129,15 @@ namespace BL
 
         private ParcelStatus ParcelsStatus(Parcel parcel)
         {
-            ParcelStatus parcelStatus = ParcelStatus.created;
+            ParcelStatus parcelStatus = ParcelStatus.Requested;
             if (parcel.Requested != null)
-                parcelStatus = ParcelStatus.created;
+                parcelStatus = ParcelStatus.Requested;
             if (parcel.Scheduled != null)
-                parcelStatus = ParcelStatus.Belonged;
+                parcelStatus = ParcelStatus.Scheduled;
             if (parcel.PickedUp != null)
-                parcelStatus = ParcelStatus.Collected;
+                parcelStatus = ParcelStatus.PickedUp;
             if (parcel.Delivered != null)
-                parcelStatus = ParcelStatus.Provided;
+                parcelStatus = ParcelStatus.Delivered;
             return parcelStatus;
 
         }
@@ -166,10 +166,10 @@ namespace BL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                NumberOfParcelsInTheWayToCutemor = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.Collected),
-                NumberOfRecievedParcels = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.Provided),
-                NumberOfParcelsSendedAndNotProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.Collected),
-                NumberOfParcelsSendedAndProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.Provided)
+                NumberOfParcelsInTheWayToCutemor = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.PickedUp),
+                NumberOfRecievedParcels = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.Delivered),
+                NumberOfParcelsSendedAndNotProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.PickedUp),
+                NumberOfParcelsSendedAndProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.Delivered)
             };
         }
     }

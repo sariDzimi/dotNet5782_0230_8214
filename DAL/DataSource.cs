@@ -74,6 +74,7 @@ namespace DalObject
                 parcel.Weight = (WeightCategories)(rand.Next() % 3) + 1;
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
                 parcel.Requested = RandomDate();
+                parcel.IsActive = true;
                 List<Drone> notAssignDrones = getNotAssignedDrones();
                 parcel.Scheduled = (notAssignDrones.Count == 0) ? null : RandomDateOrNull(parcel.Requested);
                 parcel.PickedUp = RandomDateOrNull(parcel.Scheduled);

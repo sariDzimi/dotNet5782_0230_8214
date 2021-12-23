@@ -56,6 +56,8 @@ namespace BlApi
 
         public void updateStation(Station station);
 
+        public void updateParcel(Parcel parcel);
+
     }
 }
 

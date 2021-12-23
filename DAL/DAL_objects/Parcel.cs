@@ -22,6 +22,8 @@ namespace DO
 
         public DateTime? Delivered { get; set; }
 
+        public bool IsActive { get; set; }
+
         public override string ToString()
         {
             return $"sender {SenderId} : {Id}";
