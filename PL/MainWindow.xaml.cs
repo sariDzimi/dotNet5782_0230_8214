@@ -56,7 +56,8 @@ namespace PL
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            new CustomersList(bL).Show();
+            Close();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
