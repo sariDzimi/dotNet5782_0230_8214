@@ -18,21 +18,21 @@ using System.Threading.Tasks;
 
             public int ID { get; set; }
 
-            public WeightCategories weightCategories { get; set; }
+            public WeightCategories WeightCategories { get; set; }
 
-            public Pritorities pritorities { get; set; }
+            public Pritorities Pritorities { get; set; }
 
-            public ParcelStatus parcelStatus { get; set; }
+            public ParcelStatus ParcelStatus { get; set; }
 
-            public CustomerAtParcel customerAtParcel { get; set; }
+            public CustomerAtParcel CustomerAtParcel { get; set; }
 
 
             public override string ToString()
             {
                 return $"ParcelAtCustomer  : {ID}, " +
-                    $" , weightCategories:{weightCategories} {pritorities}, pritorities: " +
-                    $" parcelStatus {parcelStatus}, " +
-                    $"customerAtParcel : {customerAtParcel},";
+                    $" , weightCategories:{WeightCategories} {Pritorities}, pritorities: " +
+                    $" parcelStatus {ParcelStatus}, " +
+                    $"customerAtParcel : {CustomerAtParcel},";
                 ;
             }
 

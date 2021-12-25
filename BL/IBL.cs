@@ -25,7 +25,7 @@ namespace BlApi
         public IEnumerable<Drone> GetDrones();
         public void updateDroneModel(int id, string model);
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1);
-        public void updateDataCustomer(int id, string name = null, string phone = null);
+        //public void updateDataCustomer(int id, string name = null, string phone = null);
         public void updateDrone(Drone drone);
         public IEnumerable<DroneToList> GetDroneToLists();
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy);
@@ -57,6 +57,14 @@ namespace BlApi
         public void updateStation(Station station);
 
         public void updateParcel(Parcel parcel);
+
+        public void updateCustomer(Customer customer);
+
+        public Customer FindCustomer(int id);
+
+        public void addCustomerToDL(Customer customer);
+
+
 
     }
 }

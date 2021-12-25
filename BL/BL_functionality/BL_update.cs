@@ -65,7 +65,7 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="phone"></param>
-        public void updateDataCustomer(int id, string name = null, string phone = null)
+/*        public void updateDataCustomer(int id, string name = null, string phone = null)
         {
             DO.Customer customer = dalObject.findCustomerById(id);
             if (name != null)
@@ -73,6 +73,18 @@ namespace BL
             if (phone != null)
                 customer.Phone = phone;
             dalObject.updateCustomer(customer);
+        }*/
+
+        public void updateCustomer(Customer customer)
+        {
+            dalObject.updateCustomer(new DO.Customer()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                Longitude = customer.Location.Longitude,
+                Latitude = customer.Location.Latitude
+            });
         }
 
         /// <summary>

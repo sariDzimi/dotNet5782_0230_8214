@@ -18,9 +18,6 @@ namespace BO
             Location = new Location(Longitude, Latitude);
             parcelsSentedByCustomer = new List<ParcelAtCustomer>();
             parcelsSentedToCustomer = new List<ParcelAtCustomer>();
-
-
-
         }
 
         public Customer()

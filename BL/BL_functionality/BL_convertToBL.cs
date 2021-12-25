@@ -41,12 +41,12 @@ namespace BL
             {
                 if (p.customerAtParcelSender.Id == CustomerBL.Id)
                 {
-                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelsStatus(p) };
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, CustomerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, WeightCategories = p.Weight, Pritorities = p.Pritority, ParcelStatus = ParcelsStatus(p) };
                     CustomerBL.parcelsSentedByCustomer.Add(parcelAtCustomer);
                 }
                 if (p.customerAtParcelReciver.Id == CustomerBL.Id)
                 {
-                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, customerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, weightCategories = p.Weight, pritorities = p.Pritority, parcelStatus = ParcelsStatus(p) };
+                    ParcelAtCustomer parcelAtCustomer = new ParcelAtCustomer() { ID = p.Id, CustomerAtParcel = new CustomerAtParcel() { Id = CustomerBL.Id, Name = CustomerBL.Name }, WeightCategories = p.Weight, Pritorities = p.Pritority, ParcelStatus = ParcelsStatus(p) };
                     CustomerBL.parcelsSentedToCustomer.Add(parcelAtCustomer);
                 }
             }
@@ -166,10 +166,10 @@ namespace BL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                NumberOfParcelsInTheWayToCutemor = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.PickedUp),
-                NumberOfRecievedParcels = customer.parcelsSentedToCustomer.Count(p => p.parcelStatus == ParcelStatus.Delivered),
-                NumberOfParcelsSendedAndNotProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.PickedUp),
-                NumberOfParcelsSendedAndProvided = customer.parcelsSentedByCustomer.Count(p => p.parcelStatus == ParcelStatus.Delivered)
+                NumberOfParcelsInTheWayToCutemor = customer.parcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
+                NumberOfRecievedParcels = customer.parcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered),
+                NumberOfParcelsSendedAndNotProvided = customer.parcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
+                NumberOfParcelsSendedAndProvided = customer.parcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered)
             };
         }
     }

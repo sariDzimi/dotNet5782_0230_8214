@@ -29,7 +29,7 @@ using System.Threading.Tasks;
         }
 
         public class IdAlreadyExist : Exception{
-            public IdAlreadyExist(int id) : base( $"{id}, not valid") { }
+            public IdAlreadyExist(int id) : base( $"{id}, already exits") { }
 
         }
 

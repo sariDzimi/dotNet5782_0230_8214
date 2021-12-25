@@ -56,7 +56,7 @@ namespace PL
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-           BO.DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
+           DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
            BO.Drone droneBL = bl.FindDrone(droneToList.Id);
             new Drone(bl, droneBL).Show();
             Close();
@@ -68,7 +68,7 @@ namespace PL
             Close();
 
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow(bl).Show();
             Close();

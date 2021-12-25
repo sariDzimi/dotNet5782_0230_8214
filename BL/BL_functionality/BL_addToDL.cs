@@ -34,7 +34,7 @@ namespace BL
         /// <param name="station"></param>
         public void addStationToDL(Station station)
         {
-            if (dalObject.GetStations().Any(s => s.Id == station.Id)) 
+            if (dalObject.GetStations().Any(s => s.Id == station.Id))
                 throw new IdAlreadyExist(station.Id);
 
             DO.Station stationDL = new DO.Station()
@@ -74,26 +74,28 @@ namespace BL
             };
             dalObject.addParcel(parcelDL);
         }
-    }
 
-    /// <summary>
-    /// add Customer To DL
-    /// </summary>
-    /// <param name="customer"></param>
-    /*        public void addCustomerToDL(Customer customer)
+
+        /// <summary>
+        /// add Customer To DL
+        /// </summary>
+        /// <param name="customer"></param>
+        public void addCustomerToDL(Customer customer)
+        {
+            if (dalObject.GetCustomer().Any(c => c.Id == customer.Id))
+                throw new IdAlreadyExist(customer.Id);
+
+            DO.Customer customerDL = new DO.Customer()
             {
-                foreach (var item in dalObject.GetStations().ToList())
-                {
-                    if (item.Id == customer.Id)
-                    {
-                        throw new IdAlreadyExist(customer.Id);
-                    }
-                }
-
-                IDAL.DO.Customer customerDL = new IDAL.DO.Customer() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Phone = customer.Phone, Latitude = customer.Location.Latitude };
-                dalObject.addCustomer(customerDL);
-
-            }*/
+                Id = customer.Id,
+                Name = customer.Name,
+                Longitude = customer.Location.Longitude,
+                Phone = customer.Phone,
+                Latitude = customer.Location.Latitude
+            };
+            dalObject.addCustomer(customerDL);
+        }
+    }
 
     /// <summary>
     /// add DroneCharge To DL

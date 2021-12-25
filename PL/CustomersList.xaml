@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="CustomersList" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="248" Margin="0,176,0,0" VerticalAlignment="Top" Width="780" >
+        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="248" Margin="0,176,0,0" VerticalAlignment="Top" Width="780" MouseDoubleClick="customeList_MouseDoubleList" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="id" Width="40" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="name" Width="50" DisplayMemberBinding="{Binding Nane}" />
+                    <GridViewColumn Header="name" Width="50" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="phone" Width="90" DisplayMemberBinding="{Binding Phone}" />
                     <GridViewColumn Header="coming parcels" Width="110" DisplayMemberBinding="{Binding NumberOfParcelsInTheWayToCutemor}" />
                     <GridViewColumn Header="recieved parcels" Width="100" DisplayMemberBinding="{Binding NumberOfRecievedParcels}" />
@@ -22,6 +22,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_Click"/>
+        <Button Content="add customer" HorizontalAlignment="Left" Margin="264,48,0,0" VerticalAlignment="Top" Height="68" Width="118" Click="addCustomer_click"/>
 
     </Grid>
 </Window>

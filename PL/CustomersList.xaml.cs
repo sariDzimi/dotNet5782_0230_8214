@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace PL
         public CustomersList()
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
         }
 
         public CustomersList(IBL blArg)
@@ -37,6 +39,20 @@ namespace PL
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow(bl).Show();
+            Close();
+        }
+
+        private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
+        {
+            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
+            BO.Customer customer = bl.FindCustomer(customerToList.Id);
+            new CustomerWindow(bl, customer).Show();
+            Close();
+        }
+
+        private void addCustomer_click(object sender, RoutedEventArgs e)
+        {
+            new CustomerWindow(bl).Show();
             Close();
         }
     }
