@@ -12,7 +12,9 @@ namespace BL
     {
         public void DeleateParcel(Parcel parcel)
         {
-
+            DO.Parcel parcel1 = dalObject.FindParcelBy((p) => p.Id == parcel.Id);
+            parcel1.IsActive = false;
+            dalObject.updateParcel(parcel1);
             
         }
         /// <summary>
