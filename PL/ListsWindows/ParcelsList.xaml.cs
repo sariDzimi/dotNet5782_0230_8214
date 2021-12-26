@@ -91,7 +91,7 @@ namespace PL
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddParcelButton(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bl).Show();
             Close();

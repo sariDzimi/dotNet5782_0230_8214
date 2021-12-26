@@ -11,10 +11,16 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Expander Header="{Binding ID}" IsExpanded="false" >
-
+                        <Expander  IsExpanded="True" >
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                </StackPanel>
+                            </Expander.Header>
                             <ItemsPresenter />
                         </Expander>
+
+                       
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -22,7 +28,7 @@
     </Window.Resources>
     <Grid>
         <Grid>
-            <Button Content="Add Parcel" HorizontalAlignment="Left" Margin="298,28,0,0" VerticalAlignment="Top" Width="98"  Height="32" Click="Button_Click_3"/>
+            <Button x:Name="AddParcel"  Content="Add Parcel" HorizontalAlignment="Left" Margin="298,28,0,0" VerticalAlignment="Top" Width="98"  Height="32" Click="AddParcelButton"/>
 
             <ComboBox Name="PrioritySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="150" SelectionChanged="PrioritySelector_SelectionChanged" Grid.Column="0" Margin="617,69,0,0" Height="31" />
             <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.Column="0" Margin="617,21,0,0" HorizontalAlignment="Left" Width="148" Height="30"/>
