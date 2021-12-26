@@ -18,9 +18,9 @@
 
         <Grid Margin="199,166,252,40">
             <Label x:Name="weightText" HorizontalAlignment="Left" Margin="87,14,0,0"  VerticalAlignment="Top" Width="57" Content="Weight"/>
-            <ComboBox x:Name="weightLabel" HorizontalAlignment="Left" Margin="157,14,0,0"  VerticalAlignment="Top" Width="167"/>
+            <ComboBox x:Name="weightLabel" Visibility="{Binding ElementName= priorityLabel, Path=Visibility}" HorizontalAlignment="Left" Margin="157,14,0,0"  VerticalAlignment="Top" Width="167"/>
             <Label x:Name="priorityText" Content="priority" HorizontalAlignment="Left" Margin="87,40,0,0" VerticalAlignment="Top" Width="57"/>
-            <ComboBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0"  VerticalAlignment="Top" Width="168"/>
+            <ComboBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0"  VerticalAlignment="Top" Width="168" Visibility="Visible"/>
             <Label x:Name="ScheduledTrxt" Content="Scheduled" HorizontalAlignment="Left" Margin="87,73,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="ScheduledLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
             <Label  x:Name="PickedUpText" Content="PickedUp" HorizontalAlignment="Left" Margin="87,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.033,0.464"/>
@@ -47,12 +47,14 @@
         <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="109,99,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
 
-        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click_1"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="Button_Click"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="UpdatePrcel"/>
+        <Button x:Name="DeleateParcel" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="AddParcel"/>
         <CheckBox x:Name="DeliveredC"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,297,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
         <Button Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender"/>
         <Button Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver"/>
+        <TextBox x:Name="weightLabel2" Text="" HorizontalAlignment="Left" Margin="536,179,0,0" VerticalAlignment="Top" Height="22" Width="169"/>
+        <TextBox x:Name="priorityLabel2" Text="" HorizontalAlignment="Left" Margin="538,209,0,0" VerticalAlignment="Top" Width="169" Height="23"/>
     </Grid>
 </Window>
