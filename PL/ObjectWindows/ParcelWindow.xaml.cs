@@ -34,15 +34,12 @@ namespace PL
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            //DroneStatusDroneL.Visibility = Visibility.Hidden;
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
             bL1 = bL;
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //MaxWeight.Visibility = Visibility.Hidden;
-            //addButton.IsEnabled = true;
+           
         }
 
         public ParcelWindow( IBL bl, Parcel parcel1 )

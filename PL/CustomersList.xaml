@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomersList" Height="450" Width="800">
+        Title="CustomersList" Height="450" Width="800"
+         Style="{StaticResource OurStyle}">
     <Grid>
         <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="248" Margin="0,176,0,0" VerticalAlignment="Top" Width="780" MouseDoubleClick="customeList_MouseDoubleList" >
             <ListView.View>

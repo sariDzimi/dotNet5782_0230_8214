@@ -11,5 +11,13 @@
               Value="Black" />
 
         </Style>
+        <Style x:Key="OurStyle" TargetType="Window">
+            <Setter Property="Background"
+                    Value="#FFD0AF81">
+            </Setter>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#FFF1E2E2"></Setter>
+            
+        </Style>
     </Application.Resources>
 </Application>

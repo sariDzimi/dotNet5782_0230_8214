@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesList" Height="640" Width="800">
+        Title="DronesList" Height="640" Width="800"
+         Style="{StaticResource OurStyle}">
     <Window.Resources>
         <Style x:Key="close" TargetType="Button">
             <Setter Property="Background"
