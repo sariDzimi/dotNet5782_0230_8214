@@ -27,7 +27,6 @@ namespace PL
         public StationsList()
         {
             InitializeComponent();
-            
         }
 
         public StationsList(IBL bl)
@@ -68,7 +67,6 @@ namespace PL
         {
             clearListView();
         }
-
 
         private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
         {

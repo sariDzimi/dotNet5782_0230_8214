@@ -64,5 +64,10 @@ namespace PL
         {
             DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
+
+        private void workerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SignWindow1()
+        }
     }
 }
