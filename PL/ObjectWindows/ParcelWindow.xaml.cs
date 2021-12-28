@@ -34,19 +34,18 @@ namespace PL
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            //DroneStatusDroneL.Visibility = Visibility.Hidden;
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
             bL1 = bL;
-
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //MaxWeight.Visibility = Visibility.Hidden;
-            //addButton.IsEnabled = true;
+            AddParcelButton.Visibility = Visibility.Visible;
+            OpenReciver.Visibility = Visibility.Hidden;
+           
         }
 
         public ParcelWindow( IBL bl, Parcel parcel1 )
         {
             InitializeComponent();
+            AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
             bL1 = bl;
             idParcelLabel.Text = $"{parcel.Id}";
@@ -63,8 +62,7 @@ namespace PL
             {
                 DeleateParcel.Visibility = Visibility.Visible;
             }
-            weightLabel2.Text = $"{parcel.Weight}";
-            priorityLabel2.Text = $"{parcel.Pritority}";
+           
             weightLabel.Text = $"{parcel.Weight}";
             priorityLabel.Text = $"{parcel.Pritority}";
             RequestedLabel.Text = $"{parcel.Requested}";
@@ -101,10 +99,11 @@ namespace PL
         {
             try
             {
-                parcel.Requested = DateTime.Now;
+               // BO.Parcel parcel = new Parcel();
+                //parcel.Requested = DateTime.Now;
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
-                bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1 });
+                bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1, Requested= DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 new ParcelsList(bL1).Show();
                 Close();
