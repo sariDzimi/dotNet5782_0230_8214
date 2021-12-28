@@ -22,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        public CurrentUser currentUser = new CurrentUser();
         public IBL bL;
         public MainWindow()
         {
@@ -62,12 +63,87 @@ namespace PL
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            //DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void workerButton_Click(object sender, RoutedEventArgs e)
         {
-            SignWindow1()
+            
+        }
+
+        private void managerButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ManegerWindow(bL, currentUser).Show();
+            Close();
+        }
+
+        private void customerButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void EnterManeger(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.Manager manager = new BO.Manager() { UserName = getUserName(), Password = getPassword() };
+                bool flag;
+                flag = bL.CheckWorkerIfExixst(manager);
+                if (flag == true)
+                {
+                    currentUser.Type = "Maneger";
+                    MessageBox.Show("you are in");
+                }
+
+
+
+                else
+                {
+                    MessageBox.Show("you are not maneger, please login like user");
+                    new MainWindow(bL).Show();
+                    Close();
+                }
+            }
+            catch (BO.NotFound)
+            {
+                MessageBox.Show("you are not maneger, please login like user");
+                new MainWindow(bL).Show();
+                Close();
+            }
+
+            catch (NotValidInput ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+        }
+
+
+        private int getPassword()
+        {
+
+            try
+            {
+                return Convert.ToInt32(PassWordText.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("Password");
+            }
+        }
+
+        private string getUserName()
+        {
+            try
+            {
+                return UserNameText.Text;
+            }
+            catch
+            {
+                throw new NotValidInput("UserName");
+            }
         }
     }
 }
+

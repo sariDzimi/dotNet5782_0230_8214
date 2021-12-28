@@ -25,11 +25,11 @@ namespace PL
         Station station;
         public StationWindow()
         {
-            InitializeComponent();
+           // InitializeComponent();
         }
         public StationWindow(IBL blArg, Station stationArg)
         {
-            InitializeComponent();
+            //InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             station = stationArg;
@@ -42,7 +42,7 @@ namespace PL
 
         public StationWindow(IBL blArg)
         {
-            InitializeComponent();
+            //InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;

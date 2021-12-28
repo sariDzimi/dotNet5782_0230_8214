@@ -145,6 +145,12 @@ namespace DalObject
                    select parcel;
         }
 
+        public IEnumerable<Manager> GetManeger()
+        {
+            return from maneger in DataSource.Managers
+                   select maneger;
+        }
+
         /// <summary>
         /// returns droneCharges form datasource
         /// </summary>
@@ -180,6 +186,25 @@ namespace DalObject
             }
             return parcelDL;
         }
+
+        public Manager findManegerBy(Predicate<Manager> findBy)
+        {
+            DO.Manager manager = new DO.Manager();
+
+            try
+            {
+                manager = (from man in DataSource.Managers
+                            where findBy(man)
+                            select man).First();
+            }
+            catch (Exception ex)
+            {
+                throw new NotFoundException($"{ex}");
+            }
+            return manager;
+        }
+
+
 
         public Parcel findParcelById(int id)
         {

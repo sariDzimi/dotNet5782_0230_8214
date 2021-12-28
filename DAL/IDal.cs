@@ -66,6 +66,8 @@ namespace DalApi
         public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();
+        public IEnumerable<Manager> GetManeger();
+        public Manager findManegerBy(Predicate<Manager> findBy);
 
     }
 
