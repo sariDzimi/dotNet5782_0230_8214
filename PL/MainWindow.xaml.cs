@@ -241,12 +241,12 @@ namespace PL
         {
             try
             {
-                BO.Customer customer = new BO.Customer() { Id = getId(), Name = getNameLogin() };
+                 //= new BO.Customer() { Id = getId(), Name = getNameLogin() };
 
-                bL.FindCustomer(customer.Id);
+                BO.Customer customer=bL.FindCustomer(getId());
                 MessageBox.Show("you are in");
                 currentUser.Type = "Customer";
-                new ManegerWindow(bL, currentUser).Show();
+                new CustomerWindow(bL,customer, currentUser).Show();
             }
             catch (BO.NotFound)
             {
@@ -272,7 +272,7 @@ namespace PL
                 bL.addCustomerToDL(customer);
                 currentUser.Type = "Customer";
                 MessageBox.Show("you are in");
-                new ManegerWindow(bL, currentUser).Show();
+                new CustomerWindow(bL,customer, currentUser).Show();
                 Close();
 
             }
