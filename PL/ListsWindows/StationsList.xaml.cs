@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class StationsList : Window
     {
+        CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
         List<StationToList> items;
@@ -29,8 +30,9 @@ namespace PL
             InitializeComponent();
         }
 
-        public StationsList(IBL bl)
+        public StationsList(IBL bl, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
@@ -72,19 +74,19 @@ namespace PL
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.FindStation(stationToList.ID);
-            new StationWindow(bL, station).Show();
+            new StationWindow(bL, station, currentUser).Show();
             Close();
         }
 
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-            new StationWindow(bL).Show();
+            new StationWindow(bL, currentUser).Show();
             Close();
         }
 
         private void closeButton_click(object sender, RoutedEventArgs e)
         {
-            new MainWindow(bL).Show();
+            new ManegerWindow(bL, currentUser).Show();
             Close();
         }
     }

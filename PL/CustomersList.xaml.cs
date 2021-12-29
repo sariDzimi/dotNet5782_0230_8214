@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class CustomersList : Window
     {
+        CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         public CustomersList()
         {
@@ -27,8 +28,9 @@ namespace PL
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomersList(IBL blArg)
+        public CustomersList(IBL blArg, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             bl = blArg;
             WindowStyle = WindowStyle.None;
@@ -38,7 +40,7 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow(bl).Show();
+            new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 
@@ -46,13 +48,13 @@ namespace PL
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.FindCustomer(customerToList.Id);
-            new CustomerWindow(bl, customer).Show();
+            new CustomerWindow(bl, customer, currentUser).Show();
             Close();
         }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl).Show();
+            new CustomerWindow(bl, currentUser).Show();
             Close();
         }
     }

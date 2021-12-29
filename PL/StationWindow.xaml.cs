@@ -21,14 +21,16 @@ namespace PL
     /// </summary>
     public partial class StationWindow : Window
     {
+        CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Station station;
         public StationWindow()
         {
            // InitializeComponent();
         }
-        public StationWindow(IBL blArg, Station stationArg)
+        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             //InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
@@ -40,8 +42,9 @@ namespace PL
             longitudeTextBox.DataContext = station.Location;
         }
 
-        public StationWindow(IBL blArg)
-        {
+        public StationWindow(IBL blArg, CurrentUser currentUser1)
+      {
+            currentUser = currentUser1;
             //InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
@@ -57,7 +60,7 @@ namespace PL
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
 
-            new Drone(bl, bl.FindDrone(droneAtCharging.ID)).Show();
+            new Drone(bl, bl.FindDrone(droneAtCharging.ID), currentUser).Show();
 
         }
 
@@ -97,7 +100,7 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
-                new StationsList(bl).Show();
+                new StationsList(bl, currentUser).Show();
                 Close();
             }
             catch (Exception ex)
@@ -108,7 +111,7 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList(bl).Show();
+            new StationsList(bl, currentUser).Show();
             Close();
         }
 

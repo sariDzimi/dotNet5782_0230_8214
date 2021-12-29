@@ -148,6 +148,11 @@ namespace PL
                 throw new NotValidInput("UserName");
             }
         }
+
+        private void LogInBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

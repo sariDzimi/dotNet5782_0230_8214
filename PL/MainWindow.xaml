@@ -86,7 +86,7 @@
                             <TextBox x:Name="IdTextBox" Grid.Row="1" Grid.Column="3" ></TextBox>
                             <Label x:Name="NameLabel" Grid.Row="3" Grid.Column="1">Name:</Label>
                             <TextBox x:Name="NameTextBox" Grid.Row="3" Grid.Column="3" ></TextBox>
-                            <!--<Button x:Name="LogInBtn" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Click="LogInCLick" >Log In</Button>-->
+                            <Button x:Name="LogInBtn" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Click="LogInBtn_Click"  >Log In</Button>
                         </Grid>
 
                     </Grid>

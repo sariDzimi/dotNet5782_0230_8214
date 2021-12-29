@@ -21,6 +21,8 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
+        CurrentUser currentUser = new CurrentUser();
+
         IBL bL;
         BO.Drone drone;
         public bool boo = false;
@@ -31,8 +33,9 @@ namespace PL
 
             InitializeComponent();
         }
-        public Drone(IBL bL1)
+        public Drone(IBL bL1, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
@@ -43,10 +46,10 @@ namespace PL
             addButton.IsEnabled = true;
             
         }
-        public Drone(IBL bL1, BO.Drone droneBL)
+        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
         {
             WindowStyle = WindowStyle.None;
-
+            currentUser = currentUser1;
             drone = droneBL;
             InitializeComponent();
             bL = bL1;
@@ -103,7 +106,7 @@ namespace PL
             {
                 bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 MessageBox.Show("the drone was added succesfuly!!!");
-                new DronesList(bL).Show();
+                new DronesList(bL, currentUser).Show();
                 Close();
             }
             catch (NotValidInput ex)
@@ -124,7 +127,7 @@ namespace PL
 
         private void ButtonClick_Close(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL).Show();
+            new DronesList(bL, currentUser).Show();
             Close();
         }
 
@@ -246,7 +249,7 @@ namespace PL
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL).Show();
+            new DronesList(bL, currentUser).Show();
             Close();
         }
 
@@ -315,7 +318,7 @@ namespace PL
         {
             Parcel parcel = new Parcel();
             parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
-            new ParcelWindow(bL, parcel).Show();
+            new ParcelWindow(bL, parcel, currentUser).Show();
         }
     }
 }
