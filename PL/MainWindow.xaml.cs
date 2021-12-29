@@ -26,9 +26,10 @@ namespace PL
         public IBL bL;
         public MainWindow()
         {
-            InitializeComponent();
 
             bL = BLFactory.GetBl();
+            InitializeComponent();
+
 
         }
         public MainWindow( IBL bL1)
