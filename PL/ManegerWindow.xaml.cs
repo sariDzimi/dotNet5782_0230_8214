@@ -34,6 +34,36 @@ namespace PL
             currentUser = CurrentUser1;
             InitializeComponent();
 
+            UserText.Text = currentUser.Type;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new DronesList(bL1).Show();
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new ParcelsList(bL1).Show();
+            Close();
+        }
+        private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
+        {
+            new StationsList(bL1).Show();
+            Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            new CustomersList(bL1).Show();
+            Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+           DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
 
         //private void Enter(object sender, RoutedEventArgs e)

@@ -31,6 +31,7 @@ namespace PL
             InitializeComponent();
 
 
+
         }
         public MainWindow( IBL bL1)
         {
@@ -39,33 +40,33 @@ namespace PL
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new DronesList(bL).Show();
-            Close();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    new DronesList(bL).Show();
+        //    Close();
+        //}
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            new ParcelsList(bL).Show();
-            Close();
-        }
-        private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
-        {
-            new StationsList(bL).Show();
-            Close();
-        }
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    new ParcelsList(bL).Show();
+        //    Close();
+        //}
+        //private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
+        //{
+        //    new StationsList(bL).Show();
+        //    Close();
+        //}
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            new CustomersList(bL).Show();
-            Close();
-        }
+        //private void Button_Click_2(object sender, RoutedEventArgs e)
+        //{
+        //    new CustomersList(bL).Show();
+        //    Close();
+        //}
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            //DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
-        }
+        //private void Button_Click_3(object sender, RoutedEventArgs e)
+        //{
+        //    //DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+        //}
 
         private void workerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -93,6 +94,8 @@ namespace PL
                 {
                     currentUser.Type = "Maneger";
                     MessageBox.Show("you are in");
+                    new ManegerWindow(bL, currentUser).Show();
+                    Close();
                 }
 
 
