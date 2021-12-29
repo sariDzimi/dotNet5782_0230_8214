@@ -198,6 +198,34 @@
         mc:Ignorable="d"
         Title="ManegerWindow" Height="450" Width="800">
     <Window.Resources>
+        <Style x:Key="commonStyle"
+           TargetType="Control">
+            <Setter Property="FontSize"
+              Value="50" />
+            <Setter Property="FontFamily"
+              Value="DORinline" />
+        </Style>
+        <Style TargetType="Button"
+           BasedOn="{StaticResource commonStyle}">
+            <Setter Property="Background"
+              Value="#FF272624" />
+            <Setter Property="Foreground"
+              Value= "#FF272624" />
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="#FF272624"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="close" TargetType="Button">
             <Setter Property="Background"
               Value= "#FFFF061C" />
@@ -211,11 +239,13 @@
             <ImageBrush x:Name="imageDrone" ImageSource="./images/drone2.jpg"/>
         </Grid.Background>
 
-        <!--<Button x:Name="DronesList" Content="Drones List" HorizontalAlignment="Left" Height="35" Margin="99,43,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click" Visibility="Hidden"/>
-    <Button Content="Parcels List" HorizontalAlignment="Left" Height="36" Margin="99,81,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click_1" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
-    <Button Content="Stations List" HorizontalAlignment="Left" Height="36" Margin="94,153,0,0" VerticalAlignment="Top" Width="102" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
-    <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="99,117,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
-    <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />-->
-    
+        <Button x:Name="DronesList" Content="Drones List" HorizontalAlignment="Left" Height="35" Margin="99,43,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click" Visibility="Hidden"/>
+        <Button Content="Parcels List" HorizontalAlignment="Left" Height="36" Margin="99,81,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click_1" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
+        <Button Content="Stations List" HorizontalAlignment="Left" Height="36" Margin="94,153,0,0" VerticalAlignment="Top" Width="102" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
+        <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="99,117,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
+        <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />
+        <Label Content="User:" HorizontalAlignment="Left" Margin="564,19,0,0" VerticalAlignment="Top" Height="25" Width="38"/>
+        <TextBlock x:Name="UserText" HorizontalAlignment="Left" Margin="607,24,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="64"/>
+
     </Grid>
 </Window>
