@@ -52,6 +52,7 @@
         <Button Content="Stations List" HorizontalAlignment="Left" Height="36" Margin="94,153,0,0" VerticalAlignment="Top" Width="102" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
         <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="99,117,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
         <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />
+        <Button Content="Button" HorizontalAlignment="Left" Margin="229,81,0,0" VerticalAlignment="Top" Click="Button_Click_4"/>
 
     </Grid>
 </Window>
