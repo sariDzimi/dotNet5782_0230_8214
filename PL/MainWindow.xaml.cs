@@ -239,9 +239,10 @@ namespace PL
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = new BO.Customer() { Id = getId(), Name = getNameLogin() };
             try
             {
+                BO.Customer customer = new BO.Customer() { Id = getId(), Name = getNameLogin() };
+
                 bL.FindCustomer(customer.Id);
                 MessageBox.Show("you are in");
                 currentUser.Type = "Customer";
@@ -264,9 +265,10 @@ namespace PL
 
         private void SignUpSignInBtn_Click(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = new BO.Customer() { Id = getIdSighnUp(), Name = getNameSighnUp(), Phone = getPhone(), Location = new BO.Location(getLutitude(), getLongitute()) };
             try
             {
+                BO.Customer customer = new BO.Customer() { Id = getIdSighnUp(), Name = getNameSighnUp(), Phone = getPhone(), Location = new BO.Location(getLutitude(), getLongitute()) };
+
                 bL.addCustomerToDL(customer);
                 currentUser.Type = "Customer";
                 MessageBox.Show("you are in");
