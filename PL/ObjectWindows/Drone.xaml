@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="450" Width="800">
+        Title="Drone" Height="450" Width="800"
+         Style="{StaticResource OurStyle}">
     <Window.Resources>
         <Style TargetType="local:Drone">
             <Setter Property="Background"

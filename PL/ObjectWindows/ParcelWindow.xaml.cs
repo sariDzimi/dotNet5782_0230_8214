@@ -34,19 +34,18 @@ namespace PL
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            //DroneStatusDroneL.Visibility = Visibility.Hidden;
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
             bL1 = bL;
-
-            //WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //MaxWeight.Visibility = Visibility.Hidden;
-            //addButton.IsEnabled = true;
+            AddParcelButton.Visibility = Visibility.Visible;
+            OpenReciver.Visibility = Visibility.Hidden;
+           
         }
 
         public ParcelWindow( IBL bl, Parcel parcel1 )
         {
             InitializeComponent();
+            AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
             bL1 = bl;
             idParcelLabel.Text = $"{parcel.Id}";
@@ -54,8 +53,16 @@ namespace PL
             {
                 iddroneLabel.Text = $"{parcel.droneAtParcel.Id}";
                 if(parcel.Delivered == null)
-                OpenDrone.Visibility = Visibility.Visible;
+                {
+                    OpenDrone.Visibility = Visibility.Visible;
+                }
+                
             }
+            if (parcel.Scheduled == null)
+            {
+                DeleateParcel.Visibility = Visibility.Visible;
+            }
+           
             weightLabel.Text = $"{parcel.Weight}";
             priorityLabel.Text = $"{parcel.Pritority}";
             RequestedLabel.Text = $"{parcel.Requested}";
@@ -66,7 +73,12 @@ namespace PL
             customerAtParcelReciverText.Text = $"{parcel.customerAtParcelReciver}";
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
-            if(parcel.PickedUp == null)
+            weightLabel.IsEditable = true;
+            weightLabel.Text = $"{parcel.Weight}";
+            priorityLabel.IsEditable = true;
+            priorityLabel.Text = $"{parcel.Pritority}";
+
+            if (parcel.PickedUp == null)
             {
                 PickedUpC.Visibility = Visibility.Visible;
             }
@@ -83,14 +95,15 @@ namespace PL
             Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddParcel(object sender, RoutedEventArgs e)
         {
             try
             {
-                parcel.Requested = DateTime.Now;
+               // BO.Parcel parcel = new Parcel();
+                //parcel.Requested = DateTime.Now;
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
-                bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1 });
+                bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1, Requested= DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 new ParcelsList(bL1).Show();
                 Close();
@@ -174,16 +187,23 @@ namespace PL
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void UpdatePrcel(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
+                BO.WeightCategories weightCategories = getMaxWeight();
+                BO.Pritorities pritorities = getPritorities();
+                parcel.Pritority = pritorities;
+                parcel.Weight = weightCategories;
+                bL1.updateParcel(parcel);
 
-            //}
-            //catch ()
-            //{
+            }
+            catch (NotValidInput ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
 
-            //}
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -228,12 +248,14 @@ namespace PL
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
-
+            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelSender.Id);
+            new CustomerWindow(bL1, customer).Show();
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
-
+            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
+            new CustomerWindow(bL1, customer).Show();
         }
     }
 }

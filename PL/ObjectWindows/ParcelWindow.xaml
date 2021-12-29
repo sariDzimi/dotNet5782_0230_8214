@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Parcel" Height="450" Width="800">
+        Title="Parcel" Height="450" Width="800"
+         Style="{StaticResource OurStyle}">
     <Grid>
 
 
 
-        <TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="173,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" />
+        <TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="173,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"   />
 
-        <TextBox x:Name="iddroneLabel" HorizontalAlignment="Left" Margin="173,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" />
+        <TextBox x:Name="iddroneLabel" HorizontalAlignment="Left" Margin="173,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}" />
 
 
 
         <Grid Margin="199,166,252,40">
             <Label x:Name="weightText" HorizontalAlignment="Left" Margin="87,14,0,0"  VerticalAlignment="Top" Width="57" Content="Weight"/>
-            <ComboBox x:Name="weightLabel" HorizontalAlignment="Left" Margin="157,14,0,0"  VerticalAlignment="Top" Width="167"/>
+            <ComboBox x:Name="weightLabel" Visibility="{Binding ElementName= priorityLabel, Path=Visibility}" HorizontalAlignment="Left" Margin="157,14,0,0"  VerticalAlignment="Top" Width="167"/>
             <Label x:Name="priorityText" Content="priority" HorizontalAlignment="Left" Margin="87,40,0,0" VerticalAlignment="Top" Width="57"/>
-            <ComboBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0"  VerticalAlignment="Top" Width="168"/>
+            <ComboBox x:Name="priorityLabel" HorizontalAlignment="Left" Margin="157,44,0,0"  VerticalAlignment="Top" Width="168" Visibility="Visible"/>
             <Label x:Name="ScheduledTrxt" Content="Scheduled" HorizontalAlignment="Left" Margin="87,73,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="ScheduledLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
             <Label  x:Name="PickedUpText" Content="PickedUp" HorizontalAlignment="Left" Margin="87,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.033,0.464"/>
@@ -45,14 +46,15 @@
         <Button x:Name="close" Content="X"  Margin="758,10,5,401" RenderTransformOrigin="1.63,0.089" Click="close_Click"/>
 
         <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
-        <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="109,99,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
+        <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="109,99,0,0" VerticalAlignment="Top" Height="27" Width="56" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
 
-        <Button Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click_1"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="Button_Click"/>
+        <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="UpdatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" />
+        <Button x:Name="DeleateParcel" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="441,360,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel"/>
+        <Button x:Name="AddParcelButton" Content="Add" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="62" Click="AddParcel" Visibility="Hidden"/>
         <CheckBox x:Name="DeliveredC"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,297,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
-        <Button Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender"/>
-        <Button Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver"/>
+        <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
+        <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
+        
     </Grid>
 </Window>

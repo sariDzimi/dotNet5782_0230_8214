@@ -109,5 +109,12 @@ namespace PL
             }
         }
 
+        private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
+            Parcel parcel = bl.FindParcel(parcelAtCustomer.ID);
+            new ParcelWindow(bl, parcel).Show();
+            Close();
+        }
     }
 }

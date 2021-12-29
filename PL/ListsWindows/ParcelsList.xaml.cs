@@ -49,7 +49,7 @@ namespace PL
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
             BO.Parcel parcelBL = bl.FindParcel(parcelToList.ID);
-            new ParcelWindow(bl, parcelBL).Show();
+            new ParcelWindow(bl, parcelBL).Show();       
             Close();
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,7 +91,7 @@ namespace PL
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddParcelButton(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bl).Show();
             Close();

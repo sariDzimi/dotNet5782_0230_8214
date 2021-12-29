@@ -16,7 +16,7 @@
         <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="177,67,0,0" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="177,107,0,0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="phoneTextBox" HorizontalAlignment="Left" Margin="177,147,0,0" Text="{Binding Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListView Margin="319,104,228,208" x:Name="ParcelByCustomerListView" Visibility="{Binding ElementName=updateButton, Path=Visibility}">
+        <ListView Margin="319,104,228,208" x:Name="ParcelByCustomerListView" Visibility="{Binding ElementName=updateButton, Path=Visibility}" MouseDoubleClick="ParcelsList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="id" Width="25" DisplayMemberBinding="{Binding ID}" />
@@ -26,7 +26,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Margin="319,281,228,23" x:Name="ParcelToCustomerListView" Visibility="{Binding ElementName=updateButton, Path=Visibility}">
+        <ListView Margin="319,281,228,23" x:Name="ParcelToCustomerListView" Visibility="{Binding ElementName=updateButton, Path=Visibility}"  MouseDoubleClick="ParcelsList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="id" Width="25" DisplayMemberBinding="{Binding ID}" />
