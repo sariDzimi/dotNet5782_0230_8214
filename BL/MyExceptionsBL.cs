@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
-{
+
     namespace BO
     {
         public class OutOfRange : Exception
@@ -30,9 +29,9 @@ namespace IBL
         }
 
         public class IdAlreadyExist : Exception{
-            public IdAlreadyExist(int id) : base( $"{id}, not valid") { }
+            public IdAlreadyExist(int id) : base( $"{id}, already exits") { }
 
         }
 
     }
-}
+

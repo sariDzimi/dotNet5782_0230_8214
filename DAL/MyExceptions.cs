@@ -22,6 +22,9 @@ namespace DAL
         
     }
 
-
+   public class NoSuchInstance: Exception
+    {
+        public NoSuchInstance() : base("no such instance") { }
+    }
 
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using IDAL.DO;
+using DO;
 
 
-namespace IDal
+namespace DalApi
 {
     public interface IDal
     {
@@ -66,6 +66,9 @@ namespace IDal
         public void removeDroneCharge(int id);
 
         public double[] RequestElectricityUse();
+        public IEnumerable<Manager> GetManeger();
+        public Manager findManegerBy(Predicate<Manager> findBy);
+
     }
 
 }

@@ -1,0 +1,45 @@
+﻿<Window x:Class="PL.StationsList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="StationsList" Height="450" Width="800"
+         Style="{StaticResource OurStyle}">
+    <Window.Resources>
+        <Style x:Key="ContainerStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Expander Header="{Binding ID}" IsExpanded="false" >
+
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListView x:Name="StationsListView" Height="333" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_stationChoosen">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn x:Name="numberOfFreeChargeSlots" Header="free charge slots" Width="150" DisplayMemberBinding="{Binding numberOfFreeChargeSlots}" />
+                    <GridViewColumn Header="used charge slots" Width="150" DisplayMemberBinding="{Binding numberOfUsedChargeSlots}" />
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
+            </ListView.GroupStyle>
+        </ListView>
+        <CheckBox Content="show only stations with free charge slots" HorizontalAlignment="Left" Margin="315,35,0,0" VerticalAlignment="Top" Height="19" Width="237" Checked="Cheked_onlyStationsWithFreeSlots" Unchecked="unChecked_onlyFreeChargeSlots"/>
+        <Button Content="group by number of free charge slots" HorizontalAlignment="Left" Margin="315,59,0,0" VerticalAlignment="Top" Height="27" Width="214" Click="Button_Click_groupByNumberOfFree"/>
+        <Button Content="clear group by" HorizontalAlignment="Left" Margin="560,59,0,0" VerticalAlignment="Top" Height="27" Width="89" Click="Button_Click_ClearGroupBy"/>
+        <Button Content="add station" HorizontalAlignment="Left" Margin="214,63,0,0" VerticalAlignment="Top" Height="19" Width="74" Click="adddStation_Click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_click"/>
+    </Grid>
+
+</Window>
