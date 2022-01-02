@@ -22,6 +22,8 @@ namespace PL
     /// </summary>
     public partial class ParcelsList : Window
     {
+        public CurrentUser currentUser = new CurrentUser();
+
         private IBL bl;
         CollectionView view;
         List<ParcelToList> items;
@@ -30,8 +32,9 @@ namespace PL
             InitializeComponent();
         }
 
-        public ParcelsList(IBL bL1)
+        public ParcelsList(IBL bL1, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
 
             InitializeComponent();
@@ -49,7 +52,7 @@ namespace PL
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
             BO.Parcel parcelBL = bl.FindParcel(parcelToList.ID);
-            new ParcelWindow(bl, parcelBL).Show();       
+            new ParcelWindow(bl, parcelBL, currentUser).Show();       
             Close();
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -93,7 +96,7 @@ namespace PL
 
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
-            new ParcelWindow(bl).Show();
+            new ParcelWindow(bl, currentUser).Show();
             Close();
         }
     }

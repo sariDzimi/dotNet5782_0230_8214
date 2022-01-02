@@ -21,6 +21,8 @@ namespace PL
     /// </summary>
     public partial class DronesList : Window
     {
+        public CurrentUser currentUser = new CurrentUser();
+
         private IBL bl;
         public DronesList()
         {
@@ -30,9 +32,10 @@ namespace PL
             
         }
 
-        public DronesList(IBL bL1)
-        {
+        public DronesList(IBL bL1, CurrentUser currentUser1)
 
+        {
+            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = bL1;
@@ -58,19 +61,19 @@ namespace PL
         {
            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
            BO.Drone droneBL = bl.FindDrone(droneToList.Id);
-            new Drone(bl, droneBL).Show();
+            new Drone(bl, droneBL, currentUser).Show();
             Close();
         }
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl).Show();
+            new Drone(bl, currentUser).Show();
             Close();
 
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow(bl).Show();
+            new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 

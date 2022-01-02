@@ -74,7 +74,7 @@ namespace PL
 
         private void workerButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void managerButton_Click(object sender, RoutedEventArgs e)
@@ -85,7 +85,7 @@ namespace PL
 
         private void customerButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
         private void EnterManeger(object sender, RoutedEventArgs e)
         {
@@ -156,6 +156,143 @@ namespace PL
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             new Window1().Show();
+        }
+        private int getId()
+        {
+
+            try
+            {
+                return Convert.ToInt32(IdTextBox.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("Id");
+            }
+        }
+
+        private string getNameSighnUp()
+        {
+            try
+            {
+                return SignUpNameTextBox.Text;
+            }
+            catch
+            {
+                throw new NotValidInput("UserName");
+            }
+        }
+
+        private int getIdSighnUp()
+        {
+
+            try
+            {
+                return Convert.ToInt32(SignUpIdTextBox.Text);
+            }
+            catch
+            {
+                throw new NotValidInput("Id");
+            }
+        }
+
+        private string getNameLogin()
+        {
+            try
+            {
+                return NameTextBox.Text;
+            }
+            catch
+            {
+                throw new NotValidInput("UserName");
+            }
+        }
+
+
+        private double getLongitute()
+        {
+            try
+            {
+                return Convert.ToDouble($"{SignUpLongitudeTextBox.Text}");
+            }
+            catch
+            {
+                throw new NotValidInput("Longitute");
+            }
+        }
+
+        private string getPhone()
+        {
+            try
+            {
+                return SignUpNameTextBox.Text;
+            }
+            catch
+            {
+                throw new NotValidInput("Phone");
+            }
+        }
+
+
+
+        private double getLutitude()
+        {
+            try
+            {
+                return Convert.ToDouble($"{SignUpLatitudeTextBox.Text}");
+            }
+            catch
+            {
+                throw new NotValidInput("Lutitude");
+            }
+        }
+
+        private void LogInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                 //= new BO.Customer() { Id = getId(), Name = getNameLogin() };
+
+                BO.Customer customer=bL.FindCustomer(getId());
+                MessageBox.Show("you are in");
+                currentUser.Type = "Customer";
+                new CustomerWindow(bL,customer, currentUser).Show();
+            }
+            catch (BO.NotFound)
+            {
+                MessageBox.Show("please sighn up");
+                new MainWindow(bL).Show();
+                Close();
+            }
+
+            catch (NotValidInput ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+        }
+
+        private void SignUpSignInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.Customer customer = new BO.Customer() { Id = getIdSighnUp(), Name = getNameSighnUp(), Phone = getPhone(), Location = new BO.Location(getLutitude(), getLongitute()) };
+
+                bL.addCustomerToDL(customer);
+                currentUser.Type = "Customer";
+                MessageBox.Show("you are in");
+                new CustomerWindow(bL,customer, currentUser).Show();
+                Close();
+
+            }
+            catch (BO.IdAlreadyExist ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
