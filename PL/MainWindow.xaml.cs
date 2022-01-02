@@ -29,14 +29,18 @@ namespace PL
 
             bL = BLFactory.GetBl();
             InitializeComponent();
-
+            new ManegerWindow().Show();
+            Close();
 
 
         }
-        public MainWindow( IBL bL1)
+        public MainWindow(IBL bL1)
         {
             bL = bL1;
             InitializeComponent();
+            ///debuuger
+            new ManegerWindow().Show();
+            Close();
 
         }
 

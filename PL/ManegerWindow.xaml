@@ -246,6 +246,16 @@
         <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />
         <Label Content="User:" HorizontalAlignment="Left" Margin="564,19,0,0" VerticalAlignment="Top" Height="25" Width="38"/>
         <TextBlock x:Name="UserText" HorizontalAlignment="Left" Margin="607,24,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="64"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="174,78,0,0" VerticalAlignment="Top" Height="40" Width="64" RenderTransformOrigin="0.5,0.5" Click="Button_Click_4">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="366.758"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
     </Grid>
 </Window>
