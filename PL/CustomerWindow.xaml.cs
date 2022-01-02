@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class CustomerWindow : Window
     {
+        CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Customer customer;
         public CustomerWindow()
@@ -28,16 +29,18 @@ namespace PL
             InitializeComponent();
             WindowStyle = WindowStyle.None;
         }
-        public CustomerWindow(IBL BL)
+        public CustomerWindow(IBL BL, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg)
+        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             customer = customerArg;
             bl = BL;
@@ -49,7 +52,7 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomersList(bl).Show();
+            new CustomersList(bl, currentUser).Show();
             Close();
         }
 
@@ -58,7 +61,7 @@ namespace PL
             try
             {
                 bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
-                new CustomersList(bl).Show();
+                new CustomersList(bl, currentUser).Show();
                 Close();
 
             }
@@ -113,7 +116,7 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.FindParcel(parcelAtCustomer.ID);
-            new ParcelWindow(bl, parcel).Show();
+            new ParcelWindow(bl, parcel, currentUser).Show();
             Close();
         }
     }

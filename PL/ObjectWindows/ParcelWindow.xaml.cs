@@ -23,6 +23,7 @@ namespace PL
     /// 
     public partial class ParcelWindow : Window
     {
+        CurrentUser currentUser = new CurrentUser();
         IBL bL1;
         Parcel parcel;
         public ParcelWindow()
@@ -30,8 +31,9 @@ namespace PL
             InitializeComponent();
         }
 
-        public ParcelWindow(IBL bL)
+        public ParcelWindow(IBL bL, CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -42,8 +44,9 @@ namespace PL
            
         }
 
-        public ParcelWindow( IBL bl, Parcel parcel1 )
+        public ParcelWindow( IBL bl, Parcel parcel1 , CurrentUser currentUser1)
         {
+            currentUser = currentUser1;
             InitializeComponent();
             AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
@@ -91,7 +94,7 @@ namespace PL
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelsList(bL1).Show();
+            new ParcelsList(bL1, currentUser).Show();
             Close();
         }
 
@@ -105,7 +108,7 @@ namespace PL
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
                 bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1, Requested= DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
-                new ParcelsList(bL1).Show();
+                new ParcelsList(bL1, currentUser).Show();
                 Close();
             }
             catch (NotValidInput ex)
@@ -243,19 +246,19 @@ namespace PL
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
             BO.Drone drone = bL1.FindDroneBy((p) =>  parcel.droneAtParcel.Id== p.Id );
-            new Drone(bL1, drone).Show();
+            new Drone(bL1, drone, currentUser).Show();
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelSender.Id);
-            new CustomerWindow(bL1, customer).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
-            new CustomerWindow(bL1, customer).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
         }
     }
 }

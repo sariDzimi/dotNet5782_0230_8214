@@ -64,7 +64,7 @@ namespace BlApi
 
         public void addCustomerToDL(Customer customer);
 
-
+        public bool CheckWorkerIfExixst(Manager manager);
 
     }
 }

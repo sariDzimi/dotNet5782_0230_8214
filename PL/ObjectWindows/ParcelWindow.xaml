@@ -30,6 +30,8 @@
             <TextBox x:Name="DeliveredLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,129,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
             <Label x:Name="RequestedText" Content="Requested" HorizontalAlignment="Left" Margin="90,156,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="RequestedLabel" IsEnabled="False" HorizontalAlignment="Left" Margin="157,160,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <Label Content="User:" HorizontalAlignment="Left" Margin="349,-134,0,0" VerticalAlignment="Top" Height="25" Width="36"/>
+            <TextBlock x:Name="UserText" HorizontalAlignment="Left" Margin="432,-138,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="64"/>
         </Grid>
         <Grid Margin="234,54,133,255" >
             <Grid.ColumnDefinitions>
@@ -55,6 +57,6 @@
         <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
         <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
-        
+
     </Grid>
 </Window>
