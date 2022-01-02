@@ -62,12 +62,9 @@ namespace PL
             {
                 case DroneStatus.Free:
                     sendDroneForDelivery.IsEnabled = true;
-                   
                     break;
                 case DroneStatus.Maintenance:
                     releaseDroneFromCharging.IsEnabled = true;
-                    
-                    break;
                     break;
                 case DroneStatus.Delivery:
 
@@ -79,14 +76,13 @@ namespace PL
                     }
                     else
                     {
-                        if (parcelBL.Delivered == null)
+                        //if (parcelBL.Delivered == null)
 
                     } 
                     
                     }
                     break;
-               
-            }
+              
 
             this.DataContext = drone;
             if (drone.ParcelInDelivery != null)
