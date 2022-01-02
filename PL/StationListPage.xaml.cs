@@ -22,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class StationListPage : Page
     {
+        private CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
         List<StationToList> items;
@@ -73,7 +74,7 @@ namespace PL
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.FindStation(stationToList.ID);
-            new StationWindow(bL, station).Show();
+            new StationWindow(bL, station, currentUser).Show();
             //Close();
         }
 

@@ -44,7 +44,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             MaxWeight.Visibility = Visibility.Hidden;
             addButton.IsEnabled = true;
-            
+
         }
         public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
         {
@@ -55,7 +55,7 @@ namespace PL
             bL = bL1;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-           
+
             DroneStatusDroneL.Visibility = Visibility.Visible;
             //show relaed buttons
             switch (drone.DroneStatus)
@@ -78,11 +78,11 @@ namespace PL
                     {
                         //if (parcelBL.Delivered == null)
 
-                    } 
-                    
                     }
+
+
                     break;
-              
+            }
 
             this.DataContext = drone;
             if (drone.ParcelInDelivery != null)
@@ -92,231 +92,231 @@ namespace PL
             MaxWeight.Text = drone.MaxWeight.ToString();
             WeightSelector.Visibility = Visibility.Hidden;
 
+
         }
 
 
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
+            private void Button_Click(object sender, RoutedEventArgs e)
             {
-                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
-                MessageBox.Show("the drone was added succesfuly!!!");
+                try
+                {
+                    bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
+                    MessageBox.Show("the drone was added succesfuly!!!");
+                    new DronesList(bL, currentUser).Show();
+                    Close();
+                }
+                catch (NotValidInput ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (IdAlreadyExist)
+                {
+                    MessageBox.Show("id already exist");
+
+                }
+                catch (NotFound)
+                {
+                    MessageBox.Show("station number not found");
+                }
+
+            }
+
+            private void ButtonClick_Close(object sender, RoutedEventArgs e)
+            {
                 new DronesList(bL, currentUser).Show();
                 Close();
             }
-            catch (NotValidInput ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (IdAlreadyExist)
-            {
-                MessageBox.Show("id already exist");
-
-            }
-            catch (NotFound)
-            {
-                MessageBox.Show("station number not found");
-            }
-
-        }
-
-        private void ButtonClick_Close(object sender, RoutedEventArgs e)
-        {
-            new DronesList(bL, currentUser).Show();
-            Close();
-        }
 
 
-        private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bL.sendDroneToCharge(drone.Id);
-                sendDroneForDelivery.IsEnabled = false;
-                releaseDroneFromCharging.IsEnabled = true;
-     
-                timeOfCharging.Text = "";
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
-                MessageBox.Show("The drone was sent for charging successfully");
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                double time = getTime();
-                bL.releaseDroneFromCharging(drone.Id, time);
-                releaseDroneFromCharging.IsEnabled = false;
-                sendDroneForDelivery.IsEnabled = true;
-                timeOfCharging.Text = "";
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
-                MessageBox.Show("Release the drone from charging successfully");
-            }
-            catch (OutOfRange)
-            {
-                MessageBox.Show("Time entered is too long");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bL.AssignAParcelToADrone(drone.Id);
-                sendDroneForDelivery.IsEnabled = false;
-                colectParcel.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
-                ButteryDroneL.Text = $"{drone.Battery}%";
-                MessageBox.Show("Assign a drone to parcel successfully");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bL.collectParcleByDrone(drone.Id);
-                colectParcel.IsEnabled = false;
-                supllyParcel.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                MessageBox.Show("collect a parcel by drone successfully");
-                ButteryDroneL.Text = $"{drone.Battery}%";
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bL.supplyParcelByDrone(drone.Id);
-                supllyParcel.IsEnabled = false;
-                sendDroneForDelivery.IsEnabled = true;
-                //sendDroneToCharge.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                MessageBox.Show("suplly a parcel by drone successfully");
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bL.updateDroneModel(getId(), getModel());
-                MessageBox.Show($"the model drone updated successfully");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            new DronesList(bL, currentUser).Show();
-            Close();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("hello");
-        }
-
-        private int getId()
-        {
-            try
-            {
-                return Convert.ToInt32(idDroneL.Text);
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("id");
-            }
-        }
-
-        private int getMaxWeight()
-        {
-            if (WeightSelector.SelectedItem == null)
-                throw new NotValidInput("Max Weight");
-            try
+            private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
             {
 
-                return (int)(WeightCategories)WeightSelector.SelectedItem;
             }
-            catch (Exception)
-            {
-                throw new NotValidInput("Max Weight");
-            }
-        }
 
-        private int getNumberOfStation()
-        {
-            try
+            private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
             {
-                return Convert.ToInt32(numberOfStationInput.Text);
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("station number");
-            }
-        }
+                try
+                {
+                    bL.sendDroneToCharge(drone.Id);
+                    sendDroneForDelivery.IsEnabled = false;
+                    releaseDroneFromCharging.IsEnabled = true;
 
-        private double getTime()
-        {
-            try
-            {
-                return Convert.ToDouble(timeOfCharging.Text);
+                    timeOfCharging.Text = "";
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    ButteryDroneL.Text = $"{drone.Battery}%";
+                    MessageBox.Show("The drone was sent for charging successfully");
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
-            catch (Exception)
+
+            private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
             {
-                throw new NotValidInput("time");
+                try
+                {
+                    double time = getTime();
+                    bL.releaseDroneFromCharging(drone.Id, time);
+                    releaseDroneFromCharging.IsEnabled = false;
+                    sendDroneForDelivery.IsEnabled = true;
+                    timeOfCharging.Text = "";
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    ButteryDroneL.Text = $"{drone.Battery}%";
+                    MessageBox.Show("Release the drone from charging successfully");
+                }
+                catch (OutOfRange)
+                {
+                    MessageBox.Show("Time entered is too long");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-        }
 
-        private string getModel()
-        {
-            return modelDroneL.Text;
-        }
+            private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+                    bL.AssignAParcelToADrone(drone.Id);
+                    sendDroneForDelivery.IsEnabled = false;
+                    colectParcel.IsEnabled = true;
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
+                    ButteryDroneL.Text = $"{drone.Battery}%";
+                    MessageBox.Show("Assign a drone to parcel successfully");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            Parcel parcel = new Parcel();
-            parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
-            new ParcelWindow(bL, parcel, currentUser).Show();
+            private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+                    bL.collectParcleByDrone(drone.Id);
+                    colectParcel.IsEnabled = false;
+                    supllyParcel.IsEnabled = true;
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    MessageBox.Show("collect a parcel by drone successfully");
+                    ButteryDroneL.Text = $"{drone.Battery}%";
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+                    bL.supplyParcelByDrone(drone.Id);
+                    supllyParcel.IsEnabled = false;
+                    sendDroneForDelivery.IsEnabled = true;
+                    //sendDroneToCharge.IsEnabled = true;
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    MessageBox.Show("suplly a parcel by drone successfully");
+                    DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+                    ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
+                    ButteryDroneL.Text = $"{drone.Battery}%";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            private void Button_Click_1(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+                    bL.updateDroneModel(getId(), getModel());
+                    MessageBox.Show($"the model drone updated successfully");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            private void Button_Click_2(object sender, RoutedEventArgs e)
+            {
+                new DronesList(bL, currentUser).Show();
+                Close();
+            }
+
+            private void Button_Click_3(object sender, RoutedEventArgs e)
+            {
+                MessageBox.Show("hello");
+            }
+
+            private int getId()
+            {
+                try
+                {
+                    return Convert.ToInt32(idDroneL.Text);
+                }
+                catch (Exception)
+                {
+                    throw new NotValidInput("id");
+                }
+            }
+
+            private int getMaxWeight()
+            {
+                if (WeightSelector.SelectedItem == null)
+                    throw new NotValidInput("Max Weight");
+                try
+                {
+
+                    return (int)(WeightCategories)WeightSelector.SelectedItem;
+                }
+                catch (Exception)
+                {
+                    throw new NotValidInput("Max Weight");
+                }
+            }
+
+            private int getNumberOfStation()
+            {
+                try
+                {
+                    return Convert.ToInt32(numberOfStationInput.Text);
+                }
+                catch (Exception)
+                {
+                    throw new NotValidInput("station number");
+                }
+            }
+
+            private double getTime()
+            {
+                try
+                {
+                    return Convert.ToDouble(timeOfCharging.Text);
+                }
+                catch (Exception)
+                {
+                    throw new NotValidInput("time");
+                }
+            }
+
+            private string getModel()
+            {
+                return modelDroneL.Text;
+            }
+
+            private void Button_Click_4(object sender, RoutedEventArgs e)
+            {
+                Parcel parcel = new Parcel();
+                parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
+                new ParcelWindow(bL, parcel, currentUser).Show();
+            }
         }
     }
-}
 
