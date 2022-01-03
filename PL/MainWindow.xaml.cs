@@ -29,8 +29,8 @@ namespace PL
 
             bL = BLFactory.GetBl();
             InitializeComponent();
-            new ManegerWindow().Show();
-            Close();
+            //new ManegerWindow().Show();
+            //Close();
 
 
         }
@@ -114,8 +114,7 @@ namespace PL
             catch (BO.NotFound)
             {
                 MessageBox.Show("you are not maneger, please login like user");
-                new MainWindow(bL).Show();
-                Close();
+               
             }
 
             catch (NotValidInput ex)
@@ -246,22 +245,43 @@ namespace PL
             }
         }
 
+        private string getNameLog()
+        {
+            try
+            {
+                return NameTextBox.Text;
+            }
+            catch
+            {
+                throw new NotValidInput("Name");
+            }
+
+        }
+
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                 //= new BO.Customer() { Id = getId(), Name = getNameLogin() };
+                //= new BO.Customer() { Id = getId(), Name = getNameLogin() };
 
-                BO.Customer customer=bL.FindCustomer(getId());
-                MessageBox.Show("you are in");
-                currentUser.Type = "Customer";
-                new CustomerWindow(bL,customer, currentUser).Show();
+                BO.Customer customer = bL.FindCustomer(getId());
+                if ((customer.Name == getNameLog()))
+                {
+                    MessageBox.Show("you are in");
+                    currentUser.Type = "Customer";
+                    new CustomerWindow(bL, customer, currentUser).Show();
+                }
+                else
+                {
+                    MessageBox.Show("please sighn up");
+                   
+                }
+
             }
             catch (BO.NotFound)
             {
                 MessageBox.Show("please sighn up");
-                new MainWindow(bL).Show();
-                Close();
+               
             }
 
             catch (NotValidInput ex)
@@ -281,7 +301,7 @@ namespace PL
                 bL.addCustomerToDL(customer);
                 currentUser.Type = "Customer";
                 MessageBox.Show("you are in");
-                new CustomerWindow(bL,customer, currentUser).Show();
+                new CustomerWindow(bL, customer, currentUser).Show();
                 Close();
 
             }
