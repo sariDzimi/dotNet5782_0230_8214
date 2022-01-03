@@ -240,7 +240,9 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-            
+            bL1.DeleateParcel(parcel);
+            new ParcelsList(bL1, currentUser).Show();
+            this.Close();
         }
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
@@ -259,6 +261,12 @@ namespace PL
         {
             BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
             new CustomerWindow(bL1, customer, currentUser).Show();
+        }
+
+        private void close_buuton(object sender, RoutedEventArgs e)
+        {
+            new ParcelsList(bL1, currentUser).Show();
+            Close();
         }
     }
 }

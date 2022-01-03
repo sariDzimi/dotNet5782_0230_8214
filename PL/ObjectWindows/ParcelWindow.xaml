@@ -45,7 +45,6 @@
             <Button x:Name="OpenDrone" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="-160,47,0,0" VerticalAlignment="Top" Click="OpenDrone_Click"/>
 
         </Grid>
-        <Button x:Name="close" Content="X"  Margin="758,10,5,401" RenderTransformOrigin="1.63,0.089" Click="close_Click"/>
 
         <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="109,63,0,0" VerticalAlignment="Top" Height="27" Width="56"/>
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="109,99,0,0" VerticalAlignment="Top" Height="27" Width="56" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
@@ -57,6 +56,7 @@
         <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="545,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
         <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="543,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
+        <Button x:Name="Close"  Content="X"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="758,13,0,398"  Width="37" RenderTransformOrigin="1.63,0.089" Click="close_buuton"/>
 
     </Grid>
 </Window>

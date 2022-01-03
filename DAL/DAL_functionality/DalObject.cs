@@ -142,6 +142,7 @@ namespace DalObject
         public IEnumerable<Parcel> GetParcel()
         {
             return from parcel in DataSource.parcels
+                   where parcel.IsActive == true
                    select parcel;
         }
 
