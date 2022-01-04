@@ -195,19 +195,5 @@ namespace PO
             }
         }
 
-        //public int Id { get; set; }
-        //public CustomerAtParcel customerAtParcelSender { get; set; }
-        //public CustomerAtParcel customerAtParcelReciver { get; set; }
-        //public WeightCategories Weight { get; set; }
-        //public Pritorities Pritority { get; set; }
-        //public DateTime? Requested { get; set; }
-        //public DroneAtParcel droneAtParcel { get; set; }
-
-        //public DateTime? Scheduled { get; set; }
-
-        //public DateTime? PickedUp { get; set; }
-
-        //public DateTime? Delivered { get; set; }
-
     }
 }

@@ -37,11 +37,19 @@
 
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush x:Name="imageDrone" ImageSource="./images/drone2.jpg"/>
+        </Grid.Background>
 
-        <Grid >
-            <TabControl>
+
+        <Grid Margin="-30,74,-136,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="49*"/>
+            </Grid.RowDefinitions>
+            <TabControl Margin="240,-72,0,81" HorizontalAlignment="Left" Width="434" Grid.RowSpan="2" >
                 <TabItem Header="Log In">
-                    <Grid x:Name="SignInOrLogIn">
+                    <Grid x:Name="SignInOrLogIn" Margin="0,10,0,-10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100*"/>
                             <RowDefinition Height="100*"/>
@@ -62,10 +70,8 @@
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="40*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="Response" Grid.Row="2" Grid.RowSpan="4" Grid.Column="2" Grid.ColumnSpan="3">
-
-                        </TextBlock>
-                        <Grid x:Name="SignInForm" Grid.Row="3" Grid.RowSpan="4" Grid.Column="2" Grid.ColumnSpan="3">
+                        <TextBlock x:Name="Response" Grid.Row="8" Grid.Column="6" Margin="124,14,-276,-76"/>
+                        <Grid x:Name="SignInForm" Grid.Row="8" Grid.Column="6" Margin="124,45,-509,-235">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100*"/>
                                 <RowDefinition Height="100*"/>
@@ -76,18 +82,24 @@
                                 <RowDefinition Height="100*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"/>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="30*"/>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="54*"/>
+                                <ColumnDefinition Width="74*"/>
+                                <ColumnDefinition Width="0*"/>
+                                <ColumnDefinition Width="61*"/>
+                                <ColumnDefinition Width="41*"/>
+                                <ColumnDefinition Width="135*"/>
+                                <ColumnDefinition Width="54*"/>
                             </Grid.ColumnDefinitions>
-                            <Label x:Name="IdLabel" Grid.Row="1" Grid.Column="1">Id:</Label>
-                            <TextBox x:Name="IdTextBox" Grid.Row="1" Grid.Column="3" ></TextBox>
-                            <Label x:Name="NameLabel" Grid.Row="3" Grid.Column="1">Name:</Label>
-                            <TextBox x:Name="NameTextBox" Grid.Row="3" Grid.Column="3" ></TextBox>
-                            <Button x:Name="LogInBtn" Grid.Row="4" Grid.ColumnSpan="5" Click="LogInBtn_Click" Height="32" Margin="46,0,46,0" Grid.RowSpan="2" VerticalAlignment="Bottom"  >Log In</Button>
+                            <Grid Margin="-489,-274,141,64">
+
+                                <Label x:Name="IdLabel" Margin="10,86,347,130" RenderTransformOrigin="0.492,1.393">Id:</Label>
+                                <TextBox x:Name="IdTextBox" Margin="60,80,46,125" />
+                                <Label x:Name="NameLabel" Margin="5,10,347,0" Height="33" VerticalAlignment="Top">Name:</Label>
+                                <TextBox x:Name="NameTextBox" Margin="60,10,44,207" />
+                                <Button x:Name="LogInBtn" Click="LogInBtn_Click" Height="32" Margin="43,146,50,0" VerticalAlignment="Top"  >Log In</Button>
+                            </Grid>
                         </Grid>
+
 
                     </Grid>
                 </TabItem>
