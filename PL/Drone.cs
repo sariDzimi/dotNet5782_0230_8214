@@ -88,7 +88,7 @@ namespace PO
 
         //MaxWeight
         public static readonly DependencyProperty MaxWeightDrone =
-      DependencyProperty.Register("MaxWeight",
+      DependencyProperty.Register("Weight",
                                   typeof(object),
                                   typeof(Drone_p),
                                   new UIPropertyMetadata(0));

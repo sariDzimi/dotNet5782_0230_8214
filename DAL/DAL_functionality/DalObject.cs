@@ -136,14 +136,14 @@ namespace DalObject
         }
 
         /// <summary>
-        /// returns customers form datasource
+        /// returns parcel form datasource
         /// </summary>
         /// <returns>DataSource.customers</returns>
         public IEnumerable<Parcel> GetParcel()
         {
-            return from parcel in DataSource.parcels
-                   where parcel.IsActive == true
-                   select parcel;
+            return (from parcel in DataSource.parcels
+                   //where parcel.IsActive == true
+            select parcel);
         }
 
         public IEnumerable<Manager> GetManeger()

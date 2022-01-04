@@ -44,7 +44,6 @@ namespace PL
 
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            MaxWeight.Visibility = Visibility.Hidden;
             addButton.IsEnabled = true;
 
         }
@@ -59,9 +58,8 @@ namespace PL
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-
-            //DroneStatusDroneL.Visibility = Visibility.Visible;
-            //show relaed buttons
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+           
             switch (drone.DroneStatus)
             {
                 case DroneStatus.Free:
@@ -72,7 +70,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
 
-                    Parcel parcelBL = bL.FindParcelBy((t) => t.Id == drone_P.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.FindParcel(drone_P.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -86,13 +84,10 @@ namespace PL
                     break;
             }
 
-            //this.DataContext = drone;
+           
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            //Location.Text = drone.Location.ToString();
-            MaxWeight.Visibility = Visibility.Visible;
-            //MaxWeight.Text = drone.MaxWeight.ToString();
-            //WeightSelector.Visibility = Visibility.Hidden;
+            WeightSelector.IsEnabled = false;
 
 
         }
@@ -159,8 +154,8 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                //DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-               // ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.DroneStatus = drone.DroneStatus;
+                drone_P.Battery = drone.Battery;
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (OutOfRange)
@@ -180,9 +175,9 @@ namespace PL
                 bL.AssignAParcelToADrone(drone.Id);
                 sendDroneForDelivery.IsEnabled = false;
                 colectParcel.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ParcelInDelivery.Text = Convert.ToString(drone.ParcelInDelivery);
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.DroneStatus = drone.DroneStatus;
+                drone_P.Battery = drone.Battery;
+                drone_P.ParcelInDelivery = drone.ParcelInDelivery;
                 MessageBox.Show("Assign a drone to parcel successfully");
             }
             catch (Exception ex)
@@ -198,9 +193,9 @@ namespace PL
                 bL.collectParcleByDrone(drone.Id);
                 colectParcel.IsEnabled = false;
                 supllyParcel.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("collect a parcel by drone successfully");
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.DroneStatus = drone.DroneStatus;
+                drone_P.Battery = drone.Battery;
 
 
             }
@@ -217,12 +212,10 @@ namespace PL
                 bL.supplyParcelByDrone(drone.Id);
                 supllyParcel.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
-                //sendDroneToCharge.IsEnabled = true;
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
                 MessageBox.Show("suplly a parcel by drone successfully");
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ParcelInDelivery.Text = $"{drone.ParcelInDelivery}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.DroneStatus = drone.DroneStatus;
+                drone_P.Battery = drone.Battery;
+                drone_P.ParcelInDelivery = drone.ParcelInDelivery;
 
             }
             catch (Exception ex)
@@ -307,7 +300,7 @@ namespace PL
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            //Parcel parcel = new Parcel();
+           
             Parcel parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
             Hide();
             new ParcelWindow(bL, parcel, currentUser).ShowDialog();
