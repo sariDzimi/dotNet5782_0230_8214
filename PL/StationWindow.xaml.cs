@@ -104,7 +104,7 @@ namespace PL
                 });
 
                 Hide();
-                new StationsList(bl, currentUser).ShowDialog(; ;
+                new StationsList(bl, currentUser).ShowDialog();
                 Show();
             }
             catch (Exception ex)
