@@ -26,7 +26,7 @@
         <Label Content="landitude" HorizontalAlignment="Left" Margin="332,190,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,-0.076" Width="63"/>
         <Label x:Name="ChargeSlotsLabel" Content="charge slots" HorizontalAlignment="Left" Margin="88,242,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.693,1.06" />
 
-        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="175,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Id}"/>
+        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="175,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding ID}"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="191,142,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Name}"/>
         <!--<TextBox x:Name="freeChargeStolsTextBox" HorizontalAlignment="Left" Margin="208,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}" Text="{Binding FreeChargeSlots}"/>-->
         <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Margin="175,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Longitude}"/>

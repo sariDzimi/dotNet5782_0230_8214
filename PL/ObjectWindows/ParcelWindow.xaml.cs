@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using PO;
 
 
 namespace PL
@@ -26,6 +27,8 @@ namespace PL
         CurrentUser currentUser = new CurrentUser();
         IBL bL1;
         Parcel parcel;
+        Parcel_p Parcel_P;
+
         public ParcelWindow()
         {
             InitializeComponent();
@@ -41,51 +44,38 @@ namespace PL
             bL1 = bL;
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-           
+
         }
 
-        public ParcelWindow( IBL bl, Parcel parcel1 , CurrentUser currentUser1)
+        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
             AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
+            Parcel_P = new Parcel_p() { ID = parcel.Id, CustomerAtParcelReciver = parcel.customerAtParcelReciver, IdDrone = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id, CustomerAtParcelSender = parcel.customerAtParcelSender, Delivered = parcel.Delivered, PickedUp = parcel.PickedUp, Pritority = parcel.Pritority, Requested = parcel.Requested, Scheduled = parcel.Scheduled, Weight = parcel.Weight };
             bL1 = bl;
-            idParcelLabel.Text = $"{parcel.Id}";
-            if (parcel.droneAtParcel != null)
+            weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
+            weightLabel.IsEnabled = false;
+            priorityLabel.IsEnabled = false;
+            DataContext = Parcel_P;
+            if (parcel.droneAtParcel != null && parcel.Delivered == null)
             {
-                iddroneLabel.Text = $"{parcel.droneAtParcel.Id}";
-                if(parcel.Delivered == null)
-                {
-                    OpenDrone.Visibility = Visibility.Visible;
-                }
-                
+                OpenDrone.Visibility = Visibility.Visible;
+               
             }
+
             if (parcel.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
             }
-           
-            weightLabel.Text = $"{parcel.Weight}";
-            priorityLabel.Text = $"{parcel.Pritority}";
-            RequestedLabel.Text = $"{parcel.Requested}";
-            ScheduledLabel.Text = $"{parcel.Scheduled}";
-            PickedUpLabel.Text = $"{parcel.PickedUp}";
-            DeliveredLabel.Text = $"{parcel.Delivered}";
-            customerAtParcelSenderLabel.Text = $"{parcel.customerAtParcelSender}";
-            customerAtParcelReciverText.Text = $"{parcel.customerAtParcelReciver}";
-            weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
-            weightLabel.IsEditable = true;
-            weightLabel.Text = $"{parcel.Weight}";
-            priorityLabel.IsEditable = true;
-            priorityLabel.Text = $"{parcel.Pritority}";
-
-            if (parcel.PickedUp == null)
+            
+            if (parcel.PickedUp == null && parcel.Scheduled !=null)
             {
                 PickedUpC.Visibility = Visibility.Visible;
             }
-            else if (parcel.Delivered == null)
+            else if (parcel.Delivered == null && parcel.PickedUp != null)
             {
                 DeliveredC.Visibility = Visibility.Visible;
             }
@@ -101,9 +91,11 @@ namespace PL
         {
             try
             {
+                // BO.Parcel parcel = new Parcel();
+                //parcel.Requested = DateTime.Now;
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
-                bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1, Requested= DateTime.Now });
+                bL1.addParcelToDL(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Close();
             }
@@ -154,7 +146,6 @@ namespace PL
                 throw new NotValidInput("weight");
             try
             {
-
                 return (WeightCategories)weightLabel.SelectedItem;
             }
             catch (Exception)
@@ -201,7 +192,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-           
+
 
         }
 
@@ -215,7 +206,7 @@ namespace PL
                 parcel.Delivered = DateTime.Now;
                 bL1.updateParcel(parcel);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
-                
+
             }
 
         }
@@ -242,10 +233,8 @@ namespace PL
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
-            BO.Drone drone = bL1.FindDroneBy((p) =>  parcel.droneAtParcel.Id== p.Id );
-            Hide();
-            new Drone(bL1, drone, currentUser).ShowDialog();
-            Show();
+            BO.Drone drone = bL1.FindDroneBy((p) => Parcel_P.IdDrone == p.Id);
+            new Drone(bL1, drone, currentUser).Show();
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
@@ -273,4 +262,3 @@ namespace PL
 
 
 
-                                                                                                                                                                                                       

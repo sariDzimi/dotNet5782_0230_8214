@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-
+using PO;
 namespace PL
 {
     /// <summary>
@@ -24,28 +24,30 @@ namespace PL
         CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Station station;
+        Station_p station_P;
+        
         public StationWindow()
         {
-           // InitializeComponent();
+            InitializeComponent();
         }
         public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
-            //InitializeComponent();
+            InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             station = stationArg;
+            station_P = new Station_p() { ID = station.Id, Name = station.Name, Longitude = station.Location.Longitude,Latitude= station.Location.Latitude, FreeChargeSlots = station.FreeChargeSlots };
             DroneChargingListView.ItemsSource = station.droneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
-            DataContext = station;
-            laditudeTextBox.DataContext = station.Location;
-            longitudeTextBox.DataContext = station.Location;
+            DataContext = station_P;
+            
         }
 
         public StationWindow(IBL blArg, CurrentUser currentUser1)
       {
             currentUser = currentUser1;
-            //InitializeComponent();
+            InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;
