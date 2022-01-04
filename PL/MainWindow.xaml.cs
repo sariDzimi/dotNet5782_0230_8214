@@ -261,9 +261,7 @@ namespace PL
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                //= new BO.Customer() { Id = getId(), Name = getNameLogin() };
-
+            { 
                 BO.Customer customer = bL.FindCustomer(getId());
                 if ((customer.Name == getNameLog()))
                 {

@@ -13,7 +13,7 @@
         <Label Content="phone" HorizontalAlignment="Left" Margin="86,134,0,0" VerticalAlignment="Top"/>
         <Label Content="parcels sended by customer" HorizontalAlignment="Left" Margin="346,67,0,0" VerticalAlignment="Top" Visibility="{Binding ElementName=ParcelByCustomerListView, Path=Visibility}"/>
         <Label Content="parcels sended to customer" HorizontalAlignment="Left" Margin="348,242,0,0" VerticalAlignment="Top" Visibility="{Binding ElementName=ParcelToCustomerListView, Path=Visibility}"/>
-        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="177,67,0,0" Text="{Binding Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="177,67,0,0" Text="{Binding ID}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="177,107,0,0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="phoneTextBox" HorizontalAlignment="Left" Margin="177,147,0,0" Text="{Binding Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ListView Margin="319,104,228,208" x:Name="ParcelByCustomerListView" Visibility="{Binding ElementName=updateButton, Path=Visibility}" MouseDoubleClick="ParcelsList_MouseDoubleClick">

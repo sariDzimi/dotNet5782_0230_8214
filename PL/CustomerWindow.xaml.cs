@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using PO;
 
 namespace PL
 {
@@ -24,6 +25,7 @@ namespace PL
         CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Customer customer;
+        Customer_p Customer_P; 
         public CustomerWindow()
         {
             InitializeComponent();
@@ -43,8 +45,9 @@ namespace PL
             currentUser = currentUser1;
             InitializeComponent();
             customer = customerArg;
+            Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.parcelsSentedByCustomer, ParcelsSentedToCustomer = customer.parcelsSentedToCustomer };
             bl = BL;
-            DataContext = customer;
+            DataContext = Customer_P;
             ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
