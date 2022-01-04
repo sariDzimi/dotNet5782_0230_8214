@@ -52,7 +52,6 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomersList(bl, currentUser).Show();
             Close();
         }
 
@@ -61,7 +60,7 @@ namespace PL
             try
             {
                 bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
-                new CustomersList(bl, currentUser).Show();
+                //new CustomersList(bl, currentUser).Show();
                 Close();
 
             }
@@ -116,8 +115,9 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.FindParcel(parcelAtCustomer.ID);
-            new ParcelWindow(bl, parcel, currentUser).Show();
-            Close();
+            Hide();
+            new ParcelWindow(bl, parcel, currentUser).ShowDialog();
+            Show();
         }
     }
 }

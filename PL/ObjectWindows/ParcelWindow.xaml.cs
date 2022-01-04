@@ -94,7 +94,6 @@ namespace PL
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelsList(bL1, currentUser).Show();
             Close();
         }
 
@@ -102,13 +101,10 @@ namespace PL
         {
             try
             {
-               // BO.Parcel parcel = new Parcel();
-                //parcel.Requested = DateTime.Now;
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
                 bL1.addParcelToDL( new Parcel() { Id = getId(), Weight = getMaxWeight(),Pritority=getPritorities(), customerAtParcelSender= customerAtParcelSender1, customerAtParcelReciver= customerAtParcelReciver1, Requested= DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
-                new ParcelsList(bL1, currentUser).Show();
                 Close();
             }
             catch (NotValidInput ex)
@@ -194,8 +190,8 @@ namespace PL
         {
             try
             {
-                BO.WeightCategories weightCategories = getMaxWeight();
-                BO.Pritorities pritorities = getPritorities();
+                WeightCategories weightCategories = getMaxWeight();
+                Pritorities pritorities = getPritorities();
                 parcel.Pritority = pritorities;
                 parcel.Weight = weightCategories;
                 bL1.updateParcel(parcel);
@@ -241,31 +237,35 @@ namespace PL
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
             bL1.DeleateParcel(parcel);
-            new ParcelsList(bL1, currentUser).Show();
-            this.Close();
+            Close();
         }
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
             BO.Drone drone = bL1.FindDroneBy((p) =>  parcel.droneAtParcel.Id== p.Id );
-            new Drone(bL1, drone, currentUser).Show();
+            Hide();
+            new Drone(bL1, drone, currentUser).ShowDialog();
+            Show();
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelSender.Id);
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            Hide();
+            new CustomerWindow(bL1, customer, currentUser).ShowDialog();
+            Show();
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            Hide();
+            new CustomerWindow(bL1, customer, currentUser).ShowDialog();
+            Show();
         }
 
         private void close_buuton(object sender, RoutedEventArgs e)
         {
-            new ParcelsList(bL1, currentUser).Show();
             Close();
         }
     }

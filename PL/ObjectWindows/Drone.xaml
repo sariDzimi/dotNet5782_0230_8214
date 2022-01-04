@@ -104,6 +104,6 @@
             <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,222,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
             <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,222,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28"  IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
         </Grid>
-        <Button x:Name="close" Content="X" Style="{StaticResource close}" HorizontalAlignment="Left"  Margin="758,10,0,401" Click="Button_Click_2" Width="37" RenderTransformOrigin="1.63,0.089"/>
+        <Button x:Name="close" Content="X" Style="{StaticResource close}" HorizontalAlignment="Left"  Margin="758,10,0,401" Click="closeButton_Click" Width="37" RenderTransformOrigin="1.63,0.089"/>
     </Grid>
 </Window>
