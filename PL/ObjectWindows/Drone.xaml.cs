@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using PO;
 
 namespace PL
 {
@@ -25,6 +26,7 @@ namespace PL
 
         IBL bL;
         BO.Drone drone;
+        Drone_p drone_P;
         public bool boo = false;
         public Drone()
         {
@@ -52,11 +54,13 @@ namespace PL
             currentUser = currentUser1;
             drone = droneBL;
             InitializeComponent();
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null?new ParcelInDelivery() : drone.ParcelInDelivery  }; 
             bL = bL1;
+            DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
 
-            DroneStatusDroneL.Visibility = Visibility.Visible;
+            //DroneStatusDroneL.Visibility = Visibility.Visible;
             //show relaed buttons
             switch (drone.DroneStatus)
             {
@@ -68,7 +72,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
 
-                    Parcel parcelBL = bL.FindParcelBy(t => t.Id == drone.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.FindParcelBy((t) => t.Id == drone_P.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -82,13 +86,13 @@ namespace PL
                     break;
             }
 
-            this.DataContext = drone;
+            //this.DataContext = drone;
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            Location.Text = drone.Location.ToString();
+            //Location.Text = drone.Location.ToString();
             MaxWeight.Visibility = Visibility.Visible;
-            MaxWeight.Text = drone.MaxWeight.ToString();
-            WeightSelector.Visibility = Visibility.Hidden;
+            //MaxWeight.Text = drone.MaxWeight.ToString();
+            //WeightSelector.Visibility = Visibility.Hidden;
 
 
         }
@@ -155,8 +159,8 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                //DroneStatusDroneL.Text = $"{drone.DroneStatus}";
+               // ButteryDroneL.Text = $"{drone.Battery}%";
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (OutOfRange)

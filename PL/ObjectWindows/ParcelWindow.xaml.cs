@@ -75,7 +75,7 @@ namespace PL
             {
                 PickedUpC.Visibility = Visibility.Visible;
             }
-            else if (parcel.Delivered == null)
+            else if (parcel.Delivered == null && parcel.PickedUp != null)
             {
                 DeliveredC.Visibility = Visibility.Visible;
             }

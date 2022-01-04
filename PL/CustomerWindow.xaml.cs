@@ -122,5 +122,7 @@ namespace PL
             new ParcelWindow(bl, parcel, currentUser).ShowDialog();
             Show();
         }
+
+        
     }
 }
