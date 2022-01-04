@@ -40,25 +40,21 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL1, currentUser).Show();
-            Close();
+            openWindowList( new DronesList(bL1, currentUser));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            new ParcelsList(bL1, currentUser).Show();
-            Close();
+            openWindowList(new ParcelsList(bL1, currentUser));
         }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {
-            new StationsList(bL1, currentUser).Show();
-            Close();
+            openWindowList(new StationsList(bL1, currentUser));
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            new CustomersList(bL1, currentUser).Show();
-            Close();
+            openWindowList( new CustomersList(bL1, currentUser));
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -70,6 +66,13 @@ namespace PL
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             this.Content = new StationListPage(bL1, this);
+        }
+
+        private void openWindowList(Window window)
+        {
+            Hide();
+            window.ShowDialog();
+            Show();
         }
         //private void Enter(object sender, RoutedEventArgs e)
         //{
@@ -134,6 +137,8 @@ namespace PL
         //        throw new NotValidInput("UserName");
         //    }
         //}
+
+
     }
 }
 

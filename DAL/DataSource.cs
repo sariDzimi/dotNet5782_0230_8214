@@ -31,10 +31,9 @@ namespace DalObject
         /// </summary>
         static public void Initialize()
         {
-            Manager manager = new Manager() { UserName = "sariDzimi", Password = 123456789 };
-            Manager manager1 = new Manager() { UserName = "MiryamSH", Password = 987654321 };
-            Managers.Add(manager);
-            Managers.Add(manager1);
+            Managers.Add(new Manager() { UserName = "sariDzimi", Password = 123456789 });
+            Managers.Add(new Manager() { UserName = "MiryamSH", Password = 987654321 });
+            Managers.Add(new Manager() { UserName = "", Password = 0 });
 
             int maxRand = 10;
             Random rand = new Random();

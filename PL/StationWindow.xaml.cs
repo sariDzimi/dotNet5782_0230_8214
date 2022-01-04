@@ -62,7 +62,9 @@ namespace PL
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
 
-            new Drone(bl, bl.FindDrone(droneAtCharging.ID), currentUser).Show();
+            Hide();
+            new Drone(bl, bl.FindDrone(droneAtCharging.ID), currentUser).ShowDialog();
+            Show();
 
         }
 
@@ -102,8 +104,10 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
-                new StationsList(bl, currentUser).Show();
-                Close();
+
+                Hide();
+                new StationsList(bl, currentUser).ShowDialog();
+                Show();
             }
             catch (Exception ex)
             {
@@ -113,7 +117,6 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList(bl, currentUser).Show();
             Close();
         }
 

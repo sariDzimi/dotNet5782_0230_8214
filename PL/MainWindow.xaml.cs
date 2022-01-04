@@ -39,8 +39,12 @@ namespace PL
             bL = bL1;
             InitializeComponent();
             ///debuuger
+      
             new ManegerWindow().Show();
+
             Close();
+
+
 
         }
 
