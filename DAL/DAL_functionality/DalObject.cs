@@ -414,7 +414,12 @@ namespace DalObject
             DataSource.droneCharges.Remove(droneChargeDL);
         }
 
-
+        public void DeleteParcel(int id)
+        {
+            Parcel parcel = findParcelById(id);
+            parcel.IsActive = false;
+            updateParcel(parcel);
+        }
 
         public IEnumerable<Parcel> GetParcelIdBy(Predicate<Parcel> findBy)
         {
