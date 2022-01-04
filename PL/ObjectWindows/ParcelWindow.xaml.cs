@@ -227,7 +227,7 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-            bL1.DeleateParcel(parcel);
+            bL1.DeleateParcel(parcel.Id);
             Close();
         }
 

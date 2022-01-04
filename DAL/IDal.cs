@@ -7,10 +7,12 @@ using DalObject;
 using DO;
 
 
+
 namespace DalApi
 {
     public interface IDal
     {
+        public void DeleteParcel(int id);
         public void addDrone(Drone drone);
 
         public void addCustomer(Customer customer);

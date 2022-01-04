@@ -66,7 +66,7 @@ namespace BlApi
 
         public bool CheckWorkerIfExixst(Manager manager);
 
-        public void DeleateParcel(Parcel parcel);
+        public void DeleateParcel(int id);
     }
 }
 

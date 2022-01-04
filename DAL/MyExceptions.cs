@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class NotFoundException : Exception
+    public class NotFoundException : Exception
     {
         public NotFoundException(string  e) : base($"{e}  Not found")
         {
-
         }
-
-        
 
     }
     public class IdAlreadyExist : Exception
@@ -27,4 +24,9 @@ namespace DAL
         public NoSuchInstance() : base("no such instance") { }
     }
 
+
+    public class ListEmpty : Exception
+    {
+        public ListEmpty(string list) : base(list + " is empty") { }
+    }
 }
