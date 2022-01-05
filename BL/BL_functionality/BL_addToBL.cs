@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using DAL;
 
 
 namespace BL
@@ -72,7 +73,7 @@ namespace BL
             
             droneBL.Battery = rand.Next(20, 40);
             DO.Station stationDL = new DO.Station();
-            stationDL = dalObject.findStationById(numberStaion);
+            stationDL = dalObject.GetStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
             DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneBL.Id, stationId = stationDL.Id };
             dalObject.addDronCharge(droneChargeDL);

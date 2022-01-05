@@ -23,33 +23,34 @@ namespace DalApi
 
         public void addDronCharge(DroneCharge droneCharge);
 
-        public IEnumerable<Station> GetStations();
+        public IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
 
 
-        public IEnumerable<Drone> GetDrones();
+        public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null);
 
 
-        public IEnumerable<Customer> GetCustomer();
+        public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null);
 
 
-        public IEnumerable<Parcel> GetParcel();
+        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
 
-        public IEnumerable<DroneCharge> GetDroneCharges();
-
-
-        public Parcel FindParcelBy(Predicate<Parcel> predicate);
+        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
 
 
-        public Station findStationBy( Predicate<Station> predicate);
-        public Station findStationById( int id);
+        //public Parcel FindParcelBy(Predicate<Parcel> predicate);
 
 
-        public Customer findCustomerBy( Predicate<Customer> predicate);
-        public Customer findCustomerById( int id);
+        //public Station findStationBy( Predicate<Station> predicate);
+        public Station GetStationById(int id);
 
 
-        public Drone findDroneBy( Predicate<Drone> predicate);
-        public Drone findDroneById(int id);
+        //public Customer findCustomerBy( Predicate<Customer> predicate);
+        public Customer GetCustomerById( int id);
+
+
+        //public Drone findDroneBy( Predicate<Drone> predicate);
+        public Drone GetDroneById(int id);
+        public DroneCharge GetDroneChargeById(int droneId);
 
         
 
@@ -57,19 +58,19 @@ namespace DalApi
 
         public void updateParcel(Parcel parcel);
         public void updateStation(Station parcel);
-        public IEnumerable<Parcel> GetParcelIdBy( Predicate<Parcel> predicate);
-        public IEnumerable<Station> GetStationIdBy(Predicate<Station> predicate);
+        //public IEnumerable<Parcel> GetParcelIdBy( Predicate<Parcel> predicate);
+        //public IEnumerable<Station> GetStationIdBy(Predicate<Station> predicate);
 
         public void updateCustomer(Customer customer);
 
 
         public void updateDronecharge(DroneCharge dronecharge);
 
-        public void removeDroneCharge(int id);
+        public void DeleteDroneCharge(int id);
 
         public double[] RequestElectricityUse();
-        public IEnumerable<Manager> GetManeger();
-        public Manager findManegerBy(Predicate<Manager> findBy);
+        public IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
+        //public Manager findManegerBy(Predicate<Manager> findBy);
 
     }
 

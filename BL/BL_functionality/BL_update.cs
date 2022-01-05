@@ -17,7 +17,7 @@ namespace BL
         /// <param name="model"></param>
         public void updateDroneModel(int id, string model)
         {
-            DO.Drone droneDL = dalObject.findDroneById(id);
+            DO.Drone droneDL = dalObject.GetDroneById(id);
             droneDL.Model = model;
             dalObject.updateDrone(droneDL);
 
@@ -34,7 +34,7 @@ namespace BL
         /// <param name="totalChargeSlots"></param>
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-            DO.Station station = dalObject.findStationById(id);
+            DO.Station station = dalObject.GetStationById(id);
             if (name != -1)
                 station.Name = name;
             if (totalChargeSlots != -1)

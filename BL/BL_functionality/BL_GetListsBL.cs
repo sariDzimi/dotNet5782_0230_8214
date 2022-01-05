@@ -29,7 +29,7 @@ namespace BL
         public IEnumerable<Parcel> GetParcels()
         {
 
-            return from parcel in dalObject.GetParcel()
+            return from parcel in dalObject.GetParcels()
                    select convertToParcelBL(parcel);
             
         }
@@ -41,7 +41,7 @@ namespace BL
         public IEnumerable<Customer> GetCustomers()
         {
 
-            return from customer in dalObject.GetCustomer()
+            return from customer in dalObject.GetCustomers()
                    select convertToCustomerBL(customer);
 
            

@@ -34,9 +34,6 @@ namespace BL
         /// <param name="station"></param>
         public void addStationToDL(Station station)
         {
-            if (dalObject.GetStations().Any(s => s.Id == station.Id))
-                throw new IdAlreadyExist(station.Id);
-
             DO.Station stationDL = new DO.Station()
             {
                 Id = station.Id,
@@ -45,7 +42,14 @@ namespace BL
                 Longitude = station.Location.Longitude,
                 Latitude = station.Location.Latitude
             };
-            dalObject.addStation(stationDL);
+            try
+            {
+                dalObject.addStation(stationDL);
+            }
+            catch (DAL.IdAlreadyExist)
+            {
+                throw new IdAlreadyExist(station.Id);
+            }
 
         }
 
@@ -55,10 +59,6 @@ namespace BL
         /// <param name="parcel"></param>
         public void addParcelToDL(Parcel parcel)
         {
-
-            if (dalObject.GetParcel().Any(p => p.Id == parcel.Id))
-                throw new IdAlreadyExist(parcel.Id);
-
             DO.Parcel parcelDL = new DO.Parcel()
             {
                 Id = parcel.Id,
@@ -72,7 +72,15 @@ namespace BL
                 Delivered = parcel.Delivered == null ? null : parcel.Delivered,
                 PickedUp = parcel.PickedUp == null ? null : parcel.PickedUp
             };
-            dalObject.addParcel(parcelDL);
+            try
+            {
+                dalObject.addParcel(parcelDL);
+            }
+            catch (DAL.IdAlreadyExist)
+            {
+                throw new IdAlreadyExist(parcel.Id);
+            }
+
         }
 
 
@@ -82,9 +90,6 @@ namespace BL
         /// <param name="customer"></param>
         public void addCustomerToDL(Customer customer)
         {
-            if (dalObject.GetCustomer().Any(c => c.Id == customer.Id))
-                throw new IdAlreadyExist(customer.Id);
-
             DO.Customer customerDL = new DO.Customer()
             {
                 Id = customer.Id,
@@ -93,7 +98,14 @@ namespace BL
                 Phone = customer.Phone,
                 Latitude = customer.Location.Latitude
             };
-            dalObject.addCustomer(customerDL);
+            try
+            {
+                dalObject.addCustomer(customerDL);
+            }
+            catch (DAL.IdAlreadyExist)
+            {
+                throw new IdAlreadyExist(customer.Id);
+            }
         }
     }
 

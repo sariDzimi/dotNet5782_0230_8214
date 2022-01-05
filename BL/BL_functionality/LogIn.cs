@@ -16,11 +16,7 @@ namespace BL
         {
             try
             {
-                DO.Manager manager1 = dalObject.findManegerBy((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName)));
-                if (manager1.Equals(null))
-                {
-                    throw new NotFound("Maneger");
-                }
+                DO.Manager manager1 = dalObject.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
 
             }
             catch(Exception)

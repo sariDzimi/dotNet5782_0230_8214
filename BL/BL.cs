@@ -35,7 +35,7 @@ namespace BL
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<BO.Drone>();
-            List<DO.Parcel> parcelDLs = dalObject.GetParcel().ToList();
+            List<DO.Parcel> parcelDLs = dalObject.GetParcels().ToList();
 
             foreach (var droneDL in dalObject.GetDrones())
             {
@@ -163,7 +163,7 @@ namespace BL
             station.FreeChargeSlots += 1;
             updateStation(station);
 */
-            dalObject.removeDroneCharge(idDrone);
+            dalObject.DeleteDroneCharge(idDrone);
         }
 
         /// <summary>

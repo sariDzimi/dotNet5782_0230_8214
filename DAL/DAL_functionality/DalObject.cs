@@ -30,6 +30,7 @@ namespace DalObject
             }
         }
 
+        #region Drone
         /// <summary>
         /// Adds the drone to the drones list in the DataSource
         /// If the ID alredy exist the function will throw exception
@@ -44,7 +45,44 @@ namespace DalObject
 
             DataSource.drones.Add(drone);
         }
+        /// <summary>
+        /// returns drones form datasource
+        /// </summary>
+        /// <returns>DataSource.drones</returns>
+        public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null)
+        {
+            getBy ??= (drone => true);
+            return from drone in DataSource.drones
+                   where (getBy(drone))
+                   select drone;
+        }
+        public Drone GetDroneById(int id)
+        {
+            try
+            {
+                return GetDrones(d => d.Id == id).First();
 
+            }
+            catch
+            {
+                throw new NotFoundException("drone");
+            }
+        }
+
+        /// <summary>
+        /// updates the drones list in the database
+        /// </summary>
+        /// <param name="drone"></param>
+        public void updateDrone(Drone drone)
+        {
+            int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
+            if (index == -1)
+                throw new NotFoundException("drone");
+            DataSource.drones[index] = drone;
+        }
+        #endregion
+
+        #region Customer
         /// <summary>
         /// adds the customer to the customers list in the DataSource
         ///  If the ID alredy exist the function will throw exception
@@ -60,6 +98,42 @@ namespace DalObject
         }
 
         /// <summary>
+        /// returns customers form datasource
+        /// </summary>
+        /// <returns>DataSource.customers</returns>
+        public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null)
+        {
+            getBy ??= (customer => true);
+            return from customer in DataSource.customers
+                   where (getBy(customer))
+                   select customer;
+        }
+
+        public Customer GetCustomerById(int id)
+        {
+            try
+            {
+
+                return GetCustomers(c => c.Id == id).First();
+            }
+            catch
+            {
+                throw new NotFoundException("customer");
+            }
+        }
+
+        public void updateCustomer(Customer customer)
+        {
+            int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
+            if (index == -1)
+                throw new NotFoundException("customer");
+            DataSource.customers[index] = customer;
+
+        }
+        #endregion
+
+        #region Parcel
+        /// <summary>
         /// adds the parcel to the parcels list in the DataSource
         /// If the ID alredy exist the function will throw exception
         /// </summary>
@@ -74,13 +148,60 @@ namespace DalObject
         }
 
         /// <summary>
+        /// returns parcel form datasource
+        /// </summary>
+        /// <returns>DataSource.customers</returns>
+        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null)
+        {
+            getBy ??= (parcel => true);
+            return (from parcel in DataSource.parcels
+                    where (getBy(parcel) && parcel.IsActive)
+                    select parcel);
+        }
+        public Parcel findParcelById(int id)
+        {
+            try
+            {
+
+                return GetParcels(p => p.Id == id).First();
+            }
+            catch
+            {
+                throw new NotFoundException("parcel");
+            }
+        }
+
+        /// <summary>
+        /// updates the drones list in the database
+        /// </summary>
+        /// <param name="parcel"></param>
+        public void updateParcel(Parcel parcel)
+        {
+            int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
+            if (index == -1)
+                throw new NotFoundException("parcel");
+            DataSource.parcels[index] = parcel;
+
+        }
+        public void DeleteParcel(int id)
+        {
+            Parcel parcel = findParcelById(id);
+            parcel.IsActive = false;
+            updateParcel(parcel);
+        }
+
+        #endregion
+
+        #region Station
+
+        /// <summary>
         /// Adds the station to the stations list in the DataSource
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="station"></param>
         public void addStation(Station station)
         {
-            if (DataSource.customers.Any(st => st.Id == station.Id))
+            if (DataSource.stations.Any(st => st.Id == station.Id))
             {
                 throw new IdAlreadyExist(station.Id);
             }
@@ -88,6 +209,44 @@ namespace DalObject
             DataSource.stations.Add(station);
 
         }
+        /// <summary>
+        /// returns stations form datasource
+        /// </summary>
+        /// <returns>DataSource.stations</returns>
+        public IEnumerable<Station> GetStations(Predicate<Station> getBy = null)
+        {
+            getBy ??= (station => true);
+            return from station in DataSource.stations
+                   where (getBy(station))
+                   select station;
+        }
+        public Station GetStationById(int id)
+        {
+            try
+            {
+
+                return GetStations(s => s.Id == id).First();
+            }
+            catch
+            {
+                throw new NotFoundException("station");
+            }
+        }
+        /// <summary>
+        /// updates the stations list in the database
+        /// </summary>
+        /// <param name="station"></param>
+        public void updateStation(Station station)
+        {
+            int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
+            if (index == -1)
+                throw new NotFoundException("station");
+            DataSource.stations[index] = station;
+        }
+
+        #endregion
+
+        #region droneCharge
 
         /// <summary>
         /// adds the droneCharge to the droneCharges list in the DataSource
@@ -103,336 +262,63 @@ namespace DalObject
             DataSource.droneCharges.Add(droneCharge);
 
         }
-
-
-        /// <summary>
-        /// returns stations form datasource
-        /// </summary>
-        /// <returns>DataSource.stations</returns>
-        public IEnumerable<Station> GetStations()
-        {
-            return from station in DataSource.stations
-                   select station;
-        }
-
-        /// <summary>
-        /// returns drones form datasource
-        /// </summary>
-        /// <returns>DataSource.drones</returns>
-        public IEnumerable<Drone> GetDrones()
-        {
-            return from drone in DataSource.drones
-                   select drone;
-        }
-
-        /// <summary>
-        /// returns customers form datasource
-        /// </summary>
-        /// <returns>DataSource.customers</returns>
-        public IEnumerable<Customer> GetCustomer()
-        {
-            return from customer in DataSource.customers
-                   select customer;
-        }
-
-        /// <summary>
-        /// returns parcel form datasource
-        /// </summary>
-        /// <returns>DataSource.customers</returns>
-        public IEnumerable<Parcel> GetParcel()
-        {
-            return (from parcel in DataSource.parcels
-                   //where parcel.IsActive == true
-            select parcel);
-        }
-
-        public IEnumerable<Manager> GetManeger()
-        {
-            return from maneger in DataSource.Managers
-                   select maneger;
-        }
-
         /// <summary>
         /// returns droneCharges form datasource
         /// </summary>
         /// <returns>DataSource.droneCharges</returns>
-        public IEnumerable<DroneCharge> GetDroneCharges()
+        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null)
         {
+            getBy ??= (DroneCharge => true);
             return from droneCharge in DataSource.droneCharges
+                   where(getBy(droneCharge))
                    select droneCharge;
         }
-
-        /// <summary>
-        /// returns parcel by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>parcel</returns>
-        /// 
-
-
-        public Parcel FindParcelBy(Predicate<Parcel> findBy)
-        {
-
-            Parcel parcelDL = new Parcel();
-
-            try
-            {
-                parcelDL = (from parcel in DataSource.parcels
-                            where findBy(parcel)
-                            select parcel).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($" {ex}");
-            }
-            return parcelDL;
-        }
-
-        public Manager findManegerBy(Predicate<Manager> findBy)
-        {
-            DO.Manager manager = new DO.Manager();
-
-            try
-            {
-                manager = (from man in DataSource.Managers
-                            where findBy(man)
-                            select man).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($"{ex}");
-            }
-            return manager;
-        }
-
-
-
-        public Parcel findParcelById(int id)
-        {
-            return FindParcelBy(p => p.Id == id && p.IsActive == true );
-        }
-
-        /// <summary>
-        /// returns station by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>station</returns>
-        public Station findStationBy(Predicate<Station> findBy)
-        {
-
-            Station stationDL = new Station();
-
-            try
-            {
-                stationDL = (from station in DataSource.stations
-                             where findBy(station)
-                             select station).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($" {ex}");
-            }
-            return stationDL;
-        }
-
-        public Station findStationById(int id)
-        {
-            return findStationBy(s => s.Id == id);
-        }
-
-
-
-
-        /// <summary>
-        /// returns customer by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>customer</returns>
-
-
-        public Customer findCustomerBy(Predicate<Customer> findBy)
-        {
-
-            Customer customerDL = new Customer();
-
-            try
-            {
-                customerDL = (from customer in DataSource.customers
-                              where findBy(customer)
-                              select customer).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($" {ex}");
-            }
-            return customerDL;
-        }
-
-        public Customer findCustomerById(int id)
-        {
-            return findCustomerBy(c => c.Id == id);
-        }
-
-        /// <summary>
-        /// returns drone by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>drone</returns>
-
-
-        public Drone findDroneBy(Predicate<Drone> findBy)
-        {
-
-            Drone droneDL = new Drone();
-
-            try
-            {
-                droneDL = (from drone in DataSource.drones
-                           where findBy(drone)
-                           select drone).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($" {ex}");
-            }
-            return droneDL;
-        }
-
-        public Drone findDroneById(int id)
-        {
-            return findDroneBy(d => d.Id == id);
-        }
-
-
-
-
-        /// <summary>
-        /// returns droneCharge by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>droneCharge</returns>
-        public DroneCharge findDroneChargeBy(Predicate<DroneCharge> findBy)
-        {
-
-            DroneCharge droneChargeDL = new DroneCharge();
-
-            try
-            {
-                droneChargeDL = (from droneCharge in DataSource.droneCharges
-                                 where findBy(droneCharge)
-                                 select droneCharge).First();
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($" {ex}");
-            }
-            return droneChargeDL;
-        }
-
-        /// <summary>
-        /// updates the drones list in the database
-        /// </summary>
-        /// <param name="drone"></param>
-        public void updateDrone(Drone drone)
-        {
-            int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
-            DataSource.drones[index] = drone;
-        }
-
-        /// <summary>
-        /// updates the drones list in the database
-        /// </summary>
-        /// <param name="parcel"></param>
-        public void updateParcel(Parcel parcel)
-        {
-            int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
-            if (index == -1)
-                throw new NotFoundException("parcel");
-            DataSource.parcels[index] = parcel;
-
-        }
-
-        /// <summary>
-        /// updates the drones list in the database
-        /// </summary>
-        /// <param name="customer"></param>
-        public void updateCustomer(Customer customer)
-        {
-            int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
-            DataSource.customers[index] = customer;
-
-        }
-
-        /// <summary>
-        /// updates the stations list in the database
-        /// </summary>
-        /// <param name="station"></param>
-        public void updateStation(Station station)
-        {
-            int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
-            DataSource.stations[index] = station;
-        }
-
-        /// <summary>
-        /// updates the dronecharges list in the database
-        /// </summary>
-        /// <param name="dronecharge"></param>
         public void updateDronecharge(DroneCharge dronecharge)
         {
             int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
+            if (index == -1)
+                throw new NotFoundException("droneCharge");
             DataSource.droneCharges[index] = dronecharge;
 
         }
 
-        /// <summary>
-        /// returns the array of the electricity use
-        /// </summary>
-        /// <returns>Electricity</returns>
-        public double[] RequestElectricityUse()
+        public DroneCharge GetDroneChargeById(int droneId)
         {
-            double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
-            return Electricity;
-
+            try
+            {
+                return GetDroneCharges(droneCharge => droneCharge.DroneId == droneId).First();
+            }
+            catch
+            {
+                throw new NotFoundException("droneCharge");
+            }
         }
 
         /// <summary>
         /// removes droneCharge from dronecharges list in database
         /// </summary>
         /// <param name="id"></param>
-        public void removeDroneCharge(int id)
+        public void DeleteDroneCharge(int droneId)
         {
-            DroneCharge droneChargeDL = new DroneCharge();
-            try
-            {
-                droneChargeDL = findDroneChargeBy(i => i.DroneId == id);
+            DroneCharge droneCharge = GetDroneChargeById(droneId);
+            DataSource.droneCharges.Remove(droneCharge);
+        }
+        #endregion
 
-            }
-            catch (Exception ex)
-            {
-                throw new NotFoundException($"{ex}");
-            }
-            DataSource.droneCharges.Remove(droneChargeDL);
+
+        public IEnumerable<Manager> GetManagers(Predicate<Manager> getBy = null)
+        {
+            getBy ??= (manager => true);
+            return from manager in DataSource.Managers
+                   where(getBy(manager))
+                   select manager;
         }
 
-        public void DeleteParcel(int id)
+        public double[] RequestElectricityUse()
         {
-            Parcel parcel = findParcelById(id);
-            parcel.IsActive = false;
-            updateParcel(parcel);
-        }
+            double[] Electricity = { DataSource.Config.free, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.heavy, DataSource.Config.rateChargePerHour };
+            return Electricity;
 
-        public IEnumerable<Parcel> GetParcelIdBy(Predicate<Parcel> findBy)
-        {
-            return from parcel in DataSource.parcels
-                   where findBy(parcel)
-                   select parcel;
-        }
-
-        public IEnumerable<Station> GetStationIdBy(Predicate<Station> findBy)
-        {
-            return from station in DataSource.stations
-                   where findBy(station)
-                   select station;
         }
 
     }

@@ -71,8 +71,8 @@ namespace BL
                 droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
             }
             //DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };
-            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.findCustomerById(p.SenderId).Name };
-            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.findCustomerById(p.TargetId).Name };
+            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.GetCustomerById(p.SenderId).Name };
+            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.GetCustomerById(p.TargetId).Name };
 
             Parcel ParcelBL = new Parcel() { Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel = droneAtParcel, Pritority = (BO.Pritorities)p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender1, customerAtParcelReciver = customerAtParcelreciver1, Weight = (BO.WeightCategories)p.Weight };
             return ParcelBL;
@@ -85,7 +85,7 @@ namespace BL
         /// <returns></returns>
         private int calculateFreeChargeSlotsInStation(int statioinID)
         {
-            int total = dalObject.findStationById(statioinID).ChargeSlots;
+            int total = dalObject.GetStationById(statioinID).ChargeSlots;
             foreach (var chargeDrone in dalObject.GetDroneCharges())
             {
                 if (chargeDrone.stationId == statioinID)
@@ -122,7 +122,7 @@ namespace BL
                 ID = station.Id,
                 Name = station.Name,
                 numberOfFreeChargeSlots = station.FreeChargeSlots,
-                numberOfUsedChargeSlots = dalObject.findStationById(station.Id).ChargeSlots - station.FreeChargeSlots
+                numberOfUsedChargeSlots = dalObject.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots
             };
             return stationToList;
         }
