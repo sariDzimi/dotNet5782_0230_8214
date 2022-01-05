@@ -44,7 +44,7 @@ namespace BL
             };
             try
             {
-                dalObject.addStation(stationDL);
+                dalObject.AddStation(stationDL);
             }
             catch (DAL.IdAlreadyExist)
             {
@@ -74,7 +74,7 @@ namespace BL
             };
             try
             {
-                dalObject.addParcel(parcelDL);
+                dalObject.AddParcel(parcelDL);
             }
             catch (DAL.IdAlreadyExist)
             {
@@ -100,7 +100,7 @@ namespace BL
             };
             try
             {
-                dalObject.addCustomer(customerDL);
+                dalObject.AddCustomer(customerDL);
             }
             catch (DAL.IdAlreadyExist)
             {

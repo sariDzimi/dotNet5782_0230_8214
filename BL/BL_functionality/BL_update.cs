@@ -19,7 +19,7 @@ namespace BL
         {
             DO.Drone droneDL = dalObject.GetDroneById(id);
             droneDL.Model = model;
-            dalObject.updateDrone(droneDL);
+            dalObject.UpdateDrone(droneDL);
 
             Drone droneBL = dronesBL.First(d => d.Id == id);
             droneBL.Model = model;
@@ -39,12 +39,12 @@ namespace BL
                 station.Name = name;
             if (totalChargeSlots != -1)
                 station.ChargeSlots = totalChargeSlots;
-            dalObject.updateStation(station);
+            dalObject.UpdateStation(station);
         }
 
         public void updateParcel(Parcel parcel)
         {
-            dalObject.updateParcel(new DO.Parcel()
+            dalObject.UpdateParcel(new DO.Parcel()
             {
                 Id = parcel.Id,
                 Delivered = parcel.Delivered,
@@ -77,7 +77,7 @@ namespace BL
 
         public void updateCustomer(Customer customer)
         {
-            dalObject.updateCustomer(new DO.Customer()
+            dalObject.UpdateCustomer(new DO.Customer()
             {
                 Id = customer.Id,
                 Name = customer.Name,
@@ -95,12 +95,12 @@ namespace BL
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
             dronesBL[index] = drone;
-            dalObject.updateDrone(new DO.Drone() { Id = drone.Id, MaxWeight = (DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
+            dalObject.UpdateDrone(new DO.Drone() { Id = drone.Id, MaxWeight = (DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
         }
 
         public void updateStation(Station station)
         {
-            dalObject.updateStation(new DO.Station()
+            dalObject.UpdateStation(new DO.Station()
             {
                 ChargeSlots = station.FreeChargeSlots,
                 Id = station.Id,

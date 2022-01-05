@@ -36,7 +36,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="drone"></param>
-        public void addDrone(Drone drone)
+        public void AddDrone(Drone drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
             {
@@ -73,7 +73,7 @@ namespace DalObject
         /// updates the drones list in the database
         /// </summary>
         /// <param name="drone"></param>
-        public void updateDrone(Drone drone)
+        public void UpdateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             if (index == -1)
@@ -88,7 +88,7 @@ namespace DalObject
         ///  If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="customer"></param>
-        public void addCustomer(Customer customer)
+        public void AddCustomer(Customer customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
             {
@@ -122,7 +122,7 @@ namespace DalObject
             }
         }
 
-        public void updateCustomer(Customer customer)
+        public void UpdateCustomer(Customer customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
             if (index == -1)
@@ -138,7 +138,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="parcel"></param>
-        public void addParcel(Parcel parcel)
+        public void AddParcel(Parcel parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
             {
@@ -158,7 +158,7 @@ namespace DalObject
                     where (getBy(parcel) && parcel.IsActive)
                     select parcel);
         }
-        public Parcel findParcelById(int id)
+        public Parcel GetParcelById(int id)
         {
             try
             {
@@ -175,7 +175,7 @@ namespace DalObject
         /// updates the drones list in the database
         /// </summary>
         /// <param name="parcel"></param>
-        public void updateParcel(Parcel parcel)
+        public void UpdateParcel(Parcel parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             if (index == -1)
@@ -185,9 +185,9 @@ namespace DalObject
         }
         public void DeleteParcel(int id)
         {
-            Parcel parcel = findParcelById(id);
+            Parcel parcel = GetParcelById(id);
             parcel.IsActive = false;
-            updateParcel(parcel);
+            UpdateParcel(parcel);
         }
 
         #endregion
@@ -199,7 +199,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="station"></param>
-        public void addStation(Station station)
+        public void AddStation(Station station)
         {
             if (DataSource.stations.Any(st => st.Id == station.Id))
             {
@@ -236,7 +236,7 @@ namespace DalObject
         /// updates the stations list in the database
         /// </summary>
         /// <param name="station"></param>
-        public void updateStation(Station station)
+        public void UpdateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(p => p.Id == station.Id);
             if (index == -1)
@@ -253,7 +253,7 @@ namespace DalObject
         /// If the ID alredy exist the function will throw exception
         /// </summary>
         /// <param name="droneCharge"></param>
-        public void addDronCharge(DroneCharge droneCharge)
+        public void AddDroneCharge(DroneCharge droneCharge)
         {
             if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
             {
@@ -272,14 +272,6 @@ namespace DalObject
             return from droneCharge in DataSource.droneCharges
                    where(getBy(droneCharge))
                    select droneCharge;
-        }
-        public void updateDronecharge(DroneCharge dronecharge)
-        {
-            int index = DataSource.droneCharges.FindIndex(p => p.DroneId == dronecharge.DroneId);
-            if (index == -1)
-                throw new NotFoundException("droneCharge");
-            DataSource.droneCharges[index] = dronecharge;
-
         }
 
         public DroneCharge GetDroneChargeById(int droneId)

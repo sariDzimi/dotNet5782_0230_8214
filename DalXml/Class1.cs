@@ -5,10 +5,11 @@ using DO;
 using DAL;
 using System.Linq;
 using System.Xml.Linq;
+using DalApi;
 
 namespace DalXml
 {
-    public partial class DalXml
+    public partial class DalXml : IDal
     {
         static string dir = @"..\..\..\..\xmlData\";
         static DalXml()
@@ -46,7 +47,7 @@ namespace DalXml
         #region Drone
         public void AddDrone(Drone drone)
         {
-            IEnumerable<DO.Drone> droneList = GetAllDrones();
+            IEnumerable<DO.Drone> droneList = GetDrones();
 
             if (droneList.Any(d => d.Id == drone.Id))
             {
@@ -57,10 +58,9 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
-
         public void DeleteDrone(int id)
         {
-            IEnumerable<DO.Drone> droneList = GetAllDrones();
+            IEnumerable<DO.Drone> droneList = GetDrones();
             Drone drone;
             try
             {
@@ -75,10 +75,9 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
-
         public void UpdateDrone(Drone drone)
         {
-            List<DO.Drone> droneList = GetAllDrones().ToList();
+            List<DO.Drone> droneList = GetDrones().ToList();
 
             int index = droneList.FindIndex(d => d.Id == drone.Id);
 
@@ -89,21 +88,18 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
-
         public DO.Drone GetDroneById(int id)
         {
             try
             {
-                return GetAllDrones(d => d.Id == id).First();
+                return GetDrones(d => d.Id == id).First();
             }
             catch (Exception)
             {
                 throw new NotFoundException("drone");
             }
         }
-
-
-        public IEnumerable<DO.Drone> GetAllDrones(Predicate<DO.Drone> predicat = null)
+        public IEnumerable<DO.Drone> GetDrones(Predicate<DO.Drone> predicat = null)
         {
             IEnumerable<DO.Drone> droneList = XMLTools.LoadListFromXMLSerializer<DO.Drone>(dir + droneFilePath);
 
@@ -119,9 +115,9 @@ namespace DalXml
         #endregion
 
         #region Parcel
-        public void AddPArcel(Parcel parcel)
+        public void AddParcel(Parcel parcel)
         {
-            IEnumerable<DO.Parcel> parcelList = GetAllParcels();
+            IEnumerable<DO.Parcel> parcelList = GetParcels();
             if (parcelList.Any(p => p.Id == parcel.Id))
             {
                 throw new IdAlreadyExist(parcel.Id);
@@ -131,7 +127,6 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(parcelList, dir + parcelFilePath);
         }
-
         public void DeleteParcel(int id)
         {
             Parcel parcel;
@@ -148,7 +143,7 @@ namespace DalXml
         }
         public void UpdateParcel(Parcel parcel)
         {
-            List<DO.Parcel> parcelList = GetAllParcels().ToList();
+            List<DO.Parcel> parcelList = GetParcels().ToList();
 
             int index = parcelList.FindIndex(d => d.Id == parcel.Id);
 
@@ -159,12 +154,11 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(parcelList, dir + parcelFilePath);
         }
-
         public DO.Parcel GetParcelById(int id)
         {
             try
             {
-                return GetAllParcels(p => p.Id == id).First();
+                return GetParcels(p => p.Id == id).First();
             }
             catch (Exception)
             {
@@ -172,9 +166,7 @@ namespace DalXml
             }
 
         }
-
-
-        public IEnumerable<DO.Parcel> GetAllParcels(Predicate<DO.Parcel> predicat = null)
+        public IEnumerable<DO.Parcel> GetParcels(Predicate<DO.Parcel> predicat = null)
         {
             IEnumerable<DO.Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(dir + parcelFilePath);
 
@@ -189,7 +181,7 @@ namespace DalXml
         #endregion
 
         #region Station
-        public IEnumerable<DO.Station> GetAllStations(Predicate<Station> predicate = null)
+        public IEnumerable<DO.Station> GetStations(Predicate<Station> predicate = null)
         {
 
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
@@ -217,7 +209,6 @@ namespace DalXml
                    where predicate(station)
                    select station;
         }
-
         public DO.Station GetStationById(int id)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
@@ -241,7 +232,6 @@ namespace DalXml
             }
             return station;
         }
-
         public void AddStation(DO.Station station)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
@@ -263,8 +253,7 @@ namespace DalXml
                 throw new IdAlreadyExist(station.Id);
             }
         }
-
-        public void RemoveStation(int id)
+        public void DeleteStation(int id)
         {
             XElement element = XMLTools.LoadData(dir + stationFilePath);
             XElement elements;
@@ -282,8 +271,7 @@ namespace DalXml
             elements.Remove();
             element.Save(dir + stationFilePath);
         }
-
-        public void UpdateTest(DO.Station station)
+        public void UpdateStation(DO.Station station)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
             XElement element;
@@ -310,7 +298,7 @@ namespace DalXml
         #region Customer
         public void AddCustomer(Customer customer)
         {
-            IEnumerable<DO.Customer> customerList = GetAllCustomers();
+            IEnumerable<DO.Customer> customerList = GetCustomers();
             if (customerList.Any(p => p.Id == customer.Id))
             {
                 throw new IdAlreadyExist(customer.Id);
@@ -320,10 +308,9 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer<DO.Customer>(customerList, dir + customerFilePath);
         }
-
         public void DeleteCustomer(int id)
         {
-            IEnumerable<DO.Customer> customerList = GetAllCustomers();
+            IEnumerable<DO.Customer> customerList = GetCustomers();
             Customer customer;
             try
             {
@@ -340,7 +327,7 @@ namespace DalXml
         }
         public void UpdateCustomer(Customer customer)
         {
-            List<DO.Customer> customerList = GetAllCustomers().ToList();
+            List<DO.Customer> customerList = GetCustomers().ToList();
 
             int index = customerList.FindIndex(d => d.Id == customer.Id);
 
@@ -351,12 +338,11 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(customerList, dir + customerFilePath);
         }
-
         public DO.Customer GetCustomerById(int id)
         {
             try
             {
-                return GetAllCustomers(c => c.Id == id).First();
+                return GetCustomers(c => c.Id == id).First();
             }
             catch (Exception)
             {
@@ -364,9 +350,7 @@ namespace DalXml
             }
 
         }
-
-
-        public IEnumerable<Customer> GetAllCustomers(Predicate<DO.Customer> predicat = null)
+        public IEnumerable<Customer> GetCustomers(Predicate<DO.Customer> predicat = null)
         {
             IEnumerable<Customer> customerList = XMLTools.LoadListFromXMLSerializer<DO.Customer>(dir + customerFilePath);
 
@@ -384,7 +368,7 @@ namespace DalXml
         #region DroneCharge
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            IEnumerable<DroneCharge> droneChargeList = GetAllDroneCharge();
+            IEnumerable<DroneCharge> droneChargeList = GetDroneCharges();
             if (droneChargeList.Any(dc => dc.DroneId == droneCharge.DroneId))
             {
                 throw new IdAlreadyExist(droneCharge.DroneId);
@@ -394,10 +378,9 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(droneChargeList, dir + droneChargeFilePath);
         }
-
         public void DeleteDroneCharge(int id)
         {
-            IEnumerable<DO.DroneCharge> droneChargeList = GetAllDroneCharge();
+            IEnumerable<DO.DroneCharge> droneChargeList = GetDroneCharges();
             DroneCharge droneCharge;
             try
             {
@@ -412,12 +395,11 @@ namespace DalXml
 
             XMLTools.SaveListToXMLSerializer(droneChargeList, dir + droneChargeFilePath);
         }
-
         public DO.DroneCharge GetDroneChargeById(int droneId)
         {
             try
             {
-                return GetAllDroneCharge(c => c.DroneId == droneId).First();
+                return GetDroneCharges(c => c.DroneId == droneId).First();
             }
             catch (Exception)
             {
@@ -425,9 +407,7 @@ namespace DalXml
             }
 
         }
-
-
-        public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DO.DroneCharge> predicat = null)
+        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DO.DroneCharge> predicat = null)
         {
             IEnumerable<DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DO.DroneCharge>(dir + droneChargeFilePath);
 
@@ -439,7 +419,15 @@ namespace DalXml
 
         }
 
-
         #endregion
+        double[] IDal.RequestElectricityUse()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Manager> IDal.GetManagers(Predicate<Manager> findBy)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

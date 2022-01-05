@@ -76,13 +76,13 @@ namespace BL
             stationDL = dalObject.GetStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
             DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneBL.Id, stationId = stationDL.Id };
-            dalObject.addDronCharge(droneChargeDL);
+            dalObject.AddDroneCharge(droneChargeDL);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
             DO.Drone drone = new DO.Drone() { Id = id, MaxWeight = (DO.WeightCategories)maxWeight, Model = model };
-            dalObject.addDrone(drone);
+            dalObject.AddDrone(drone);
             dronesBL.Add(droneBL);
-            dalObject.updateStation(stationDL);
+            dalObject.UpdateStation(stationDL);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace BL
 
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            dalObject.addDronCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId});
+            dalObject.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId});
         }
     }
 }

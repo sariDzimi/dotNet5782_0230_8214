@@ -13,15 +13,15 @@ namespace DalApi
     public interface IDal
     {
         public void DeleteParcel(int id);
-        public void addDrone(Drone drone);
+        public void AddDrone(Drone drone);
 
-        public void addCustomer(Customer customer);
+        public void AddCustomer(Customer customer);
 
-        public void addParcel(Parcel parcel);
+        public void AddParcel(Parcel parcel);
 
-        public void addStation(Station station);
+        public void AddStation(Station station);
 
-        public void addDronCharge(DroneCharge droneCharge);
+        public void AddDroneCharge(DroneCharge droneCharge);
 
         public IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
 
@@ -40,17 +40,16 @@ namespace DalApi
 
         public Customer GetCustomerById( int id);
 
+        public Parcel GetParcelById(int id);
         public Drone GetDroneById(int id);
         public DroneCharge GetDroneChargeById(int droneId);
 
-        public void updateDrone(Drone drone);
+        public void UpdateDrone(Drone drone);
 
-        public void updateParcel(Parcel parcel);
-        public void updateStation(Station parcel);
+        public void UpdateParcel(Parcel parcel);
+        public void UpdateStation(Station parcel);
 
-        public void updateCustomer(Customer customer);
-
-        public void updateDronecharge(DroneCharge dronecharge);
+        public void UpdateCustomer(Customer customer);
 
         public void DeleteDroneCharge(int id);
 

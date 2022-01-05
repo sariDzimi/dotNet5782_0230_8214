@@ -86,7 +86,7 @@ namespace BL
                     droneBL.Location = station.Location;
                     droneBL.Battery = rand.Next(0, 21);
                     DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneDL.Id, stationId = station.Id };
-                    dalObject.addDronCharge(droneChargeDL);
+                    dalObject.AddDroneCharge(droneChargeDL);
                     droneBL.Location = station.Location;
                 }
 
