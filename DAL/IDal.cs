@@ -36,33 +36,19 @@ namespace DalApi
 
         public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
 
-
-        //public Parcel FindParcelBy(Predicate<Parcel> predicate);
-
-
-        //public Station findStationBy( Predicate<Station> predicate);
         public Station GetStationById(int id);
 
-
-        //public Customer findCustomerBy( Predicate<Customer> predicate);
         public Customer GetCustomerById( int id);
 
-
-        //public Drone findDroneBy( Predicate<Drone> predicate);
         public Drone GetDroneById(int id);
         public DroneCharge GetDroneChargeById(int droneId);
-
-        
 
         public void updateDrone(Drone drone);
 
         public void updateParcel(Parcel parcel);
         public void updateStation(Station parcel);
-        //public IEnumerable<Parcel> GetParcelIdBy( Predicate<Parcel> predicate);
-        //public IEnumerable<Station> GetStationIdBy(Predicate<Station> predicate);
 
         public void updateCustomer(Customer customer);
-
 
         public void updateDronecharge(DroneCharge dronecharge);
 
@@ -70,7 +56,6 @@ namespace DalApi
 
         public double[] RequestElectricityUse();
         public IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
-        //public Manager findManegerBy(Predicate<Manager> findBy);
 
     }
 
