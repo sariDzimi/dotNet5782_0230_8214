@@ -97,5 +97,11 @@ namespace PL
             Window.GetWindow(this).Content =  new ParcelPage(bl, currentUser, this);
 
         }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            new ManegerWindow(bl, currentUser).Show();
+            Window.GetWindow(this).Close();
+        }
     }
 }

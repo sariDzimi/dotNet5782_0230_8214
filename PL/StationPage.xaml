@@ -35,7 +35,7 @@
         </ListView>
         <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="425,123,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="updateButton_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="addButton_Click" Visibility="{Binding Visibility, ElementName=addStationLabel}"/>
-        <Button x:Name="close" Content="X" Style="{StaticResource close}"  Margin="758,10,0,401" Click="closeButton_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="37"/>
+        <Button x:Name="close" Content="return back" Style="{StaticResource close}"  Margin="726,10,0,401" Click="closeButton_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="69"/>
 
     </Grid>
 </Page>

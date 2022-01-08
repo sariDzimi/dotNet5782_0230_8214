@@ -38,7 +38,7 @@ namespace PL
 
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        private void returnBackButton_Click(object sender, RoutedEventArgs e)
         {
             new ManegerWindow(bl, currentUser).Show();
             Window.GetWindow(this).Close();

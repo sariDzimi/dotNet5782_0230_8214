@@ -36,7 +36,7 @@
         <Label Content="Weight" HorizontalAlignment="Left" Margin="471,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.259,0.347"/>
         <Button Content="All List" HorizontalAlignment="Left" Margin="26,78,0,0" VerticalAlignment="Top" Width="116" Height="22" Click="Button_Click_1"/>
         <Button Content="Group By Reciver" HorizontalAlignment="Left" Margin="154,27,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.376,-2.148" Width="119" Height="35" Click="Button_Click_2"/>
-        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="return back" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="close_Click"/>
 
     </Grid>
 </Page>

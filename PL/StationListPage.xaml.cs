@@ -84,7 +84,6 @@ namespace PL
 
         private void closeButton_click(object sender, RoutedEventArgs e)
         {
-            //???????
             new ManegerWindow(bL, currentUser).Show();
             Window.GetWindow(this).Close();
         }

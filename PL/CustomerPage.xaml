@@ -9,7 +9,7 @@
       Title="CustomerPage">
 
     <Grid>
-        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_Click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="return back" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_Click"/>
         <Label Content="id" HorizontalAlignment="Left" Margin="88,72,0,0" VerticalAlignment="Top"/>
         <Label Content="name" HorizontalAlignment="Left" Margin="88,103,0,0" VerticalAlignment="Top"/>
         <Label Content="phone" HorizontalAlignment="Left" Margin="86,134,0,0" VerticalAlignment="Top"/>

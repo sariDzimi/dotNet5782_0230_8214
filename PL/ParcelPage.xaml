@@ -57,7 +57,7 @@
         <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="274,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked"/>
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="618,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
         <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="618,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
-        <Button x:Name="Close"  Content="X"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="758,13,0,398"  Width="37" RenderTransformOrigin="1.63,0.089" Click="close_buuton"/>
+        <Button x:Name="Close" Style="{StaticResource close}" Content="return back"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="720,74,0,338"  Width="70" RenderTransformOrigin="1.63,0.089" Click="close_buuton"/>
 
     </Grid>
 </Page>
