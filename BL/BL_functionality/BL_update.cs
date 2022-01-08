@@ -55,7 +55,8 @@ namespace BL
                 Scheduled = parcel.Scheduled,
                 SenderId = parcel.customerAtParcelSender.Id,
                 TargetId = parcel.customerAtParcelReciver.Id,
-                Weight = (DO.WeightCategories)parcel.Weight
+                Weight = (DO.WeightCategories)parcel.Weight,
+                IsActive = true
             });
         }
 

@@ -424,7 +424,6 @@ namespace DalXml
         {
             throw new NotImplementedException();
         }
-
         IEnumerable<Manager> IDal.GetManagers(Predicate<Manager> findBy)
         {
             throw new NotImplementedException();

@@ -10,30 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for CustomerList.xaml
+    /// Interaction logic for CustomerListPage.xaml
     /// </summary>
-    public partial class CustomersList : Window
+    public partial class CustomerListPage : Page
     {
-        CurrentUser currentUser = new CurrentUser();
-        private IBL bl;
-        public CustomersList()
+        public CustomerListPage()
         {
             InitializeComponent();
-            WindowStyle = WindowStyle.None;
         }
+        CurrentUser currentUser = new CurrentUser();
+        private IBL bl;
 
-        public CustomersList(IBL blArg, CurrentUser currentUser1)
+        public CustomerListPage(IBL blArg, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
             bl = blArg;
-            WindowStyle = WindowStyle.None;
             customersListView.ItemsSource = bl.GetCustomerToLists();
 
         }
@@ -41,28 +41,19 @@ namespace PL
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             new ManegerWindow(bl, currentUser).Show();
-            Close();
+            Window.GetWindow(this).Close();
         }
 
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.FindCustomer(customerToList.Id);
-
-            Hide();
-            new CustomerWindow(bl, customer, currentUser).ShowDialog();
-            Show();
+            Window.GetWindow(this).Content = new CustomerPage(bl, customer, currentUser, this);
         }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-
-
-            //var win = new CustomerWindow(bl, currentUser);
-            Hide();
-            new CustomerWindow(bl, currentUser).ShowDialog();
-            Show();
-
+            Window.GetWindow(this).Content = new CustomerPage(bl, currentUser, this);
         }
     }
 }

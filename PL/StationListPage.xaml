@@ -18,7 +18,7 @@
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
-                <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
+                <GroupStyle/>
             </ListView.GroupStyle>
         </ListView>
         <CheckBox Content="show only stations with free charge slots" HorizontalAlignment="Left" Margin="315,35,0,0" VerticalAlignment="Top" Height="19" Width="237" Checked="Cheked_onlyStationsWithFreeSlots" Unchecked="unChecked_onlyFreeChargeSlots"/>

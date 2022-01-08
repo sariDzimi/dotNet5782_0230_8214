@@ -127,7 +127,7 @@ namespace BL
 
             try
             {
-                parcelBL = (from parcel in GetParcels().ToList()
+                parcelBL = (from parcel in GetParcels()
                             where findBy(parcel)
                             select parcel).First();
             }

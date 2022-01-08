@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class StationListPage : Page
     {
-        private CurrentUser currentUser = new CurrentUser();
+        CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
         List<StationToList> items;
@@ -31,9 +31,9 @@ namespace PL
             InitializeComponent();
         }
 
-        public StationListPage(IBL bl, Window window)
+        public StationListPage(IBL bl, CurrentUser currentUser1 )
         {
-            //WindowStyle = WindowStyle.None;
+            currentUser = currentUser1;
             InitializeComponent();
             bL = bl;
             StationsListView.ItemsSource = bL.GetStationToLists();
@@ -74,20 +74,19 @@ namespace PL
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.FindStation(stationToList.ID);
-            new StationWindow(bL, station, currentUser).Show();
-            //Close();
+            Window.GetWindow(this).Content = new StationPage(bL, station, currentUser, this);
         }
 
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-/*            new StationWindow(bL).Show();
-            Close();*/
+            Window.GetWindow(this).Content = new StationPage(bL, currentUser, this);
         }
 
         private void closeButton_click(object sender, RoutedEventArgs e)
         {
-            /*new MainWindow(bL).Show();
-            Close();*/
+            //???????
+            new ManegerWindow(bL, currentUser).Show();
+            Window.GetWindow(this).Close();
         }
     }
 }
