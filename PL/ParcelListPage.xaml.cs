@@ -50,7 +50,7 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcelBL = bl.FindParcel(parcelToList.ID);
+            BO.Parcel parcelBL = bl.GetParcelById(parcelToList.ID);
             Window.GetWindow(this).Content = new ParcelPage(bl, parcelBL, currentUser, this);
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

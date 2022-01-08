@@ -266,7 +266,7 @@ namespace PL
         {
             try
             { 
-                BO.Customer customer = bL.FindCustomer(getId());
+                BO.Customer customer = bL.GetCustomerById(getId());
                 if ((customer.Name == getNameLog()))
                 {
                     MessageBox.Show("you are in");

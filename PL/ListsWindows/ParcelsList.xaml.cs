@@ -51,7 +51,7 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcelBL = bl.FindParcel(parcelToList.ID);
+            BO.Parcel parcelBL = bl.GetParcelById(parcelToList.ID);
             new ParcelWindow(bl, parcelBL, currentUser).Show();       
             Close();
         }

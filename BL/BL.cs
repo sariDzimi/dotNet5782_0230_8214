@@ -46,8 +46,8 @@ namespace BL
                     if (parcel.Delivered == null)
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
-                        Location locationSender = FindCustomerBy(c => c.Id == parcel.customerAtParcelSender.Id).Location;
-                        Location locationReciver = FindCustomerBy(c => c.Id == parcel.customerAtParcelReciver.Id).Location;
+                        Location locationSender = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
+                        Location locationReciver = GetCustomerById(parcel.customerAtParcelReciver.Id).Location;
                         parcel.Scheduled = DateTime.Now;
                         double distance1 = distanceBetweenTwoLocationds(locationSender, locationReciver);
                         ParcelInDelivery parcelInDelivery = new ParcelInDelivery()
@@ -150,7 +150,7 @@ namespace BL
         /// <param name="timeInCharging"></param>
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
-            Drone droneBL = FindDrone(idDrone);
+            Drone droneBL = GetDroneById(idDrone);
 
             if (droneBL.DroneStatus != DroneStatus.Maintenance)
                 throw new BO.DroneIsNotInCorrectStatus("drone is not in Maintenance ");
@@ -172,8 +172,8 @@ namespace BL
         /// <param name="idDrone"></param>
         public void collectParcleByDrone(int idDrone)
         {
-            Drone droneBL = FindDrone(idDrone);
-            Parcel parcel = FindParcel(droneBL.ParcelInDelivery.Id);
+            Drone droneBL = GetDroneById(idDrone);
+            Parcel parcel = GetParcelById(droneBL.ParcelInDelivery.Id);
             if (droneBL.DroneStatus != DroneStatus.Delivery || droneBL.ParcelInDelivery == null)
                 throw new DroneIsNotInCorrectStatus("drone is not in Delivery");
 
@@ -195,7 +195,7 @@ namespace BL
         /// <param name="droneId"></param>
         public void sendDroneToCharge(int droneId)
         {
-            Drone drone = FindDrone(droneId);
+            Drone drone = GetDroneById(droneId);
             if (drone.DroneStatus == DroneStatus.Free)
             {
                 Station closestStation = closestStationToLoacation(drone.Location);
@@ -276,19 +276,19 @@ namespace BL
             Parcel bestParcel = new Parcel();
             try
             {
-                bestParcel = FindParcelBy(t => t.Scheduled == null);
+                bestParcel = GetParcelsBy(t => t.Scheduled == null).First();
             }
             catch (Exception)
             {
                 throw new NotFound("parcel");
             }
-            Drone droneBL = FindDrone(id);
+            Drone droneBL = GetDroneById(id);
 
             foreach (var parcel in GetParcels())
             {
                 if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue;
-                Location CurrentSenderLocation = FindCustomer(parcel.customerAtParcelSender.Id).Location;
-                Location CurrentReciverLocation = FindCustomer(parcel.customerAtParcelReciver.Id).Location;
+                Location CurrentSenderLocation = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
+                Location CurrentReciverLocation = GetCustomerById(parcel.customerAtParcelReciver.Id).Location;
                 Location CloslestStationLocation = closestStationToLoacation(CurrentReciverLocation).Location;
                 double electricityNeeded = CalculateElectricity(CurrentSenderLocation, CurrentReciverLocation, parcel.Weight)
                     + CalculateElectricityWhenFree(CurrentReciverLocation, CloslestStationLocation)
@@ -307,7 +307,7 @@ namespace BL
                         }
                         else if (bestParcel.Weight == parcel.Weight)
                         {
-                            Location bestParcelLocaion = FindCustomer(bestParcel.customerAtParcelSender.Id).Location;
+                            Location bestParcelLocaion = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
                             if (distanceBetweenTwoLocationds(droneBL.Location, CurrentSenderLocation) < distanceBetweenTwoLocationds(droneBL.Location, bestParcelLocaion)) ;
                             {
                                 bestParcel = parcel;
@@ -317,8 +317,8 @@ namespace BL
                 }
             }
 
-            Location SenderLocation = FindCustomer(bestParcel.customerAtParcelSender.Id).Location;
-            Location ReciverLocation = FindCustomer(bestParcel.customerAtParcelReciver.Id).Location;
+            Location SenderLocation = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
+            Location ReciverLocation = GetCustomerById(bestParcel.customerAtParcelReciver.Id).Location;
             droneBL.DroneStatus = DroneStatus.Delivery;
             double distance1 = distanceBetweenTwoLocationds(SenderLocation, ReciverLocation);
 
@@ -348,7 +348,7 @@ namespace BL
         public void supplyParcelByDrone(int DroneID)
         {
 
-            Drone droneBL = FindDrone(DroneID);
+            Drone droneBL = GetDroneById(DroneID);
 
             if (droneBL.DroneStatus != DroneStatus.Delivery)
                 throw new DroneIsNotInCorrectStatus("drone is not in delivery");
@@ -363,7 +363,7 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Free;
             droneBL.ParcelInDelivery = null;
             updateDrone(droneBL);
-            Parcel parcel = FindParcel(droneBL.Id);
+            Parcel parcel = GetParcelById(droneBL.Id);
             parcel.Delivered = DateTime.Now;
             updateParcel(parcel);
 

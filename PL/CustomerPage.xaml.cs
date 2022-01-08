@@ -119,7 +119,7 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.FindParcel(parcelAtCustomer.ID);
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
             Window.GetWindow(this).Content = new ParcelPage(bl, parcel, currentUser, this);
         }
 

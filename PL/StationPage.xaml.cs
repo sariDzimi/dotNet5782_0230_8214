@@ -65,7 +65,7 @@ namespace PL
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
 
             Window.GetWindow(this).Content = 
-            new DronePage(bl, bl.FindDrone(droneAtCharging.ID), currentUser, this);
+            new DronePage(bl, bl.GetDroneById(droneAtCharging.ID), currentUser, this);
           
 
         }

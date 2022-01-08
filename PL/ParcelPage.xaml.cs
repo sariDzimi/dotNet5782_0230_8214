@@ -234,19 +234,19 @@ namespace PL
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
-            BO.Drone drone = bL1.FindDroneBy((p) => parcel.droneAtParcel.Id == p.Id);
+            BO.Drone drone = bL1.GetDroneById(parcel.droneAtParcel.Id);
             Window.GetWindow(this).Content = new DronePage(bL1, drone, currentUser, this);
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelSender.Id);
+            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
             Window.GetWindow(this).Content = new CustomerPage(bL1, customer, currentUser, this);
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
+            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
             Window.GetWindow(this).Content = new CustomerPage(bL1, customer, currentUser, this);
         }
 

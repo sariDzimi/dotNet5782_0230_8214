@@ -31,19 +31,33 @@ namespace BlApi
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy);
         public Drone ConvertDroneToListToDrone(DroneToList droneToList);
 
-        public Station FindStationBy(Predicate<Station> findBy);
-        public Station FindStation(int id);
-        public Drone FindDrone(int id);
-        public Drone FindDroneBy(Predicate<Drone> findBy);
-        public Customer FindCustomerBy(Predicate<Customer> findBy);
-        public Parcel FindParcelBy(Predicate<Parcel> findBy);
-        public Parcel FindParcel(int id);
-        public DroneCharge FindDroneCharge(int droneId);
-        public IEnumerable<StationToList> GetStationToLists();
+        public IEnumerable<Drone> GetDronesBy(Predicate<Drone> findBy);
+
+        public Drone GetDroneById(int id);
+
+        public IEnumerable<Customer> GetCustomersBy(Predicate<Customer> findBy);
+
+        public Customer GetCustomerById(int id);
+        public IEnumerable<Station> GetStationsBy(Predicate<Station> findBy);
+
+        public Station GetStationById(int id);
+
         public IEnumerable<Parcel> GetParcelsBy(Predicate<Parcel> findBy);
-        public IEnumerable<ParcelToList> GetParcelToLists();
+        public Parcel GetParcelById(int id);
 
         public IEnumerable<ParcelToList> GetParcelsToListBy(Predicate<ParcelToList> findBy);
+
+        /*        public Station FindStationBy(Predicate<Station> findBy);
+                public Station FindStation(int id);
+                public Drone FindDrone(int id);
+                public Drone FindDroneBy(Predicate<Drone> findBy);
+                public Customer FindCustomerBy(Predicate<Customer> findBy);
+                public Parcel FindParcelBy(Predicate<Parcel> findBy);
+                public Parcel FindParcel(int id);
+                public DroneCharge FindDroneCharge(int droneId);*/
+        public IEnumerable<StationToList> GetStationToLists();
+        public IEnumerable<ParcelToList> GetParcelToLists();
+
         public IEnumerable<CustomerToList> GetCustomerToLists();
 
         public ParcelToList convertParcelToParcelToList(Parcel parcel);
@@ -59,8 +73,6 @@ namespace BlApi
         public void updateParcel(Parcel parcel);
 
         public void updateCustomer(Customer customer);
-
-        public Customer FindCustomer(int id);
 
         public void addCustomerToDL(Customer customer);
 

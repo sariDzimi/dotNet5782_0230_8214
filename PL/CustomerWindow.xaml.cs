@@ -117,7 +117,7 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.FindParcel(parcelAtCustomer.ID);
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
             Hide();
             new ParcelWindow(bl, parcel, currentUser).ShowDialog();
             Show();

@@ -59,7 +59,7 @@ namespace PL
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-            BO.Drone droneBL = bl.FindDrone(droneToList.Id);
+            BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
             Window.GetWindow(this).Content = new DronePage(bl, droneBL, currentUser, this);
         }
 

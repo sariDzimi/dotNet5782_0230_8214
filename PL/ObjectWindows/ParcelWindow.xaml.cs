@@ -233,13 +233,13 @@ namespace PL
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
-            BO.Drone drone = bL1.FindDroneBy((p) => Parcel_P.IdDrone == p.Id);
+            BO.Drone drone = bL1.GetDroneById(Parcel_P.IdDrone);
             new Drone(bL1, drone, currentUser).Show();
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelSender.Id);
+            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
             Hide();
             new CustomerWindow(bL1, customer, currentUser).ShowDialog();
             Show();
@@ -247,7 +247,7 @@ namespace PL
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.FindCustomerBy((c) => c.Id == parcel.customerAtParcelReciver.Id);
+            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
             Hide();
             new CustomerWindow(bL1, customer, currentUser).ShowDialog();
             Show();

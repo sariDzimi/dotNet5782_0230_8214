@@ -47,7 +47,7 @@ namespace PL
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            BO.Customer customer = bl.FindCustomer(customerToList.Id);
+            BO.Customer customer = bl.GetCustomerById(customerToList.Id);
 
             Hide();
             new CustomerWindow(bl, customer, currentUser).ShowDialog();

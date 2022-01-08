@@ -23,7 +23,7 @@ namespace BL
             foreach (var dronecharge in dalObject.GetDroneCharges())
             {
                 if (dronecharge.stationId == s.Id)
-                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = FindDrone(dronecharge.DroneId).Battery });
+                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = GetDroneById(dronecharge.DroneId).Battery });
             }
             return StationBL;
         }
@@ -107,12 +107,12 @@ namespace BL
 
         public Drone ConvertDroneToListToDrone(DroneToList droneToList)
         {
-            return FindDrone(droneToList.Id);
+            return GetDroneById(droneToList.Id);
         }
 
         public Parcel ConvertParcelToListToParcel(ParcelToList parcelToList)
         {
-            return FindParcel(parcelToList.ID);
+            return GetParcelById(parcelToList.ID);
         }
 
         private StationToList convertStationToStationToList(Station station)

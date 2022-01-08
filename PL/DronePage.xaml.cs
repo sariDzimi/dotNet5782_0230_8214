@@ -75,7 +75,7 @@ namespace PL
 
                     List<Parcel> parcels = bL.GetParcels().ToList();
 
-                    Parcel parcelBL = bL.FindParcel(drone_P.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -306,7 +306,7 @@ namespace PL
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
 
-            Parcel parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
+            Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
             Window.GetWindow(this).Content = new ParcelPage(bL, parcel, currentUser, this);  //new ParcelWindow(bL, parcel, currentUser).ShowDialog();
         }
 

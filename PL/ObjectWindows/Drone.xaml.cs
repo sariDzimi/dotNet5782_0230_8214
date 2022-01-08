@@ -70,7 +70,7 @@ namespace PL
                     break;
                 case DroneStatus.Delivery:
 
-                    Parcel parcelBL = bL.FindParcel(drone_P.ParcelInDelivery.Id);
+                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
 
                     if (parcelBL.PickedUp == null)
                     {
@@ -301,7 +301,7 @@ namespace PL
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
            
-            Parcel parcel = bL.FindParcel(drone.ParcelInDelivery.Id);
+            Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
             Hide();
             new ParcelWindow(bL, parcel, currentUser).ShowDialog();
             Show();
