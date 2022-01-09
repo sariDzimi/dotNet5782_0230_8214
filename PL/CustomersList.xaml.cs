@@ -40,7 +40,7 @@ namespace PL
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new ManegerWindow(bl, currentUser).Show();
+            //new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 
@@ -49,9 +49,9 @@ namespace PL
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.GetCustomerById(customerToList.Id);
 
-            Hide();
-            new CustomerWindow(bl, customer, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new CustomerWindow(bl, customer, currentUser).Show();
+            //Show();
         }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
@@ -59,9 +59,9 @@ namespace PL
 
 
             //var win = new CustomerWindow(bl, currentUser);
-            Hide();
-            new CustomerWindow(bl, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new CustomerWindow(bl, currentUser).Show();
+            //Show();
 
         }
     }

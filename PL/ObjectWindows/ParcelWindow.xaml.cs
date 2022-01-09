@@ -240,17 +240,17 @@ namespace PL
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
-            Hide();
-            new CustomerWindow(bL1, customer, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new CustomerWindow(bL1, customer, currentUser).Show();
+            //Show();
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
-            Hide();
-            new CustomerWindow(bL1, customer, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new CustomerWindow(bL1, customer, currentUser).Show();
+            //Show();
         }
 
         private void close_buuton(object sender, RoutedEventArgs e)

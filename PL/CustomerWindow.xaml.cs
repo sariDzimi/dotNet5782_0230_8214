@@ -118,9 +118,9 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
-            Hide();
-            new ParcelWindow(bl, parcel, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new ParcelWindow(bl, parcel, currentUser).Show();
+            //Show();
         }
 
         

@@ -62,18 +62,18 @@ namespace PL
            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
            BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
             new Drone(bl, droneBL, currentUser).Show();
-            Close();
+            //Close();
         }
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
             new Drone(bl, currentUser).Show();
-            Close();
+            //Close();
 
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            new ManegerWindow(bl, currentUser).Show();
+            //new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 

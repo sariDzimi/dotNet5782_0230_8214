@@ -74,16 +74,16 @@ namespace PL
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.GetStationById(stationToList.ID);
-            Hide();
-            new StationWindow(bL, station, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new StationWindow(bL, station, currentUser).Show();
+            //Show();
         }
 
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            new StationWindow(bL, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new StationWindow(bL, currentUser).Show();
+            //Show();
         }
 
         private void closeButton_click(object sender, RoutedEventArgs e)

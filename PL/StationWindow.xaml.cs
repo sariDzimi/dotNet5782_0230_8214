@@ -62,9 +62,9 @@ namespace PL
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
 
-            Hide();
-            new Drone(bl, bl.GetDroneById(droneAtCharging.ID), currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new Drone(bl, bl.GetDroneById(droneAtCharging.ID), currentUser).Show();
+            //Show();
 
         }
 

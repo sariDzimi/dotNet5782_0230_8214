@@ -40,25 +40,25 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL1, currentUser);
+            new DronesList(bL1, currentUser).Show();
             //this.Content = new DroneListPage(bL1, currentUser);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             //this.Content = new ParcelListPage(bL1, currentUser);
-            new ParcelsList(bL1, currentUser);
+            new ParcelsList(bL1, currentUser).Show();
         }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {
-            //openWindowList(new StationsList(bL1, currentUser));
-            this.Content = new StationListPage(bL1, currentUser);
+            new StationsList(bL1, currentUser).Show();
+            //this.Content = new StationListPage(bL1, currentUser);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            this.Content = new CustomerListPage(bL1, currentUser);
-            //openWindowList( new CustomersList(bL1, currentUser));
+            //this.Content = new CustomerListPage(bL1, currentUser);
+            new CustomersList(bL1, currentUser).Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -69,15 +69,17 @@ namespace PL
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            this.Content = new StationListPage(bL1, currentUser);
+            //this.Content = new StationListPage(bL1, currentUser);
+            new StationsList(bL1, currentUser).Show();
         }
 
-        private void openWindowList(Window window)
+/*        private void openWindowList(Window window)
         {
             Hide();
             window.ShowDialog();
             Show();
-        }
+        }*/
+
         //private void Enter(object sender, RoutedEventArgs e)
         //{
         //    try

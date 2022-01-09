@@ -295,9 +295,9 @@ namespace PL
         {
            
             Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-            Hide();
-            new ParcelWindow(bL, parcel, currentUser).ShowDialog();
-            Show();
+            //Hide();
+            new ParcelWindow(bL, parcel, currentUser).Show();
+            //Show();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

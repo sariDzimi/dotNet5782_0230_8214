@@ -38,8 +38,6 @@ namespace PL
         {
             bL = bL1;
             InitializeComponent();
-            ///debuuger
-      
             new ManegerWindow().Show();
 
             Close();
@@ -84,7 +82,6 @@ namespace PL
         private void managerButton_Click(object sender, RoutedEventArgs e)
         {
             new ManegerWindow(bL, currentUser).Show();
-            Close();
         }
 
         private void customerButton_Click(object sender, RoutedEventArgs e)

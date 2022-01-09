@@ -96,9 +96,9 @@ namespace PL
 
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
-            Hide();
-            new ParcelWindow(bl, currentUser).ShowDialog() ;
-            Show();
+            //Hide();
+            new ParcelWindow(bl, currentUser).Show() ;
+            //Show();
         }
     }
 }
