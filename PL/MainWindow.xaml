@@ -49,7 +49,7 @@
             </Grid.RowDefinitions>
             <TabControl Margin="240,-72,0,81" HorizontalAlignment="Left" Width="434" Grid.RowSpan="2" >
                 <TabItem Header="Log In">
-                    <Grid x:Name="SignInOrLogIn" Margin="0,10,0,-10">
+                    <Grid x:Name="SignInOrLogIn" Margin="0,10,0,-10" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100*"/>
                             <RowDefinition Height="100*"/>

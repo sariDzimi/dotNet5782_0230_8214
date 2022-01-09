@@ -12,6 +12,17 @@ namespace PO
 {
     class Drone_p : DependencyObject
     {
+
+        public void Update(BO.Drone drone)
+        {
+            ID = drone.Id;
+            Battery = drone.Battery;
+            Model = drone.Model;
+            DroneStatus = drone.DroneStatus;
+            MaxWeight = drone.MaxWeight;
+            ParcelInDelivery = drone.ParcelInDelivery;
+            Location = drone.Location;
+        }
         //ID
         public static readonly DependencyProperty IdDrone =
        DependencyProperty.Register("ID",

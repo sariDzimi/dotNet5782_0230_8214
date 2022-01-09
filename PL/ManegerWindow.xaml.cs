@@ -40,14 +40,14 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //openWindowList( new DronesList(bL1, currentUser));
-            this.Content = new DroneListPage(bL1, currentUser);
+            new DronesList(bL1, currentUser);
+            //this.Content = new DroneListPage(bL1, currentUser);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Content = new ParcelListPage(bL1, currentUser);
-            //openWindowList(new ParcelsList(bL1, currentUser));
+            //this.Content = new ParcelListPage(bL1, currentUser);
+            new ParcelsList(bL1, currentUser);
         }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {

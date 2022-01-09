@@ -136,10 +136,8 @@ namespace PL
                 bL.sendDroneToCharge(drone.Id);
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
-
                 timeOfCharging.Text = "";
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.Update(drone);
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -154,8 +152,7 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                drone_P.DroneStatus = drone.DroneStatus;
-                drone_P.Battery = drone.Battery;
+                drone_P.Update(drone);
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (OutOfRange)
@@ -175,9 +172,7 @@ namespace PL
                 bL.AssignAParcelToADrone(drone.Id);
                 sendDroneForDelivery.IsEnabled = false;
                 colectParcel.IsEnabled = true;
-                drone_P.DroneStatus = drone.DroneStatus;
-                drone_P.Battery = drone.Battery;
-                drone_P.ParcelInDelivery = drone.ParcelInDelivery;
+                drone_P.Update(drone);
                 MessageBox.Show("Assign a drone to parcel successfully");
             }
             catch (Exception ex)
@@ -194,9 +189,8 @@ namespace PL
                 colectParcel.IsEnabled = false;
                 supllyParcel.IsEnabled = true;
                 MessageBox.Show("collect a parcel by drone successfully");
-                drone_P.DroneStatus = drone.DroneStatus;
-                drone_P.Battery = drone.Battery;
-
+                drone_P.Update(drone);
+           
 
             }
             catch (Exception ex)
@@ -213,9 +207,8 @@ namespace PL
                 supllyParcel.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 MessageBox.Show("suplly a parcel by drone successfully");
-                drone_P.DroneStatus = drone.DroneStatus;
-                drone_P.Battery = drone.Battery;
-                drone_P.ParcelInDelivery = drone.ParcelInDelivery;
+                drone_P.Update(drone);
+               
 
             }
             catch (Exception ex)

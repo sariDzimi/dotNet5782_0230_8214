@@ -141,10 +141,10 @@ namespace PL
                 bL.sendDroneToCharge(drone.Id);
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
-
                 timeOfCharging.Text = "";
-                DroneStatusDroneL.Text = $"{drone.DroneStatus}";
-                ButteryDroneL.Text = $"{drone.Battery}%";
+                drone_P.DroneStatus = drone.DroneStatus;
+                drone_P.Battery = drone.Battery;
+                drone_P.ParcelInDelivery = drone.ParcelInDelivery;
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
