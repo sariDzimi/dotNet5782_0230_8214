@@ -155,7 +155,7 @@ namespace DalObject
         {
             getBy ??= (parcel => true);
             return (from parcel in DataSource.parcels
-                    where (getBy(parcel) && parcel.IsActive)
+                    where (getBy(parcel)/*parcel.IsActive*/)
                     select parcel);
         }
         public Parcel GetParcelById(int id)

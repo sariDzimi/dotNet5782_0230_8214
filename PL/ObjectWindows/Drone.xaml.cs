@@ -304,6 +304,11 @@ namespace PL
         {
             Close();
         }
+
+        private void pbStatus_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
 
