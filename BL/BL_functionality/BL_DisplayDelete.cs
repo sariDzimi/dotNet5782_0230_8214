@@ -10,11 +10,11 @@ namespace BL
 {
      partial class BL
     {
-        public void DeleateParcel(int id)
-        {
-            dalObject.DeleteParcel(id);
+        //public void DeleateParcel(int id)
+        //{
+        //    dalObject.DeleteParcel(id);
             
-        }
+        //}
         /// <summary>
         /// Get Not Asigned Parcels
         /// </summary>

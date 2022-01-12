@@ -64,9 +64,11 @@ namespace PL
             {
                 case DroneStatus.Free:
                     sendDroneForDelivery.IsEnabled = true;
+                    //OpaenDrone.Visibility = Visibility.Hidden;
                     break;
                 case DroneStatus.Maintenance:
                     releaseDroneFromCharging.IsEnabled = true;
+                   // OpaenDrone.Visibility = Visibility.Hidden;
                     break;
                 case DroneStatus.Delivery:
 
@@ -75,9 +77,9 @@ namespace PL
                     if (parcelBL.PickedUp == null)
                     {
                         colectParcel.IsEnabled = true;
-                    }
+                        OpaenDrone.Visibility = Visibility.Visible;                    }
                     else
-                    {
+                        {
                         //if (parcelBL.Delivered == null)
 
                     }
@@ -101,6 +103,8 @@ namespace PL
                 bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
+               
+                
             }
             catch (NotValidInput ex)
             {
@@ -174,6 +178,7 @@ namespace PL
                 colectParcel.IsEnabled = true;
                 drone_P.Update(drone);
                 MessageBox.Show("Assign a drone to parcel successfully");
+                OpaenDrone.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {

@@ -31,6 +31,7 @@ namespace PL
             InitializeComponent();
             
         }
+       
 
         public DronesList(IBL bL1, CurrentUser currentUser1)
 

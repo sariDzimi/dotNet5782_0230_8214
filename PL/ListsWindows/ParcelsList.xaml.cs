@@ -42,7 +42,6 @@ namespace PL
             items = bl.GetParcelToLists().ToList();
             ParcelsListView.ItemsSource = items;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
-
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
@@ -99,6 +98,11 @@ namespace PL
             //Hide();
             new ParcelWindow(bl, currentUser).Show() ;
             //Show();
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
