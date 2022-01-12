@@ -42,7 +42,8 @@ namespace PL
             bl = bL1;
             DronesListView.ItemsSource = bl.GetDroneToLists();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
-            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories)); 
+            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            CurrentUser.Text = currentUser.Type;
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

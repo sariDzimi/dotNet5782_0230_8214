@@ -15,8 +15,14 @@
               Value="Black" />
 
         </Style>
+        <Style x:Key="Text" TargetType="TextBlock">
+            <Setter Property="Background"
+              Value= "#00000000" />
+        </Style>
     </Window.Resources>
     <Grid Margin="10,10,0,0">
+        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
+        <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
         <Label x:Name="addStationLabel" Content="add station!!!" HorizontalAlignment="Left" Height="24" Margin="268,59,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
         <Label x:Name="updateStationLabel" Content="update station!!!" HorizontalAlignment="Left" Height="24" Margin="268,34,0,0" VerticalAlignment="Top" Width="141" Visibility="Collapsed"/>
         <Label x:Name="idLabel" Content="id" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top"/>

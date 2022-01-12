@@ -35,6 +35,7 @@ namespace PL
             bl = blArg;
             WindowStyle = WindowStyle.None;
             customersListView.ItemsSource = bl.GetCustomerToLists();
+            CurrentUser.Text = currentUser.Type;
 
         }
 

@@ -41,7 +41,8 @@ namespace PL
             DroneChargingListView.ItemsSource = station.droneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
             DataContext = station_P;
-            
+            CurrentUser.Text = currentUser.Type;
+
         }
 
         public StationWindow(IBL blArg, CurrentUser currentUser1)
@@ -51,6 +52,7 @@ namespace PL
             WindowStyle = WindowStyle.None;
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;
+            CurrentUser.Text = currentUser.Type;
         }
 
         private void DroneChargingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -45,6 +45,7 @@ namespace PL
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
+            CurrentUser.Text = currentUser.Type;
 
         }
         public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)

@@ -39,6 +39,7 @@ namespace PL
             StationsListView.ItemsSource = bL.GetStationToLists();
             items = bl.GetStationToLists().ToList();
             view = (CollectionView)CollectionViewSource.GetDefaultView(bL.GetStationToLists());
+            CurrentUser.Text = currentUser.Type;
         }
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)

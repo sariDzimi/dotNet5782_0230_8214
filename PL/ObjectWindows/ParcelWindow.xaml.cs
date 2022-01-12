@@ -60,6 +60,7 @@ namespace PL
             weightLabel.IsEnabled = false;
             priorityLabel.IsEnabled = false;
             DataContext = Parcel_P;
+            CurrentUser.Text = currentUser.Type;
             if (parcel.droneAtParcel != null && parcel.Delivered == null)
             {
                 OpenDrone.Visibility = Visibility.Visible;

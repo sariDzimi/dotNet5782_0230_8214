@@ -44,7 +44,7 @@ namespace PL
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-
+            CurrentUser.Text = currentUser.Type;
         }
 
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)

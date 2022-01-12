@@ -38,6 +38,7 @@ namespace PL
             WindowStyle = WindowStyle.None;
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
+            CurrentUser.Text = currentUser.Type;
         }
 
         public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
@@ -51,6 +52,7 @@ namespace PL
             ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
+            CurrentUser.Text = currentUser.Type;
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

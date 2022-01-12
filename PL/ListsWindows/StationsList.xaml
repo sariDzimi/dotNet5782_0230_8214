@@ -20,8 +20,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="Text" TargetType="TextBlock">
+            <Setter Property="Background"
+              Value= "#00000000" />
+        </Style>
     </Window.Resources>
     <Grid>
+        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
+        <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
         <ListView x:Name="StationsListView" Height="333" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_stationChoosen">
             <ListView.View>
                 <GridView >

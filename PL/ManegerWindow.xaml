@@ -233,6 +233,10 @@
               Value="Black" />
 
         </Style>
+        <Style x:Key="Text" TargetType="TextBlock">
+            <Setter Property="Background"
+              Value= "#00000000" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.Background>
@@ -244,8 +248,8 @@
         <Button Content="Stations List" HorizontalAlignment="Left" Height="36" Margin="94,153,0,0" VerticalAlignment="Top" Width="102" Click="ButtonClick_OpenStationsList" Visibility="{Binding ElementName=DronesList, Path=Visibility}"/>
         <Button Content="customer list" HorizontalAlignment="Left" Height="36" Margin="99,117,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_2" Visibility="{Binding ElementName=DronesList, Path=Visibility}" />
         <Button Content="______&#xD;&#xA;______&#xD;&#xA;______" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" Height="85" Width="76" Background="Transparent" FontWeight="UltraBlack" Click="Button_Click_3" />
-        <Label Content="User:" HorizontalAlignment="Left" Margin="564,19,0,0" VerticalAlignment="Top" Height="25" Width="38"/>
-        <TextBlock x:Name="UserText" HorizontalAlignment="Left" Margin="607,24,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="64"/>
+        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
+        <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="174,78,0,0" VerticalAlignment="Top" Height="40" Width="64" RenderTransformOrigin="0.5,0.5" Click="Button_Click_4">
             <Button.RenderTransform>
                 <TransformGroup>

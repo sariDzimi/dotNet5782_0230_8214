@@ -34,7 +34,7 @@ namespace PL
             currentUser = CurrentUser1;
             InitializeComponent();
 
-            UserText.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type;
 
         }
 
