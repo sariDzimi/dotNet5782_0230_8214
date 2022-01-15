@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
-
+using System.Collections.ObjectModel;
+using PO;
 
 namespace PL
 {
@@ -27,6 +28,7 @@ namespace PL
         private IBL bl;
         CollectionView view;
         List<ParcelToList> items;
+        ParcelList parcelsList = new ParcelList();
         public ParcelsList()
         {
             InitializeComponent();
@@ -36,16 +38,19 @@ namespace PL
         {
             currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
-
             InitializeComponent();
             bl = bL1;
             items = bl.GetParcelToLists().ToList();
-            ParcelsListView.ItemsSource = items;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type;
+            parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(items);
+            DataContext = parcelsList.Parcels;
+            ParcelsListView.ItemsSource = parcelsList.Parcels;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
+
+        
 
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
@@ -96,7 +101,7 @@ namespace PL
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
             //Hide();
-            new ParcelWindow(bl, currentUser).Show() ;
+            new ParcelWindow(bl, currentUser, parcelsList.Parcels).Show() ;
             //Show();
         }
 

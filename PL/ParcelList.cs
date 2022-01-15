@@ -7,19 +7,34 @@ using BO;
 using System.Diagnostics;
 using System.Windows;
 using System.Collections.ObjectModel;
+using BlApi;
 
 namespace PO
 {
-     internal  class ParcelList
+     public class ParcelList: DependencyObject
     {
+
+        public ParcelList()
+        {
+            
+        }
 
         public ObservableCollection<Parcel_p> Parcels = new ObservableCollection<Parcel_p>();
 
-        public void AddStudent(BO.Parcel parcel)
+        public void AddParcel(ParcelToList parcel)
         {
-            Parcels.Add(new Parcel_p {ID = parcel.Id, CustomerAtParcelReciver= parcel.customerAtParcelReciver, CustomerAtParcelSender= parcel.customerAtParcelSender, Delivered= parcel.Delivered, PickedUp = parcel.PickedUp, Pritority = parcel.Pritority, Requested = parcel.Requested, Scheduled = parcel.Scheduled, Weight =parcel.Weight, IdDrone =  parcel.droneAtParcel == null ? 0: parcel.droneAtParcel.Id });
+            Parcels.Add(new Parcel_p { ID = parcel.ID, Pritority = parcel.pritorities, Weight = parcel.weightCategories });
         }
+         public ObservableCollection<Parcel_p> ConvertParcelBLToPL(List<ParcelToList> parcelsBL)
+        {
 
+          foreach(var parcel in parcelsBL)
+            {
+                Parcel_p parcel_P = new Parcel_p() { ID = parcel.ID, Pritority = parcel.pritorities,   Weight = parcel.weightCategories };
+                Parcels.Add(parcel_P);
+            }
+            return Parcels;
+        }
 
     }
 }

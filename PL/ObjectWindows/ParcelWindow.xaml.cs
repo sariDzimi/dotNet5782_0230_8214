@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using PO;
-
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -28,13 +28,14 @@ namespace PL
         IBL bL1;
         Parcel parcel;
         Parcel_p Parcel_P;
+        ParcelList parcelList= new ParcelList();
 
         public ParcelWindow()
         {
             InitializeComponent();
         }
 
-        public ParcelWindow(IBL bL, CurrentUser currentUser1)
+        public ParcelWindow(IBL bL, CurrentUser currentUser1, ObservableCollection<Parcel_p> parcel_PsA)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace PL
             bL1 = bL;
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-
+            this.parcelList.Parcels = parcel_PsA;
         }
 
         public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1)
@@ -97,6 +98,7 @@ namespace PL
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
                 bL1.addParcelToDL(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
+                parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight()});
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Close();
             }

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PO
 {
-    class Parcel_p : DependencyObject
+     public class Parcel_p : DependencyObject
     {
 
         //ID
@@ -30,8 +30,7 @@ namespace PO
             }
         }
 
-
-
+        
         //customer At Parcel Sender
         public static readonly DependencyProperty customerAtParcelSender =
       DependencyProperty.Register("CustomerAtParcelSender",
