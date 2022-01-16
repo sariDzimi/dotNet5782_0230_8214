@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace PO
 {
-    class Drone_p : DependencyObject
+    public class Drone_p : DependencyObject
     {
 
         public void Update(BO.Drone drone)

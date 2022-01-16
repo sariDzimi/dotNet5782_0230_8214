@@ -59,9 +59,9 @@
                     <GridView >
                         <GridViewColumn x:Name="ID" Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
                         <GridViewColumn Header="weightCategories" Width="150" DisplayMemberBinding="{Binding Weight}" />
-                        <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
-                        <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfCustomerSended}" />
-                        <GridViewColumn Header="parcelStatus" Width="150" DisplayMemberBinding="{Binding parcelStatus}" />
+                        <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfReciver}" />
+                        <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfSender}" />
+                        <GridViewColumn Header="parcelStatus" Width="150" DisplayMemberBinding="{Binding ParcelStatus}" />
                         <GridViewColumn Header="pritorities" Width="150" DisplayMemberBinding="{Binding Pritority}" />
 
 

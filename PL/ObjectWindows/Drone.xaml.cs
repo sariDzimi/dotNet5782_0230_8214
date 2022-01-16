@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using PO;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -27,6 +28,7 @@ namespace PL
         IBL bL;
         BO.Drone drone;
         Drone_p drone_P;
+        DroneList DroneP = new DroneList();
         public bool boo = false;
         public Drone()
         {
@@ -35,13 +37,13 @@ namespace PL
 
             InitializeComponent();
         }
-        public Drone(IBL bL1, CurrentUser currentUser1)
+        public Drone(IBL bL1, CurrentUser currentUser1, ObservableCollection<Drone_p> drone_Ps)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
-
+            DroneP.Drone_Ps = drone_Ps;
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
@@ -102,6 +104,8 @@ namespace PL
             try
             {
                 bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
+                BO.Drone drone = bL.GetDroneById(getId());
+                DroneP.AddDrone(new DroneToList() { Id = getId(), Model = getModel(), NumberOfSendedParcel = getNumberOfStation(), Battery = drone.Battery , Location  = drone.Location, DroneStatus = drone.DroneStatus });
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
                

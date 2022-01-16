@@ -23,14 +23,14 @@ namespace PO
 
         public void AddParcel(ParcelToList parcel)
         {
-            Parcels.Add(new Parcel_p { ID = parcel.ID, Pritority = parcel.pritorities, Weight = parcel.weightCategories });
+            Parcels.Add(new Parcel_p { ID = parcel.ID, Pritority = parcel.pritorities, Weight = parcel.weightCategories, NameOfReciver = parcel.NameOfCustomerReciver, NameOfSender =parcel.NameOfCustomerSended, ParcelStatus = parcel.parcelStatus });
         }
          public ObservableCollection<Parcel_p> ConvertParcelBLToPL(List<ParcelToList> parcelsBL)
         {
 
           foreach(var parcel in parcelsBL)
             {
-                Parcel_p parcel_P = new Parcel_p() { ID = parcel.ID, Pritority = parcel.pritorities,   Weight = parcel.weightCategories };
+                Parcel_p parcel_P = new Parcel_p() { ID = parcel.ID, Pritority = parcel.pritorities,   Weight = parcel.weightCategories, NameOfReciver =parcel.NameOfCustomerReciver, NameOfSender= parcel.NameOfCustomerSended, ParcelStatus = parcel.parcelStatus  };
                 Parcels.Add(parcel_P);
             }
             return Parcels;

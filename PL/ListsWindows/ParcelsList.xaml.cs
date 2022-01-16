@@ -54,8 +54,8 @@ namespace PL
 
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
-            ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcelBL = bl.GetParcelById(parcelToList.ID);
+            Parcel_p parcel = (sender as ListView).SelectedValue as Parcel_p;
+            BO.Parcel parcelBL = bl.GetParcelById(parcel.ID);
             new ParcelWindow(bl, parcelBL, currentUser).Show();       
             Close();
         }
@@ -100,9 +100,7 @@ namespace PL
 
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
-            //Hide();
-            new ParcelWindow(bl, currentUser, parcelsList.Parcels).Show() ;
-            //Show();
+            new ParcelWindow(bl, currentUser, parcelsList.Parcels).Show();
         }
 
         private void close_Click(object sender, RoutedEventArgs e)

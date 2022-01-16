@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using PO;
 
 namespace PL
 {
@@ -22,7 +23,8 @@ namespace PL
     public partial class DronesList : Window
     {
         public CurrentUser currentUser = new CurrentUser();
-
+        List<DroneToList> items;
+        DroneList droneList = new DroneList();
         private IBL bl;
         public DronesList()
         {
@@ -34,16 +36,19 @@ namespace PL
        
 
         public DronesList(IBL bL1, CurrentUser currentUser1)
-
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = bL1;
-            DronesListView.ItemsSource = bl.GetDroneToLists();
+            items = bl.GetDroneToLists().ToList();
+            droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
+            DataContext = droneList.Drone_Ps;
+            DronesListView.ItemsSource = droneList.Drone_Ps;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type;
+            
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,15 +66,15 @@ namespace PL
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-           DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
-           BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
+           Drone_p droneToList = (sender as ListView).SelectedValue as Drone_p;
+           BO.Drone droneBL = bl.GetDroneById(droneToList.ID);
             new Drone(bl, droneBL, currentUser).Show();
             //Close();
         }
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, currentUser).Show();
+            new Drone(bl, currentUser, droneList.Drone_Ps).Show();
             //Close();
 
         }
