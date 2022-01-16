@@ -1,61 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DalObject;
-using DO;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using DalObject;
+//using DO;
 
 
 
-namespace DalApi
-{
-    public interface IDal
-    {
-        public void DeleteParcel(int id);
-        public void AddDrone(Drone drone);
+//namespace DalApi
+//{
+//    public interface IDal
+//    {
+//        public void DeleteParcel(int id);
+//        public void AddDrone(Drone drone);
 
-        public void AddCustomer(Customer customer);
+//        public void AddCustomer(Customer customer);
 
-        public void AddParcel(Parcel parcel);
+//        public void AddParcel(Parcel parcel);
 
-        public void AddStation(Station station);
+//        public void AddStation(Station station);
 
-        public void AddDroneCharge(DroneCharge droneCharge);
+//        public void AddDroneCharge(DroneCharge droneCharge);
 
-        public IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
-
-
-        public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null);
+//        public IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
 
 
-        public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null);
+//        public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null);
 
 
-        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
+//        public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null);
 
-        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
 
-        public Station GetStationById(int id);
+//        public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
 
-        public Customer GetCustomerById( int id);
+//        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
 
-        public Parcel GetParcelById(int id);
-        public Drone GetDroneById(int id);
-        public DroneCharge GetDroneChargeById(int droneId);
+//        public Station GetStationById(int id);
 
-        public void UpdateDrone(Drone drone);
+//        public Customer GetCustomerById( int id);
 
-        public void UpdateParcel(Parcel parcel);
-        public void UpdateStation(Station parcel);
+//        public Parcel GetParcelById(int id);
+//        public Drone GetDroneById(int id);
+//        public DroneCharge GetDroneChargeById(int droneId);
 
-        public void UpdateCustomer(Customer customer);
+//        public void UpdateDrone(Drone drone);
 
-        public void DeleteDroneCharge(int id);
+//        public void UpdateParcel(Parcel parcel);
+//        public void UpdateStation(Station parcel);
 
-        public double[] RequestElectricityUse();
-        public IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
+//        public void UpdateCustomer(Customer customer);
 
-    }
+//        public void DeleteDroneCharge(int id);
 
-}
+//        public double[] RequestElectricityUse();
+//        public IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
+
+//    }
+
+//}

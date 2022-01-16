@@ -1,7 +1,8 @@
 {
   "profiles": {
     "PL": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\yebsc\\source\\repos\\dotNet5782_0230_8214"
     }
   }
 }

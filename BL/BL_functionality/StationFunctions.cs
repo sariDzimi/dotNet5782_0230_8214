@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using DAL;
 
 
 namespace BL
@@ -29,7 +28,7 @@ namespace BL
             {
                 dalObject.AddStation(stationDL);
             }
-            catch (DAL.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExist)
             {
                 throw new IdAlreadyExist(station.Id);
             }

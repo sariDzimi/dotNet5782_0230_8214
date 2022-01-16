@@ -29,7 +29,7 @@ namespace BL
             {
                 dalObject.AddCustomer(customerDL);
             }
-            catch (DAL.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExist)
             {
                 throw new IdAlreadyExist(customer.Id);
             }

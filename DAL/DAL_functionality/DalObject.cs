@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
-using DalObject;
+using DalApi;
 using DO;
 
-namespace DalObject
+namespace Dal
 {
     internal class DalObject : DalApi.IDal
     {
-        internal static DalObject instance;
+        internal static DalObject Instance;
 
 
         public DalObject()
@@ -24,9 +23,9 @@ namespace DalObject
         {
             get
             {
-                if (instance == null)
-                    instance = new DalObject();
-                return instance;
+                if (Instance == null)
+                    Instance = new DalObject();
+                return Instance;
             }
         }
 

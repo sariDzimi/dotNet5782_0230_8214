@@ -35,7 +35,7 @@ namespace BL
             {
                 dalObject.AddParcel(parcelDL);
             }
-            catch (DAL.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExist)
             {
                 throw new IdAlreadyExist(parcel.Id);
             }
