@@ -65,7 +65,7 @@ namespace PL
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Content = new DronePage(bl, currentUser, this); new Drone(bl, currentUser).Show();
+           // Window.GetWindow(this).Content = new DronePage(bl, currentUser, this); new Drone(bl, currentUser, Drone_Ps).Show();
 
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)

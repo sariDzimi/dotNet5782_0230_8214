@@ -29,8 +29,61 @@ namespace PO
                 SetValue(IdParcel, value);
             }
         }
+      
+        //NameOfReciver
+       public static readonly DependencyProperty nameOfReciver =
+      DependencyProperty.Register("NameOfReciver",
+                                  typeof(object),
+                                  typeof(Parcel_p),
+                                  new UIPropertyMetadata(0));
+        public string NameOfReciver
+        {
+            get
+            {
+                return (string)GetValue(nameOfReciver);
+            }
+            set
+            {
+                SetValue(nameOfReciver, value);
+            }
+        }
 
-        
+        //NameOfReciver
+        public static readonly DependencyProperty parcelStatus =
+       DependencyProperty.Register("ParcelStatus",
+                                   typeof(object),
+                                   typeof(Parcel_p),
+                                   new UIPropertyMetadata(0));
+        public ParcelStatus ParcelStatus
+        {
+            get
+            {
+                return (ParcelStatus)GetValue(parcelStatus);
+            }
+            set
+            {
+                SetValue(parcelStatus, value);
+            }
+        }
+
+        //NameOfSender
+        public static readonly DependencyProperty nameOfSender =
+       DependencyProperty.Register("NameOfSender",
+                                   typeof(object),
+                                   typeof(Parcel_p),
+                                   new UIPropertyMetadata(0));
+        public string NameOfSender
+        {
+            get
+            {
+                return (string)GetValue(nameOfSender);
+            }
+            set
+            {
+                SetValue(nameOfSender, value);
+            }
+        }
+
         //customer At Parcel Sender
         public static readonly DependencyProperty customerAtParcelSender =
       DependencyProperty.Register("CustomerAtParcelSender",
