@@ -36,5 +36,15 @@ namespace PO
             return Parcels;
         }
 
+        public ObservableCollection<Parcel_p> ClearParcels()
+        {
+            //foreach (var parcel in Parcels)
+            //{
+            //    Parcels.Remove(parcel);
+            //}
+            Parcels = new ObservableCollection<Parcel_p>();
+            return Parcels;
+        }
+
     }
 }

@@ -84,9 +84,6 @@ namespace PL
             Close();
         }
 
-        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
     }
 }

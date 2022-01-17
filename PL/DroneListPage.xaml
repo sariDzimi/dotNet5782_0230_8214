@@ -25,7 +25,7 @@
             <Button x:Name="addADrone" Content="Add a drone"  Click="addADrone_Click"   Height="31" Grid.Column="2"/>
         </Grid>
 
-        <ListView x:Name="DronesListView" Height="400" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_droneChoosen" Grid.Row="1" SelectionChanged="DronesListView_SelectionChanged"/>
+        <ListView x:Name="DronesListView" Height="400" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_droneChoosen" Grid.Row="1" />
 
         <Label Content="drone status:" HorizontalAlignment="Left" Margin="24,69,0,0" VerticalAlignment="Top" Height="31" Width="101" Grid.RowSpan="2"/>
         <Label Content="max weight" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.295,-6.252" Width="101" Height="31"/>

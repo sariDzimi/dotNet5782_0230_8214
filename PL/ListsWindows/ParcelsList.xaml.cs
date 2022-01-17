@@ -50,13 +50,13 @@ namespace PL
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 
-        
+
 
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             Parcel_p parcel = (sender as ListView).SelectedValue as Parcel_p;
             BO.Parcel parcelBL = bl.GetParcelById(parcel.ID);
-            new ParcelWindow(bl, parcelBL, currentUser).Show();       
+            new ParcelWindow(bl, parcelBL, currentUser).Show();
             Close();
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,7 +66,7 @@ namespace PL
         }
 
         private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { 
+        {
 
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
             ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.pritorities == selected);
@@ -75,7 +75,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfSender");
             view.GroupDescriptions.Add(groupDescription);
         }
 
@@ -87,15 +87,16 @@ namespace PL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfReciver");
             view.GroupDescriptions.Add(groupDescription);
 
         }
         private void clearListView()
         {
-            items = bl.GetParcelToLists().ToList();
-            ParcelsListView.ItemsSource = items;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+            parcelsList.Parcels = parcelsList.ClearParcels();
+            parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
+            ParcelsListView.ItemsSource = parcelsList.Parcels;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(parcelsList.Parcels);
         }
 
         private void AddParcelButton(object sender, RoutedEventArgs e)

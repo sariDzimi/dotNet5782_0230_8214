@@ -74,9 +74,6 @@ namespace PL
             Window.GetWindow(this).Close();
         }
 
-        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -133,7 +133,9 @@ namespace BL
         public DroneToList ConvertDroneToDroneToList(Drone drone)
         {
             DroneToList droneToList = new DroneToList() { Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Location = drone.Location, Model = drone.Model };
-            if (!(drone.ParcelInDelivery == null))
+            
+            if (!(drone.ParcelInDelivery == null) )
+                if(drone.ParcelInDelivery.Id != 0)
                 droneToList.NumberOfSendedParcel = drone.ParcelInDelivery.Id;
             else
                 droneToList.NumberOfSendedParcel = 0;
