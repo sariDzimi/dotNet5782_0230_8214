@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace PO
 {
-    class Station_p : DependencyObject
+    public class Station_p : DependencyObject
     {
         //freeChargeSlots
         public static readonly DependencyProperty freeChargeSlots =
