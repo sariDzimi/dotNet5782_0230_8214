@@ -31,9 +31,9 @@ namespace PL
             WindowStyle = WindowStyle.None;
 
             InitializeComponent();
-            
+
         }
-       
+
 
         public DronesList(IBL bL1, CurrentUser currentUser1)
         {
@@ -48,7 +48,7 @@ namespace PL
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type;
-            
+
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -60,14 +60,23 @@ namespace PL
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.DroneStatus)StatusSelector.SelectedItem;
-            DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.DroneStatus == selected);
+            //  DronesListView.ItemsSource = droneList.Drone_Ps;
+            droneList.ClearDrones();
+            droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList());
+           // DataContext = droneList.Drone_Ps;
+
+            //droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
+            //DataContext = droneList.Drone_Ps;
+            DronesListView.ItemsSource = droneList.Drone_Ps;
+            
+            //bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList();
         }
 
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-           Drone_p droneToList = (sender as ListView).SelectedValue as Drone_p;
-           BO.Drone droneBL = bl.GetDroneById(droneToList.ID);
+            Drone_p droneToList = (sender as ListView).SelectedValue as Drone_p;
+            BO.Drone droneBL = bl.GetDroneById(droneToList.ID);
             new Drone(bl, droneBL, currentUser).Show();
             //Close();
         }
@@ -84,6 +93,6 @@ namespace PL
             Close();
         }
 
-       
+
     }
 }
