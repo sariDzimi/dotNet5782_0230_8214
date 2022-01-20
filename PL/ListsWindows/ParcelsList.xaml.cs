@@ -61,15 +61,22 @@ namespace PL
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
+           // ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.weightCategories == selected);
+
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.weightCategories == selected);
+            parcelsList.ClearParcels();
+            parcelsList.ConvertParcelBLToPL(bl.GetParcelsToListBy((d) => d.weightCategories == selected).ToList());
+            ParcelsListView.ItemsSource = parcelsList.Parcels;
         }
 
         private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
-            ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.pritorities == selected);
+          //  ParcelsListView.ItemsSource = bl.GetParcelsToListBy((d) => d.pritorities == selected);
+            parcelsList.ClearParcels();
+            parcelsList.ConvertParcelBLToPL(bl.GetParcelsToListBy((d) => d.pritorities == selected).ToList());
+            ParcelsListView.ItemsSource = parcelsList.Parcels;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

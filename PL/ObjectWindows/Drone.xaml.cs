@@ -50,13 +50,15 @@ namespace PL
             CurrentUser.Text = currentUser.Type;
 
         }
+      
         public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
         {
             WindowStyle = WindowStyle.None;
             currentUser = currentUser1;
             drone = droneBL;
             InitializeComponent();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null?new ParcelInDelivery() : drone.ParcelInDelivery  }; 
+            BO.ParcelInDelivery parcelInDelivery = new BO.ParcelInDelivery();
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  }; 
             bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;

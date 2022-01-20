@@ -35,5 +35,11 @@ namespace PO
             return Drone_Ps;
         }
 
+        public ObservableCollection<Drone_p> ClearDrones()
+        {
+            Drone_Ps = new ObservableCollection<Drone_p>();
+            return Drone_Ps;
+        }
+
     }
 }

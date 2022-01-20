@@ -22,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class DronesList : Window
     {
+        CollectionView view;
         public CurrentUser currentUser = new CurrentUser();
         List<DroneToList> items;
         DroneList droneList = new DroneList();
@@ -43,33 +44,33 @@ namespace PL
             bl = bL1;
             items = bl.GetDroneToLists().ToList();
             droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
-            DataContext = droneList.Drone_Ps;
+            DataContext = droneList;
             DronesListView.ItemsSource = droneList.Drone_Ps;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+
 
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            DronesListView.ItemsSource = bl.GetDroneToListsBy((d) => d.MaxWeight == selected);
+            droneList.ClearDrones();
+            droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.MaxWeight == selected).ToList());
+            DronesListView.ItemsSource = droneList.Drone_Ps;
+
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.DroneStatus)StatusSelector.SelectedItem;
-            //  DronesListView.ItemsSource = droneList.Drone_Ps;
             droneList.ClearDrones();
             droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList());
-           // DataContext = droneList.Drone_Ps;
-
-            //droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
-            //DataContext = droneList.Drone_Ps;
             DronesListView.ItemsSource = droneList.Drone_Ps;
-            
-            //bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList();
+
+
         }
 
 
@@ -92,7 +93,6 @@ namespace PL
             //new ManegerWindow(bl, currentUser).Show();
             Close();
         }
-
 
     }
 }

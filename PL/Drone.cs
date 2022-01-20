@@ -116,24 +116,25 @@ namespace PO
         }
 
         //ParcelInDelivery
-        //   public static readonly DependencyProperty parcelInDelivery =
-        //DependencyProperty.Register("ParcelInDelivery",
-        //                            typeof(object),
-        //                            typeof(Drone_p),
-        //                            new UIPropertyMetadata(0));
-        //   public ParcelInDelivery ParcelInDelivery
-        //   {
-        //       get
-        //       {
-        //           return (ParcelInDelivery)GetValue(parcelInDelivery);
-        //       }
-        //       set
-        //       {
-        //           SetValue(parcelInDelivery, value);
-        //       }
-        //   }
+        public static readonly DependencyProperty parcelInDelivery =
+     DependencyProperty.Register("ParcelInDelivery",
+                                 typeof(object),
+                                 typeof(Drone_p),
+                                 new UIPropertyMetadata(0));
+        public BO.ParcelInDelivery ParcelInDelivery
+        {
+            get
+            {
+                //var rr=Convert.ChangeType(GetValue(parcelInDelivery), typeof(BO.ParcelInDelivery));
+                return (BO.ParcelInDelivery)GetValue(parcelInDelivery);
+            }
+            set
+            {
+                SetValue(parcelInDelivery, value);
+            }
+        }
 
-        public ParcelInDelivery ParcelInDelivery { get; set; }
+       // public ParcelInDelivery ParcelInDelivery { get; set; }
 
         //Location
         public static readonly DependencyProperty location =
