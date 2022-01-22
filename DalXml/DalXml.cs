@@ -6,15 +6,27 @@ using System.Linq;
 using System.Xml.Linq;
 using DalApi;
 
-namespace DalXml
+namespace Dal
 {
     public partial class DalXml : IDal
     {
-        static string dir = @"..\..\..\..\xmlData\";
+        internal static DalXml Instance;
+
+        static string dir = @"..\..\..\..\xml\";
         static DalXml()
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
+        }
+
+        public static DalXml GetInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new DalXml();
+                return Instance;
+            }
         }
 
         string stationFilePath = @"StationList.xml";
@@ -22,24 +34,26 @@ namespace DalXml
         string parcelFilePath = @"ParcelList.xml";
         string droneFilePath = @"DroneList.xml";
         string droneChargeFilePath = @"DroneChargeList.xml";
+        string configFilePath = @"Config.xml";
+        string managersFilePath = @"Managers.xml";
 
         public DalXml()
         {
-            DS.DataSource.Initialize();
+            DataSource.Initialize();
             if (!File.Exists(dir + customerFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Customer>(DS.DataSource.customers, dir + customerFilePath);
+                XMLTools.SaveListToXMLSerializer(DataSource.customers, dir + customerFilePath);
 
             if (!File.Exists(dir + parcelFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Parcel>(DS.DataSource.parcels, dir + parcelFilePath);
+                XMLTools.SaveListToXMLSerializer(DataSource.parcels, dir + parcelFilePath);
 
             if (!File.Exists(dir + droneFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Drone>(DS.DataSource.drones, dir + droneFilePath);
+                XMLTools.SaveListToXMLSerializer(DataSource.drones, dir + droneFilePath);
 
             if (!File.Exists(dir + stationFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.Station>(DS.DataSource.stations, dir + stationFilePath);
+                XMLTools.SaveListToXMLSerializer(DataSource.stations, dir + stationFilePath);
 
             if (!File.Exists(dir + droneChargeFilePath))
-                XMLTools.SaveListToXMLSerializer<DO.DroneCharge>(DS.DataSource.droneCharges, dir + droneChargeFilePath);
+                XMLTools.SaveListToXMLSerializer(DataSource.droneCharges, dir + droneChargeFilePath);
 
         }
 
@@ -421,11 +435,50 @@ namespace DalXml
         #endregion
         double[] IDal.RequestElectricityUse()
         {
-            throw new NotImplementedException();
+            //IEnumerable<double> electricityUseList = XMLTools.LoadListFromXMLSerializer<double>(dir + configFilePath);
+            //return electricityUseList.ToArray();
+
+            XElement elements = XMLTools.LoadData(dir + configFilePath);
+            double[] Electricity = new double[5];
+            try
+            {
+                //double light = elements.Elements()
+                foreach(var electricity in elements.Elements())
+                {
+                    Electricity[0] = Convert.ToDouble(electricity.Value);
+                    Electricity[1] = Convert.ToDouble(electricity.Value);
+                    Electricity[2] = Convert.ToDouble(electricity.Value);
+                    Electricity[3] = Convert.ToDouble(electricity.Value);
+                    Electricity[4] = Convert.ToDouble(electricity.Value);
+                   
+                }
+                //StationList = (from p in elements.Elements()
+                //               select new DO.Station()
+                //               {
+                //                   Id = Convert.ToInt32(p.Element("Id").Value),
+                //                   Name = Convert.ToInt32(p.Element("Name").Value),
+                //                   ChargeSlots = Convert.ToInt32(p.Element("ChargeSlots").Value),
+                //                   Latitude = Convert.ToDouble(p.Element("Latitude").Value),
+                //                   Longitude = Convert.ToDouble(p.Element("Longitude").Value)
+                //               });
+            }
+            catch
+            {
+                throw new ListEmpty("stationList");
+            }
+
+            return Electricity;
         }
         IEnumerable<Manager> IDal.GetManagers(Predicate<Manager> findBy)
         {
-            throw new NotImplementedException();
+            IEnumerable<Manager> customerList = XMLTools.LoadListFromXMLSerializer<DO.Manager>(dir + managersFilePath);
+
+            findBy ??= ((st) => true);
+            return from manager in customerList
+                   where findBy(manager)
+                   orderby manager.UserName
+                   select manager;
+
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.IO;
 
-namespace DalXml
+namespace Dal
 {
 
     public class XMLTools
@@ -28,6 +28,7 @@ namespace DalXml
         }
         public static IEnumerable<T> LoadListFromXMLSerializer<T>(string filePath)
         {
+
             try
             {
                 if (File.Exists(filePath))
@@ -35,17 +36,26 @@ namespace DalXml
                     IEnumerable<T> list;
                     XmlSerializer x = new XmlSerializer(typeof(List<T>));
                     FileStream file = new FileStream(filePath, FileMode.Open);
-                    list = (IEnumerable<T>)x.Deserialize(file);
+                    try
+                    {
+                        list = (IEnumerable<T>)x.Deserialize(file);
+                    }
+                    catch(Exception)
+                    {
+                        list = new List<T>();
+                    }
                     file.Close();
                     return list;
                 }
+                else
+                    throw new FileNotFoundException(filePath);
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);  // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+                throw new FileNotFoundException(filePath);
             }
-            throw new Exception();
+
         }
         #endregion
 

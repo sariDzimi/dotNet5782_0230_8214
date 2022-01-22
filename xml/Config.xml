@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<free>.1</free>
+	<light>.4</light>
+	<medium>.5</medium>
+	<heavy>.7</heavy>
+	<rateChargePerHour>.5</rateChargePerHour>
+</config>

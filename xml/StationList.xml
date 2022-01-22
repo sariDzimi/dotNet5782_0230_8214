@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Station>
+    <Id>1</Id>
+    <Name>1</Name>
+    <Longitude>6</Longitude>
+    <Latitude>6</Latitude>
+    <ChargeSlots>54</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>2</Id>
+    <Name>2</Name>
+    <Longitude>7</Longitude>
+    <Latitude>4</Latitude>
+    <ChargeSlots>44</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>3</Id>
+    <Name>3</Name>
+    <Longitude>8</Longitude>
+    <Latitude>4</Latitude>
+    <ChargeSlots>24</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>4</Id>
+    <Name>4</Name>
+    <Longitude>10</Longitude>
+    <Latitude>7</Latitude>
+    <ChargeSlots>91</ChargeSlots>
+  </Station>
+</ArrayOfStation>
