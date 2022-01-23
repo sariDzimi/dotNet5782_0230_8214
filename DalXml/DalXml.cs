@@ -12,7 +12,7 @@ namespace Dal
     {
         internal static DalXml Instance;
 
-        static string dir = @"..\..\..\..\xml\";
+        static string dir = @"..\..\..\..\xmlData\";
         static DalXml()
         {
             if (!Directory.Exists(dir))
@@ -471,12 +471,26 @@ namespace Dal
         }
         IEnumerable<Manager> IDal.GetManagers(Predicate<Manager> findBy)
         {
-            IEnumerable<Manager> customerList = XMLTools.LoadListFromXMLSerializer<DO.Manager>(dir + managersFilePath);
+            XElement elements = XMLTools.LoadData(dir + managersFilePath);
+            IEnumerable<Manager> managers;
+            try
+            {
 
+                managers = (from m in elements.Elements()
+                            select new Manager()
+                            {
+                                UserName = m.Element("UserName").Value,
+                                Password = Convert.ToInt32(m.Element("Password").Value)
+                            });
+            }
+            catch
+            {
+                throw new ListEmpty("managers");
+            }
             findBy ??= ((st) => true);
-            return from manager in customerList
+
+            return from manager in managers
                    where findBy(manager)
-                   orderby manager.UserName
                    select manager;
 
         }

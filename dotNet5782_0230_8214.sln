@@ -33,6 +33,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFadace", "DalFadace\DalF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{6B2F31A5-F58E-46DB-8DAD-22B720BC170E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xmlData", "xmlData", "{2354C7AB-7C35-4003-B0EF-858F0E10293A}"
+	ProjectSection(SolutionItems) = preProject
+		xml\Config.xml = xml\Config.xml
+		xml\CustomerList.xml = xml\CustomerList.xml
+		xml\dal-config.xml = xml\dal-config.xml
+		xml\DroneChargeList.xml = xml\DroneChargeList.xml
+		xml\DroneList.xml = xml\DroneList.xml
+		xml\Managers.xml = xml\Managers.xml
+		xml\ParcelList.xml = xml\ParcelList.xml
+		xml\StationList.xml = xml\StationList.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
