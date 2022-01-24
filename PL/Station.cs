@@ -14,7 +14,7 @@ namespace PO
     {
         //freeChargeSlots
         public static readonly DependencyProperty freeChargeSlots =
-       DependencyProperty.Register("FreeChargeSlots",
+       DependencyProperty.Register("numberOfFreeChargeSlots",
                                    typeof(object),
                                    typeof(Station_p),
                                    new UIPropertyMetadata(0));

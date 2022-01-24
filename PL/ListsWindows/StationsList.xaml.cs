@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using PO;
 
 namespace PL
 {
@@ -25,6 +26,7 @@ namespace PL
         private IBL bL;
         CollectionView view;
         List<StationToList> items;
+        StationList stationList = new StationList();
         public StationsList()
         {
             InitializeComponent();
@@ -36,11 +38,16 @@ namespace PL
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
-            StationsListView.ItemsSource = bL.GetStationToLists();
             items = bl.GetStationToLists().ToList();
-            view = (CollectionView)CollectionViewSource.GetDefaultView(bL.GetStationToLists());
+            stationList.Stations = stationList.ConvertStationBLToPL(items);
+            DataContext = stationList.Stations;
+            StationsListView.ItemsSource = stationList.Stations;
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             CurrentUser.Text = currentUser.Type;
         }
+
+        //    ParcelsListView.ItemsSource = parcelsList.Parcels;
+        //    view = (CollectionView) CollectionViewSource.GetDefaultView(DataContext);
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
@@ -73,7 +80,7 @@ namespace PL
 
         private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
         {
-            StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
+            Station_p stationToList = (sender as ListView).SelectedValue as Station_p;
             BO.Station station = bL.GetStationById(stationToList.ID);
             //Hide();
             new StationWindow(bL, station, currentUser).Show();

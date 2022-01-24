@@ -116,21 +116,22 @@ namespace PO
         }
 
         //ParcelInDelivery
-        public static readonly DependencyProperty parcelInDelivery =
+        public static readonly DependencyProperty parcelInD =
      DependencyProperty.Register("ParcelInDelivery",
                                  typeof(object),
                                  typeof(Drone_p),
                                  new UIPropertyMetadata(0));
-        public BO.ParcelInDelivery ParcelInDelivery
+        public ParcelInDelivery ParcelInDelivery
         {
             get
             {
-                //var rr=Convert.ChangeType(GetValue(parcelInDelivery), typeof(BO.ParcelInDelivery));
-                return (BO.ParcelInDelivery)GetValue(parcelInDelivery);
+                ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
+                parcelInDelivery = GetValue(parcelInD) as ParcelInDelivery;
+                return parcelInDelivery;
             }
             set
             {
-                SetValue(parcelInDelivery, value);
+                SetValue(parcelInD, value);
             }
         }
 

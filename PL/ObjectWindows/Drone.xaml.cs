@@ -57,7 +57,7 @@ namespace PL
             currentUser = currentUser1;
             drone = droneBL;
             InitializeComponent();
-            BO.ParcelInDelivery parcelInDelivery = new BO.ParcelInDelivery();
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  }; 
             bL = bL1;
             DataContext = drone_P;
@@ -144,7 +144,7 @@ namespace PL
         {
             try
             {
-                bL.sendDroneToCharge(drone.Id);
+                bL.sendDroneToCharge(drone_P.ID);
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
                 timeOfCharging.Text = "";
@@ -159,7 +159,7 @@ namespace PL
             try
             {
                 double time = getTime();
-                bL.releaseDroneFromCharging(drone.Id, time);
+                bL.releaseDroneFromCharging(drone_P.ID, time);
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
@@ -180,7 +180,7 @@ namespace PL
         {
             try
             {
-                bL.AssignAParcelToADrone(drone.Id);
+                bL.AssignAParcelToADrone(drone_P.ID);
                 sendDroneForDelivery.IsEnabled = false;
                 colectParcel.IsEnabled = true;
                 drone_P.Update(drone);
@@ -197,7 +197,7 @@ namespace PL
         {
             try
             {
-                bL.collectParcleByDrone(drone.Id);
+                bL.collectParcleByDrone(drone_P.ID);
                 colectParcel.IsEnabled = false;
                 supllyParcel.IsEnabled = true;
                 MessageBox.Show("collect a parcel by drone successfully");
@@ -215,7 +215,7 @@ namespace PL
         {
             try
             {
-                bL.supplyParcelByDrone(drone.Id);
+                bL.supplyParcelByDrone(drone_P.ID);
                 supllyParcel.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 MessageBox.Show("suplly a parcel by drone successfully");
