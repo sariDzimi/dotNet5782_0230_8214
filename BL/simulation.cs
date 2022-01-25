@@ -39,11 +39,10 @@ namespace BL
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Maintenance:
-                        
-
-                        while (drone.Battery != 100)
+                        double NeedToFuul = (100 - drone.Battery) / bl.GetRateOFCharging();
+                        while ((drone.Battery + NeedToFuul / 100 )< 100)
                         {
-                            drone.Battery += (100 - drone.Battery) / bl.GetRateOFCharging()/100;
+                            drone.Battery += NeedToFuul / 100;
                             updateDrone(drone, 1);
                             Thread.Sleep(100);  
                         }

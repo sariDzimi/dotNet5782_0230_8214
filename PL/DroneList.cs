@@ -13,7 +13,7 @@ namespace PO
 {
     public class DroneList : DependencyObject
     {
-
+        IBL BL;
         public DroneList()
         {
 
@@ -44,7 +44,11 @@ namespace PO
 
         public void UpdateList(Drone_p drone_P)
         {
-            //if (Drone_Ps) ;
+            if (Drone_Ps.Count == 0)
+            {
+                this.Drone_Ps = this.ConvertDronelBLToPL(BL.GetDroneToLists().ToList());
+            }                
+
             int index = Drone_Ps.IndexOf(Drone_Ps.Where(X => X.ID == drone_P.ID).FirstOrDefault());
             Drone_Ps[index] = drone_P;
 
