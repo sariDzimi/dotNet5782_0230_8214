@@ -29,7 +29,8 @@ namespace PL
         Parcel parcel;
         Parcel_p Parcel_P;
         ParcelList parcelList= new ParcelList();
-
+        //DroneList droneList = new DroneList();
+        Drone_p drone_P = new Drone_p();
         public ParcelWindow()
         {
             InitializeComponent();

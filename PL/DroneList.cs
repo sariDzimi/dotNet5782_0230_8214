@@ -41,5 +41,13 @@ namespace PO
             return Drone_Ps;
         }
 
+
+        public void UpdateList(Drone_p drone_P)
+        {
+            //if (Drone_Ps) ;
+            int index = Drone_Ps.IndexOf(Drone_Ps.Where(X => X.ID == drone_P.ID).FirstOrDefault());
+            Drone_Ps[index] = drone_P;
+
+        }
     }
 }

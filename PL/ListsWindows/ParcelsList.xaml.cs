@@ -29,6 +29,8 @@ namespace PL
         CollectionView view;
         List<ParcelToList> items;
         ParcelList parcelsList = new ParcelList();
+        //DroneList droneList = new DroneList();
+
         public ParcelsList()
         {
             InitializeComponent();

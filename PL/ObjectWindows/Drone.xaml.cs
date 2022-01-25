@@ -53,11 +53,12 @@ namespace PL
 
         }
       
-        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
+        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1, ObservableCollection<Drone_p> drone_Ps)
         {
             WindowStyle = WindowStyle.None;
             currentUser = currentUser1;
             drone = droneBL;
+            DroneP.Drone_Ps = drone_Ps;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  }; 
@@ -94,6 +95,56 @@ namespace PL
             }
 
            
+            if (drone.ParcelInDelivery != null)
+                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            WeightSelector.IsEnabled = false;
+
+
+        }
+
+        //TODO.....
+        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
+        {
+            WindowStyle = WindowStyle.None;
+            currentUser = currentUser1;
+            drone = droneBL;
+            InitializeComponent();
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery };
+            bL = bL1;
+            DataContext = drone_P;
+            addButton.Visibility = Visibility.Hidden;
+            updateBottun.IsEnabled = true;
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+
+            switch (drone.DroneStatus)
+            {
+                case DroneStatus.Free:
+                    sendDroneForDelivery.IsEnabled = true;
+                    //OpaenDrone.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.Maintenance:
+                    releaseDroneFromCharging.IsEnabled = true;
+                    // OpaenDrone.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.Delivery:
+
+                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
+
+                    if (parcelBL.PickedUp == null)
+                    {
+                        colectParcel.IsEnabled = true;
+                        OpaenDrone.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        //if (parcelBL.Delivered == null)
+
+                    }
+                    break;
+            }
+
+
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             WeightSelector.IsEnabled = false;
@@ -151,6 +202,7 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = true;
                 timeOfCharging.Text = "";
                 drone_P.Update(drone);
+                DroneP.UpdateList(drone_P);
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -166,6 +218,7 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
                 drone_P.Update(drone);
+                DroneP.UpdateList(drone_P);
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (OutOfRange)
@@ -186,6 +239,7 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = false;
                 colectParcel.IsEnabled = true;
                 drone_P.Update(drone);
+                DroneP.UpdateList(drone_P);
                 MessageBox.Show("Assign a drone to parcel successfully");
                 OpaenDrone.Visibility = Visibility.Visible;
             }
@@ -204,7 +258,9 @@ namespace PL
                 supllyParcel.IsEnabled = true;
                 MessageBox.Show("collect a parcel by drone successfully");
                 drone_P.Update(drone);
-           
+                DroneP.UpdateList(drone_P);
+
+
 
             }
             catch (Exception ex)
@@ -338,6 +394,7 @@ namespace PL
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
                 drone_P.Update(drone);
+                DroneP.UpdateList(drone_P);
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
