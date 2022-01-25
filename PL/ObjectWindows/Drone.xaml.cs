@@ -85,10 +85,15 @@ namespace PL
                     if (parcelBL.PickedUp == null)
                     {
                         colectParcel.IsEnabled = true;
-                        OpaenDrone.Visibility = Visibility.Visible;                    }
+                        OpaenDrone.Visibility = Visibility.Visible;
+                    }
                     else
+                    {
+                        if (parcelBL.Delivered == null)
                         {
-                        //if (parcelBL.Delivered == null)
+                            supllyParcel.IsEnabled =true;
+                        }
+
 
                     }
                     break;
@@ -278,7 +283,10 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = true;
                 MessageBox.Show("suplly a parcel by drone successfully");
                 drone_P.Update(drone);
-               
+                DroneP.UpdateList(drone_P);
+
+
+
 
             }
             catch (Exception ex)

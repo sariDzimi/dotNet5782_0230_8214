@@ -380,9 +380,9 @@ namespace BL
             droneBL.Battery -= electricityUsed;
             droneBL.Location = locationReciver;
             droneBL.DroneStatus = DroneStatus.Free;
-            droneBL.ParcelInDelivery = null;
             updateDrone(droneBL);
-            Parcel parcel = GetParcelById(droneBL.Id);
+            Parcel parcel = GetParcelById(droneBL.ParcelInDelivery.Id);
+            droneBL.ParcelInDelivery = null;
             parcel.Delivered = DateTime.Now;
             updateParcel(parcel);
 

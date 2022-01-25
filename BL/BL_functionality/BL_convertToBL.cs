@@ -134,7 +134,7 @@ namespace BL
                 parcelStatus = ParcelStatus.Requested;
             if (parcel.Scheduled != null)
                 parcelStatus = ParcelStatus.Scheduled;
-            if (parcel.PickedUp != null)
+            if (parcel.PickedUp != null && parcel.Delivered == null)
                 parcelStatus = ParcelStatus.PickedUp;
             if (parcel.Delivered != null)
                 parcelStatus = ParcelStatus.Delivered;

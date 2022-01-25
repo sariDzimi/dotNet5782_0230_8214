@@ -130,6 +130,7 @@ namespace BL
                 parcelStatus = ParcelsStatus(parcel),
                 pritorities = parcel.Pritority,
                 weightCategories = parcel.Weight
+                
             };
         }
     }

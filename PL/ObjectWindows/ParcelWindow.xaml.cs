@@ -63,22 +63,22 @@ namespace PL
             priorityLabel.IsEnabled = false;
             DataContext = Parcel_P;
             CurrentUser.Text = currentUser.Type;
-            if (parcel.droneAtParcel != null && parcel.Delivered == null)
+            if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
             {
                 OpenDrone.Visibility = Visibility.Visible;
                
             }
 
-            if (parcel.Scheduled == null)
+            if (Parcel_P.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
             }
             
-            if (parcel.PickedUp == null && parcel.Scheduled !=null)
+            if (Parcel_P.PickedUp == null && parcel.Scheduled !=null)
             {
                 PickedUpC.Visibility = Visibility.Visible;
             }
-            else if (parcel.Delivered == null && parcel.PickedUp != null)
+            else if (Parcel_P.Delivered == null && parcel.PickedUp != null)
             {
                 DeliveredC.Visibility = Visibility.Visible;
             }

@@ -25,7 +25,7 @@ namespace BL
                             if (drone.Battery != 100)
                                 bl.sendDroneToCharge(drone.Id);
                             //else
-                               
+
                         }
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);
@@ -39,6 +39,14 @@ namespace BL
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Maintenance:
+                        
+
+                        while (drone.Battery != 100)
+                        {
+                            drone.Battery += (100 - drone.Battery) / bl.GetRateOFCharging()/100;
+                            updateDrone(drone, 1);
+                            Thread.Sleep(100);  
+                        }
                         bl.releaseDroneFromCharging(drone.Id, (100 - drone.Battery) / bl.GetRateOFCharging());
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);
