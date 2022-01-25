@@ -42,9 +42,9 @@ namespace BL
             foreach (var droneDL in dal.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone() { Id = droneDL.Id, Model = droneDL.Model, MaxWeight = (BO.WeightCategories)droneDL.MaxWeight };
-                if (GetParcelsBy(p => (p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id)).Any())
+                if (GetParcelsBy(p => p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id).Any())
                 {
-                    Parcel parcel = GetParcelsBy(p => (p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id)).First();
+                    Parcel parcel = GetParcelsBy(p => p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id).First();
                     if (parcel.Delivered == null)
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
@@ -275,27 +275,32 @@ namespace BL
 
         public void AssignAParcelToADrone(int id)
         {
-            Parcel bestParcel = new Parcel();
+            Drone droneBL = GetDroneById(id);
+            Parcel bestParcel = null;
             try
             {
-                bestParcel = GetParcelsBy(t => t.Scheduled == null).First();
+                bool found = false;
+                foreach (var parcel in GetParcelsBy(t => t.Scheduled == null))
+                {
+                    if (droneBL.Battery >= calculateBatteryForDelivery(droneBL.Location, parcel.customerAtParcelSender.Id, parcel.customerAtParcelReciver.Id, parcel.Weight))
+                    {
+                        bestParcel = parcel;
+                        break;
+                    }
+                }
             }
             catch (Exception)
             {
                 throw new NotFound("parcel");
             }
-            Drone droneBL = GetDroneById(id);
+            if (bestParcel == null)
+                throw new NotFound("parcel");
 
             foreach (var parcel in GetParcels())
             {
                 if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue;
-                Location CurrentSenderLocation = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
-                Location CurrentReciverLocation = GetCustomerById(parcel.customerAtParcelReciver.Id).Location;
-                Location CloslestStationLocation = closestStationToLoacation(CurrentReciverLocation).Location;
-                double electricityNeeded = CalculateElectricity(CurrentSenderLocation, CurrentReciverLocation, parcel.Weight)
-                    + CalculateElectricityWhenFree(CurrentReciverLocation, CloslestStationLocation)
-                    + CalculateElectricityWhenFree(droneBL.Location, CurrentSenderLocation);
-                if (electricityNeeded < droneBL.Battery)
+                
+                if (calculateBatteryForDelivery(droneBL.Location, parcel.customerAtParcelSender.Id, parcel.customerAtParcelReciver.Id, parcel.Weight) <= droneBL.Battery)
                 {
                     if (bestParcel.Pritority < parcel.Pritority)
                     {
@@ -310,7 +315,8 @@ namespace BL
                         else if (bestParcel.Weight == parcel.Weight)
                         {
                             Location bestParcelLocaion = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
-                            if (distanceBetweenTwoLocationds(droneBL.Location, CurrentSenderLocation) < distanceBetweenTwoLocationds(droneBL.Location, bestParcelLocaion)) ;
+                            Location senderLocation = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
+                            if (distanceBetweenTwoLocationds(droneBL.Location, senderLocation) < distanceBetweenTwoLocationds(droneBL.Location, bestParcelLocaion)) ;
                             {
                                 bestParcel = parcel;
                             }
@@ -347,6 +353,17 @@ namespace BL
         /// </summary>
         /// <param name="DroneID"></param>
 
+
+        public double calculateBatteryForDelivery(Location droneLocation ,int senderId, int reciverId, WeightCategories parcelWeight)
+        {
+            Location senderLocation = GetCustomerById(senderId).Location;
+            Location reciverLocation = GetCustomerById(reciverId).Location;
+            Location closlestStationLocation = closestStationToLoacation(reciverLocation).Location;
+            double electricityNeeded = CalculateElectricity(senderLocation, reciverLocation, parcelWeight)
+                + CalculateElectricityWhenFree(droneLocation, senderLocation)
+                + CalculateElectricityWhenFree(reciverLocation, closlestStationLocation);
+            return electricityNeeded;
+        }
         public void supplyParcelByDrone(int DroneID)
         {
 
