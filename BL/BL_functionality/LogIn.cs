@@ -15,7 +15,7 @@ namespace BL
         {
             try
             {
-                DO.Manager manager1 = dalObject.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
+                DO.Manager manager1 = dal.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
 
             }
             catch(Exception)

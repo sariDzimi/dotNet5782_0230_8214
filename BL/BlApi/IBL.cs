@@ -79,6 +79,9 @@ namespace BlApi
         public bool CheckWorkerIfExixst(Manager manager);
 
         public void DeleateParcel(int id);
+
+        public void StartSimulation(Drone drone, Action<Drone, int> action, Func<bool> func);
+        public double GetRateOFCharging();
     }
 }
 

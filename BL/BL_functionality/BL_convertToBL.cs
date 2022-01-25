@@ -85,8 +85,8 @@ namespace BL
         /// <returns></returns>
         private int calculateFreeChargeSlotsInStation(int statioinID)
         {
-            int total = dalObject.GetStationById(statioinID).ChargeSlots;
-            foreach (var chargeDrone in dalObject.GetDroneCharges())
+            int total = dal.GetStationById(statioinID).ChargeSlots;
+            foreach (var chargeDrone in dal.GetDroneCharges())
             {
                 if (chargeDrone.stationId == statioinID)
                     total--;

@@ -15,7 +15,7 @@ namespace BL
 
         private List<BO.Drone> dronesBL;
         private Random rand = new Random();
-        private DalApi.IDal dalObject;
+        internal DalApi.IDal dal;
 
         private double ElectricityUseWhenFree = 0;
         private double ElectricityUseWhenLight = 0;
@@ -29,17 +29,17 @@ namespace BL
         {
             //intlizing BL members
             //dalObject = DalFactory.GetDal("DalObject");
-            dalObject = DalFactory.GetDal();
-            double[] ElectricityUse = dalObject.RequestElectricityUse();
+            dal = DalFactory.GetDal();
+            double[] ElectricityUse = dal.RequestElectricityUse();
             ElectricityUseWhenFree = ElectricityUse[0];
             ElectricityUseWhenLight = ElectricityUse[1];
             ElectricityUseWhenMedium = ElectricityUse[2];
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<BO.Drone>();
-            List<DO.Parcel> parcelDLs = dalObject.GetParcels().ToList();
+            List<DO.Parcel> parcelDLs = dal.GetParcels().ToList();
 
-            foreach (var droneDL in dalObject.GetDrones())
+            foreach (var droneDL in dal.GetDrones())
             {
                 BO.Drone droneBL = new BO.Drone() { Id = droneDL.Id, Model = droneDL.Model, MaxWeight = (BO.WeightCategories)droneDL.MaxWeight };
                 if (GetParcelsBy(p => (p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id)).Any())
@@ -88,7 +88,7 @@ namespace BL
                     droneBL.Location = station.Location;
                     droneBL.Battery = rand.Next(0, 21);
                     DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneDL.Id, stationId = station.Id };
-                    dalObject.AddDroneCharge(droneChargeDL);
+                    dal.AddDroneCharge(droneChargeDL);
                     droneBL.Location = station.Location;
                 }
 
@@ -161,11 +161,11 @@ namespace BL
             droneBL.DroneStatus = DroneStatus.Free;
             updateDrone(droneBL);
 
-/*            Station station = FindStation(FindDroneCharge(droneBL.Id).stationId);
-            station.FreeChargeSlots += 1;
-            updateStation(station);
-*/
-            dalObject.DeleteDroneCharge(idDrone);
+            /*            Station station = FindStation(FindDroneCharge(droneBL.Id).stationId);
+                        station.FreeChargeSlots += 1;
+                        updateStation(station);
+            */
+            dal.DeleteDroneCharge(idDrone);
         }
 
         /// <summary>
@@ -202,12 +202,12 @@ namespace BL
             {
                 Station closestStation = closestStationToLoacation(drone.Location);
 
-                if (dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(closestStation.Location, drone.Location) < drone.Battery)
+                if (dal.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(closestStation.Location, drone.Location) < drone.Battery)
                 {
                     //IDAL.DO.Station stationDL = dalObject.GetStations().ToList().Find(s => s.Id == closestStation.Id);
                     //IDAL.DO.Drone droneDL = dalObject.GetDrones().ToList().Find(s => s.Id == closestStation.Id);
                     //BL
-                    drone.Battery -= dalObject.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(closestStation.Location, drone.Location);
+                    drone.Battery -= dal.RequestElectricityUse()[0] * distanceBetweenTwoLocationds(closestStation.Location, drone.Location);
                     drone.Location = closestStation.Location;
                     drone.DroneStatus = DroneStatus.Maintenance;
                     updateDrone(drone);/*
@@ -272,7 +272,7 @@ namespace BL
         /// Assign AParcel To A Drone
         /// </summary>
         /// <param name="id"></param>
-       
+
         public void AssignAParcelToADrone(int id)
         {
             Parcel bestParcel = new Parcel();
@@ -412,6 +412,16 @@ namespace BL
             int numOfStations = GetStations().ToList().Count;
             Station station = GetStations().ToList()[rand.Next(0, numOfStations)];
             return station;
+        }
+
+        public void StartSimulation(Drone drone, Action<Drone, int> action, Func<bool> func)
+        {
+            Simulation simulation = new Simulation(this, drone, action, func); 
+        }
+
+        public double GetRateOFCharging()
+        {
+            return this.RateOfCharching;
         }
     }
 }

@@ -169,6 +169,8 @@
                     <Button x:Name="OpaenDrone" Content="open" HorizontalAlignment="Left" Visibility="Hidden" Margin="298,203,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="Button_Click_4" Grid.Row="1"/>
                     <ComboBox x:Name="WeightSelector" Text="{Binding Weight}"  HorizontalAlignment="Left" Margin="156,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
                 </Grid>
+                <Button Content="simulation" HorizontalAlignment="Left" Margin="521,19,0,0" VerticalAlignment="Top" Click="simulation_Click"/>
+                <Button Content="stop" HorizontalAlignment="Left" Margin="611,19,0,0" VerticalAlignment="Top" Click="stop_Click"/>
             </Grid>
             <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,280,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
 

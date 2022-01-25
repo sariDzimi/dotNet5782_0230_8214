@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
@@ -30,6 +31,7 @@ namespace PL
         Drone_p drone_P;
         DroneList DroneP = new DroneList();
         public bool boo = false;
+        BackgroundWorker worker = new BackgroundWorker();
         public Drone()
         {
             //WindowStyle = WindowStyle.None;
@@ -317,7 +319,34 @@ namespace PL
             Close();
         }
 
-        
+        private void simulation_Click(object sender, RoutedEventArgs e)
+        {
+            worker.DoWork += (object? sender, DoWorkEventArgs e) =>
+            {
+                bL.StartSimulation(
+                    drone,
+                    (d, i) =>
+                    {
+                        worker.ReportProgress(i);
+                    },
+                    () => worker.CancellationPending
+                    );
+
+            };
+
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
+            {
+                drone_P.Update(drone);
+            };
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerAsync();
+        }
+
+        private void stop_Click(object sender, RoutedEventArgs e)
+        {
+            worker.CancelAsync();
+        }
     }
 }
 

@@ -33,7 +33,7 @@ namespace BL
             };
             try
             {
-                dalObject.AddParcel(parcelDL);
+                dal.AddParcel(parcelDL);
             }
             catch (DalApi.IdAlreadyExist)
             {
@@ -60,8 +60,8 @@ namespace BL
                 droneAtParcel = new DroneAtParcel() { Id = p.DroneId };
             }
             //DroneAtParcel droneAtParcel = new DroneAtParcel() { Id = p.DroneId, Battery = droneBL.Battery, Location = droneBL.Location };
-            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dalObject.GetCustomerById(p.SenderId).Name };
-            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dalObject.GetCustomerById(p.TargetId).Name };
+            CustomerAtParcel customerAtParcelsender1 = new CustomerAtParcel() { Id = p.SenderId, Name = dal.GetCustomerById(p.SenderId).Name };
+            CustomerAtParcel customerAtParcelreciver1 = new CustomerAtParcel() { Id = p.TargetId, Name = dal.GetCustomerById(p.TargetId).Name };
 
             Parcel ParcelBL = new Parcel() { Id = p.Id, Delivered = p.Delivered, PickedUp = p.PickedUp, droneAtParcel = droneAtParcel, Pritority = (BO.Pritorities)p.Pritority, Requested = p.Requested, Scheduled = p.Scheduled, customerAtParcelSender = customerAtParcelsender1, customerAtParcelReciver = customerAtParcelreciver1, Weight = (BO.WeightCategories)p.Weight };
             return ParcelBL;
@@ -69,13 +69,13 @@ namespace BL
 
         public void DeleateParcel(int id)
         {
-            dalObject.DeleteParcel(id);
+            dal.DeleteParcel(id);
 
         }
 
         public void updateParcel(Parcel parcel)
         {
-            dalObject.UpdateParcel(new DO.Parcel()
+            dal.UpdateParcel(new DO.Parcel()
             {
                 Id = parcel.Id,
                 Delivered = parcel.Delivered,
@@ -115,7 +115,7 @@ namespace BL
         public IEnumerable<Parcel> GetParcels()
         {
 
-            return from parcel in dalObject.GetParcels()
+            return from parcel in dal.GetParcels()
                    select convertToParcelBL(parcel);
 
         }

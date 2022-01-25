@@ -25,7 +25,7 @@ namespace BL
                 throw new OutOfRange("status");
             }
 
-            if (dalObject.GetDrones().Any(d => d.Id == id))
+            if (dal.GetDrones().Any(d => d.Id == id))
                 throw new IdAlreadyExist(id);
 
             Drone droneBL = new Drone() { Id = id, MaxWeight = (WeightCategories)maxWeight, Model = model };
@@ -48,16 +48,16 @@ namespace BL
 
             droneBL.Battery = rand.Next(20, 40);
             DO.Station stationDL = new DO.Station();
-            stationDL = dalObject.GetStationById(numberStaion);
+            stationDL = dal.GetStationById(numberStaion);
             stationDL.ChargeSlots -= 1;
             DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneBL.Id, stationId = stationDL.Id };
-            dalObject.AddDroneCharge(droneChargeDL);
+            dal.AddDroneCharge(droneChargeDL);
             Location location = new Location(stationDL.Longitude, stationDL.Latitude);
             droneBL.Location = location;
             DO.Drone drone = new DO.Drone() { Id = id, MaxWeight = (DO.WeightCategories)maxWeight, Model = model };
-            dalObject.AddDrone(drone);
+            dal.AddDrone(drone);
             dronesBL.Add(droneBL);
-            dalObject.UpdateStation(stationDL);
+            dal.UpdateStation(stationDL);
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace BL
         /// <param name="model"></param>
         public void updateDroneModel(int id, string model)
         {
-            DO.Drone droneDL = dalObject.GetDroneById(id);
+            DO.Drone droneDL = dal.GetDroneById(id);
             droneDL.Model = model;
-            dalObject.UpdateDrone(droneDL);
+            dal.UpdateDrone(droneDL);
 
             Drone droneBL = dronesBL.First(d => d.Id == id);
             droneBL.Model = model;
@@ -95,12 +95,12 @@ namespace BL
         {
             int index = dronesBL.FindIndex(d => d.Id == drone.Id);
             dronesBL[index] = drone;
-            dalObject.UpdateDrone(new DO.Drone() { Id = drone.Id, MaxWeight = (DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
+            dal.UpdateDrone(new DO.Drone() { Id = drone.Id, MaxWeight = (DO.WeightCategories)drone.MaxWeight, Model = drone.Model });
         }
 
         public void updateStation(Station station)
         {
-            dalObject.UpdateStation(new DO.Station()
+            dal.UpdateStation(new DO.Station()
             {
                 ChargeSlots = station.FreeChargeSlots,
                 Id = station.Id,

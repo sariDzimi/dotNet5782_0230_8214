@@ -26,7 +26,7 @@ namespace BL
             };
             try
             {
-                dalObject.AddStation(stationDL);
+                dal.AddStation(stationDL);
             }
             catch (DalApi.IdAlreadyExist)
             {
@@ -44,7 +44,7 @@ namespace BL
         {
             Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
             StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
-            foreach (var dronecharge in dalObject.GetDroneCharges())
+            foreach (var dronecharge in dal.GetDroneCharges())
             {
                 if (dronecharge.stationId == s.Id)
                     StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = GetDroneById(dronecharge.DroneId).Battery });
@@ -60,12 +60,12 @@ namespace BL
         /// <param name="totalChargeSlots"></param>
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-            DO.Station station = dalObject.GetStationById(id);
+            DO.Station station = dal.GetStationById(id);
             if (name != -1)
                 station.Name = name;
             if (totalChargeSlots != -1)
                 station.ChargeSlots = totalChargeSlots;
-            dalObject.UpdateStation(station);
+            dal.UpdateStation(station);
         }
 
         public IEnumerable<Station> GetStationsBy(Predicate<Station> findBy)
@@ -92,7 +92,7 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<Station> GetStations()
         {
-            return from station in dalObject.GetStations()
+            return from station in dal.GetStations()
                    select ConvertToStationBL(station);
 
         }
@@ -104,7 +104,7 @@ namespace BL
                 ID = station.Id,
                 Name = station.Name,
                 numberOfFreeChargeSlots = station.FreeChargeSlots,
-                numberOfUsedChargeSlots = dalObject.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots
+                numberOfUsedChargeSlots = dal.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots
             };
             return stationToList;
         }

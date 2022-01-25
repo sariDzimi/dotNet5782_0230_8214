@@ -3,9 +3,9 @@
 	<dal>list</dal>
 	<dal-packages>
 		<list>
-			<xml>DalXml</xml>
+			<object>DalObject</object>
 		</list>
-		<!--<object>DalObject</object>-->
+		
 		<xml>DalXml</xml>
 	</dal-packages>
 </config>

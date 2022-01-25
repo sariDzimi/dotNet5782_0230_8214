@@ -17,7 +17,7 @@ namespace BL
         }
         public IEnumerable<DroneCharge> GetDronesCharges()
         {
-            return from drone in dalObject.GetDroneCharges()
+            return from drone in dal.GetDroneCharges()
                    select ConvertToDroneChargeBL(drone);
 
         }
@@ -34,7 +34,7 @@ namespace BL
                 }*/
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            dalObject.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId });
+            dal.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId });
         }
     }
 }

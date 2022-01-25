@@ -27,7 +27,7 @@ namespace BL
             };
             try
             {
-                dalObject.AddCustomer(customerDL);
+                dal.AddCustomer(customerDL);
             }
             catch (DalApi.IdAlreadyExist)
             {
@@ -62,7 +62,7 @@ namespace BL
 
         public void updateCustomer(Customer customer)
         {
-            dalObject.UpdateCustomer(new DO.Customer()
+            dal.UpdateCustomer(new DO.Customer()
             {
                 Id = customer.Id,
                 Name = customer.Name,
@@ -96,7 +96,7 @@ namespace BL
         public IEnumerable<Customer> GetCustomers()
         {
 
-            return from customer in dalObject.GetCustomers()
+            return from customer in dal.GetCustomers()
                    select convertToCustomerBL(customer);
 
 
