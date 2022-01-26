@@ -152,7 +152,7 @@ namespace BL
                         {
                             Location bestParcelLocaion = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
                             Location senderLocation = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
-                            if (calculateDistanceBetweenTwoLocationds(drone.Location, senderLocation) < calculateDistanceBetweenTwoLocationds(drone.Location, bestParcelLocaion)) ;
+                            if (calculateDistanceBetweenTwoLocationds(drone.Location, senderLocation) < calculateDistanceBetweenTwoLocationds(drone.Location, bestParcelLocaion)) 
                             {
                                 bestParcel = parcel;
                             }

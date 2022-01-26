@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace PL
 {
-    enum userType {manager, cutomer};
+    public enum userType {manager, cutomer};
 }
                  

@@ -24,18 +24,18 @@ namespace PL
     {
         public CurrentUser currentUser = new CurrentUser();
         public IBL bL1;
+
         public ManegerWindow()
         {
             InitializeComponent();
         }
+
         public ManegerWindow(IBL bL, CurrentUser CurrentUser1)
         {
             bL1 = bL;
             currentUser = CurrentUser1;
             InitializeComponent();
-
-            CurrentUser.Text = currentUser.Type;
-
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

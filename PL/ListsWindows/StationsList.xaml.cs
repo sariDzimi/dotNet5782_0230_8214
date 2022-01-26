@@ -42,7 +42,7 @@ namespace PL
             stationList.Stations = stationList.ConvertStationBLToPL(items);
             StationsListView.DataContext = stationList.Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)

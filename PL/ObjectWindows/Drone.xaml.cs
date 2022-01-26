@@ -49,7 +49,7 @@ namespace PL
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
 
         }
       

@@ -45,7 +45,7 @@ namespace PL
             items = bl.GetParcelToLists().ToList();
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
             parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(items);
             ParcelsListView.DataContext = parcelsList.Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);

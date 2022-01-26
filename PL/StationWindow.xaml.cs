@@ -44,19 +44,18 @@ namespace PL
             DroneChargingListView.ItemsSource = station.droneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
             DataContext = station_P;
-            CurrentUser.Text = currentUser.Type;
-
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         public StationWindow(IBL blArg, CurrentUser currentUser1, StationList Stations)
-      {
+        {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             StationsList = Stations;
             addStationLabel.Visibility = Visibility.Visible;
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void DroneChargingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -116,9 +115,6 @@ namespace PL
                 });
                 Station station = bl.GetStationById(getId());
                 StationsList.AddStation(new StationToList() { ID = getId(), numberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
-                //Hide();
-                //new StationsList(bl, currentUser).ShowDialog();
-                //Show();
                 MessageBox.Show("the Station added!!");
                 this.Close();
 

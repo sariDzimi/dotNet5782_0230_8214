@@ -10,7 +10,7 @@ namespace BO
 
     public class Drone
     {
-        public event Action <Drone> DroneChangaed;
+        //public event Action <Drone> DroneChangaed;
 
         public Drone(int id, string model, WeightCategories weightCategories, double battery)
         {
