@@ -8,12 +8,12 @@ namespace Dal
 {
     internal partial class DalObject : DalApi.IDal
     {
-        #region Drone
+        #region Add Drone
+
         /// <summary>
-        /// Adds the drone to the drones list in the DataSource
-        /// If the ID alredy exist the function will throw exception
+        /// adds drone to DataSource
         /// </summary>
-        /// <param name="drone"></param>
+        /// <param name="drone">drone</param>
         public void AddDrone(Drone drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
@@ -23,10 +23,16 @@ namespace Dal
 
             DataSource.drones.Add(drone);
         }
+
+        #endregion
+
+        #region Get Drone
+
         /// <summary>
         /// returns drones form datasource
         /// </summary>
-        /// <returns>DataSource.drones</returns>
+        /// <param name="getBy">condition</param>
+        /// <returns>drones that full-fill the conditon</returns>
         public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null)
         {
             getBy ??= (drone => true);
@@ -34,6 +40,12 @@ namespace Dal
                    where (getBy(drone))
                    select drone;
         }
+
+        /// <summary>
+        /// finds a drone by id
+        /// </summary>
+        /// <param name="id">id of drone</param>
+        /// <returns>drone with the given id</returns>
         public Drone GetDroneById(int id)
         {
             try
@@ -47,10 +59,14 @@ namespace Dal
             }
         }
 
+        #endregion
+
+        #region Update Drone
+
         /// <summary>
-        /// updates the drones list in the database
+        /// update drone in the DataSource
         /// </summary>
-        /// <param name="drone"></param>
+        /// <param name="drone">drone with updated details</param>
         public void UpdateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
@@ -58,6 +74,7 @@ namespace Dal
                 throw new NotFoundException("drone");
             DataSource.drones[index] = drone;
         }
+
         #endregion
     }
 }

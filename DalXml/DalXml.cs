@@ -66,7 +66,7 @@ namespace Dal
        
 
        
-        double[] IDal.RequestElectricityUse()
+        double[] IDal.GetElectricityUse()
         {
             //IEnumerable<double> electricityUseList = XMLTools.LoadListFromXMLSerializer<double>(dir + configFilePath);
             //return electricityUseList.ToArray();

@@ -8,12 +8,12 @@ namespace Dal
 {
     internal partial class DalObject : DalApi.IDal
     {
-        #region Parcel
+        #region Add Parcel
+
         /// <summary>
-        /// adds the parcel to the parcels list in the DataSource
-        /// If the ID alredy exist the function will throw exception
+        /// adds droneCharge to DataSource
         /// </summary>
-        /// <param name="parcel"></param>
+        /// <param name="parcel">parcel</param>
         public void AddParcel(Parcel parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
@@ -23,10 +23,15 @@ namespace Dal
             DataSource.parcels.Add(parcel);
         }
 
+        #endregion
+
+        #region Get Parcel
+
         /// <summary>
-        /// returns parcel form datasource
+        /// returns parcels form datasource
         /// </summary>
-        /// <returns>DataSource.customers</returns>
+        /// <param name="getBy">condition</param>
+        /// <returns>parcels that full-fill the conditon</returns>
         public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null)
         {
             getBy ??= (parcel => true);
@@ -34,6 +39,12 @@ namespace Dal
                     where (getBy(parcel)/*parcel.IsActive*/)
                     select parcel);
         }
+
+        /// <summary>
+        /// finds a parcel by id
+        /// </summary>
+        /// <param name="id">id of parcel</param>
+        /// <returns>parcel with the given id</returns>
         public Parcel GetParcelById(int id)
         {
             try
@@ -47,10 +58,14 @@ namespace Dal
             }
         }
 
+        #endregion
+
+        #region Update Parcel
+
         /// <summary>
-        /// updates the drones list in the database
+        /// update parcel in the DataSource
         /// </summary>
-        /// <param name="parcel"></param>
+        /// <param name="parcel">parcel with updated details</param>
         public void UpdateParcel(Parcel parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
@@ -59,6 +74,15 @@ namespace Dal
             DataSource.parcels[index] = parcel;
 
         }
+
+        #endregion
+
+        #region Delete Parcel
+
+        /// <summary>
+        /// removing a parcel by marking it as not active
+        /// </summary>
+        /// <param name="id">id of parcel to remove</param>
         public void DeleteParcel(int id)
         {
             Parcel parcel = GetParcelById(id);

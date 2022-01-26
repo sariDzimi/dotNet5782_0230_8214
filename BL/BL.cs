@@ -30,7 +30,7 @@ namespace BL
             //intlizing BL members
             //dalObject = DalFactory.GetDal("DalObject");
             dal = DalFactory.GetDal();
-            double[] ElectricityUse = dal.RequestElectricityUse();
+            double[] ElectricityUse = dal.GetElectricityUse();
             ElectricityUseWhenFree = ElectricityUse[0];
             ElectricityUseWhenLight = ElectricityUse[1];
             ElectricityUseWhenMedium = ElectricityUse[2];
