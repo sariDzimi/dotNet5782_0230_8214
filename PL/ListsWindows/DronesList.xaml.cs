@@ -44,7 +44,6 @@ namespace PL
             bl = bL1;
             items = bl.GetDroneToLists().ToList();
             droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
-            //DronesListView.ItemsSource = droneList.Drone_Ps;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type;
@@ -57,8 +56,7 @@ namespace PL
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
             droneList.ClearDrones();
             droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.MaxWeight == selected).ToList());
-            DronesListView.ItemsSource = droneList.Drone_Ps;
-
+            DronesListView.DataContext = droneList.Drone_Ps;
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,9 +64,7 @@ namespace PL
             var selected = (BO.DroneStatus)StatusSelector.SelectedItem;
             droneList.ClearDrones();
             droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList());
-            DronesListView.ItemsSource = droneList.Drone_Ps;
-
-
+            DronesListView.DataContext = droneList.Drone_Ps;
         }
 
 

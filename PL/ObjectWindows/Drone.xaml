@@ -79,13 +79,18 @@
         <Grid x:Name="Actions" Visibility="Visible" HorizontalAlignment="Center" Margin="-21,0,-247,-10">
             <Grid HorizontalAlignment="Center" >
                 <!--<Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>-->
+                <Grid x:Name="Buttons">
 
-                <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,99,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="30" Width="276" IsEnabled="{Binding ElementName= sendDroneForDelivery , Path=IsEnabled}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                    <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,280,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+
+                    <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,331,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
+                    <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,332,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28"  IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
+                    <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,99,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneToCharge" Height="30" Width="276" IsEnabled="{Binding ElementName= sendDroneForDelivery , Path=IsEnabled}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                 <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,45,0,0" VerticalAlignment="Top" Click="Button_Click_sendDroneForDelivery" Height="32" Width="276" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                 <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="501,222,0,0" VerticalAlignment="Top" Click="Button_Click_colectParcel" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                 <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="501,158,0,0" VerticalAlignment="Top" Click="Button_Click_supllyParcel" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                 <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="501,377,0,0" VerticalAlignment="Top" Height="32" Width="273" Click="Button_Click"   />
-
+                </Grid>
                 <Grid Style="{StaticResource GridItem }" Margin="86,0,630,0" HorizontalAlignment="Center"  >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="119*"/>
@@ -172,10 +177,7 @@
                 <Button Content="simulation" HorizontalAlignment="Left" Margin="521,19,0,0" VerticalAlignment="Top" Click="simulation_Click"/>
                 <Button Content="stop" HorizontalAlignment="Left" Margin="611,19,0,0" VerticalAlignment="Top" Click="stop_Click"/>
             </Grid>
-            <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,280,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
-
-            <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,331,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
-            <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,332,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28"  IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
+           
         </Grid>
         <Button x:Name="close" Content="X" Style="{StaticResource close}" HorizontalAlignment="Left"  Margin="758,10,0,401" Click="closeButton_Click" Width="37" RenderTransformOrigin="1.63,0.089"/>
     </Grid>

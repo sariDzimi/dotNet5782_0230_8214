@@ -51,13 +51,18 @@
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
+    <Id>12</Id>
+    <Model>Susuky</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
     <Id>23</Id>
     <Model>Toyota</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <Id>12</Id>
-    <Model>Susuky</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <Id>45768</Id>
+    <Model>Toyota</Model>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
 </ArrayOfDrone>

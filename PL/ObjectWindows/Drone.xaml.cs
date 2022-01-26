@@ -121,7 +121,44 @@ namespace PL
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            this.SwitchDroneStatus();
+            //switch (drone.DroneStatus)
+            //{
+            //    case DroneStatus.Free:
+            //        sendDroneForDelivery.IsEnabled = true;
+            //        //OpaenDrone.Visibility = Visibility.Hidden;
+            //        break;
+            //    case DroneStatus.Maintenance:
+            //        releaseDroneFromCharging.IsEnabled = true;
+            //        // OpaenDrone.Visibility = Visibility.Hidden;
+            //        break;
+            //    case DroneStatus.Delivery:
 
+            //        Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
+
+            //        if (parcelBL.PickedUp == null)
+            //        {
+            //            colectParcel.IsEnabled = true;
+            //            OpaenDrone.Visibility = Visibility.Visible;
+            //        }
+            //        else
+            //        {
+            //            //if (parcelBL.Delivered == null)
+
+            //        }
+            //        break;
+            //}
+
+
+            if (drone.ParcelInDelivery != null)
+                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            WeightSelector.IsEnabled = false;
+
+
+        }
+
+        private void  SwitchDroneStatus()
+        {
             switch (drone.DroneStatus)
             {
                 case DroneStatus.Free:
@@ -148,15 +185,7 @@ namespace PL
                     }
                     break;
             }
-
-
-            if (drone.ParcelInDelivery != null)
-                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            WeightSelector.IsEnabled = false;
-
-
         }
-
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -382,9 +411,21 @@ namespace PL
         {
             Close();
         }
+        private void DesEableButtons()
+        {
+            Buttons.Visibility = Visibility.Hidden;
+        }
+
+        private void EnableButtons()
+        {
+            Buttons.Visibility = Visibility.Visible;
+            this.SwitchDroneStatus();
+
+        }
 
         private void simulation_Click(object sender, RoutedEventArgs e)
         {
+            DesEableButtons();
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {
                 bL.StartSimulation(
@@ -411,6 +452,7 @@ namespace PL
         private void stop_Click(object sender, RoutedEventArgs e)
         {
             worker.CancelAsync();
+            this.EnableButtons();
         }
     }
 }
