@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,18 +26,19 @@ namespace PL
         IBL bl;
         Station station;
         Station_p station_P;
+        StationList StationsList = new StationList();
 
-        
         public StationWindow()
         {
             InitializeComponent();
         }
-        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1)
+        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1, StationList Stations)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
+            this.StationsList = Stations;
             station = stationArg;
             station_P = new Station_p() { ID = station.Id, Name = station.Name, Longitude = station.Location.Longitude,Latitude= station.Location.Latitude, FreeChargeSlots = station.FreeChargeSlots };
             DroneChargingListView.ItemsSource = station.droneAtChargings;
@@ -46,12 +48,13 @@ namespace PL
 
         }
 
-        public StationWindow(IBL blArg, CurrentUser currentUser1)
+        public StationWindow(IBL blArg, CurrentUser currentUser1, StationList Stations)
       {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
+            StationsList = Stations;
             addStationLabel.Visibility = Visibility.Visible;
             CurrentUser.Text = currentUser.Type;
         }
@@ -83,7 +86,11 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
+                Station station = bl.GetStationById(getId());
+                StationsList.UpdateListStations(new Station_p() { ID = getId(), FreeChargeSlots = getChargeSlots(), Name = getName(), Latitude  = getLocation().Latitude, Longitude  = getLocation().Longitude });
             }
+
+            
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -107,10 +114,14 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
+                Station station = bl.GetStationById(getId());
+                StationsList.AddStation(new StationToList() { ID = getId(), numberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
+                //Hide();
+                //new StationsList(bl, currentUser).ShowDialog();
+                //Show();
+                MessageBox.Show("the Station added!!");
+                this.Close();
 
-                Hide();
-                new StationsList(bl, currentUser).ShowDialog();
-                Show();
             }
             catch (Exception ex)
             {

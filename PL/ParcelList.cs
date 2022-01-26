@@ -13,7 +13,7 @@ namespace PO
 {
      public class ParcelList: DependencyObject
     {
-
+        IBL BL;
         public ParcelList()
         {
             
@@ -45,6 +45,16 @@ namespace PO
             Parcels = new ObservableCollection<Parcel_p>();
             return Parcels;
         }
+        public void UpdateListParcels(Parcel_p parcel_P )
+        {
+            if (Parcels.Count == 0)
+            {
+                this.Parcels = this.ConvertParcelBLToPL(BL.GetParcelToLists().ToList());
+            }
 
+            int index = Parcels.IndexOf(Parcels.Where(X => X.ID == parcel_P.ID).FirstOrDefault());
+            Parcels[index] = parcel_P;
+
+        }
     }
 }

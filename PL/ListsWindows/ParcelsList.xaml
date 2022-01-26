@@ -52,7 +52,8 @@
 
 
 
-            <ListView x:Name="ParcelsListView" Margin="15,133,15,10" MouseDoubleClick="MouseDoubleClick_ParcelChoosen" Style="{StaticResource ListViews}">
+            <ListView x:Name="ParcelsListView" Margin="15,133,15,10" MouseDoubleClick="MouseDoubleClick_ParcelChoosen" Style="{StaticResource ListViews}" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+                
 
                 <ListView.View>
 

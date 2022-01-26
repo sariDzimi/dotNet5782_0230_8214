@@ -40,18 +40,17 @@ namespace PL
             bL = bl;
             items = bl.GetStationToLists().ToList();
             stationList.Stations = stationList.ConvertStationBLToPL(items);
-            DataContext = stationList.Stations;
-            StationsListView.ItemsSource = stationList.Stations;
+            StationsListView.DataContext = stationList.Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             CurrentUser.Text = currentUser.Type;
         }
 
-        //    ParcelsListView.ItemsSource = parcelsList.Parcels;
-        //    view = (CollectionView) CollectionViewSource.GetDefaultView(DataContext);
-
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
-            StationsListView.ItemsSource = bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0);
+            stationList.ClearStations();
+            stationList.ConvertStationBLToPL(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0).ToList());
+            StationsListView.DataContext = stationList.Stations;
+
         }
 
         private void Button_Click_groupByNumberOfFree(object sender, RoutedEventArgs e)
@@ -63,8 +62,9 @@ namespace PL
 
         private void clearListView()
         {
-            items = bL.GetStationToLists().ToList();
-            StationsListView.ItemsSource = items;
+            stationList.Stations = stationList.ClearStations();
+            stationList.Stations = stationList.ConvertStationBLToPL(bL.GetStationToLists().ToList());
+            StationsListView.DataContext = stationList.Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
         }
 
@@ -82,16 +82,13 @@ namespace PL
         {
             Station_p stationToList = (sender as ListView).SelectedValue as Station_p;
             BO.Station station = bL.GetStationById(stationToList.ID);
-            //Hide();
-            new StationWindow(bL, station, currentUser).Show();
-            //Show();
+            new StationWindow(bL, station, currentUser, stationList).Show();
+            
         }
 
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-            //Hide();
-            new StationWindow(bL, currentUser).Show();
-            //Show();
+            new StationWindow(bL, currentUser, stationList).Show();
         }
 
         private void closeButton_click(object sender, RoutedEventArgs e)
