@@ -109,6 +109,13 @@ namespace BL
             return stationToList;
         }
 
+        private Station GetRandomStation()
+        {
+            int numOfStations = GetStations().ToList().Count;
+            Station station = GetStations().ToList()[rand.Next(0, numOfStations)];
+            return station;
+        }
+
 
 
 

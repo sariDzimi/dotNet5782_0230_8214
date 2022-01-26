@@ -14,8 +14,5 @@ namespace BL
             return BL.GetInstance;
 
         }
-
-
-
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using DAL;
+using DalApi;
 
 
 namespace BL
@@ -35,6 +35,18 @@ namespace BL
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             dal.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId });
+        }
+
+        public void DeleteDroneCharge(int droneId)
+        {
+            try
+            {
+                dal.DeleteDroneCharge(droneId);
+            }
+            catch(NotFoundException)
+            {
+                throw new NotFound($"couldn't find a droneChagre for drone: {droneId}");
+            }
         }
     }
 }
