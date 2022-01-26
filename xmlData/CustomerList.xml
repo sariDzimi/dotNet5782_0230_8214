@@ -154,4 +154,11 @@
     <Longitude>2</Longitude>
     <Latitude>7</Latitude>
   </Customer>
+  <Customer>
+    <Id>32</Id>
+    <Name>asru</Name>
+    <Phone>asru</Phone>
+    <Longitude>5</Longitude>
+    <Latitude>56</Latitude>
+  </Customer>
 </ArrayOfCustomer>
