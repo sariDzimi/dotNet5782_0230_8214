@@ -34,7 +34,7 @@ namespace BL
 
             if (stationBL.FreeChargeSlots == 0)
             {
-                throw new NotFound($"space in the station number {numberStaion} to put the drone");
+                throw new NotFound($"no space in the station number {numberStaion} to put the drone");
             }
             else
             {

@@ -312,6 +312,11 @@ namespace Dal
 
         }
 
+        public void DeleteAllDroneCharges()
+        {
+            DataSource.droneCharges = new List<DroneCharge>();
+        }
+
     }
 
 }

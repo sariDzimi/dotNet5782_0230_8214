@@ -140,4 +140,11 @@
     <Longitude>7</Longitude>
     <Latitude>4</Latitude>
   </Customer>
+  <Customer>
+    <Id>22</Id>
+    <Name>Sara</Name>
+    <Phone>029999999</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>1</Latitude>
+  </Customer>
 </ArrayOfCustomer>

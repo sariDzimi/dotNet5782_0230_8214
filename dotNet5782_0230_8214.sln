@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Targil0", "Targil0\Targil0.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC7CB6A0-7552-4818-A109-DE9E1C4DBAE1}"
 	ProjectSection(SolutionItems) = preProject
-		Config.xml = Config.xml
 		Managers.xml = Managers.xml
 		README.md = README.md
 	EndProjectSection
@@ -35,10 +34,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xmlData", "xmlData", "{2354C7AB-7C35-4003-B0EF-858F0E10293A}"
 	ProjectSection(SolutionItems) = preProject
-		xml\Config.xml = xml\Config.xml
+		Config.xml = Config.xml
 		xml\CustomerList.xml = xml\CustomerList.xml
 		xml\dal-config.xml = xml\dal-config.xml
-		xml\DroneChargeList.xml = xml\DroneChargeList.xml
+		DroneChargeList.xml = DroneChargeList.xml
 		xml\DroneList.xml = xml\DroneList.xml
 		xml\Managers.xml = xml\Managers.xml
 		xml\ParcelList.xml = xml\ParcelList.xml

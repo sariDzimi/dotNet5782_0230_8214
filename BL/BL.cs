@@ -11,7 +11,7 @@ namespace BL
     partial class BL : BlApi.IBL
     {
         internal static BL instance;
-
+        
 
         private List<BO.Drone> dronesBL;
         private Random rand = new Random();
@@ -37,6 +37,7 @@ namespace BL
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<BO.Drone>();
+            dal.DeleteAllDroneCharges();
             List<DO.Parcel> parcelDLs = dal.GetParcels().ToList();
 
             foreach (var droneDL in dal.GetDrones())

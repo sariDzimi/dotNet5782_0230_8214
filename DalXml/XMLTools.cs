@@ -22,8 +22,7 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                //throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+                throw new FileLoadException(filePath, $"fail to create xml file: {filePath}", ex);
             }
         }
         public static IEnumerable<T> LoadListFromXMLSerializer<T>(string filePath)
@@ -67,8 +66,7 @@ namespace Dal
             }
             catch
             {
-                Console.WriteLine("File upload problem");
-                return null;
+                throw new FileNotFoundException(filePath);
             }
         }
     }

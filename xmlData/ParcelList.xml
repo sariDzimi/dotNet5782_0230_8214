@@ -34,7 +34,7 @@
     <Pritority>Reguler</Pritority>
     <Requested>2017-01-05T00:00:00</Requested>
     <DroneId>1</DroneId>
-    <Scheduled>2022-01-24T22:15:46.5867755+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:02:54.0528114+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
@@ -75,7 +75,7 @@
     <DroneId>0</DroneId>
     <Scheduled xsi:nil="true" />
     <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <Delivered>2022-01-25T23:12:27.9142309+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -99,7 +99,7 @@
     <Pritority>Emergency</Pritority>
     <Requested>2001-08-20T00:00:00</Requested>
     <DroneId>3</DroneId>
-    <Scheduled>2022-01-24T22:15:48.6438056+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:03:47.2821933+02:00</Scheduled>
     <PickedUp>2020-01-12T00:00:00</PickedUp>
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
@@ -114,7 +114,7 @@
     <DroneId>0</DroneId>
     <Scheduled xsi:nil="true" />
     <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <Delivered>2022-01-25T23:16:56.0150761+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -138,7 +138,7 @@
     <Pritority>Emergency</Pritority>
     <Requested>1996-05-28T00:00:00</Requested>
     <DroneId>6</DroneId>
-    <Scheduled>2022-01-24T22:15:50.8566135+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:04:38.4276122+02:00</Scheduled>
     <PickedUp>2016-08-14T00:00:00</PickedUp>
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
@@ -151,7 +151,7 @@
     <Pritority>Emergency</Pritority>
     <Requested>2016-06-28T00:00:00</Requested>
     <DroneId>10</DroneId>
-    <Scheduled>2022-01-24T22:15:53.941899+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:05:01.9742736+02:00</Scheduled>
     <PickedUp>2020-11-28T00:00:00</PickedUp>
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
@@ -164,7 +164,7 @@
     <Pritority>Fast</Pritority>
     <Requested>2014-12-27T00:00:00</Requested>
     <DroneId>9</DroneId>
-    <Scheduled>2022-01-24T22:15:52.8111575+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:04:55.7095926+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>
@@ -216,7 +216,7 @@
     <Pritority>Emergency</Pritority>
     <Requested>2014-01-20T00:00:00</Requested>
     <DroneId>5</DroneId>
-    <Scheduled>2022-01-24T22:15:49.8968479+02:00</Scheduled>
+    <Scheduled>2022-01-26T10:04:26.147282+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>

@@ -5,14 +5,14 @@
     <Name>1</Name>
     <Longitude>2</Longitude>
     <Latitude>9</Latitude>
-    <ChargeSlots>74</ChargeSlots>
+    <ChargeSlots>70</ChargeSlots>
   </Station>
   <Station>
     <Id>2</Id>
     <Name>2</Name>
     <Longitude>5</Longitude>
     <Latitude>3</Latitude>
-    <ChargeSlots>21</ChargeSlots>
+    <ChargeSlots>20</ChargeSlots>
   </Station>
   <Station>
     <Id>3</Id>
