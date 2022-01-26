@@ -46,7 +46,7 @@ namespace PL
             droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
             DronesListView.DataContext = droneList.Drone_Ps;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }

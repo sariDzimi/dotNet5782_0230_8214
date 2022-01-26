@@ -172,6 +172,24 @@ namespace BL
         //        NumberOfParcelsSendedAndProvided = customer.parcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered)
         //    };
         //}
+        ParcelInDelivery convertPArcelToParcelInDelivery(Parcel bestParcel, bool isParclelWaiting)
+        {
+            Location SenderLocation = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
+            Location ReciverLocation = GetCustomerById(bestParcel.customerAtParcelReciver.Id).Location;
+
+            return new ParcelInDelivery()
+            {
+                customerAtParcelTheReciver = bestParcel.customerAtParcelReciver,
+                customerAtParcelTheSender = bestParcel.customerAtParcelSender,
+                Id = bestParcel.Id,
+                IsWating = isParclelWaiting,
+                locationCollect = SenderLocation,
+                locationTarget = ReciverLocation,
+                distance = calculateDistanceBetweenTwoLocationds(SenderLocation, ReciverLocation),
+                pritorities = bestParcel.Pritority,
+                weightCategories = bestParcel.Weight
+            };
+        }
     }
 
 

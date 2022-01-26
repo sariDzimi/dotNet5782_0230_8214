@@ -22,15 +22,19 @@ namespace PL
     /// </summary>
     public partial class CustomerWindow : Window
     {
-        CurrentUser currentUser = new CurrentUser();
+        CurrentUser currentUser;
         IBL bl;
         Customer customer;
-        Customer_p Customer_P; 
+        Customer_p Customer_P;
+
+        #region CustomerWindow constructors
+
         public CustomerWindow()
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
         }
+
         public CustomerWindow(IBL BL, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
@@ -38,7 +42,7 @@ namespace PL
             WindowStyle = WindowStyle.None;
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
@@ -52,9 +56,12 @@ namespace PL
             ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.Type;
+            CurrentUser.Text = currentUser.Type.ToString();
         }
 
+        #endregion
+
+        #region buttons functionality
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -65,7 +72,6 @@ namespace PL
             try
             {
                 bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
-                //new CustomersList(bl, currentUser).Show();
                 Close();
 
             }
@@ -86,6 +92,10 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #endregion
+
+        #region get input from TextBoxes
         private int getId()
         {
             try
@@ -116,6 +126,10 @@ namespace PL
             }
         }
 
+        #endregion
+
+        #region ParcelsList MouseDoubleClick
+
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
@@ -125,6 +139,13 @@ namespace PL
             //Show();
         }
 
-        
+        #endregion
+
+        private void addParcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MIRIAM-TODO
+            //new ParcelWindow()
+        }
+
     }
 }

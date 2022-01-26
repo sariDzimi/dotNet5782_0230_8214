@@ -97,7 +97,7 @@ namespace PL
                 flag = bL.CheckWorkerIfExixst(manager);
                 if (flag == true)
                 {
-                    currentUser.Type = "Maneger";
+                    currentUser.Type = userType.manager;
                     MessageBox.Show("you are in");
                     new ManegerWindow(bL, currentUser).Show();
                     Close();
@@ -267,7 +267,7 @@ namespace PL
                 if ((customer.Name == getNameLog()))
                 {
                     MessageBox.Show("you are in");
-                    currentUser.Type = "Customer";
+                    currentUser.Type = userType.cutomer;
                     new CustomerWindow(bL, customer, currentUser).Show();
                 }
                 else
@@ -298,7 +298,7 @@ namespace PL
                 BO.Customer customer = new BO.Customer() { Id = getIdSighnUp(), Name = getNameSighnUp(), Phone = getPhone(), Location = new BO.Location(getLutitude(), getLongitute()) };
 
                 bL.addCustomerToDL(customer);
-                currentUser.Type = "Customer";
+                currentUser.Type = userType.cutomer;
                 MessageBox.Show("you are in");
                 new CustomerWindow(bL, customer, currentUser).Show();
                 Close();

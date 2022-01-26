@@ -10,7 +10,7 @@ namespace BO
 
     public class Drone
     {
-        public event Action <Drone> DroneChangaed;
+        //public event Action <Drone> DroneChangaed;
 
         public Drone(int id, string model, WeightCategories weightCategories, double battery)
         {
@@ -41,7 +41,7 @@ namespace BO
             set
             {
                 if (value < 0 || value > 100)
-                    throw new OutOfRange("battery");
+                    throw new OutOfRange("battery out of range");
                 battery = Math.Floor((double)value * 100) / 100;
             }
         }

@@ -19,6 +19,6 @@ namespace PL
 {
     public class CurrentUser
     {
-        public string Type { get; set; } 
+        public userType Type { get; set; } 
     }
 }

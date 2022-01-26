@@ -8,13 +8,12 @@ namespace Dal
 {
     internal partial class DalObject : DalApi.IDal
     {
-        #region droneCharge
+        #region Add DroneCharge
 
         /// <summary>
-        /// adds the droneCharge to the droneCharges list in the DataSource
-        /// If the ID alredy exist the function will throw exception
+        /// adds droneCharge to DataSource
         /// </summary>
-        /// <param name="droneCharge"></param>
+        /// <param name="droneCharge">droneCharge</param>
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
@@ -24,10 +23,16 @@ namespace Dal
             DataSource.droneCharges.Add(droneCharge);
 
         }
+
+        #endregion
+
+        #region Get DroneCharge
+
         /// <summary>
         /// returns droneCharges form datasource
         /// </summary>
-        /// <returns>DataSource.droneCharges</returns>
+        /// <param name="getBy">condition</param>
+        /// <returns>droneCharges that full-fill the conditon</returns>
         public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null)
         {
             getBy ??= (DroneCharge => true);
@@ -36,6 +41,11 @@ namespace Dal
                    select droneCharge;
         }
 
+        /// <summary>
+        /// finds a droneCharge by id of drone
+        /// </summary>
+        /// <param name="droneId">id of drone</param>
+        /// <returns>droneCharge with the given id</returns>
         public DroneCharge GetDroneChargeById(int droneId)
         {
             try
@@ -48,21 +58,28 @@ namespace Dal
             }
         }
 
+        #endregion
+
+        #region Delete DroneCharge
+
         /// <summary>
-        /// removes droneCharge from dronecharges list in database
+        /// removes droneCharge from database
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id of drone to remove</param>
         public void DeleteDroneCharge(int droneId)
         {
             DroneCharge droneCharge = GetDroneChargeById(droneId);
             DataSource.droneCharges.Remove(droneCharge);
         }
 
-
+        /// <summary>
+        /// removes all droneCharges in database
+        /// </summary>
         public void DeleteAllDroneCharges()
         {
             DataSource.droneCharges = new List<DroneCharge>();
         }
+
         #endregion
     }
 }

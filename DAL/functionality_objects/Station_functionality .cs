@@ -8,13 +8,12 @@ namespace Dal
 {
     internal partial class DalObject : DalApi.IDal
     {
-        #region Station
+        #region Add Station
 
         /// <summary>
-        /// Adds the station to the stations list in the DataSource
-        /// If the ID alredy exist the function will throw exception
+        ///adds station to DataSource
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="station">station</param>
         public void AddStation(Station station)
         {
             if (DataSource.stations.Any(st => st.Id == station.Id))
@@ -25,10 +24,14 @@ namespace Dal
             DataSource.stations.Add(station);
 
         }
+        #endregion
+
+        #region Get Station
         /// <summary>
         /// returns stations form datasource
         /// </summary>
-        /// <returns>DataSource.stations</returns>
+        /// <param name="getBy">condition</param>
+        /// <returns>stations that full-fill the conditon</returns>
         public IEnumerable<Station> GetStations(Predicate<Station> getBy = null)
         {
             getBy ??= (station => true);
@@ -36,6 +39,12 @@ namespace Dal
                    where (getBy(station))
                    select station;
         }
+        
+        /// <summary>
+        /// finds a station by id
+        /// </summary>
+        /// <param name="id">id of station</param>
+        /// <returns>station with the given id</returns>
         public Station GetStationById(int id)
         {
             try
@@ -48,10 +57,15 @@ namespace Dal
                 throw new NotFoundException("station");
             }
         }
+
+        #endregion
+
+        #region Update Station
+
         /// <summary>
-        /// updates the stations list in the database
+        /// update staion in the DataSource
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="station">station with updated details</param>
         public void UpdateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(p => p.Id == station.Id);

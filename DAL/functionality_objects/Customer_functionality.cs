@@ -8,12 +8,12 @@ namespace Dal
 {
     internal partial class DalObject : DalApi.IDal
     {
-        #region Customer
+        #region Add Customer
+
         /// <summary>
-        /// adds the customer to the customers list in the DataSource
-        ///  If the ID alredy exist the function will throw exception
+        /// adds customer to DataSource
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="customer">Customer</param>
         public void AddCustomer(Customer customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
@@ -23,10 +23,15 @@ namespace Dal
             DataSource.customers.Add(customer);
         }
 
+        #endregion
+
+        #region Get Customer
+
         /// <summary>
         /// returns customers form datasource
         /// </summary>
-        /// <returns>DataSource.customers</returns>
+        /// <param name="getBy">condition</param>
+        /// <returns>customers that full-fill the conditon</returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null)
         {
             getBy ??= (customer => true);
@@ -35,6 +40,11 @@ namespace Dal
                    select customer;
         }
 
+        /// <summary>
+        /// finds a customer by id
+        /// </summary>
+        /// <param name="id">id of customer</param>
+        /// <returns>customer with the given id</returns>
         public Customer GetCustomerById(int id)
         {
             try
@@ -48,6 +58,14 @@ namespace Dal
             }
         }
 
+        #endregion
+
+        #region Update Customer
+
+        /// <summary>
+        /// update customer in the DataSource
+        /// </summary>
+        /// <param name="customer">customer with updated details</param>
         public void UpdateCustomer(Customer customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
@@ -56,6 +74,8 @@ namespace Dal
             DataSource.customers[index] = customer;
 
         }
+
         #endregion
+
     }
 }

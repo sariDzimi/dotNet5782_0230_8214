@@ -52,7 +52,7 @@ namespace DalApi
 
         void DeleteDroneCharge(int id);
 
-        double[] RequestElectricityUse();
+        double[] GetElectricityUse();
         IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
 
         void DeleteAllDroneCharges();
