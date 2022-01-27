@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using PL.PO;
+
 namespace PL
 {
     /// <summary>
@@ -22,6 +24,7 @@ namespace PL
     {
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
+        CustomerList customerList = new CustomerList();
         public CustomersList()
         {
             InitializeComponent();
@@ -30,18 +33,19 @@ namespace PL
 
         public CustomersList(IBL blArg, CurrentUser currentUser1)
         {
+
             currentUser = currentUser1;
             InitializeComponent();
             bl = blArg;
+            customerList.Customers = customerList.ConvertCustomerlBLToPL(bl.GetCustomerToLists().ToList());
+            customersListView.DataContext = customerList.Customers;
             WindowStyle = WindowStyle.None;
-            customersListView.ItemsSource = bl.GetCustomerToLists();
             CurrentUser.Text = currentUser.Type.ToString();
 
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            //new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 
@@ -49,20 +53,13 @@ namespace PL
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-
-            //Hide();
             new CustomerWindow(bl, customer, currentUser).Show();
-            //Show();
-        }
+        
+    }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-
-
-            //var win = new CustomerWindow(bl, currentUser);
-            //Hide();
             new CustomerWindow(bl, currentUser).Show();
-            //Show();
 
         }
     }

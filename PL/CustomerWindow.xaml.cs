@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using PL.PO;
 using PO;
 
 namespace PL
@@ -26,7 +27,7 @@ namespace PL
         IBL bl;
         Customer customer;
         Customer_p Customer_P;
-
+        CustomerList Customers = new CustomerList();
         #region CustomerWindow constructors
 
         public CustomerWindow()
