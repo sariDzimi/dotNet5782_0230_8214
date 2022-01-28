@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BL;
+using PL.PO;
 
 namespace PL
 {
@@ -24,7 +25,7 @@ namespace PL
     {
         public CurrentUser currentUser = new CurrentUser();
         public IBL bL1;
-
+        CustomerList CustomersList = new CustomerList();
         public ManegerWindow()
         {
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace PL
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             //this.Content = new ParcelListPage(bL1, currentUser);
-            new ParcelsList(bL1, currentUser).Show();
+            new ParcelsList(bL1, currentUser, CustomersList).Show();
         }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {

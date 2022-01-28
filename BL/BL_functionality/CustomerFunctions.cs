@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using DAL;
+using System.Runtime.CompilerServices;
 
 
 namespace BL
@@ -15,6 +15,7 @@ namespace BL
         /// add Customer To DL
         /// </summary>
         /// <param name="customer"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void addCustomerToDL(Customer customer)
         {
             DO.Customer customerDL = new DO.Customer()
@@ -27,7 +28,11 @@ namespace BL
             };
             try
             {
-                dal.AddCustomer(customerDL);
+                lock (dal)
+                {
+                    dal.AddCustomer(customerDL);
+                }
+
             }
             catch (DalApi.IdAlreadyExist)
             {
@@ -60,6 +65,7 @@ namespace BL
             return CustomerBL;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void updateCustomer(Customer customer)
         {
             dal.UpdateCustomer(new DO.Customer()
@@ -71,6 +77,7 @@ namespace BL
                 Latitude = customer.Location.Latitude
             });
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomersBy(Predicate<Customer> findBy)
         {
             return from customer in GetCustomers()
@@ -78,6 +85,7 @@ namespace BL
                    select customer;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomerById(int id)
         {
             try
@@ -93,14 +101,19 @@ namespace BL
         /// Get Customers
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers()
         {
+            lock (dal)
+            {
+                return from customer in dal.GetCustomers()
+                       select convertToCustomerBL(customer);
+            }
 
-            return from customer in dal.GetCustomers()
-                   select convertToCustomerBL(customer);
 
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public CustomerToList convertCustomerToCustomerToList(Customer customer)
         {
             return new CustomerToList()

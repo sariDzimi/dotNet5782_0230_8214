@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
+using PL.PO;
 
 namespace PL
 {
@@ -29,6 +30,7 @@ namespace PL
         Parcel parcel;
         Parcel_p Parcel_P;
         ParcelList parcelList= new ParcelList();
+        CustomerList CustomerList = new CustomerList();
         //DroneList droneList = new DroneList();
         Drone_p drone_P = new Drone_p();
         public ParcelWindow()
@@ -49,9 +51,10 @@ namespace PL
             this.parcelList.Parcels = parcel_PsA;
         }
 
-        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1)
+        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1, CustomerList customerList)
         {
             currentUser = currentUser1;
+            CustomerList = customerList;
             InitializeComponent();
             AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
@@ -245,7 +248,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
             //Show();
         }
 
@@ -253,7 +256,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
             //Show();
         }
 

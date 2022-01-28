@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using DAL;
+using System.Runtime.CompilerServices;
 
 
 namespace BL
 {
     partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone ConvertDroneToListToDrone(DroneToList droneToList)
         {
             return GetDroneById(droneToList.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDroneToLists()
         {
             return from drone in GetDrones()
@@ -23,6 +25,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy)
         {
             return from drone in GetDrones()

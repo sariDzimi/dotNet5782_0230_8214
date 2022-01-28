@@ -16,6 +16,7 @@ using System.ComponentModel;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
+using PL.PO;
 
 namespace PL
 {
@@ -32,6 +33,7 @@ namespace PL
         DroneList DroneP = new DroneList();
         public bool boo = false;
         BackgroundWorker worker = new BackgroundWorker();
+        CustomerList customerList = new CustomerList();
         public Drone()
         {
             //WindowStyle = WindowStyle.None;
@@ -403,7 +405,7 @@ namespace PL
            
             Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
             //Hide();
-            new ParcelWindow(bL, parcel, currentUser).Show();
+            new ParcelWindow(bL, parcel, currentUser, customerList).Show();
             //Show();
         }
 

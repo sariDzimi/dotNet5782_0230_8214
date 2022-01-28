@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 
 namespace Dal
 {
@@ -14,6 +16,7 @@ namespace Dal
         /// adds customer to DataSource
         /// </summary>
         /// <param name="customer">Customer</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
@@ -32,6 +35,7 @@ namespace Dal
         /// </summary>
         /// <param name="getBy">condition</param>
         /// <returns>customers that full-fill the conditon</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null)
         {
             getBy ??= (customer => true);
@@ -45,6 +49,8 @@ namespace Dal
         /// </summary>
         /// <param name="id">id of customer</param>
         /// <returns>customer with the given id</returns>
+       [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Customer GetCustomerById(int id)
         {
             try
@@ -66,6 +72,9 @@ namespace Dal
         /// update customer in the DataSource
         /// </summary>
         /// <param name="customer">customer with updated details</param>
+         
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateCustomer(Customer customer)
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);

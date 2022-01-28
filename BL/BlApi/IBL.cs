@@ -60,6 +60,7 @@ namespace BlApi
 
         public IEnumerable<CustomerToList> GetCustomerToLists();
 
+        public CustomerToList convertCustomerToCustomerToList(Customer customer);
         public ParcelToList convertParcelToParcelToList(Parcel parcel);
 
         public Parcel ConvertParcelToListToParcel(ParcelToList parcelToList);

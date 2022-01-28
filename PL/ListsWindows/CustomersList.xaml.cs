@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BlApi;
 using BO;
 using PL.PO;
+using PO;
 
 namespace PL
 {
@@ -51,15 +52,15 @@ namespace PL
 
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
-            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
+            Customer_p  customerToList = (sender as ListView).SelectedValue as Customer_p;
             BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-            new CustomerWindow(bl, customer, currentUser).Show();
+            new CustomerWindow(bl, customer, currentUser, customerList).Show();
         
     }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, currentUser).Show();
+            new CustomerWindow(bl, currentUser, customerList).Show();
 
         }
     }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DalApi;
+using System.Runtime.CompilerServices;
+
 
 
 namespace BL
@@ -14,6 +16,7 @@ namespace BL
              /// </summary>
              /// <param name="idDrone"></param>
              /// <param name="timeInCharging"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
             Drone drone = GetDroneById(idDrone);
@@ -32,6 +35,7 @@ namespace BL
         /// collect Parcle By Drone
         /// </summary>
         /// <param name="idDrone"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void collectParcleByDrone(int idDrone)
         {
             Drone drone = GetDroneById(idDrone);
@@ -52,6 +56,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void supplyParcelByDrone(int DroneID)
         {
 
@@ -84,6 +89,7 @@ namespace BL
         /// send Drone To Charge
         /// </summary>
         /// <param name="droneId"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void sendDroneToCharge(int droneId)
         {
             Drone drone = GetDroneById(droneId);
@@ -109,6 +115,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignAParcelToADrone(int id)
         {
             Drone drone = GetDroneById(id);

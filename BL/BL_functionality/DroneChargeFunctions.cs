@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
+using System.Runtime.CompilerServices;
+
 
 
 namespace BL
@@ -15,10 +17,14 @@ namespace BL
         {
             return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.stationId);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDronesCharges()
         {
-            return from drone in dal.GetDroneCharges()
-                   select ConvertToDroneChargeBL(drone);
+            lock (dal)
+            {
+                return from drone in dal.GetDroneCharges()
+                       select ConvertToDroneChargeBL(drone);
+            }
 
         }
         /// <summary>
@@ -32,16 +38,26 @@ namespace BL
                     dalObject.addDronCharge(droneChargeDL);
 
                 }*/
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            dal.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId });
+            lock (dal)
+            {
+                dal.AddDroneCharge(new DO.DroneCharge() { DroneId = droneCharge.DroneId, stationId = droneCharge.StationId });
+            }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDroneCharge(int droneId)
         {
             try
             {
-                dal.DeleteDroneCharge(droneId);
+                lock (dal)
+                {
+                    dal.DeleteDroneCharge(droneId);
+
+                }
+                    
             }
             catch(NotFoundException)
             {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+
 
 
 namespace BL
@@ -14,6 +16,7 @@ namespace BL
         /// add Station To DL
         /// </summary>
         /// <param name="station"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void addStationToDL(Station station)
         {
             DO.Station stationDL = new DO.Station()
@@ -26,7 +29,10 @@ namespace BL
             };
             try
             {
-                dal.AddStation(stationDL);
+                lock (dal)
+                {
+                    dal.AddStation(stationDL);
+                }
             }
             catch (DalApi.IdAlreadyExist)
             {
@@ -42,12 +48,15 @@ namespace BL
         /// <returns></returns>
         private Station ConvertToStationBL(DO.Station s)
         {
-            Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
-            StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
-            foreach (var dronecharge in dal.GetDroneCharges())
+            lock (dal)
             {
-                if (dronecharge.stationId == s.Id)
-                    StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = GetDroneById(dronecharge.DroneId).Battery });
+                Station StationBL = new Station() { Id = s.Id, Name = s.Name, Location = new Location(s.Longitude, s.Latitude) };
+                StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(s.Id);
+                foreach (var dronecharge in dal.GetDroneCharges())
+                {
+                    if (dronecharge.stationId == s.Id)
+                        StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = GetDroneById(dronecharge.DroneId).Battery });
+                }
             }
             return StationBL;
         }
@@ -58,16 +67,21 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="totalChargeSlots"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1)
         {
-            DO.Station station = dal.GetStationById(id);
-            if (name != -1)
-                station.Name = name;
-            if (totalChargeSlots != -1)
-                station.ChargeSlots = totalChargeSlots;
-            dal.UpdateStation(station);
+            lock (dal)
+            {
+                DO.Station station = dal.GetStationById(id);
+                if (name != -1)
+                    station.Name = name;
+                if (totalChargeSlots != -1)
+                    station.ChargeSlots = totalChargeSlots;
+                dal.UpdateStation(station);
+            }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStationsBy(Predicate<Station> findBy)
         {
             return from station in GetStations()
@@ -75,6 +89,7 @@ namespace BL
                    select station;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStationById(int id)
         {
             try
@@ -90,11 +105,14 @@ namespace BL
         /// Get Stations
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations()
         {
-            return from station in dal.GetStations()
-                   select ConvertToStationBL(station);
-
+            lock (dal)
+            {
+                return from station in dal.GetStations()
+                       select ConvertToStationBL(station);
+            }
         }
 
         private StationToList convertStationToStationToList(Station station)

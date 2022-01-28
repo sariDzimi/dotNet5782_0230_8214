@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
@@ -14,6 +15,7 @@ namespace Dal
         ///adds station to DataSource
         /// </summary>
         /// <param name="station">station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)
         {
             if (DataSource.stations.Any(st => st.Id == station.Id))
@@ -32,6 +34,7 @@ namespace Dal
         /// </summary>
         /// <param name="getBy">condition</param>
         /// <returns>stations that full-fill the conditon</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations(Predicate<Station> getBy = null)
         {
             getBy ??= (station => true);
@@ -66,6 +69,7 @@ namespace Dal
         /// update staion in the DataSource
         /// </summary>
         /// <param name="station">station with updated details</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(Station station)
         {
             int index = DataSource.stations.FindIndex(p => p.Id == station.Id);

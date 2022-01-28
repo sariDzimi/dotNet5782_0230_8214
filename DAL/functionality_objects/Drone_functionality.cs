@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
@@ -14,6 +15,7 @@ namespace Dal
         /// adds drone to DataSource
         /// </summary>
         /// <param name="drone">drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone)
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
@@ -33,6 +35,7 @@ namespace Dal
         /// </summary>
         /// <param name="getBy">condition</param>
         /// <returns>drones that full-fill the conditon</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null)
         {
             getBy ??= (drone => true);
@@ -66,7 +69,8 @@ namespace Dal
         /// <summary>
         /// update drone in the DataSource
         /// </summary>
-        /// <param name="drone">drone with updated details</param>
+        /// <param name="drone">drone with updated details</param>   
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(Drone drone)
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);

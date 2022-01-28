@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 
 namespace Dal
 {
@@ -14,6 +16,7 @@ namespace Dal
         /// adds droneCharge to DataSource
         /// </summary>
         /// <param name="droneCharge">droneCharge</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
@@ -33,6 +36,7 @@ namespace Dal
         /// </summary>
         /// <param name="getBy">condition</param>
         /// <returns>droneCharges that full-fill the conditon</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null)
         {
             getBy ??= (DroneCharge => true);
@@ -66,6 +70,7 @@ namespace Dal
         /// removes droneCharge from database
         /// </summary>
         /// <param name="id">id of drone to remove</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDroneCharge(int droneId)
         {
             DroneCharge droneCharge = GetDroneChargeById(droneId);

@@ -49,7 +49,7 @@
             <TextBox x:Name="customerAtParcelSenderLabel" Text="{Binding CustomerAtParcelSender }" HorizontalAlignment="Left" Margin="181,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Grid.Column="1"/>
             <Label x:Name="customerAtParcelReciverLabel" Content="customer At Parcel Reciver" HorizontalAlignment="Left" Margin="-6,76,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <TextBox x:Name="customerAtParcelReciverText" Text="{Binding CustomerAtParcelReciver}" HorizontalAlignment="Left" Margin="181,84,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Grid.Column="1"/>
-            <Button x:Name="OpenDrone" Content="open" Visibility="Visible" HorizontalAlignment="Left" Margin="-217,56,0,0" VerticalAlignment="Top" Click="OpenDrone_Click" Width="41"/>
+            <Button x:Name="OpenDrone" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="-217,56,0,0" VerticalAlignment="Top" Click="OpenDrone_Click" Width="41"/>
 
         </Grid>
 

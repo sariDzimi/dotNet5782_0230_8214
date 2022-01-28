@@ -8,9 +8,28 @@ using System.Windows;
 using BO;
 namespace PO
 {
-    class Customer_p : DependencyObject
+    public class Customer_p : DependencyObject
     {
-        
+
+
+        public void UpdateFromBL(BO.Customer customer)
+        {
+            this.Id = customer.Id;
+            this.Latitude = customer.Location.Latitude;
+            this.Longitude = customer.Location.Longitude;
+            this.Name = customer.Name;
+            //this.NumberOfParcelsInTheWayToCutemor = 
+        }
+
+        public void UpdateFromToList(CustomerToList  customer)
+        {
+
+            this.NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor;
+            this.NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided;
+            this.NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided;
+            this.NumberOfRecievedParcels = customer.NumberOfRecievedParcels;
+          
+                }
         public override string ToString()
         {
             string parcelSentedByCustomer = " ";
@@ -116,7 +135,7 @@ namespace PO
             }
         }
 
-        public static readonly DependencyProperty LatitudeCustomer=
+        public static readonly DependencyProperty LatitudeCustomer =
       DependencyProperty.Register("Latitude",
                                   typeof(object),
                                   typeof(Station_p),
@@ -172,6 +191,83 @@ namespace PO
         }
 
 
+        //NumberOfParcelsInTheWayToCutemor
+        public static readonly DependencyProperty numberOfParcelsInTheWayToCutemor =
+       DependencyProperty.Register("NumberOfParcelsInTheWayToCutemor",
+                               typeof(object),
+                               typeof(Customer_p),
+                               new UIPropertyMetadata(0));
+
+        public int NumberOfParcelsInTheWayToCutemor
+        {
+            get
+            {
+                return (int)GetValue(numberOfParcelsInTheWayToCutemor);
+            }
+            set
+            {
+                SetValue(numberOfParcelsInTheWayToCutemor, value);
+            }
+        }
+
+
+        //NumberOfRecievedParcels 
+        public static readonly DependencyProperty numberOfRecievedParcels =
+      DependencyProperty.Register("NumberOfRecievedParcels",
+                              typeof(object),
+                              typeof(Customer_p),
+                              new UIPropertyMetadata(0));
+
+        public int NumberOfRecievedParcels
+        {
+            get
+            {
+                return (int)GetValue(numberOfRecievedParcels);
+            }
+            set
+            {
+                SetValue(numberOfRecievedParcels, value);
+            }
+        }
+
+        //NumberOfParcelsSendedAndNotProvided
+        public static readonly DependencyProperty numberOfParcelsSendedAndNotProvided =
+     DependencyProperty.Register("NumberOfParcelsSendedAndNotProvided",
+                             typeof(object),
+                             typeof(Customer_p),
+                             new UIPropertyMetadata(0));
+
+        public int NumberOfParcelsSendedAndNotProvided
+        {
+            get
+            {
+                return (int)GetValue(numberOfParcelsSendedAndNotProvided);
+            }
+            set
+            {
+                SetValue(numberOfParcelsSendedAndNotProvided, value);
+            }
+        }
+
+
+        //NumberOfParcelsSendedAndProvided
+        public static readonly DependencyProperty numberOfParcelsSendedAndProvided =
+    DependencyProperty.Register("NumberOfParcelsSendedAndProvided",
+                            typeof(object),
+                            typeof(Customer_p),
+                            new UIPropertyMetadata(0));
+
+        public int NumberOfParcelsSendedAndProvided
+        {
+            get
+            {
+                return (int)GetValue(numberOfParcelsSendedAndProvided);
+            }
+            set
+            {
+                SetValue(numberOfParcelsSendedAndProvided, value);
+            }
+        }
     }
 
 }

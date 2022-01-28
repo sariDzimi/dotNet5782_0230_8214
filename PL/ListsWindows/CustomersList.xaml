@@ -16,16 +16,16 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
-        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="248" Margin="0,176,0,0" VerticalAlignment="Top" Width="780" MouseDoubleClick="customeList_MouseDoubleList" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource Self}}" >
+        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="270" Margin="0,176,0,0" VerticalAlignment="Top" Width="800" MouseDoubleClick="customeList_MouseDoubleList" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource Self}}"  >
             <ListView.View >
                 <GridView>
-                    <GridViewColumn Header="id" Width="40" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="name" Width="50" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="phone" Width="90" DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn Header="id" Width="40" DisplayMemberBinding="{Binding Id}"  />
+                    <GridViewColumn Header="name" Width="45" DisplayMemberBinding="{Binding Name}"  />
+                    <GridViewColumn Header="phone" Width="85" DisplayMemberBinding="{Binding Phone}" />
                     <GridViewColumn Header="coming parcels" Width="110" DisplayMemberBinding="{Binding NumberOfParcelsInTheWayToCutemor}" />
-                    <GridViewColumn Header="recieved parcels" Width="100" DisplayMemberBinding="{Binding NumberOfRecievedParcels}" />
-                    <GridViewColumn Header="sended parcels(not provided yet)" Width="200" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndNotProvided}" />
-                    <GridViewColumn Header="sended and provided parcels" Width="180" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndProvided}" />
+                    <GridViewColumn Header="recieved parcels" Width="110" DisplayMemberBinding="{Binding NumberOfRecievedParcels}" />
+                    <GridViewColumn Header="sended parcels(not provided)" Width="200" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndNotProvided}" />
+                    <GridViewColumn Header="sended and provided parcels" Width="200" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndProvided}" />
 
                 </GridView>
             </ListView.View>

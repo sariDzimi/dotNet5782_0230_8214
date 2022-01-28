@@ -11,25 +11,25 @@ using System.Windows;
 
 namespace PL.PO
 {
-    class CustomerList : DependencyObject
+    public class CustomerList : DependencyObject
     {
         IBL BL;
         public CustomerList()
         {
-            //Customers = this.ConvertCustomerlBLToPL( BL.GetCustomerToLists().ToList());
         }
 
-        public ObservableCollection<Customer_p> Customers  =  new ObservableCollection<Customer_p>();
+        public ObservableCollection<Customer_p> Customers = new ObservableCollection<Customer_p>();
 
-        public void AddDroneCustomer(CustomerToList customer)
+        public void AddeCustomer(CustomerToList customer)
         {
-            Customers.Add(new Customer_p { Id = customer.Id, Name = customer.Name, Phone = customer.Phone });
+            Customers.Add(new Customer_p { Id = customer.Id, Name = customer.Name, Phone = customer.Phone , NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels = customer.NumberOfRecievedParcels});
+            
         }
         public ObservableCollection<Customer_p> ConvertCustomerlBLToPL(List<CustomerToList> customersToLists)
         {
             foreach (var customer in customersToLists)
             {
-                Customer_p customer1 = new Customer_p() { Id = customer.Id, Name = customer.Name, Phone = customer.Phone };
+                Customer_p customer1 = new Customer_p() { Id = customer.Id, Name = customer.Name, Phone = customer.Phone, NumberOfParcelsInTheWayToCutemor  =customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided= customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels  = customer.NumberOfRecievedParcels };
                 Customers.Add(customer1);
             }
             return Customers;
@@ -50,7 +50,6 @@ namespace PL.PO
 
         }
     }
-
 }
 
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 
 namespace BL
@@ -15,8 +16,10 @@ namespace BL
         {
             try
             {
-                DO.Manager manager1 = dal.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
-
+                lock (dal)
+                {
+                    DO.Manager manager1 = dal.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
+                }
             }
             catch(Exception)
             {

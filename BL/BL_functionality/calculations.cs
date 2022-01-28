@@ -3,6 +3,7 @@ using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 
 namespace BL
@@ -25,6 +26,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double calculateBatteryForDelivery(Location droneLocation, int senderId, int reciverId, WeightCategories parcelWeight)
         {
             Location senderLocation = GetCustomerById(senderId).Location;

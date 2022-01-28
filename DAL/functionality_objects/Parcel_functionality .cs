@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
@@ -14,6 +15,7 @@ namespace Dal
         /// adds droneCharge to DataSource
         /// </summary>
         /// <param name="parcel">parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(Parcel parcel)
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
@@ -32,6 +34,7 @@ namespace Dal
         /// </summary>
         /// <param name="getBy">condition</param>
         /// <returns>parcels that full-fill the conditon</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null)
         {
             getBy ??= (parcel => true);
@@ -66,6 +69,7 @@ namespace Dal
         /// update parcel in the DataSource
         /// </summary>
         /// <param name="parcel">parcel with updated details</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateParcel(Parcel parcel)
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
@@ -83,6 +87,7 @@ namespace Dal
         /// removing a parcel by marking it as not active
         /// </summary>
         /// <param name="id">id of parcel to remove</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int id)
         {
             Parcel parcel = GetParcelById(id);

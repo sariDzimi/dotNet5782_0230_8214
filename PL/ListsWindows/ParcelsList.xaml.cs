@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using System.Collections.ObjectModel;
 using PO;
+using PL.PO;
 
 namespace PL
 {
@@ -29,6 +30,7 @@ namespace PL
         CollectionView view;
         List<ParcelToList> items;
         ParcelList parcelsList = new ParcelList();
+        CustomerList Customer = new CustomerList();
         //DroneList droneList = new DroneList();
 
         public ParcelsList()
@@ -36,10 +38,11 @@ namespace PL
             InitializeComponent();
         }
 
-        public ParcelsList(IBL bL1, CurrentUser currentUser1)
+        public ParcelsList(IBL bL1, CurrentUser currentUser1, CustomerList customer)
         {
             currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
+            Customer = customer;
             InitializeComponent();
             bl = bL1;
             items = bl.GetParcelToLists().ToList();
@@ -57,7 +60,7 @@ namespace PL
         {
             Parcel_p parcel = (sender as ListView).SelectedValue as Parcel_p;
             BO.Parcel parcelBL = bl.GetParcelById(parcel.ID);
-            new ParcelWindow(bl, parcelBL, currentUser).Show();
+            new ParcelWindow(bl, parcelBL, currentUser, Customer).Show();
             Close();
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BL;
+using PL.PO;
 
 namespace PL
 {
@@ -24,6 +25,7 @@ namespace PL
     {
         public CurrentUser currentUser = new CurrentUser();
         public IBL bL;
+        CustomerList customerList = new CustomerList();
         public MainWindow()
         {
 
@@ -268,7 +270,7 @@ namespace PL
                 {
                     MessageBox.Show("you are in");
                     currentUser.Type = userType.cutomer;
-                    new CustomerWindow(bL, customer, currentUser).Show();
+                    new CustomerWindow(bL, customer, currentUser, customerList).Show();
                 }
                 else
                 {
@@ -300,7 +302,7 @@ namespace PL
                 bL.addCustomerToDL(customer);
                 currentUser.Type = userType.cutomer;
                 MessageBox.Show("you are in");
-                new CustomerWindow(bL, customer, currentUser).Show();
+                new CustomerWindow(bL, customer, currentUser, customerList).Show();
                 Close();
 
             }

@@ -36,7 +36,7 @@ namespace PL
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomerWindow(IBL BL, CurrentUser currentUser1)
+        public CustomerWindow(IBL BL, CurrentUser currentUser1, CustomerList customerList)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -44,9 +44,10 @@ namespace PL
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.Type.ToString();
+            this.Customers = customerList;
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
+        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1, CustomerList customerList)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace PL
             Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.parcelsSentedByCustomer, ParcelsSentedToCustomer = customer.parcelsSentedToCustomer };
             bl = BL;
             DataContext = Customer_P;
+            Customers = customerList;
             ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
@@ -74,7 +76,8 @@ namespace PL
             {
                 bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
                 Close();
-
+                MessageBox.Show("The customer added");
+                Customers.AddeCustomer(bl.convertCustomerToCustomerToList(bl.GetCustomerById(getId())));
             }
             catch(Exception ex)
             {
@@ -87,6 +90,11 @@ namespace PL
             try
             {
                 bl.updateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
+                MessageBox.Show("The customer Updeted");
+                CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == Customer_P.Id);
+                this.Customer_P.UpdateFromBL(bl.GetCustomerById(getId()));
+                this.Customer_P.UpdateFromToList(customer);
+                Customers.UpdateList(Customer_P);
             }
             catch (Exception ex)
             {
@@ -135,9 +143,7 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
-            //Hide();
-            new ParcelWindow(bl, parcel, currentUser).Show();
-            //Show();
+            new ParcelWindow(bl, parcel, currentUser, Customers).Show();
         }
 
         #endregion
