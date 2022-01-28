@@ -57,8 +57,9 @@ namespace BL
                     if (dronecharge.stationId == s.Id)
                         StationBL.droneAtChargings.Add(new DroneAtCharging() { ID = dronecharge.DroneId, Battery = GetDroneById(dronecharge.DroneId).Battery });
                 }
+
+                return StationBL;
             }
-            return StationBL;
         }
 
         /// <summary>
