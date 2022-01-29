@@ -74,8 +74,8 @@
     <Requested>2008-05-22T00:00:00</Requested>
     <DroneId>3</DroneId>
     <Scheduled>2022-01-26T11:31:59.0930596+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered>2022-01-26T11:32:00.1009384+02:00</Delivered>
+    <PickedUp>2022-01-29T19:44:09.8000536+02:00</PickedUp>
+    <Delivered>2022-01-29T19:44:11.6144325+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -230,8 +230,8 @@
     <Requested>1999-10-19T00:00:00</Requested>
     <DroneId>23</DroneId>
     <Scheduled>2022-01-26T11:19:09.4730636+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered>2022-01-26T11:19:10.4960039+02:00</Delivered>
+    <PickedUp>2022-01-29T19:44:02.685425+02:00</PickedUp>
+    <Delivered>2022-01-29T19:44:05.2866775+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -282,8 +282,34 @@
     <Requested>2022-01-26T11:19:43.2338575+02:00</Requested>
     <DroneId>45768</DroneId>
     <Scheduled>2022-01-26T11:21:18.5969963+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
+    <PickedUp>2022-01-29T19:44:19.1072945+02:00</PickedUp>
     <Delivered>2022-01-26T11:21:19.6141072+02:00</Delivered>
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <Id>36789</Id>
+    <SenderId>1</SenderId>
+    <TargetId>5</TargetId>
+    <Weight>Light</Weight>
+    <Pritority>Reguler</Pritority>
+    <Requested>2022-01-29T19:44:35.0156385+02:00</Requested>
+    <DroneId>4</DroneId>
+    <Scheduled>2022-01-29T19:45:08.74492+02:00</Scheduled>
+    <PickedUp>2022-01-29T20:18:04.1693216+02:00</PickedUp>
+    <Delivered>2022-01-29T20:18:05.6996896+02:00</Delivered>
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <Id>45648</Id>
+    <SenderId>1</SenderId>
+    <TargetId>5</TargetId>
+    <Weight>Light</Weight>
+    <Pritority>Reguler</Pritority>
+    <Requested>2022-01-29T20:18:19.7436036+02:00</Requested>
+    <DroneId>23</DroneId>
+    <Scheduled>2022-01-29T20:19:46.0333188+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered>2022-01-29T20:19:47.0958414+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
 </ArrayOfParcel>

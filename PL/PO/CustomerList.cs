@@ -16,20 +16,20 @@ namespace PL.PO
         IBL BL;
         public CustomerList()
         {
+
         }
 
         public ObservableCollection<Customer_p> Customers = new ObservableCollection<Customer_p>();
-
         public void AddeCustomer(CustomerToList customer)
         {
-            Customers.Add(new Customer_p { Id = customer.Id, Name = customer.Name, Phone = customer.Phone , NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels = customer.NumberOfRecievedParcels});
-            
+            Customers.Add(new Customer_p { Id = customer.Id, Name = customer.Name, Phone = customer.Phone, NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels = customer.NumberOfRecievedParcels });
+
         }
         public ObservableCollection<Customer_p> ConvertCustomerlBLToPL(List<CustomerToList> customersToLists)
         {
             foreach (var customer in customersToLists)
             {
-                Customer_p customer1 = new Customer_p() { Id = customer.Id, Name = customer.Name, Phone = customer.Phone, NumberOfParcelsInTheWayToCutemor  =customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided= customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels  = customer.NumberOfRecievedParcels };
+                Customer_p customer1 = new Customer_p() { Id = customer.Id, Name = customer.Name, Phone = customer.Phone, NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor, NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided, NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided, NumberOfRecievedParcels = customer.NumberOfRecievedParcels };
                 Customers.Add(customer1);
             }
             return Customers;

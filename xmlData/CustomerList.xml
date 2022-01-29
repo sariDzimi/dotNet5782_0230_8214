@@ -11,8 +11,8 @@
     <Id>2</Id>
     <Name>customer1</Name>
     <Phone>709315160</Phone>
-    <Longitude>8</Longitude>
-    <Latitude>5</Latitude>
+    <Longitude>5</Longitude>
+    <Latitude>8</Latitude>
   </Customer>
   <Customer>
     <Id>3</Id>

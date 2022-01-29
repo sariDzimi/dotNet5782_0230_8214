@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DalApi;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 
 
@@ -50,9 +51,13 @@ namespace BL
             drone.Battery -= useElectricity;
             drone.Location = locationSender;
             updateDrone(drone);
-
+            int SPEED = 100;
+            int timeItIsTake = (int)(drone.ParcelInDelivery.distance) * SPEED;
             parcel.PickedUp = DateTime.Now;
             updateParcel(parcel);
+            Thread.Sleep(timeItIsTake/100);
+            drone.ParcelInDelivery.IsWating = true;
+
 
         }
 
@@ -124,7 +129,7 @@ namespace BL
             {
                 foreach (var parcel in GetParcelsBy(t => t.Scheduled == null))
                 {
-                    if (isEnoughBattaryToDeliverTheParcel(drone.Battery,drone.Location ,parcel) && drone.MaxWeight >= parcel.Weight)
+                    if (isEnoughBattaryToDeliverTheParcel(drone.Battery, drone.Location, parcel) && drone.MaxWeight >= parcel.Weight)
                     {
                         bestParcel = parcel;
                         break;
@@ -159,7 +164,7 @@ namespace BL
                         {
                             Location bestParcelLocaion = GetCustomerById(bestParcel.customerAtParcelSender.Id).Location;
                             Location senderLocation = GetCustomerById(parcel.customerAtParcelSender.Id).Location;
-                            if (calculateDistanceBetweenTwoLocationds(drone.Location, senderLocation) < calculateDistanceBetweenTwoLocationds(drone.Location, bestParcelLocaion)) 
+                            if (calculateDistanceBetweenTwoLocationds(drone.Location, senderLocation) < calculateDistanceBetweenTwoLocationds(drone.Location, bestParcelLocaion))
                             {
                                 bestParcel = parcel;
                             }
@@ -174,7 +179,7 @@ namespace BL
             bestParcel.droneAtParcel = new DroneAtParcel { Id = drone.Id, Battery = drone.Id, Location = drone.Location };
             bestParcel.Scheduled = DateTime.Now;
             updateParcel(bestParcel);
-
+            updateDrone(drone);
         }
         /// <summary>
         /// supply Parcel By Drone
