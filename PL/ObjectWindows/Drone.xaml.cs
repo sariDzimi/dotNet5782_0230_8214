@@ -455,6 +455,7 @@ namespace PL
         {
             worker.CancelAsync();
             this.EnableButtons();
+
         }
     }
 }

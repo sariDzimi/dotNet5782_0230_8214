@@ -99,10 +99,12 @@ namespace PL
             {
                 // BO.Parcel parcel = new Parcel();
                 //parcel.Requested = DateTime.Now;
-                CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
-                CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
+                Customer customerSender = bL1.GetCustomerById(getIdSender());
+                Customer customerReceiver = bL1.GetCustomerById(getIdSender());
+                CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
+                CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
                 bL1.addParcelToDL(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
-                parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight()});
+                parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight(), NameOfCustomerReciver = customerAtParcelReciver1.Name, NameOfCustomerSended= customerAtParcelSender1.Name });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Close();
             }
@@ -234,7 +236,9 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
+
             bL1.DeleateParcel(parcel.Id);
+            parcelList.DeleateParcel(Parcel_P);
             Close();
         }
 

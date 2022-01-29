@@ -56,5 +56,9 @@ namespace PO
             Parcels[index] = parcel_P;
 
         }
+         public void DeleateParcel(Parcel_p parcel_P)
+        {
+            Parcels.Remove(parcel_P);
+        }
     }
 }

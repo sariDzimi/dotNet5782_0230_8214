@@ -50,13 +50,10 @@ namespace BL
             double useElectricity = calculateElectricity(drone.Location, locationSender, parcel.Weight);
             drone.Battery -= useElectricity;
             drone.Location = locationSender;
+            drone.ParcelInDelivery.IsWating = false;
             updateDrone(drone);
-            int SPEED = 100;
-            int timeItIsTake = (int)(drone.ParcelInDelivery.distance) * SPEED;
             parcel.PickedUp = DateTime.Now;
             updateParcel(parcel);
-            Thread.Sleep(timeItIsTake/100);
-            drone.ParcelInDelivery.IsWating = true;
 
 
         }
@@ -174,7 +171,7 @@ namespace BL
             }
 
             drone.DroneStatus = DroneStatus.Delivery;
-            drone.ParcelInDelivery = convertPArcelToParcelInDelivery(bestParcel, false);
+            drone.ParcelInDelivery = convertPArcelToParcelInDelivery(bestParcel, true);
             updateDrone(drone);
             bestParcel.droneAtParcel = new DroneAtParcel { Id = drone.Id, Battery = drone.Id, Location = drone.Location };
             bestParcel.Scheduled = DateTime.Now;
