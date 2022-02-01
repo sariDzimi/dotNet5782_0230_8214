@@ -19,6 +19,7 @@ using PL.PO;
 
 namespace PL
 {
+    public delegate void Changed<T>(T change);
     /// <summary>
     /// Interaction logic for ParcelsList.xaml
     /// </summary>
@@ -27,6 +28,7 @@ namespace PL
         public CurrentUser currentUser = new CurrentUser();
 
         private IBL bl;
+        ObservableCollection<Parcel_p> parcel_Ps = new ObservableCollection<Parcel_p>();
         CollectionView view;
         List<ParcelToList> items;
         ParcelList parcelsList = new ParcelList();
@@ -42,15 +44,18 @@ namespace PL
         {
             currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
-            Customer = customer;
+            //Customer = customer;
             InitializeComponent();
             bl = bL1;
+
+
             items = bl.GetParcelToLists().ToList();
+            parcel_Ps = parcelsList.ConvertParcelBLToPL(items);
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type.ToString();
-            parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(items);
-            ParcelsListView.DataContext = parcelsList.Parcels;
+            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(items);
+            ParcelsListView.DataContext = parcel_Ps;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
         }
 

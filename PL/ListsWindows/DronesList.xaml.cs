@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BO;
 using BlApi;
 using PO;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -22,18 +23,24 @@ namespace PL
     /// </summary>
     public partial class DronesList : Window
     {
-        CollectionView view;
+        ObservableCollection<DroneToList> Drones = new ObservableCollection<DroneToList>();
+
+       // CollectionView view;
         public CurrentUser currentUser = new CurrentUser();
-        List<DroneToList> items;
-        DroneList droneList = new DroneList();
         private IBL bl;
         public DronesList()
         {
             WindowStyle = WindowStyle.None;
-
             InitializeComponent();
 
         }
+
+
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
+
 
 
         public DronesList(IBL bL1, CurrentUser currentUser1)
@@ -42,43 +49,60 @@ namespace PL
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = bL1;
-            items = bl.GetDroneToLists().ToList();
-            droneList.Drone_Ps = droneList.ConvertDronelBLToPL(items);
+            Drones = Convert<DroneToList>(bl.GetDroneToLists());
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type.ToString();
-            DronesListView.DataContext = droneList.Drone_Ps;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            DataContext = Drones;
         }
 
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            droneList.ClearDrones();
-            droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.MaxWeight == selected).ToList());
-            DronesListView.DataContext = droneList.Drone_Ps;
+            Drones = Convert<DroneToList>(bl.GetDroneToListsBy((d) => d.MaxWeight == selected));
+            DataContext = Drones;
+
+
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.DroneStatus)StatusSelector.SelectedItem;
-            droneList.ClearDrones();
-            droneList.ConvertDronelBLToPL(bl.GetDroneToListsBy((d) => d.DroneStatus == selected).ToList());
-            DronesListView.DataContext = droneList.Drone_Ps;
+            Drones = Convert<DroneToList>(bl.GetDroneToListsBy((d) => d.DroneStatus == selected));
+            DataContext = Drones;
+
         }
 
 
         private void MouseDoubleClick_droneChoosen(object sender, MouseButtonEventArgs e)
         {
-            Drone_p droneToList = (sender as ListView).SelectedValue as Drone_p;
-            BO.Drone droneBL = bl.GetDroneById(droneToList.ID);
-            new Drone(bl, droneBL, currentUser, droneList.Drone_Ps).Show();
+            DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
+            BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
+            Drone OpenWindow = new Drone(bl, droneBL, currentUser);
+            OpenWindow.ChangedDrone += UpdateInList;
+            OpenWindow.Show();
             //Close();
+
+        }
+
+        public void UpdateInList(BO.Drone drone)
+        {
+            DroneToList droneToList = Drones.First((d) => d.Id == drone.Id);
+            int index = Drones.IndexOf(droneToList);
+            Drones[index] =  new DroneToList() {Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Model = drone.Model,Location = drone.Location  };
+
+
+        }
+        public void AddDrone(BO.Drone drone)
+        {
+            Drones.Add(new DroneToList() { });
         }
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, currentUser, droneList.Drone_Ps).Show();
+            Drone OpenWindow = new Drone(bl,currentUser);
+            OpenWindow.ChangedDrone += AddDrone;
+            OpenWindow.Show();
             //Close();
 
         }

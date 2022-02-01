@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using BO;
 using System.Diagnostics;
 using System.Windows;
-
+using PL;
 
 namespace PO
 {
     public class Drone_p : DependencyObject
     {
-
+        public Changed<BO.Drone> ListChanged; 
         public void Update(BO.Drone drone)
         {
             ID = drone.Id;
@@ -22,6 +22,10 @@ namespace PO
             MaxWeight = drone.MaxWeight;
             ParcelInDelivery = drone.ParcelInDelivery;
             Location = drone.Location;
+            if(ListChanged != null)
+            {
+                ListChanged(drone);
+            }
         }
         //ID
         public static readonly DependencyProperty IdDrone =

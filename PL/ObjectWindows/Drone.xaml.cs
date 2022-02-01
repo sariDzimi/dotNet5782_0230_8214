@@ -26,14 +26,12 @@ namespace PL
     public partial class Drone : Window
     {
         CurrentUser currentUser = new CurrentUser();
-
+        public Changed<BO.Drone> ChangedDrone;
         IBL bL;
         BO.Drone drone;
-        Drone_p drone_P;
-        DroneList DroneP = new DroneList();
+        Drone_p drone_P  = new Drone_p();
         public bool boo = false;
         BackgroundWorker worker = new BackgroundWorker();
-        CustomerList customerList = new CustomerList();
         public Drone()
         {
             //WindowStyle = WindowStyle.None;
@@ -41,29 +39,29 @@ namespace PL
 
             InitializeComponent();
         }
-        public Drone(IBL bL1, CurrentUser currentUser1, ObservableCollection<Drone_p> drone_Ps)
+        public Drone(IBL bL1, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
-            DroneP.Drone_Ps = drone_Ps;
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
             CurrentUser.Text = currentUser.Type.ToString();
+            drone_P.ListChanged += new Changed<BO.Drone>(UpdateDroneList);
 
         }
-      
-        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1, ObservableCollection<Drone_p> drone_Ps)
+
+        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
         {
             WindowStyle = WindowStyle.None;
             currentUser = currentUser1;
             drone = droneBL;
-            DroneP.Drone_Ps = drone_Ps;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  }; 
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  };
+            drone_P.ListChanged += new Changed<BO.Drone>(UpdateDroneList);
             bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
@@ -74,11 +72,9 @@ namespace PL
             {
                 case DroneStatus.Free:
                     sendDroneForDelivery.IsEnabled = true;
-                    //OpaenDrone.Visibility = Visibility.Hidden;
                     break;
                 case DroneStatus.Maintenance:
                     releaseDroneFromCharging.IsEnabled = true;
-                   // OpaenDrone.Visibility = Visibility.Hidden;
                     break;
                 case DroneStatus.Delivery:
 
@@ -109,54 +105,12 @@ namespace PL
 
         }
 
-        //TODO.....
-        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
+        public void UpdateDroneList(BO.Drone drone)
         {
-            WindowStyle = WindowStyle.None;
-            currentUser = currentUser1;
-            drone = droneBL;
-            InitializeComponent();
-            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery };
-            bL = bL1;
-            DataContext = drone_P;
-            addButton.Visibility = Visibility.Hidden;
-            updateBottun.IsEnabled = true;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            this.SwitchDroneStatus();
-            //switch (drone.DroneStatus)
-            //{
-            //    case DroneStatus.Free:
-            //        sendDroneForDelivery.IsEnabled = true;
-            //        //OpaenDrone.Visibility = Visibility.Hidden;
-            //        break;
-            //    case DroneStatus.Maintenance:
-            //        releaseDroneFromCharging.IsEnabled = true;
-            //        // OpaenDrone.Visibility = Visibility.Hidden;
-            //        break;
-            //    case DroneStatus.Delivery:
-
-            //        Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
-
-            //        if (parcelBL.PickedUp == null)
-            //        {
-            //            colectParcel.IsEnabled = true;
-            //            OpaenDrone.Visibility = Visibility.Visible;
-            //        }
-            //        else
-            //        {
-            //            //if (parcelBL.Delivered == null)
-
-            //        }
-            //        break;
-            //}
-
-
-            if (drone.ParcelInDelivery != null)
-                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            WeightSelector.IsEnabled = false;
-
-
+            if(ChangedDrone!= null)
+            {
+                ChangedDrone(drone);
+            }
         }
 
         private void  SwitchDroneStatus()
@@ -196,11 +150,16 @@ namespace PL
             {
                 bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 BO.Drone drone = bL.GetDroneById(getId());
-                DroneP.AddDrone(new DroneToList() { Id = getId(), Model = getModel(), NumberOfSendedParcel = getNumberOfStation(), Battery = drone.Battery , Location  = drone.Location, DroneStatus = drone.DroneStatus });
+                if (drone_P.ListChanged != null)
+                {
+                    drone_P.ListChanged(drone);
+                }
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
                
-                
+
+
+
             }
             catch (NotValidInput ex)
             {
@@ -238,7 +197,6 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = true;
                 timeOfCharging.Text = "";
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
                 MessageBox.Show("The drone was sent for charging successfully");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -254,7 +212,6 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
                 MessageBox.Show("Release the drone from charging successfully");
             }
             catch (OutOfRange)
@@ -275,7 +232,6 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = false;
                 colectParcel.IsEnabled = true;
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
                 MessageBox.Show("Assign a drone to parcel successfully");
                 OpaenDrone.Visibility = Visibility.Visible;
             }
@@ -294,7 +250,6 @@ namespace PL
                 supllyParcel.IsEnabled = true;
                 MessageBox.Show("collect a parcel by drone successfully");
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
 
 
 
@@ -314,7 +269,6 @@ namespace PL
                 sendDroneForDelivery.IsEnabled = true;
                 MessageBox.Show("suplly a parcel by drone successfully");
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
 
 
 
@@ -405,7 +359,7 @@ namespace PL
            
             Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
             //Hide();
-            new ParcelWindow(bL, parcel, currentUser, customerList).Show();
+            //new ParcelWindow(bL, parcel, currentUser, customerList).Show();
             //Show();
         }
 
@@ -445,7 +399,6 @@ namespace PL
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
                 drone_P.Update(drone);
-                DroneP.UpdateList(drone_P);
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
