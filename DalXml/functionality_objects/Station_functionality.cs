@@ -12,9 +12,14 @@ namespace Dal
     {
 
         #region Station
-        public IEnumerable<DO.Station> GetStations(Predicate<Station> predicate = null)
-        {
 
+        /// <summary>
+        /// returns stations form stations xml file
+        /// </summary>
+        /// <param name="getBy">condition</param>
+        /// <returns>stations that full-fill the conditon</returns>
+        public IEnumerable<DO.Station> GetStations(Predicate<Station> getBy = null)
+        {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
             IEnumerable<DO.Station> StationList;
             try
@@ -34,12 +39,18 @@ namespace Dal
                 throw new ListEmpty("stationList");
             }
 
-            predicate ??= ((st) => true);
+            getBy ??= ((st) => true);
 
             return from station in StationList
-                   where predicate(station)
+                   where getBy(station)
                    select station;
         }
+
+        /// <summary>
+        /// finds a station by id
+        /// </summary>
+        /// <param name="id">id of station</param>
+        /// <returns>station with the given id</returns>
         public DO.Station GetStationById(int id)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
@@ -63,6 +74,11 @@ namespace Dal
             }
             return station;
         }
+
+        /// <summary>
+        /// adds station to stations xml file
+        /// </summary>
+        /// <param name="station"></param>
         public void AddStation(DO.Station station)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);
@@ -84,6 +100,11 @@ namespace Dal
                 throw new IdAlreadyExist(station.Id);
             }
         }
+
+        /// <summary>
+        /// deletes station from stations xml file
+        /// </summary>
+        /// <param name="id">id of station</param>
         public void DeleteStation(int id)
         {
             XElement element = XMLTools.LoadData(dir + stationFilePath);
@@ -102,6 +123,11 @@ namespace Dal
             elements.Remove();
             element.Save(dir + stationFilePath);
         }
+
+        /// <summary>
+        /// updates the station in the stations xml file
+        /// </summary>
+        /// <param name="station">station with updated details</param>
         public void UpdateStation(DO.Station station)
         {
             XElement elements = XMLTools.LoadData(dir + stationFilePath);

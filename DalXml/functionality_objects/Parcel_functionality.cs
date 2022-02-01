@@ -11,6 +11,10 @@ namespace Dal
     public partial class DalXml : IDal
     {
         #region Parcel
+        /// <summary>
+        /// adds parcel to parcels xml file
+        /// </summary>
+        /// <param name="parcel">parcel</param>
         public void AddParcel(Parcel parcel)
         {
             List<DO.Parcel> parcelList = GetParcels().ToList();
@@ -23,6 +27,11 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(parcelList, dir + parcelFilePath);
         }
+
+        /// <summary>
+        /// deletes parcel from p xarcelsml file
+        /// </summary>
+        /// <param name="id">id of parcel</param>
         public void DeleteParcel(int id)
         {
             Parcel parcel;
@@ -37,6 +46,11 @@ namespace Dal
             parcel.IsActive = false;
             UpdateParcel(parcel);
         }
+
+        /// <summary>
+        /// updates the parcel in the parcels xml file
+        /// </summary>
+        /// <param name="parcel">parcel with updated details</param>
         public void UpdateParcel(Parcel parcel)
         {
             List<DO.Parcel> parcelList = GetParcels().ToList();
@@ -50,6 +64,12 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(parcelList, dir + parcelFilePath);
         }
+
+        /// <summary>
+        /// finds a parcel by id
+        /// </summary>
+        /// <param name="id">id of parcel</param>
+        /// <returns>parcel with the given id</returns>
         public DO.Parcel GetParcelById(int id)
         {
             try
@@ -62,13 +82,19 @@ namespace Dal
             }
 
         }
-        public IEnumerable<DO.Parcel> GetParcels(Predicate<DO.Parcel> predicat = null)
+
+        /// <summary>
+        /// returns parcles form parcels xml file
+        /// </summary>
+        /// <param name="getBy">condition</param>
+        /// <returns>parcels that full-fill the conditon</returns>
+        public IEnumerable<DO.Parcel> GetParcels(Predicate<DO.Parcel> getBy = null)
         {
             IEnumerable<DO.Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(dir + parcelFilePath);
 
-            predicat ??= ((st) => true);
+            getBy ??= ((st) => true);
             return from parcel in parcelList
-                   where predicat(parcel)
+                   where getBy(parcel)
                    orderby parcel.Id
                    select parcel;
         }

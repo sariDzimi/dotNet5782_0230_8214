@@ -7,10 +7,19 @@ using System.IO;
 
 namespace Dal
 {
-
+    /// <summary>
+    /// tools of loading data from the xml files
+    /// </summary>
     public class XMLTools
     {
         #region SaveLoadWithXMLSerializer
+
+        /// <summary>
+        /// saves list to xml file, using XmlSerializer
+        /// </summary>
+        /// <typeparam name="T">type of object</typeparam>
+        /// <param name="list">list of objects</param>
+        /// <param name="filePath">file path</param>
         public static void SaveListToXMLSerializer<T>(IEnumerable<T> list, string filePath)
         {
             try
@@ -25,6 +34,13 @@ namespace Dal
                 throw new FileLoadException(filePath, $"fail to create xml file: {filePath}", ex);
             }
         }
+
+        /// <summary>
+        /// loads list of objects from xml file, using XmlSerializer
+        /// </summary>
+        /// <typeparam name="T">type of object</typeparam>
+        /// <param name="filePath">file path</param>
+        /// <returns></returns>
         public static IEnumerable<T> LoadListFromXMLSerializer<T>(string filePath)
         {
 
@@ -58,6 +74,11 @@ namespace Dal
         }
         #endregion
 
+        /// <summary>
+        /// loads xml elements from xml file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>XElement</returns>
         public static XElement LoadData(string filePath)
         {
             try

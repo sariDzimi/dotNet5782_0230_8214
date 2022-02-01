@@ -7,8 +7,15 @@ using DO;
 
 namespace Dal
 {
+    /// <summary>
+    /// DataSource for creating xml files if they not exit
+    /// </summary>
+    /// 
+
     class DataSource
     {
+        #region DataSource Lists
+
         static internal List<Drone> drones = new List<Drone>();
         static internal List<Station> stations = new List<Station>();
         static internal List<Customer> customers = new List<Customer>();
@@ -16,10 +23,17 @@ namespace Dal
         static internal List<DroneCharge> droneCharges = new List<DroneCharge>();
         static internal List<Manager> Managers = new List<Manager>();
 
+        #endregion
+
         static DataSource()
         {
             Initialize();
         }
+
+        /// <summary>
+        /// config details.
+        /// cantains data of how much electricity a drone uses for parcels in diffrents weights
+        /// </summary>
         internal class Config
         {
             public static double free = .1;
@@ -29,15 +43,13 @@ namespace Dal
             public static double rateChargePerHour = .5;
         }
 
+        #region Initialize
+
         /// <summary>
-        /// intilizes the lists in he database by randomng data
+        /// intilizes the lists of the database with randomng data
         /// </summary>
         static public void Initialize()
         {
-            Managers.Add(new Manager() { UserName = "sariDzimi", Password = 123456789 });
-            Managers.Add(new Manager() { UserName = "MiryamSH", Password = 987654321 });
-            Managers.Add(new Manager() { UserName = "", Password = 0 });
-
             int maxRand = 10;
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
@@ -89,13 +101,20 @@ namespace Dal
                 parcel.DroneId = parcel.Scheduled == null ? 0 : notAssignDrones[rand.Next(0, notAssignDrones.Count)].Id;
                 parcels.Add(parcel);
             }
+
+            Managers.Add(new Manager() { UserName = "sariDzimi", Password = 123456789 });
+            Managers.Add(new Manager() { UserName = "MiryamSH", Password = 987654321 });
+            Managers.Add(new Manager() { UserName = "", Password = 0 });
         }
 
+        #endregion
+
+        #region Random functions
 
         /// <summary>
         /// randoms a date
         /// </summary>
-        /// <returns>date</returns>
+        /// <returns>random date</returns>
         public static DateTime RandomDate()
         {
             Random rand = new Random();
@@ -104,6 +123,12 @@ namespace Dal
             return start.AddDays(rand.Next(range));
         }
 
+
+        /// <summary>
+        /// randoms a date statring from the given date
+        /// </summary>
+        /// <param name="startDate">starting date</param>
+        /// <returns>rabdom date</returns>
         public static DateTime? RandomDate(DateTime? startDate)
         {
             if (startDate == null)
@@ -114,10 +139,15 @@ namespace Dal
             return start.Value.AddDays(rand.Next(range));
         }
 
+
+        /// <summary>
+        /// random an answer between null of a random date
+        /// </summary>
+        /// <param name="startDate">starting date</param>
+        /// <returns>null or random date</returns>
         public static DateTime? RandomDateOrNull(DateTime? startDate)
         {
             Random rand = new Random();
-            ;
             int x = (int)(rand.Next(1, 4));
             if (x < 2)
                 return null;
@@ -125,6 +155,9 @@ namespace Dal
                 return RandomDate(startDate);
         }
 
+        #endregion
+
+        #region help functions
         public static List<Drone> getNotAssignedDrones()
         {
             List<Drone> notAssignDrones = new List<Drone>();
@@ -146,7 +179,8 @@ namespace Dal
             return notAssignDrones;
         }
 
+        #endregion
     }
-   
+
 }
 

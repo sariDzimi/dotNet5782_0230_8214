@@ -11,6 +11,12 @@ namespace Dal
     public partial class DalXml : IDal
     {
         #region DroneCharge
+
+        /// <summary>
+        /// adds droneChare to droneCharges xml file
+        /// </summary>
+        /// <param name="droneCharge">droneCharge</param>
+  
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             List<DroneCharge> droneChargeList = GetDroneCharges().ToList();
@@ -23,6 +29,11 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(droneChargeList, dir + droneChargeFilePath);
         }
+
+        /// <summary>
+        /// deletes DroneCharge from DroneCharges xml file
+        /// </summary>
+        /// <param name="id">drone id of droneCharge</param>
         public void DeleteDroneCharge(int id)
         {
             List<DO.DroneCharge> droneChargeList = GetDroneCharges().ToList();
@@ -40,6 +51,12 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(droneChargeList, dir + droneChargeFilePath);
         }
+
+        /// <summary>
+        /// finds a droneChatge by the drone id
+        /// </summary>
+        /// <param name="id">id of drone</param>
+        /// <returns>droneCharge with the given drone id</returns>
         public DO.DroneCharge GetDroneChargeById(int droneId)
         {
             try
@@ -52,18 +69,27 @@ namespace Dal
             }
 
         }
-        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DO.DroneCharge> predicat = null)
+
+        /// <summary>
+        /// returns droneCharges form droneCharges xml file
+        /// </summary>
+        /// <param name="getBy">condition</param>
+        /// <returns>droneCharges that full-fill the conditon</returns>
+        public IEnumerable<DroneCharge> GetDroneCharges(Predicate<DO.DroneCharge> getBy = null)
         {
             IEnumerable<DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DO.DroneCharge>(dir + droneChargeFilePath);
 
-            predicat ??= ((st) => true);
+            getBy ??= ((st) => true);
             return from droneCharge in droneChargeList
-                   where predicat(droneCharge)
+                   where getBy(droneCharge)
                    orderby droneCharge.DroneId
                    select droneCharge;
 
         }
 
+        /// <summary>
+        /// deletes all droneCharges from droneCharges xml files
+        /// </summary>
         public void DeleteAllDroneCharges()
         {
             XMLTools.SaveListToXMLSerializer(new List<DroneCharge>(), dir + droneChargeFilePath);

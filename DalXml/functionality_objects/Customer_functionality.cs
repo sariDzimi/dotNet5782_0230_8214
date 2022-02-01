@@ -10,10 +10,16 @@ namespace Dal
 {
     public partial class DalXml : IDal
     {
-        #region Customer
+        #region Add Customer
+
+        /// <summary>
+        /// adds customer to customers xml file
+        /// </summary>
+        /// <param name="customer">customer</param>
         public void AddCustomer(Customer customer)
         {
             List<DO.Customer> customerList = GetCustomers().ToList();
+
             if (customerList.Any(p => p.Id == customer.Id))
             {
                 throw new IdAlreadyExist(customer.Id);
@@ -23,6 +29,13 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer<DO.Customer>(customerList, dir + customerFilePath);
         }
+
+        #endregion
+
+        /// <summary>
+        /// deletes customer from customers xml file
+        /// </summary>
+        /// <param name="id">id of customer</param>
         public void DeleteCustomer(int id)
         {
             List<DO.Customer> customerList = GetCustomers().ToList();
@@ -40,6 +53,11 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(customerList, dir + customerFilePath);
         }
+
+        /// <summary>
+        /// updates the customer in the customers xml file
+        /// </summary>
+        /// <param name="customer">customer with updated details</param>
         public void UpdateCustomer(Customer customer)
         {
             List<DO.Customer> customerList = GetCustomers().ToList();
@@ -53,6 +71,12 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(customerList, dir + customerFilePath);
         }
+
+        /// <summary>
+        /// finds a customer by id
+        /// </summary>
+        /// <param name="id">id of customer</param>
+        /// <returns>customer with the given id</returns>
         public DO.Customer GetCustomerById(int id)
         {
             try
@@ -65,19 +89,24 @@ namespace Dal
             }
 
         }
-        public IEnumerable<Customer> GetCustomers(Predicate<DO.Customer> predicat = null)
+
+        /// <summary>
+        /// returns customers form customers xml file
+        /// </summary>
+        /// <param name="getBy">condition</param>
+        /// <returns>customers that full-fill the conditon</returns>
+        public IEnumerable<Customer> GetCustomers(Predicate<DO.Customer> getBy = null)
         {
             IEnumerable<Customer> customerList = XMLTools.LoadListFromXMLSerializer<DO.Customer>(dir + customerFilePath);
 
-            predicat ??= ((st) => true);
+            getBy ??= ((st) => true);
             return from customer in customerList
-                   where predicat(customer)
+                   where getBy(customer)
                    orderby customer.Id
                    select customer;
 
         }
 
 
-        #endregion
     }
 }

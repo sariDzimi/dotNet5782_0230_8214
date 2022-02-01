@@ -11,6 +11,12 @@ namespace Dal
     partial class DalXml : IDal
     {
         #region Drone
+
+        /// <summary>
+        /// adds drone to drones xml file
+        /// </summary>
+        /// <param name="drone">drone</param>
+        /// 
         public void AddDrone(Drone drone)
         {
             List<DO.Drone> droneList = GetDrones().ToList();
@@ -23,6 +29,11 @@ namespace Dal
             droneList.Add(drone);
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
+
+        /// <summary>
+        /// deletes customer from customers xml file
+        /// </summary>
+        /// <param name="id">id of drone</param>
         public void DeleteDrone(int id)
         {
             List<DO.Drone> droneList = GetDrones().ToList();
@@ -40,6 +51,11 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
+
+        /// <summary>
+        /// updates the drone in the drones xml file
+        /// </summary>
+        /// <param name="drone">drone with updated details</param>
         public void UpdateDrone(Drone drone)
         {
             List<DO.Drone> droneList = GetDrones().ToList();
@@ -53,6 +69,12 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(droneList, dir + droneFilePath);
         }
+
+        /// <summary>
+        /// finds a drone by id
+        /// </summary>
+        /// <param name="id">id of drone</param>
+        /// <returns>drone with the given id</returns>
         public DO.Drone GetDroneById(int id)
         {
             try
@@ -64,13 +86,19 @@ namespace Dal
                 throw new NotFoundException("drone");
             }
         }
-        public IEnumerable<DO.Drone> GetDrones(Predicate<DO.Drone> predicat = null)
+
+        /// <summary>
+        /// returns drones form drones xml file
+        /// </summary>
+        /// <param name="getBy">condition</param>
+        /// <returns>drones that full-fill the conditon</returns>
+        public IEnumerable<DO.Drone> GetDrones(Predicate<DO.Drone> getBy = null)
         {
             IEnumerable<DO.Drone> droneList = XMLTools.LoadListFromXMLSerializer<DO.Drone>(dir + droneFilePath);
 
-            predicat ??= ((st) => true);
+            getBy ??= ((st) => true);
             return from drone in droneList
-                   where predicat(drone)
+                   where getBy(drone)
                    orderby drone.Id
                    select drone;
 
