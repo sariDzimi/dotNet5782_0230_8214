@@ -78,7 +78,7 @@
             </Grid>
 
 
-            <ListView x:Name="DronesListView" Margin="0,64,10,10" MouseDoubleClick="MouseDoubleClick_droneChoosen" Grid.Row="1" ItemsSource="{Binding}" DataContext="{Binding RelativeSource={RelativeSource Self}}">   
+            <ListView x:Name="DronesListView" Margin="0,64,10,10" MouseDoubleClick="MouseDoubleClick_droneChoosen" Grid.Row="1" ItemsSource="{Binding}">   
 
                 <ListView.View >
 

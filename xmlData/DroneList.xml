@@ -65,4 +65,9 @@
     <Model>Toyota</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>453475</Id>
+    <Model>gjk</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
 </ArrayOfDrone>

@@ -293,11 +293,11 @@
     <Weight>Light</Weight>
     <Pritority>Fast</Pritority>
     <Requested>2022-01-30T00:57:19.2482893+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <IsActive>false</IsActive>
+    <DroneId>1</DroneId>
+    <Scheduled>2022-02-02T00:15:30.0126358+02:00</Scheduled>
+    <PickedUp>2022-02-02T00:15:31.0720893+02:00</PickedUp>
+    <Delivered>2022-02-02T00:15:32.1134167+02:00</Delivered>
+    <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
     <Id>11111</Id>
@@ -306,11 +306,11 @@
     <Weight>Light</Weight>
     <Pritority>Reguler</Pritority>
     <Requested>2022-01-30T00:50:18.3077059+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <IsActive>false</IsActive>
+    <DroneId>1</DroneId>
+    <Scheduled>2022-02-02T00:15:33.9816539+02:00</Scheduled>
+    <PickedUp>2022-02-02T00:15:35.0195298+02:00</PickedUp>
+    <Delivered>2022-02-02T00:15:36.0583595+02:00</Delivered>
+    <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
     <Id>36789</Id>

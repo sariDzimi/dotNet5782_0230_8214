@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BO;
 using BlApi;
 using PO;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -22,6 +23,8 @@ namespace PL
     /// </summary>
     public partial class StationsList : Window
     {
+        ObservableCollection<Station_p> Stations = new ObservableCollection<Station_p>();
+
         CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
@@ -39,8 +42,9 @@ namespace PL
             InitializeComponent();
             bL = bl;
             items = bl.GetStationToLists().ToList();
-            stationList.Stations = stationList.ConvertStationBLToPL(items);
-            StationsListView.DataContext = stationList.Stations;
+            Stations = stationList.ConvertStationBLToPL(items);
+            //stationList.Stations = stationList.ConvertStationBLToPL(items);
+            StationsListView.DataContext = Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             CurrentUser.Text = currentUser.Type.ToString();
         }
@@ -49,7 +53,7 @@ namespace PL
         {
             stationList.ClearStations();
             stationList.ConvertStationBLToPL(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0).ToList());
-            StationsListView.DataContext = stationList.Stations;
+           // StationsListView.DataContext = stationList.Stations;
 
         }
 
