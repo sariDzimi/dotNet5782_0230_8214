@@ -11,51 +11,49 @@ namespace DalApi
 {
     public interface IDal
     {
-        void DeleteParcel(int id);
+        #region Drone
         void AddDrone(Drone drone);
-
-        void AddCustomer(Customer customer);
-
-        void AddParcel(Parcel parcel);
-
-        void AddStation(Station station);
-
-        void AddDroneCharge(DroneCharge droneCharge);
-
-        IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
-
-
         IEnumerable<Drone> GetDrones(Predicate<Drone> getBy = null);
-
-
-        IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null);
-
-
-        IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
-
-        IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
-
-        Station GetStationById(int id);
-
-        Customer GetCustomerById( int id);
-
-        Parcel GetParcelById(int id);
         Drone GetDroneById(int id);
-        DroneCharge GetDroneChargeById(int droneId);
-
         void UpdateDrone(Drone drone);
+        #endregion
 
+        #region Parcel
+        void AddParcel(Parcel parcel);
+        IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
+        Parcel GetParcelById(int id);
         void UpdateParcel(Parcel parcel);
-        void UpdateStation(Station parcel);
+        void DeleteParcel(int id);
+        #endregion
 
+        #region Customer
+        void AddCustomer(Customer customer);
+        IEnumerable<Customer> GetCustomers(Predicate<Customer> getBy = null);
+        Customer GetCustomerById( int id);
         void UpdateCustomer(Customer customer);
+        #endregion
 
+        #region Station
+        void AddStation(Station station);
+        IEnumerable<Station> GetStations(Predicate<Station> getBy = null);
+        Station GetStationById(int id);
+        void UpdateStation(Station parcel);
+        #endregion
+
+        #region DroneCharge
+        void AddDroneCharge(DroneCharge droneCharge);
+        IEnumerable<DroneCharge> GetDroneCharges(Predicate<DroneCharge> getBy = null);
+        DroneCharge GetDroneChargeById(int droneId);
         void DeleteDroneCharge(int id);
+        void DeleteAllDroneCharges();
+        #endregion
+
+        #region Managers
+        IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
+        #endregion
 
         double[] GetElectricityUse();
-        IEnumerable<Manager> GetManagers(Predicate<Manager> findBy);
 
-        void DeleteAllDroneCharges();
     }
 
 }

@@ -40,6 +40,16 @@ namespace Dal
 
         }
 
+        #region File Path
+        string stationFilePath = @"StationList.xml";
+        string customerFilePath = @"CustomerList.xml";
+        string parcelFilePath = @"ParcelList.xml";
+        string droneFilePath = @"DroneList.xml";
+        string droneChargeFilePath = @"DroneChargeList.xml";
+        string configFilePath = @"Config.xml";
+        string managersFilePath = @"Managers.xml";
+        #endregion
+
         internal static DalXml Instance;
 
         /// <summary>
@@ -78,7 +88,7 @@ namespace Dal
             }
             catch
             {
-                throw new ListEmpty("electricity use");
+                throw new ListIsEmptyException("electricity use");
             }
 
             return Electricity;

@@ -21,7 +21,7 @@ namespace Dal
         {
             if (DataSource.droneCharges.Any(dg => dg.DroneId == droneCharge.DroneId))
             {
-                throw new IdAlreadyExist(droneCharge.DroneId);
+                throw new IdAlreadyExistException("drone", droneCharge.DroneId);
             }
             DataSource.droneCharges.Add(droneCharge);
 
@@ -58,7 +58,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("droneCharge");
+                throw new NotFoundException("droneCharge", droneId);
             }
         }
 

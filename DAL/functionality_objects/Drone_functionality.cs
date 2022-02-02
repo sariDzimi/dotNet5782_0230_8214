@@ -20,7 +20,7 @@ namespace Dal
         {
             if (DataSource.drones.Any(dr => dr.Id == drone.Id))
             {
-                throw new IdAlreadyExist(drone.Id);
+                throw new IdAlreadyExistException("drone", drone.Id);
             }
 
             DataSource.drones.Add(drone);
@@ -58,7 +58,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("drone");
+                throw new NotFoundException("drone", id);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Dal
         {
             int index = DataSource.drones.FindIndex(d => d.Id == drone.Id);
             if (index == -1)
-                throw new NotFoundException("drone");
+                throw new NotFoundException("drone", drone.Id);
             DataSource.drones[index] = drone;
         }
 

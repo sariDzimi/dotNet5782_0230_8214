@@ -34,7 +34,7 @@ namespace BL
                 }
 
             }
-            catch (DalApi.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExistException)
             {
                 throw new IdAlreadyExist(customer.Id);
             }

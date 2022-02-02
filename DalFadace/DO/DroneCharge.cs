@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    /// <summary>
+    /// entity that saves the relation between drones and the station their been charched in
+    /// </summary>
     public struct DroneCharge
     {
         public int DroneId { get; set; }

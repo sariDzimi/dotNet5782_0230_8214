@@ -34,7 +34,7 @@ namespace BL
                     dal.AddStation(stationDL);
                 }
             }
-            catch (DalApi.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExistException)
             {
                 throw new IdAlreadyExist(station.Id);
             }

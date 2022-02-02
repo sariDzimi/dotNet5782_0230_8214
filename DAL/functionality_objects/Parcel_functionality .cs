@@ -20,7 +20,7 @@ namespace Dal
         {
             if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
             {
-                throw new IdAlreadyExist(parcel.Id);
+                throw new IdAlreadyExistException("parcel", parcel.Id);
             }
             DataSource.parcels.Add(parcel);
         }
@@ -57,7 +57,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("parcel");
+                throw new NotFoundException("parcel", id);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Dal
         {
             int index = DataSource.parcels.FindIndex(p => p.Id == parcel.Id);
             if (index == -1)
-                throw new NotFoundException("parcel");
+                throw new NotFoundException("parcel", parcel.Id);
             DataSource.parcels[index] = parcel;
 
         }

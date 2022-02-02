@@ -22,7 +22,7 @@ namespace Dal
 
             if (customerList.Any(p => p.Id == customer.Id))
             {
-                throw new IdAlreadyExist(customer.Id);
+                throw new IdAlreadyExistException("customer", customer.Id);
             }
 
             customerList.Add(customer);
@@ -46,7 +46,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("customer");
+                throw new NotFoundException("customer", id);
             }
 
             customerList.Remove(customer);
@@ -65,7 +65,7 @@ namespace Dal
             int index = customerList.FindIndex(d => d.Id == customer.Id);
 
             if (index == -1)
-                throw new NotFoundException("customer");
+                throw new NotFoundException("customer", customer.Id);
 
             customerList[index] = customer;
 
@@ -85,7 +85,7 @@ namespace Dal
             }
             catch (Exception)
             {
-                throw new NotFoundException("customer");
+                throw new NotFoundException("customer", id);
             }
 
         }

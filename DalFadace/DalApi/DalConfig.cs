@@ -6,6 +6,10 @@ using System.Text;
 
 namespace DalApi
 {
+    /// <summary>
+    /// holds the name and packages of the dal,
+    /// The data relies on the configuration
+    /// </summary>
     class DalConfig
     {
         internal static string DalName;
@@ -19,6 +23,10 @@ namespace DalApi
                            ).ToDictionary(p => "" + p.Name, p => p.Value);
         }
     }
+
+    /// <summary>
+    /// exeptions of DalConfig Class
+    /// </summary>
     public class DalConfigExeption : Exception
     {
         public DalConfigExeption(string msg) : base(msg) { }

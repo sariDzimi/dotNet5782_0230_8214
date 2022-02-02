@@ -39,7 +39,7 @@ namespace BL
                     dal.AddParcel(parcelDL);
                 }
             }
-            catch (DalApi.IdAlreadyExist)
+            catch (DalApi.IdAlreadyExistException)
             {
                 throw new IdAlreadyExist(parcel.Id);
             }

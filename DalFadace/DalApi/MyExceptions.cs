@@ -8,25 +8,19 @@ namespace DalApi
 {
     public class NotFoundException : Exception
     {
-        public NotFoundException(string  e) : base($"{e}  Not found")
+        public NotFoundException(string obj, int id) : base($"{obj} : {id} is not found")
         {
         }
 
     }
-    public class IdAlreadyExist : Exception
+    public class IdAlreadyExistException : Exception
     {
-        public IdAlreadyExist(int Id) : base($"id:{Id} already exsist") { }
+        public IdAlreadyExistException(string obj, int Id) : base($"{obj} with id:{Id} already exsist") { }
         
     }
 
-   public class NoSuchInstance: Exception
+    public class ListIsEmptyException : Exception
     {
-        public NoSuchInstance() : base("no such instance") { }
-    }
-
-
-    public class ListEmpty : Exception
-    {
-        public ListEmpty(string list) : base(list + " is empty") { }
+        public ListIsEmptyException(string list) : base(list + " is empty") { }
     }
 }

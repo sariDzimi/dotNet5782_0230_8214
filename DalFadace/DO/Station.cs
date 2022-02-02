@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+
+    /// <summary>
+    /// a drone charging point
+    /// </summary>
     public struct Station
     {
         public int Id { get; set; }

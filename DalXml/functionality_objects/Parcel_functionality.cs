@@ -20,7 +20,7 @@ namespace Dal
             List<DO.Parcel> parcelList = GetParcels().ToList();
             if (parcelList.Any(p => p.Id == parcel.Id))
             {
-                throw new IdAlreadyExist(parcel.Id);
+                throw new IdAlreadyExistException("parcel", parcel.Id);
             }
 
             parcelList.Add(parcel);
@@ -41,7 +41,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("parcel");
+                throw new NotFoundException("parcel", id);
             }
             parcel.IsActive = false;
             UpdateParcel(parcel);
@@ -58,7 +58,7 @@ namespace Dal
             int index = parcelList.FindIndex(d => d.Id == parcel.Id);
 
             if (index == -1)
-                throw new NotFoundException("parcel");
+                throw new NotFoundException("parcel", parcel.Id);
 
             parcelList[index] = parcel;
 
@@ -78,7 +78,7 @@ namespace Dal
             }
             catch (Exception)
             {
-                throw new NotFoundException("parcel");
+                throw new NotFoundException("parcel", id);
             }
 
         }

@@ -8,9 +8,16 @@ using DalApi;
 
 namespace DalApi
 {
+    /// <summary>
+    /// define object of dal
+    /// </summary>
     public static class DalFactory
     {
-
+        /// <summary>
+        /// creats an object of DaL,
+        /// based on the type of DalCongfig
+        /// </summary>
+        /// <returns>instance of dal</returns>
         public static IDal GetDal()
         {
             string dalType = DalConfig.DalName;
@@ -24,16 +31,6 @@ namespace DalApi
                 BindingFlags.Public | BindingFlags.Static).GetValue(null);
             if (dal == null) throw new DalConfigExeption($"Class {dalPkg} is not a singleton or worng propertry name for Instance");
             return dal;
-            /*            switch (typeDal)
-                        {
-                            case "DalObject":
-                                return DalObject.GetInstance;
-                            case "DalXml":
-                                //return DalObject.DalXml.GetInstance;
-                                //return DalObject.DalObject.GetInstance;
-                            default:
-                                throw new NoSuchInstance();
-                        }*/
         }
     }
 }

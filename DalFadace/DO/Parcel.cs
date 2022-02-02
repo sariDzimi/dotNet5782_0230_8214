@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    /// <summary>
+    /// a post that is being delivered by the company
+    /// </summary>
     public struct Parcel
     {
         public int Id { get; set; }

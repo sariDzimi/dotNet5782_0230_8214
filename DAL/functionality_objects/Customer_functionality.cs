@@ -21,7 +21,7 @@ namespace Dal
         {
             if (DataSource.customers.Any(cs => cs.Id == customer.Id))
             {
-                throw new IdAlreadyExist(customer.Id);
+                throw new IdAlreadyExistException("customer", customer.Id);
             }
             DataSource.customers.Add(customer);
         }
@@ -60,7 +60,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("customer");
+                throw new NotFoundException("customer", id);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Dal
         {
             int index = DataSource.customers.FindIndex(p => p.Id == customer.Id);
             if (index == -1)
-                throw new NotFoundException("customer");
+                throw new NotFoundException("customer", customer.Id);
             DataSource.customers[index] = customer;
 
         }

@@ -36,7 +36,7 @@ namespace Dal
             }
             catch
             {
-                throw new ListEmpty("stationList");
+                throw new ListIsEmptyException("stationList");
             }
 
             getBy ??= ((st) => true);
@@ -70,7 +70,7 @@ namespace Dal
             }
             catch (InvalidOperationException)
             {
-                throw new NotFoundException("station");
+                throw new NotFoundException("station",id);
             }
             return station;
         }
@@ -97,7 +97,7 @@ namespace Dal
             }
             else
             {
-                throw new IdAlreadyExist(station.Id);
+                throw new IdAlreadyExistException("station", station.Id);
             }
         }
 
@@ -117,7 +117,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("Station");
+                throw new NotFoundException("Station", id);
             }
 
             elements.Remove();
@@ -140,7 +140,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("station");
+                throw new NotFoundException("station", station.Id);
             }
             element.Element("Id").Value = station.Id.ToString();
             element.Element("Name").Value = station.Name.ToString();

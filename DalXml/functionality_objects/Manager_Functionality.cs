@@ -31,7 +31,7 @@ namespace Dal
             }
             catch
             {
-                throw new ListEmpty("managers");
+                throw new ListIsEmptyException("managers");
             }
             getBy ??= ((st) => true);
 

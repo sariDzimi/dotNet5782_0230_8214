@@ -22,7 +22,7 @@ namespace Dal
             List<DroneCharge> droneChargeList = GetDroneCharges().ToList();
             if (droneChargeList.Any(dc => dc.DroneId == droneCharge.DroneId))
             {
-                throw new IdAlreadyExist(droneCharge.DroneId);
+                throw new IdAlreadyExistException("droneCharge", droneCharge.DroneId);
             }
 
             droneChargeList.Add(droneCharge);
@@ -44,7 +44,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("droneCharge");
+                throw new NotFoundException("droneCharge", id);
             }
 
             droneChargeList.Remove(droneCharge);
@@ -65,7 +65,7 @@ namespace Dal
             }
             catch (Exception)
             {
-                throw new NotFoundException("droneCharge");
+                throw new NotFoundException("droneCharge", droneId);
             }
 
         }

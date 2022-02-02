@@ -23,7 +23,7 @@ namespace Dal
 
             if (droneList.Any(d => d.Id == drone.Id))
             {
-                throw new IdAlreadyExist(drone.Id);
+                throw new IdAlreadyExistException("drone", drone.Id);
             }
 
             droneList.Add(drone);
@@ -44,7 +44,7 @@ namespace Dal
             }
             catch
             {
-                throw new NotFoundException("drone");
+                throw new NotFoundException("drone", id);
             }
 
             droneList.Remove(drone);
@@ -63,7 +63,7 @@ namespace Dal
             int index = droneList.FindIndex(d => d.Id == drone.Id);
 
             if (index == -1)
-                throw new NotFoundException("drone");
+                throw new NotFoundException("drone", drone.Id);
 
             droneList[index] = drone;
 
@@ -83,7 +83,7 @@ namespace Dal
             }
             catch (Exception)
             {
-                throw new NotFoundException("drone");
+                throw new NotFoundException("drone", id);
             }
         }
 
