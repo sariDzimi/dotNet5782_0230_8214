@@ -143,7 +143,7 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
-            new ParcelWindow(bl, parcel, currentUser, Customers).Show();
+            new ParcelWindow(bl, parcel, currentUser).Show();
         }
 
         #endregion

@@ -79,7 +79,7 @@ namespace PL
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
             BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
             Drone OpenWindow = new Drone(bl, droneBL, currentUser);
-            OpenWindow.ChangedDrone += UpdateInList;
+            OpenWindow.ChangedDroneDelegate += UpdateInList;
             OpenWindow.Show();
             //Close();
 
@@ -101,7 +101,7 @@ namespace PL
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
             Drone OpenWindow = new Drone(bl,currentUser);
-            OpenWindow.ChangedDrone += AddDrone;
+            OpenWindow.ChangedDroneDelegate += AddDrone;
             OpenWindow.Show();
             //Close();
 

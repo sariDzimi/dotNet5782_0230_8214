@@ -25,20 +25,22 @@ namespace PL
     /// 
     public partial class ParcelWindow : Window
     {
+        public Changed<BO.Parcel> ChangedParcelDelegate;
+
         CurrentUser currentUser = new CurrentUser();
         IBL bL1;
         Parcel parcel;
-        Parcel_p Parcel_P;
+        Parcel_p Parcel_P= new Parcel_p();
         ParcelList parcelList= new ParcelList();
         CustomerList CustomerList = new CustomerList();
         //DroneList droneList = new DroneList();
-        Drone_p drone_P = new Drone_p();
+        //Drone_p drone_P = new Drone_p();
         public ParcelWindow()
         {
             InitializeComponent();
         }
 
-        public ParcelWindow(IBL bL, CurrentUser currentUser1, ObservableCollection<Parcel_p> parcel_PsA)
+        public ParcelWindow(IBL bL, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -48,13 +50,15 @@ namespace PL
             bL1 = bL;
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-            this.parcelList.Parcels = parcel_PsA;
+            //this.parcelList.Parcels = parcel_PsA;
+            Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+
         }
 
-        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1, CustomerList customerList)
+        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
-            CustomerList = customerList;
+            //CustomerList = customerList;
             InitializeComponent();
             AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
@@ -66,6 +70,8 @@ namespace PL
             priorityLabel.IsEnabled = false;
             DataContext = Parcel_P;
             CurrentUser.Text = currentUser.Type.ToString();
+            Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+
             if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
             {
                 OpenDrone.Visibility = Visibility.Visible;
@@ -92,7 +98,13 @@ namespace PL
         {
             Close();
         }
-
+        public void UpdateParcelList(BO.Parcel parcel)
+        {
+            if (ChangedParcelDelegate != null)
+            {
+                ChangedParcelDelegate(parcel);
+            }
+        }
         private void AddParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -104,7 +116,12 @@ namespace PL
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
                 bL1.AddParcel(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
-                parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight(), NameOfCustomerReciver = customerAtParcelReciver1.Name, NameOfCustomerSended= customerAtParcelSender1.Name });
+                BO.Parcel parcel = bL1.GetParcelById(getId());
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(parcel);
+                }
+                //parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight(), NameOfCustomerReciver = customerAtParcelReciver1.Name, NameOfCustomerSended= customerAtParcelSender1.Name });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Close();
             }

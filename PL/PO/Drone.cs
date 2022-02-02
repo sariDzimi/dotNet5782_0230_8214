@@ -12,7 +12,7 @@ namespace PO
 {
     public class Drone_p : DependencyObject
     {
-        public Changed<BO.Drone> ListChanged; 
+        public Changed<BO.Drone> ListChangedDelegate; 
         public void Update(BO.Drone drone)
         {
             ID = drone.Id;
@@ -22,9 +22,9 @@ namespace PO
             MaxWeight = drone.MaxWeight;
             ParcelInDelivery = drone.ParcelInDelivery;
             Location = drone.Location;
-            if(ListChanged != null)
+            if(ListChangedDelegate != null)
             {
-                ListChanged(drone);
+                ListChangedDelegate(drone);
             }
         }
         //ID

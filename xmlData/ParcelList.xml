@@ -352,6 +352,19 @@
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
+    <Id>523467</Id>
+    <SenderId>2</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Light</Weight>
+    <Pritority>Reguler</Pritority>
+    <Requested>2022-02-03T01:06:43.0283243+02:00</Requested>
+    <DroneId>0</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>false</IsActive>
+  </Parcel>
+  <Parcel>
     <Id>555555</Id>
     <SenderId>2</SenderId>
     <TargetId>7</TargetId>
