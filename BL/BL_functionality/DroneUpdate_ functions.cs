@@ -12,11 +12,12 @@ namespace BL
 {
 
     partial class BL : BlApi.IBL
-    {        /// <summary>
-             /// release Drone From Charging 
-             /// </summary>
-             /// <param name="idDrone"></param>
-             /// <param name="timeInCharging"></param>
+
+    {    /// <summary>
+         /// releases drone from charging 
+         /// </summary>
+         /// <param name="idDrone">id of drone</param>
+         /// <param name="timeInCharging">time of drone in charging</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void releaseDroneFromCharging(int idDrone, double timeInCharging)
         {
@@ -32,17 +33,18 @@ namespace BL
 
         }
 
+
         /// <summary>
-        /// collect Parcle By Drone
+        /// collect parcle from sender by drone
         /// </summary>
-        /// <param name="idDrone"></param>
+        /// <param name="idDrone">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void collectParcleByDrone(int idDrone)
         {
             Drone drone = GetDroneById(idDrone);
 
-            if (drone.DroneStatus != DroneStatus.Delivery || drone.ParcelInDelivery == null) //MIRIAM-TODO check if the second condition is needed
-                throw new DroneIsNotInCorrectStatus("drone is not in Delivery");
+            if (drone.DroneStatus != DroneStatus.Delivery || drone.ParcelInDelivery == null)
+                throw new DroneIsNotInCorrectStatus("Delivery");
 
             Parcel parcel = GetParcelById(drone.ParcelInDelivery.Id);
 
@@ -58,16 +60,20 @@ namespace BL
 
         }
 
+
+        /// <summary>
+        /// suplly parcel to reciver by drone
+        /// </summary>
+        /// <param name="droneId">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void supplyParcelByDrone(int DroneID)
+        public void supplyParcelByDrone(int droneId)
         {
 
-            Drone drone = GetDroneById(DroneID);
+            Drone drone = GetDroneById(droneId);
 
             if (drone.DroneStatus != DroneStatus.Delivery)
                 throw new DroneIsNotInCorrectStatus("drone is not in delivery");
 
-            //MIRIAM-TODO check if this condition is needed
             if (drone.ParcelInDelivery == null)
                 throw new NotFound("parcel in drone");
 
@@ -87,10 +93,11 @@ namespace BL
 
         }
 
+
         /// <summary>
-        /// send Drone To Charge
+        /// send drone to a station to be charged
         /// </summary>
-        /// <param name="droneId"></param>
+        /// <param name="droneId">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void sendDroneToCharge(int droneId)
         {
@@ -113,10 +120,15 @@ namespace BL
             }
             else
             {
-                throw new DroneDoesNotHaveEnoughBattery();
+                throw new DroneDoesNotHaveEnoughBattery(droneId);
             }
         }
 
+
+        /// <summary>
+        /// assing a parcel that need to be delivered to a free drone
+        /// </summary>
+        /// <param name="id"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignAParcelToADrone(int id)
         {
@@ -143,7 +155,8 @@ namespace BL
 
             foreach (var parcel in GetParcels())
             {
-                if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue;
+                //if the parcel is already assigned to a drone, continue
+                if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue; 
 
                 if (isEnoughBattaryToDeliverTheParcel(drone.Battery, drone.Location, parcel) && drone.MaxWeight >= parcel.Weight)
                 {
@@ -171,16 +184,12 @@ namespace BL
             }
 
             drone.DroneStatus = DroneStatus.Delivery;
-            drone.ParcelInDelivery = convertPArcelToParcelInDelivery(bestParcel, true);
+            drone.ParcelInDelivery = convertParcelToTypeOfParcelInDelivery(bestParcel, true);
             updateDrone(drone);
             bestParcel.droneAtParcel = new DroneAtParcel { Id = drone.Id, Battery = drone.Id, Location = drone.Location };
             bestParcel.Scheduled = DateTime.Now;
             updateParcel(bestParcel);
             updateDrone(drone);
         }
-        /// <summary>
-        /// supply Parcel By Drone
-        /// </summary>
-        /// <param name="DroneID"></param>
     }
 }

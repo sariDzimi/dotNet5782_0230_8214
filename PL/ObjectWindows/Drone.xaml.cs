@@ -148,7 +148,7 @@ namespace PL
         {
             try
             {
-                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
+                bL.AddDrone(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 BO.Drone drone = bL.GetDroneById(getId());
                 if (drone_P.ListChanged != null)
                 {
@@ -310,14 +310,14 @@ namespace PL
             }
         }
 
-        private int getMaxWeight()
+        private WeightCategories getMaxWeight()
         {
             if (WeightSelector.SelectedItem == null)
                 throw new NotValidInput("Max Weight");
             try
             {
 
-                return (int)(WeightCategories)WeightSelector.SelectedItem;
+                return (WeightCategories)WeightSelector.SelectedItem;
             }
             catch (Exception)
             {

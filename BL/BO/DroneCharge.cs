@@ -9,7 +9,7 @@ namespace BO
 {
     public class DroneCharge
     {
-
+        public DroneCharge() { }
         public DroneCharge(int droneId, int stationId1)
         {
             DroneId = droneId;

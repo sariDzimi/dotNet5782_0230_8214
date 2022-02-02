@@ -103,7 +103,7 @@ namespace PL
         {
             try
             {
-                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
+                bL.AddDrone(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Window.GetWindow(this).Content = new DroneListPage(bL, currentUser);
             }
@@ -259,14 +259,14 @@ namespace PL
             }
         }
 
-        private int getMaxWeight()
+        private WeightCategories getMaxWeight()
         {
             if (WeightSelector.SelectedItem == null)
                 throw new NotValidInput("Max Weight");
             try
             {
 
-                return (int)(WeightCategories)WeightSelector.SelectedItem;
+                return (WeightCategories)WeightSelector.SelectedItem;
             }
             catch (Exception)
             {

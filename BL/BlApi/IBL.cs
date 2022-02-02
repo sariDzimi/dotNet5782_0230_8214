@@ -11,21 +11,19 @@ namespace BlApi
 {
     public interface IBL
     {
-        
         public void releaseDroneFromCharging(int idDrone, double timeInCharging);
         public void collectParcleByDrone(int idDrone);
         public void sendDroneToCharge(int droneId);
         public void AssignAParcelToADrone(int id);
         public void supplyParcelByDrone(int DroneID);
        
-        public void addDroneToBL(int id, int status, string model, int numberStaion);
+        public void AddDrone(int id, WeightCategories weight, string model, int numberStaion);
         public IEnumerable<Station> GetStations();
         public IEnumerable<Parcel> GetParcels();
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<Drone> GetDrones();
         public void updateDroneModel(int id, string model);
-        public void updateDataStation(int id, int name = -1, int totalChargeSlots = -1);
-        //public void updateDataCustomer(int id, string name = null, string phone = null);
+        public void UpdateDataStation(int id, int name = -1, int totalChargeSlots = -1);
         public void updateDrone(Drone drone);
         public IEnumerable<DroneToList> GetDroneToLists();
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy);
@@ -47,37 +45,29 @@ namespace BlApi
 
         public IEnumerable<ParcelToList> GetParcelsToListBy(Predicate<ParcelToList> findBy);
 
-        /*        public Station FindStationBy(Predicate<Station> findBy);
-                public Station FindStation(int id);
-                public Drone FindDrone(int id);
-                public Drone FindDroneBy(Predicate<Drone> findBy);
-                public Customer FindCustomerBy(Predicate<Customer> findBy);
-                public Parcel FindParcelBy(Predicate<Parcel> findBy);
-                public Parcel FindParcel(int id);
-                public DroneCharge FindDroneCharge(int droneId);*/
         public IEnumerable<StationToList> GetStationToLists();
         public IEnumerable<ParcelToList> GetParcelToLists();
 
         public IEnumerable<CustomerToList> GetCustomerToLists();
 
-        public CustomerToList convertCustomerToCustomerToList(Customer customer);
-        public ParcelToList convertParcelToParcelToList(Parcel parcel);
+        public CustomerToList convertCustomerToTypeOfCustomerToList(Customer customer);
+        public ParcelToList convertParcelToTypeOfParcelToList(Parcel parcel);
 
-        public Parcel ConvertParcelToListToParcel(ParcelToList parcelToList);
+        public Parcel ConvertParcelToTypeOfListToParcel(ParcelToList parcelToList);
         public IEnumerable<StationToList> GetStationToListBy(Predicate<StationToList> findBy);
 
-        public void addParcelToDL(Parcel parcel);
-        public void addStationToDL(Station station);
+        public void AddParcel(Parcel parcel);
+        public void AddStation(Station station);
 
-        public void updateStation(Station station);
+        public void UpdateStation(Station station);
 
         public void updateParcel(Parcel parcel);
 
         public void updateCustomer(Customer customer);
 
-        public void addCustomerToDL(Customer customer);
+        public void AddCustomer(Customer customer);
 
-        public bool CheckWorkerIfExixst(Manager manager);
+        public bool isManagerExist(Manager manager);
 
         public void DeleateParcel(int id);
 

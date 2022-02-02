@@ -74,7 +74,7 @@ namespace PL
         {
             try
             {
-                bl.updateStation(new Station()
+                bl.UpdateStation(new Station()
                 {
                     Id = getId(),
                     Name = getName(),
@@ -98,7 +98,7 @@ namespace PL
         {
             try
             {
-                bl.addStationToDL(new Station()
+                bl.AddStation(new Station()
                 {
                     Id = getId(),
                     Name = getName(),

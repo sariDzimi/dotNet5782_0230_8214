@@ -97,7 +97,7 @@ namespace PL
                 //parcel.Requested = DateTime.Now;
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = getIdSender() };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = getIdReciver() };
-                bL1.addParcelToDL(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
+                bL1.AddParcel(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Window.GetWindow(this).Content =new ParcelListPage(bL1, currentUser);
             }

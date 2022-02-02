@@ -13,12 +13,12 @@ namespace DO
     public struct DroneCharge
     {
         public int DroneId { get; set; }
-        public int stationId { get; set; }
+        public int StationId { get; set; }
 
         public DateTime StartCharging { get; set; }
         public override string ToString()
         {
-            return $"DroneCharge {DroneId} : {stationId}";
+            return $"DroneCharge {DroneId} : {StationId}";
         }
     }
 }

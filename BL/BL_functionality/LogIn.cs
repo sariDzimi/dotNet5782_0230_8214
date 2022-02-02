@@ -11,23 +11,30 @@ namespace BL
 {
     partial class BL
     {
-
-        public bool CheckWorkerIfExixst(Manager manager)
+        /// <summary>
+        /// cheks if manager exist in the system
+        /// </summary>
+        /// <param name="manager">manager</param>
+        /// <returns>does manager exist</returns>
+        public bool isManagerExist(Manager manager)
         {
+            DO.Manager manager1 = null;
             try
             {
                 lock (dal)
                 {
-                    DO.Manager manager1 = dal.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
+                    manager1 = dal.GetManagers((M) => ((M.Password == manager.Password) && (M.UserName == manager.UserName))).First();
                 }
             }
             catch(Exception)
             {
-                throw new NotFound("Msneger");
+                throw new NotFound("Manager");
             }
 
 
-            return true;
+            if (manager != null)
+                return true;
+            return false;  //data secureity: Denided by default
         }
 
 
