@@ -135,8 +135,19 @@ namespace PL
             //new ParcelWindow(bl, currentUser).Show();
         }
 
-        
 
+        private void DeleteParcel(BO.Parcel parcel)
+        {
+            ParcelToList parcelToList = Parcels.First((d) => d.ID == parcel.Id);
+            Parcels.Remove(parcelToList);
+        }
+
+           /* ParcelWindow OpenWindow = new ParcelWindow(bl, currentUser);
+            OpenWindow.ChangedParcelDelegate += AddParcelToLst;
+            OpenWindow.Show();*/
+                //Close();
+                //new ParcelWindow(bl, currentUser).Show();
+            
         private void close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -81,8 +81,10 @@ namespace PL
             if (Parcel_P.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
+                Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(DeleteParcelToList);
+
             }
-            
+
             if (Parcel_P.PickedUp == null && parcel.Scheduled !=null)
             {
                 PickedUpC.Visibility = Visibility.Visible;
@@ -105,6 +107,13 @@ namespace PL
                 ChangedParcelDelegate(parcel);
             }
         }
+        public void DeleteParcelToList(BO.Parcel parcel)
+        {
+
+
+        }
+
+
         private void AddParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -115,7 +124,7 @@ namespace PL
                 Customer customerReceiver = bL1.GetCustomerById(getIdSender());
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
-                bL1.AddParcel(new Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
+                bL1.AddParcel(new BO.Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
                 BO.Parcel parcel = bL1.GetParcelById(getId());
                 if (Parcel_P.ListChangedDelegate != null)
                 {
@@ -253,11 +262,16 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-            /*ChangedParcelDelegate
-                        bL1.DeleateParcel(parcel.Id);
-                        parcelList.DeleateParcel(Parcel_P);
-                        Close();*/
-            ChangedParcelDelegate(parcel);
+           // Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+
+            bL1.DeleateParcel(parcel.Id);
+            BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
+            if (Parcel_P.ListChangedDelegate != null)
+            {
+                Parcel_P.ListChangedDelegate(parcelCorrent);
+            }
+            //parcelList.DeleateParcel(Parcel_P);
+            Close();
         }
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
