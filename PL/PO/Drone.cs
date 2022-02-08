@@ -12,7 +12,7 @@ namespace PO
 {
     public class Drone_p : DependencyObject
     {
-        public Changed<BO.Drone> ListChangedDelegate; 
+        public Action<BO.Drone> ListChangedDelegate; 
         public void Update(BO.Drone drone)
         {
             ID = drone.Id;

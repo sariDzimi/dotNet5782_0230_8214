@@ -12,7 +12,7 @@ namespace PO
 {
      public class Parcel_p : DependencyObject
     {
-        public Changed<BO.Parcel> ListChangedDelegate;
+        public Action<BO.Parcel> ListChangedDelegate;
         //ID
         public static readonly DependencyProperty IdParcel =
       DependencyProperty.Register("ID",

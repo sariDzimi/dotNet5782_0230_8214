@@ -358,11 +358,11 @@
     <Weight>Light</Weight>
     <Pritority>Reguler</Pritority>
     <Requested>2022-02-03T01:06:43.0283243+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
+    <DroneId>5</DroneId>
+    <Scheduled>2022-02-04T10:30:14.1525077+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
-    <IsActive>false</IsActive>
+    <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
     <Id>555555</Id>

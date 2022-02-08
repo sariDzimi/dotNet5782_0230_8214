@@ -25,7 +25,7 @@ namespace PL
     /// 
     public partial class ParcelWindow : Window
     {
-        public Changed<BO.Parcel> ChangedParcelDelegate;
+        public Action<BO.Parcel> ChangedParcelDelegate;
 
         CurrentUser currentUser = new CurrentUser();
         IBL bL1;
@@ -51,7 +51,7 @@ namespace PL
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
             //this.parcelList.Parcels = parcel_PsA;
-            Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+            Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
         }
 
@@ -70,7 +70,7 @@ namespace PL
             priorityLabel.IsEnabled = false;
             DataContext = Parcel_P;
             CurrentUser.Text = currentUser.Type.ToString();
-            Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+            Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
             if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
             {
@@ -253,10 +253,11 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-
-            bL1.DeleateParcel(parcel.Id);
-            parcelList.DeleateParcel(Parcel_P);
-            Close();
+            /*ChangedParcelDelegate
+                        bL1.DeleateParcel(parcel.Id);
+                        parcelList.DeleateParcel(Parcel_P);
+                        Close();*/
+            ChangedParcelDelegate(parcel);
         }
 
         private void OpenDrone_Click(object sender, RoutedEventArgs e)

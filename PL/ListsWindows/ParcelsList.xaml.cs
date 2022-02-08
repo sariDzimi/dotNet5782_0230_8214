@@ -135,6 +135,8 @@ namespace PL
             //new ParcelWindow(bl, currentUser).Show();
         }
 
+        
+
         private void close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
