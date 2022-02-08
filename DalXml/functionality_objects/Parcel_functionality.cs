@@ -94,7 +94,7 @@ namespace Dal
 
             getBy ??= ((st) => true);
             return from parcel in parcelList
-                   where getBy(parcel)
+                   where getBy(parcel) && parcel.IsActive == true
                    orderby parcel.Id
                    select parcel;
         }

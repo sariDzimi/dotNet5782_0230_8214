@@ -39,7 +39,7 @@ namespace Dal
         {
             getBy ??= (parcel => true);
             return (from parcel in DataSource.parcels
-                    where (getBy(parcel)/*parcel.IsActive*/)
+                    where (getBy(parcel) & parcel.IsActive == true)
                     select parcel);
         }
 
