@@ -23,7 +23,7 @@ namespace BL
                         catch (NotFound)
                         {
                             if (drone.Battery != 100)
-                                bl.sendDroneToCharge(drone.Id);
+                                bl.SendDroneToCharge(drone.Id);
                             //else
 
                         }
@@ -33,9 +33,9 @@ namespace BL
                     case DroneStatus.Delivery:
                         //Check if it works.........
                         if (drone.ParcelInDelivery.IsWating)
-                            bl.collectParcleByDrone(drone.Id);
+                            bl.CollectParcleByDrone(drone.Id);
                         else
-                            bl.supplyParcelByDrone(drone.Id);
+                            bl.SupplyParcelByDrone(drone.Id);
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);
                         break;
@@ -47,7 +47,7 @@ namespace BL
                             updateDrone(drone, 1);
                             Thread.Sleep(SPEED);  
                         }
-                        bl.releaseDroneFromCharging(drone.Id, (100 - drone.Battery) / bl.GetRateOFCharging());
+                        bl.ReleaseDroneFromCharging(drone.Id, (100 - drone.Battery) / bl.GetRateOFCharging());
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);
                         break;

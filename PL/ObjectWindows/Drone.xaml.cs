@@ -192,7 +192,7 @@ namespace PL
         {
             try
             {
-                bL.sendDroneToCharge(drone_P.ID);
+                bL.SendDroneToCharge(drone_P.ID);
                 sendDroneForDelivery.IsEnabled = false;
                 releaseDroneFromCharging.IsEnabled = true;
                 timeOfCharging.Text = "";
@@ -207,7 +207,7 @@ namespace PL
             try
             {
                 double time = getTime();
-                bL.releaseDroneFromCharging(drone_P.ID, time);
+                bL.ReleaseDroneFromCharging(drone_P.ID, time);
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
@@ -245,7 +245,7 @@ namespace PL
         {
             try
             {
-                bL.collectParcleByDrone(drone_P.ID);
+                bL.CollectParcleByDrone(drone_P.ID);
                 colectParcel.IsEnabled = false;
                 supllyParcel.IsEnabled = true;
                 MessageBox.Show("collect a parcel by drone successfully");
@@ -264,7 +264,7 @@ namespace PL
         {
             try
             {
-                bL.supplyParcelByDrone(drone_P.ID);
+                bL.SupplyParcelByDrone(drone_P.ID);
                 supllyParcel.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 MessageBox.Show("suplly a parcel by drone successfully");
@@ -284,7 +284,7 @@ namespace PL
         {
             try
             {
-                bL.updateDroneModel(getId(), getModel());
+                bL.UpdateDroneModel(getId(), getModel());
                 MessageBox.Show($"the model drone updated successfully");
             }
             catch (Exception ex)

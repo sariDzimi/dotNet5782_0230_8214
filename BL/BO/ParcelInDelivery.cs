@@ -7,16 +7,11 @@ using BlApi;
 
 namespace BO
 {
-
+    /// <summary>
+    /// details of parcel when apears in a delivery
+    /// </summary>
     public class ParcelInDelivery
     {
-        public ParcelInDelivery()
-        {
-
-        }
-
- 
-
         public int Id { get; set; }
 
         public bool IsWating { get; set; }
@@ -40,12 +35,7 @@ namespace BO
                 $" pritorities: {pritorities}, customerAtDeliverySender: {customerAtParcelTheSender}," +
                 $" customerAtDeliveryReciver: {customerAtParcelTheReciver}, weightCategories {weightCategories}," +
                 $" locationCollect {locationCollect}, locationTarget {locationTarget}, distance {distance}   "
-
-
-            ;
         }
-
-
     }
 }
 

@@ -199,14 +199,14 @@ namespace BL
             {
                 Id = station.Id,
                 Name = station.Name,
-                Location = new Location(station.Longitude, station.Latitude)
+                Location = new Location(){ Longitude = station.Longitude , Latitude = station.Latitude }
             };
 
             StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(station.Id);
             foreach (var dronecharge in GetDronesCharges())
             {
                 if (dronecharge.StationId == station.Id)
-                    StationBL.droneAtChargings.Add(new DroneAtCharging()
+                    StationBL.DroneAtChargings.Add(new DroneAtCharging()
                     {
                         ID = dronecharge.DroneId,
                         Battery = GetDroneById(dronecharge.DroneId).Battery
@@ -224,7 +224,7 @@ namespace BL
         {
             return new StationToList()
             {
-                ID = station.Id,
+                Id = station.Id,
                 Name = station.Name,
                 numberOfFreeChargeSlots = station.FreeChargeSlots,
                 numberOfUsedChargeSlots = dal.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots

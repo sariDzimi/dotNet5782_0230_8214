@@ -64,7 +64,7 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcel = bl.GetParcelById(parcelToList.ID);
+            BO.Parcel parcel = bl.GetParcelById(parcelToList.Id);
             ParcelWindow OpenWindow = new ParcelWindow(bl, parcel, currentUser);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             OpenWindow.Show();
@@ -73,14 +73,14 @@ namespace PL
 
         public void UpdateInList(BO.Parcel parcel)
         {
-            ParcelToList parcelToList = Parcels.First((d) => d.ID == parcel.Id);
+            ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             int index = Parcels.IndexOf(parcelToList);
-            Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
+            Parcels[index] = new ParcelToList() { Id = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
 
         }
         public void AddParcelToLst(BO.Parcel parcel)
         {
-            Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
+            Parcels.Add(new ParcelToList() { Id = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -138,7 +138,7 @@ namespace PL
 
         private void DeleteParcel(BO.Parcel parcel)
         {
-            ParcelToList parcelToList = Parcels.First((d) => d.ID == parcel.Id);
+            ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             Parcels.Remove(parcelToList);
         }
 

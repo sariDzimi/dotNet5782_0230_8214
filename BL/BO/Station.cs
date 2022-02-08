@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-
+    /// <summary>
+    /// a point for charging drones
+    /// </summary>
     public class Station
     {
-        public Station()
-        {
-            droneAtChargings = new List<DroneAtCharging>();
-        }
+        //public Station()
+        //{
+        //    droneAtChargings = new List<DroneAtCharging>();
+        //}
         private int freeChargeSlots;
         public int Id { get; set; }
         public int Name { get; set; }
@@ -32,12 +34,15 @@ namespace BO
                 freeChargeSlots = value;
             }
         }
+
+        public List<DroneAtCharging> DroneAtChargings; 
+
         public override string ToString()
         {
             string droneAtCharging = " ";
-            if (droneAtChargings.Count != 0)
+            if (DroneAtChargings.Count != 0)
             {
-                foreach (var d in droneAtChargings)
+                foreach (var d in DroneAtChargings)
                 {
                     droneAtCharging += d;
                     droneAtCharging += " ";
@@ -47,10 +52,6 @@ namespace BO
             return $"station {Name} : {Id}, 'Location' {Location} , 'ChargeSlots': {FreeChargeSlots}," +
                 $"{droneAtCharging}  ";
         }
-
-        public List<DroneAtCharging> droneAtChargings;
-
-
 
     }
 

@@ -97,7 +97,7 @@ namespace BL
         public IEnumerable<CustomerToList> GetCustomerToLists()
         {
             return from customer in GetCustomers()
-                   select convertCustomerToTypeOfCustomerToList(customer);
+                   select ConvertCustomerToTypeOfCustomerToList(customer);
         }
 
         #endregion
@@ -109,7 +109,7 @@ namespace BL
         /// </summary>
         /// <param name="customer"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateCustomer(Customer customer)
+        public void UpdateCustomer(Customer customer)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace BL
         {
             return new ParcelAtCustomer()
             {
-                ID = parcel.Id,
+                Id = parcel.Id,
                 CustomerAtParcel = new CustomerAtParcel() { Id = customer.Id, Name = customer.Name },
                 WeightCategories = parcel.Weight,
                 Pritorities = parcel.Pritority,
@@ -174,7 +174,7 @@ namespace BL
             {
                 Id = customer.Id,
                 Name = customer.Name,
-                Location = new Location(customer.Latitude, customer.Longitude),
+                Location = new Location() { Longitude = customer.Longitude , Latitude = customer.Latitude},
                 Phone = customer.Phone
             };
 
@@ -200,7 +200,7 @@ namespace BL
         /// <param name="customer">customer</param>
         /// <returns>customerToList</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public CustomerToList convertCustomerToTypeOfCustomerToList(Customer customer)
+        public CustomerToList ConvertCustomerToTypeOfCustomerToList(Customer customer)
         {
             return new CustomerToList()
             {

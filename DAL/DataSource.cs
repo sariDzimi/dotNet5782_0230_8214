@@ -87,12 +87,12 @@ namespace Dal
                 parcel.TargetId = customers[rand.Next() % (customers.Count - 1)].Id;
                 parcel.Weight = (WeightCategories)(rand.Next() % 3) + 1;
                 parcel.Pritority = (Pritorities)(rand.Next() % 3);
-                parcel.Requested = RandomDate();
+                parcel.Requested = randomDate();
                 parcel.IsActive = true;
                 List<Drone> notAssignDrones = getNotAssignedDrones();
-                parcel.Scheduled = (notAssignDrones.Count == 0) ? null : RandomDateOrNull(parcel.Requested);
-                parcel.PickedUp = RandomDateOrNull(parcel.Scheduled);
-                parcel.Delivered = RandomDateOrNull(parcel.PickedUp);
+                parcel.Scheduled = (notAssignDrones.Count == 0) ? null : randomDateOrNull(parcel.Requested);
+                parcel.PickedUp = randomDateOrNull(parcel.Scheduled);
+                parcel.Delivered = randomDateOrNull(parcel.PickedUp);
                 parcel.DroneId = parcel.Scheduled == null ? 0 : notAssignDrones[rand.Next(0, notAssignDrones.Count)].Id;
                 parcels.Add(parcel);
             }
@@ -110,7 +110,7 @@ namespace Dal
         /// randoms a date
         /// </summary>
         /// <returns>random date</returns>
-        public static DateTime RandomDate()
+        private static DateTime randomDate()
         {
             Random rand = new Random();
             DateTime start = new DateTime(1995, 1, 1);
@@ -124,7 +124,7 @@ namespace Dal
         /// </summary>
         /// <param name="startDate">starting date</param>
         /// <returns>rabdom date</returns>
-        public static DateTime? RandomDate(DateTime? startDate)
+        private static DateTime? randomDate(DateTime? startDate)
         {
             if (startDate == null)
                 return null;
@@ -140,20 +140,20 @@ namespace Dal
         /// </summary>
         /// <param name="startDate">starting date</param>
         /// <returns>null or random date</returns>
-        public static DateTime? RandomDateOrNull(DateTime? startDate)
+        public static DateTime? randomDateOrNull(DateTime? startDate)
         {
             Random rand = new Random();
             int x = (int)(rand.Next(1, 4));
             if (x < 2)
                 return null;
             else
-                return RandomDate(startDate);
+                return randomDate(startDate);
         }
 
         #endregion
 
         #region help functions
-        public static List<Drone> getNotAssignedDrones()
+        private static List<Drone> getNotAssignedDrones()
         {
             List<Drone> notAssignDrones = new List<Drone>();
             foreach (var drone in drones)

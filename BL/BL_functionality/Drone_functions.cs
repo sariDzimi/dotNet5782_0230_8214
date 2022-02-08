@@ -76,13 +76,13 @@ namespace BL
         /// <param name="id">id of drone</param>
         /// <param name="model">updated model</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateDroneModel(int id, string model)
+        public void UpdateDroneModel(int id, string model)
         {
             try
             {
                 Drone droneBL = dronesBL.First(d => d.Id == id);
                 droneBL.Model = model;
-                updateDrone(droneBL);
+                UpdateDrone(droneBL);
             }
             catch
             {
@@ -95,7 +95,7 @@ namespace BL
         /// </summary>
         /// <param name="drone">drone with update detatils</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateDrone(Drone drone)
+        public void UpdateDrone(Drone drone)
         {
             try
             {

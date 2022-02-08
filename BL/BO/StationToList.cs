@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-
-
+    /// <summary>
+    /// details of station when apears in list
+    /// </summary>
     public class StationToList
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public int Name { get; set; }
 
@@ -18,15 +19,9 @@ namespace BO
 
         public int numberOfUsedChargeSlots { get; set; }
 
-
-        public StationToList()
-        {
-
-        }
-
         public override string ToString()
         {
-            return $"id:{ID} name:{Name} numbercharge slots- free:{numberOfFreeChargeSlots}, used{numberOfUsedChargeSlots}";
+            return $"id:{Id} name:{Name} numbercharge slots- free:{numberOfFreeChargeSlots}, used{numberOfUsedChargeSlots}";
         }
 
     }

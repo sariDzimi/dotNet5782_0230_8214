@@ -79,7 +79,7 @@ namespace PL
         {
             try
             {
-                bl.updateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
+                bl.UpdateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ namespace PL
             {
                 double longitude = Convert.ToDouble(longitudeTextBox.Text);
                 double latitude = Convert.ToDouble(latitudeTextBox.Text);
-                return new Location(longitude, latitude);
+                return new Location() { Longitude = longitude, Latitude = latitude};
             }
             catch
             {
@@ -119,7 +119,7 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
             Window.GetWindow(this).Content = new ParcelPage(bl, parcel, currentUser, this);
         }
 

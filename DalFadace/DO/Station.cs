@@ -9,7 +9,7 @@ namespace DO
 {
 
     /// <summary>
-    /// a drone charging point
+    /// a point for charging drones
     /// </summary>
     public struct Station
     {

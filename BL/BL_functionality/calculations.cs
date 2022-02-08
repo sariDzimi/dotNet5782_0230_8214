@@ -35,7 +35,7 @@ namespace BL
         /// <param name="parcelWeight">weight of delivers parcel</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public double calculateBatteryForDelivery(Location droneLocation, int senderId, int reciverId, WeightCategories parcelWeight)
+        private double calculateBatteryForDelivery(Location droneLocation, int senderId, int reciverId, WeightCategories parcelWeight)
         {
             Location senderLocation = GetCustomerById(senderId).Location;
             Location reciverLocation = GetCustomerById(reciverId).Location;

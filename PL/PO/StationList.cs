@@ -25,14 +25,14 @@ namespace PO
         public void AddStation(StationToList station)
         {
             //Station station1 = BL.GetStationById(station.ID);
-            Stations.Add(new Station_p { ID = station.ID, Name = station.Name, FreeChargeSlots= station.numberOfFreeChargeSlots, /*Latitude  =station1.Location.Latitude, Longitude = station1.Location.Longitude*/  });
+            Stations.Add(new Station_p { ID = station.Id, Name = station.Name, FreeChargeSlots= station.numberOfFreeChargeSlots, /*Latitude  =station1.Location.Latitude, Longitude = station1.Location.Longitude*/  });
         }
         public ObservableCollection<Station_p> ConvertStationBLToPL(List<StationToList> StationsBL)
         {
 
             foreach (var station in StationsBL)
             {
-                Station_p station_P = new Station_p() { ID = station.ID, FreeChargeSlots = station.numberOfFreeChargeSlots, Name = station.Name };
+                Station_p station_P = new Station_p() { ID = station.Id, FreeChargeSlots = station.numberOfFreeChargeSlots, Name = station.Name };
                 Stations.Add(station_P);
             }
             return Stations;

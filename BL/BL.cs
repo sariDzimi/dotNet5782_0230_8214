@@ -11,7 +11,7 @@ namespace BL
     partial class BL : BlApi.IBL
     {
         internal static BL instance;
-        
+
 
         private List<BO.Drone> dronesBL;
         private Random rand = new Random();
@@ -27,8 +27,7 @@ namespace BL
 
         public BL()
         {
-            //intlizing BL members
-            //dalObject = DalFactory.GetDal("DalObject");
+            //intilizing BL members
             dal = DalFactory.GetDal();
             double[] ElectricityUse = dal.GetElectricityUse();
             ElectricityUseWhenFree = ElectricityUse[0];
@@ -37,15 +36,29 @@ namespace BL
             ElectricityUseWhenheavy = ElectricityUse[3];
             RateOfCharching = ElectricityUse[4];
             dronesBL = new List<BO.Drone>();
-            dal.DeleteAllDroneCharges();
+
+            dal.DeleteAllDroneCharges();//we delete here all droneCharges, 
+                                        //because when we loop over the drones we creat new droneCharges
+                                        //for the drones that are in maintanace
+            
             List<DO.Parcel> parcelDLs = dal.GetParcels().ToList();
 
             foreach (var droneDL in dal.GetDrones())
             {
-                BO.Drone droneBL = new BO.Drone() { Id = droneDL.Id, Model = droneDL.Model, MaxWeight = (BO.WeightCategories)droneDL.MaxWeight };
+                BO.Drone droneBL = new BO.Drone()
+                {
+                    Id = droneDL.Id,
+                    Model = droneDL.Model,
+                    MaxWeight = (BO.WeightCategories)droneDL.MaxWeight
+                };
+
+                //if the drone has any parcel that are assigned to him
                 if (GetParcelsBy(p => p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id).Any())
                 {
                     Parcel parcel = GetParcelsBy(p => p.droneAtParcel != null && p.droneAtParcel.Id == droneBL.Id).First();
+
+                    //if a parcel is assigned to a drone, but not delivered yet,
+                    //it means that the drone is in a status of delivery
                     if (parcel.Delivered == null)
                     {
                         droneBL.DroneStatus = DroneStatus.Delivery;
@@ -67,7 +80,7 @@ namespace BL
                         };
 
                         droneBL.ParcelInDelivery = parcelInDelivery;
-                        updateParcel(parcel);
+                        UpdateParcel(parcel);
 
                         if (parcel.PickedUp.Equals(null))
                             droneBL.Location = closestStationToLoacationWithFreeChargeSlots(locationSender).Location;
@@ -77,12 +90,17 @@ namespace BL
                         double electicityNeeded = calculateElectricity(droneBL.Location, locationReciver, parcel.Weight);
                         droneBL.Battery = rand.Next((int)electicityNeeded, 100);
                     }
+
+                    //if drone is not in delivery he gets a random status
                     else
                         droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
                 }
+
+                //if drone is not in delivery he gets a random status
                 else
                     droneBL.DroneStatus = (DroneStatus)rand.Next(0, 2);
 
+                //if drone is in maintanance we add a new droneCharge
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
                     Station station = getRandomStation();
@@ -93,12 +111,13 @@ namespace BL
                     droneBL.Location = station.Location;
                 }
 
+                //if the drone is free we assing his location to be in loacation of a random customer that has a dleivered parcel
                 else if (droneBL.DroneStatus == DroneStatus.Free)
                 {
                     try
                     {
+                        //gets all customer with delivered parcels
                         List<BO.Customer> customers = GetCustomersBy(c => c.parcelsSentedToCustomer.Any(p => p.ParcelStatus == ParcelStatus.Delivered)).ToList();
-                        double u = rand.Next(0, customers.Count);
                         Customer customer = customers[(int)rand.Next(0, customers.Count)];
                         droneBL.Location = customer.Location;
                     }
@@ -106,9 +125,9 @@ namespace BL
                     {
                         droneBL.Location = getRandomStation().Location;
                     }
+
                     double electicityNeeded = calculateElectricityWhenFree(droneBL.Location, closestStationToLoacationWithFreeChargeSlots(droneBL.Location).Location);
                     droneBL.Battery = rand.Next((int)electicityNeeded, 100);
-
                 }
 
                 dronesBL.Add(droneBL);
@@ -147,7 +166,7 @@ namespace BL
 
         public void StartSimulation(Drone drone, Action<Drone, int> action, Func<bool> func)
         {
-            Simulation simulation = new Simulation(this, drone, action, func); 
+            Simulation simulation = new Simulation(this, drone, action, func);
         }
 
         public double GetRateOFCharging()

@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// details of parcel when apears in list
+    /// </summary>
     public class ParcelToList
-
     {
-
-        public ParcelToList()
-        {
-
-        }
-
-        public int ID { get; set; }
-
+        public int Id { get; set;}
         public string NameOfCustomerSended { get; set; }
         public string NameOfCustomerReciver { get; set; }
 
@@ -29,7 +24,7 @@ namespace BO
 
         public override string ToString()
         {
-            return $"ID: {ID}, sender: {NameOfCustomerSended}, reciver:{NameOfCustomerReciver}, weight: {weightCategories}, priority:{pritorities}, parcel status:{parcelStatus}";
+            return $"ID: {Id}, sender: {NameOfCustomerSended}, reciver:{NameOfCustomerReciver}, weight: {weightCategories}, priority:{pritorities}, parcel status:{parcelStatus}";
         }
 
     }

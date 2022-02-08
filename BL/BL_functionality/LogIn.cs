@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="manager">manager</param>
         /// <returns>does manager exist</returns>
-        public bool isManagerExist(Manager manager)
+        public bool IsValidMamager(Manager manager)
         {
             DO.Manager manager1 = null;
             try

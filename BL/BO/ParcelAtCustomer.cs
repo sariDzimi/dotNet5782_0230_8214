@@ -5,40 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    namespace BO {
+namespace BO
+{
+    /// <summary>
+    /// details of parcel that apears in customer
+    /// </summary>
+    public class ParcelAtCustomer
+    {
+        public int Id { get; set; }
 
-        public class ParcelAtCustomer
+        public WeightCategories WeightCategories { get; set; }
+
+        public Pritorities Pritorities { get; set; }
+
+        public ParcelStatus ParcelStatus { get; set; }
+
+        public CustomerAtParcel CustomerAtParcel { get; set; }
+
+
+        public override string ToString()
         {
-
-            public ParcelAtCustomer()
-            {
-
-            }
-
-
-            public int ID { get; set; }
-
-            public WeightCategories WeightCategories { get; set; }
-
-            public Pritorities Pritorities { get; set; }
-
-            public ParcelStatus ParcelStatus { get; set; }
-
-            public CustomerAtParcel CustomerAtParcel { get; set; }
-
-
-            public override string ToString()
-            {
-                return $"ParcelAtCustomer  : {ID}, " +
-                    $" , weightCategories:{WeightCategories} {Pritorities}, pritorities: " +
-                    $" parcelStatus {ParcelStatus}, " +
-                    $"customerAtParcel : {CustomerAtParcel},";
-                ;
-            }
-
-
-
+            return $"ParcelAtCustomer  : {Id}, " +
+                $" , weightCategories:{WeightCategories} {Pritorities}, pritorities: " +
+                $" parcelStatus {ParcelStatus}, " +
+                $"customerAtParcel : {CustomerAtParcel},";
         }
-
     }
+
+}
 

@@ -115,7 +115,7 @@ namespace BL
         /// </summary>
         /// <param name="parcel">updated parcel</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void updateParcel(Parcel parcel)
+        public void UpdateParcel(Parcel parcel)
         {
             lock (dal)
             {
@@ -230,7 +230,7 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel ConvertParcelToTypeOfListToParcel(ParcelToList parcelToList)
         {
-            return GetParcelById(parcelToList.ID);
+            return GetParcelById(parcelToList.Id);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace BL
         {
             return new ParcelToList()
             {
-                ID = parcel.Id,
+                Id = parcel.Id,
                 NameOfCustomerReciver = parcel.customerAtParcelReciver.Name,
                 NameOfCustomerSended = parcel.customerAtParcelSender.Name,
                 parcelStatus = calculateParcelsStatus(parcel),

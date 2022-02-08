@@ -7,25 +7,16 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-
+    /// <summary>
+    /// unmanned aerial vehicle that delivers parcels
+    /// </summary>
     public class Drone
     {
-        //public event Action <Drone> DroneChangaed;
-
-        public Drone(int id, string model, WeightCategories weightCategories, double battery)
-        {
-            Id = id;
-            Model = model;
-            MaxWeight = weightCategories;
-            Battery = battery;
-            ParcelInDelivery = new ParcelInDelivery();
-
-        }
-        public Drone()
-        {
-            ParcelInDelivery = new ParcelInDelivery();
-            battery = 100;
-        }
+        //public Drone()
+        //{
+        //    ParcelInDelivery = new ParcelInDelivery();
+        //    battery = 100;
+        //}
 
         private double battery;
         public int Id { get; set; }

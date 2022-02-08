@@ -96,7 +96,7 @@ namespace PL
             {
                 BO.Manager manager = new BO.Manager() { UserName = getUserName(), Password = getPassword() };
                 bool flag;
-                flag = bL.isManagerExist(manager);
+                flag = bL.IsValidMamager(manager);
                 if (flag == true)
                 {
                     currentUser.Type = userType.manager;
@@ -117,7 +117,7 @@ namespace PL
             catch (BO.NotFound)
             {
                 MessageBox.Show("you are not maneger, please login like user");
-               
+
             }
 
             catch (NotValidInput ex)
@@ -264,7 +264,7 @@ namespace PL
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
+            {
                 BO.Customer customer = bL.GetCustomerById(getId());
                 if ((customer.Name == getNameLog()))
                 {
@@ -275,14 +275,14 @@ namespace PL
                 else
                 {
                     MessageBox.Show("please sighn up");
-                   
+
                 }
 
             }
             catch (BO.NotFound)
             {
                 MessageBox.Show("please sighn up");
-               
+
             }
 
             catch (NotValidInput ex)
@@ -297,7 +297,13 @@ namespace PL
         {
             try
             {
-                BO.Customer customer = new BO.Customer() { Id = getIdSighnUp(), Name = getNameSighnUp(), Phone = getPhone(), Location = new BO.Location(getLutitude(), getLongitute()) };
+                BO.Customer customer = new BO.Customer()
+                {
+                    Id = getIdSighnUp(),
+                    Name = getNameSighnUp(),
+                    Phone = getPhone(),
+                    Location = new BO.Location() { Longitude = getLongitute(), Latitude = getLutitude()}
+                };
 
                 bL.AddCustomer(customer);
                 currentUser.Type = userType.cutomer;

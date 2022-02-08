@@ -19,7 +19,7 @@ namespace BL
          /// <param name="idDrone">id of drone</param>
          /// <param name="timeInCharging">time of drone in charging</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void releaseDroneFromCharging(int idDrone, double timeInCharging)
+        public void ReleaseDroneFromCharging(int idDrone, double timeInCharging)
         {
             Drone drone = GetDroneById(idDrone);
 
@@ -28,7 +28,7 @@ namespace BL
 
             drone.Battery += timeInCharging * RateOfCharching;
             drone.DroneStatus = DroneStatus.Free;
-            updateDrone(drone);
+            UpdateDrone(drone);
             DeleteDroneCharge(drone.Id);
 
         }
@@ -39,7 +39,7 @@ namespace BL
         /// </summary>
         /// <param name="idDrone">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void collectParcleByDrone(int idDrone)
+        public void CollectParcleByDrone(int idDrone)
         {
             Drone drone = GetDroneById(idDrone);
 
@@ -53,9 +53,9 @@ namespace BL
             drone.Battery -= useElectricity;
             drone.Location = locationSender;
             drone.ParcelInDelivery.IsWating = false;
-            updateDrone(drone);
+            UpdateDrone(drone);
             parcel.PickedUp = DateTime.Now;
-            updateParcel(parcel);
+            UpdateParcel(parcel);
 
 
         }
@@ -66,7 +66,7 @@ namespace BL
         /// </summary>
         /// <param name="droneId">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void supplyParcelByDrone(int droneId)
+        public void SupplyParcelByDrone(int droneId)
         {
 
             Drone drone = GetDroneById(droneId);
@@ -86,10 +86,10 @@ namespace BL
 
             Parcel parcel = GetParcelById(drone.ParcelInDelivery.Id);
             parcel.Delivered = DateTime.Now;
-            updateParcel(parcel);
+            UpdateParcel(parcel);
 
             drone.ParcelInDelivery = null;
-            updateDrone(drone);
+            UpdateDrone(drone);
 
         }
 
@@ -99,7 +99,7 @@ namespace BL
         /// </summary>
         /// <param name="droneId">id of drone</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void sendDroneToCharge(int droneId)
+        public void SendDroneToCharge(int droneId)
         {
             Drone drone = GetDroneById(droneId);
 
@@ -114,8 +114,12 @@ namespace BL
                 drone.Battery -= electricityNeeded;
                 drone.Location = closestStation.Location;
                 drone.DroneStatus = DroneStatus.Maintenance;
-                updateDrone(drone);
-                DroneCharge droneCharge = new DroneCharge(droneId, closestStation.Id);
+                UpdateDrone(drone);
+                DroneCharge droneCharge = new DroneCharge()
+                {
+                    DroneId = droneId,
+                    StationId = closestStation.Id
+                };
                 AddDroneCharge(droneCharge);
             }
             else
@@ -156,7 +160,7 @@ namespace BL
             foreach (var parcel in GetParcels())
             {
                 //if the parcel is already assigned to a drone, continue
-                if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue; 
+                if (parcel.droneAtParcel != null || parcel.Scheduled != null) continue;
 
                 if (isEnoughBattaryToDeliverTheParcel(drone.Battery, drone.Location, parcel) && drone.MaxWeight >= parcel.Weight)
                 {
@@ -185,11 +189,11 @@ namespace BL
 
             drone.DroneStatus = DroneStatus.Delivery;
             drone.ParcelInDelivery = convertParcelToTypeOfParcelInDelivery(bestParcel, true);
-            updateDrone(drone);
+            UpdateDrone(drone);
             bestParcel.droneAtParcel = new DroneAtParcel { Id = drone.Id, Battery = drone.Id, Location = drone.Location };
             bestParcel.Scheduled = DateTime.Now;
-            updateParcel(bestParcel);
-            updateDrone(drone);
+            UpdateParcel(bestParcel);
+            UpdateDrone(drone);
         }
     }
 }

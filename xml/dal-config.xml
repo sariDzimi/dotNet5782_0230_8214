@@ -3,7 +3,7 @@
 	<dal>list</dal>
 	<dal-packages>
 		<list>
-			<object>DalXml</object>
+			<object>DalObject</object>
 					<!--<xml>DalXml</xml>-->
 
 

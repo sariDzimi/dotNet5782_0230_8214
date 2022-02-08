@@ -220,7 +220,7 @@ namespace PL
                 Pritorities pritorities = getPritorities();
                 parcel.Pritority = pritorities;
                 parcel.Weight = weightCategories;
-                bL1.updateParcel(parcel);
+                bL1.UpdateParcel(parcel);
 
             }
             catch (NotValidInput ex)
@@ -239,7 +239,7 @@ namespace PL
             else
             {
                 parcel.Delivered = DateTime.Now;
-                bL1.updateParcel(parcel);
+                bL1.UpdateParcel(parcel);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
 
             }
@@ -254,7 +254,7 @@ namespace PL
             else
             {
                 parcel.PickedUp = DateTime.Now;
-                bL1.updateParcel(parcel);
+                bL1.UpdateParcel(parcel);
                 PickedUpLabel.Text = $"{parcel.PickedUp}";
                 DeliveredC.Visibility = Visibility.Visible;
             }

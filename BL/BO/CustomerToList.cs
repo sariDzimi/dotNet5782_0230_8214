@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// details of customer when apears in a list
+    /// </summary>
     public class CustomerToList
     {
         public int Id { get; set; }

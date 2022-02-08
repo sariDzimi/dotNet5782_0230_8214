@@ -40,7 +40,7 @@ namespace PL
             bl = blArg;
             station = stationArg;
             station_P = new Station_p() { ID = station.Id, Name = station.Name, Longitude = station.Location.Longitude, Latitude = station.Location.Latitude, FreeChargeSlots = station.FreeChargeSlots };
-            DroneChargingListView.ItemsSource = station.droneAtChargings;
+            DroneChargingListView.ItemsSource = station.DroneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
             DataContext = station_P;
 
@@ -78,7 +78,7 @@ namespace PL
                 {
                     Id = getId(),
                     Name = getName(),
-                    droneAtChargings = null,
+                    DroneAtChargings = null,
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
@@ -102,7 +102,7 @@ namespace PL
                 {
                     Id = getId(),
                     Name = getName(),
-                    droneAtChargings = null,
+                    DroneAtChargings = null,
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
@@ -127,7 +127,7 @@ namespace PL
             {
                 double longitude = Convert.ToDouble(longitudeTextBox.Text);
                 double latitude = Convert.ToDouble(laditudeTextBox.Text);
-                return new Location(longitude, latitude);
+                return new Location() { Longitude = longitude, Latitude = latitude};
             }
             catch
             {

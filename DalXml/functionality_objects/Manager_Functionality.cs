@@ -10,6 +10,7 @@ namespace Dal
 {
     partial class DalXml : IDal
     {
+        #region Get Managers
         /// <summary>
         /// returns managers form managers xml file
         /// </summary>
@@ -40,5 +41,7 @@ namespace Dal
                    select manager;
 
         }
+
+        #endregion
     }
 }

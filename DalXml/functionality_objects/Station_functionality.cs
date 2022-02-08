@@ -11,7 +11,37 @@ namespace Dal
     public partial class DalXml : IDal
     {
 
-        #region Station
+        #region Add Station
+
+        /// <summary>
+        /// adds station to stations xml file
+        /// </summary>
+        /// <param name="station"></param>
+        public void AddStation(DO.Station station)
+        {
+            XElement elements = XMLTools.LoadData(dir + stationFilePath);
+            XElement element = (from p in elements.Elements()
+                                where Convert.ToInt32(p.Element("Id").Value) == station.Id
+                                select p).FirstOrDefault();
+            if (element == null)
+            {
+                XElement Id = new XElement("Id", station.Id);
+                XElement Name = new XElement("Name", station.Name);
+                XElement ChargeSlots = new XElement("ChargeSlots", station.ChargeSlots);
+                XElement Latitude = new XElement("Latitude", station.Latitude);
+                XElement Longitude = new XElement("Longitude", station.Longitude);
+                elements.Add(new XElement("station", Id, Name, ChargeSlots, Latitude, Longitude));
+                elements.Save(dir + stationFilePath);
+            }
+            else
+            {
+                throw new IdAlreadyExistException("station", station.Id);
+            }
+        }
+
+        #endregion
+
+        #region Get Station
 
         /// <summary>
         /// returns stations form stations xml file
@@ -75,54 +105,9 @@ namespace Dal
             return station;
         }
 
-        /// <summary>
-        /// adds station to stations xml file
-        /// </summary>
-        /// <param name="station"></param>
-        public void AddStation(DO.Station station)
-        {
-            XElement elements = XMLTools.LoadData(dir + stationFilePath);
-            XElement element = (from p in elements.Elements()
-                                where Convert.ToInt32(p.Element("Id").Value) == station.Id
-                                select p).FirstOrDefault();
-            if (element == null)
-            {
-                XElement Id = new XElement("Id", station.Id);
-                XElement Name = new XElement("Name", station.Name);
-                XElement ChargeSlots = new XElement("ChargeSlots", station.ChargeSlots);
-                XElement Latitude = new XElement("Latitude", station.Latitude);
-                XElement Longitude = new XElement("Longitude", station.Longitude);
-                elements.Add(new XElement("station", Id, Name, ChargeSlots, Latitude, Longitude));
-                elements.Save(dir + stationFilePath);
-            }
-            else
-            {
-                throw new IdAlreadyExistException("station", station.Id);
-            }
-        }
+        #endregion
 
-        /// <summary>
-        /// deletes station from stations xml file
-        /// </summary>
-        /// <param name="id">id of station</param>
-        public void DeleteStation(int id)
-        {
-            XElement element = XMLTools.LoadData(dir + stationFilePath);
-            XElement elements;
-            try
-            {
-                elements = (from p in element.Elements()
-                            where Convert.ToInt32(p.Element("Id").Value) == id
-                            select p).First();
-            }
-            catch
-            {
-                throw new NotFoundException("Station", id);
-            }
-
-            elements.Remove();
-            element.Save(dir + stationFilePath);
-        }
+        #region Update Station
 
         /// <summary>
         /// updates the station in the stations xml file
@@ -148,6 +133,32 @@ namespace Dal
             element.Element("Latitude").Value = station.Latitude.ToString();
             element.Element("Longitude").Value = station.Longitude.ToString();
             elements.Save(dir + stationFilePath);
+        }
+        #endregion
+
+        #region Delete Station
+
+        /// <summary>
+        /// deletes station from stations xml file
+        /// </summary>
+        /// <param name="id">id of station</param>
+        public void DeleteStation(int id)
+        {
+            XElement element = XMLTools.LoadData(dir + stationFilePath);
+            XElement elements;
+            try
+            {
+                elements = (from p in element.Elements()
+                            where Convert.ToInt32(p.Element("Id").Value) == id
+                            select p).First();
+            }
+            catch
+            {
+                throw new NotFoundException("Station", id);
+            }
+
+            elements.Remove();
+            element.Save(dir + stationFilePath);
         }
 
         #endregion

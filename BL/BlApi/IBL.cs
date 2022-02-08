@@ -11,20 +11,20 @@ namespace BlApi
 {
     public interface IBL
     {
-        public void releaseDroneFromCharging(int idDrone, double timeInCharging);
-        public void collectParcleByDrone(int idDrone);
-        public void sendDroneToCharge(int droneId);
+        public void ReleaseDroneFromCharging(int idDrone, double timeInCharging);
+        public void CollectParcleByDrone(int idDrone);
+        public void SendDroneToCharge(int droneId);
         public void AssignAParcelToADrone(int id);
-        public void supplyParcelByDrone(int DroneID);
+        public void SupplyParcelByDrone(int DroneID);
        
         public void AddDrone(int id, WeightCategories weight, string model, int numberStaion);
         public IEnumerable<Station> GetStations();
         public IEnumerable<Parcel> GetParcels();
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<Drone> GetDrones();
-        public void updateDroneModel(int id, string model);
+        public void UpdateDroneModel(int id, string model);
         public void UpdateDataStation(int id, int name = -1, int totalChargeSlots = -1);
-        public void updateDrone(Drone drone);
+        public void UpdateDrone(Drone drone);
         public IEnumerable<DroneToList> GetDroneToLists();
         public IEnumerable<DroneToList> GetDroneToListsBy(Predicate<Drone> findBy);
         public Drone ConvertDroneToListToDrone(DroneToList droneToList);
@@ -50,7 +50,7 @@ namespace BlApi
 
         public IEnumerable<CustomerToList> GetCustomerToLists();
 
-        public CustomerToList convertCustomerToTypeOfCustomerToList(Customer customer);
+        public CustomerToList ConvertCustomerToTypeOfCustomerToList(Customer customer);
         public ParcelToList convertParcelToTypeOfParcelToList(Parcel parcel);
 
         public Parcel ConvertParcelToTypeOfListToParcel(ParcelToList parcelToList);
@@ -61,13 +61,13 @@ namespace BlApi
 
         public void UpdateStation(Station station);
 
-        public void updateParcel(Parcel parcel);
+        public void UpdateParcel(Parcel parcel);
 
-        public void updateCustomer(Customer customer);
+        public void UpdateCustomer(Customer customer);
 
         public void AddCustomer(Customer customer);
 
-        public bool isManagerExist(Manager manager);
+        public bool IsValidMamager(Manager manager);
 
         public void DeleateParcel(int id);
 

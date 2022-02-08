@@ -5,29 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    namespace BO
+namespace BO
+{
+    /// <summary>
+    /// details of drone when apears in a list
+    /// </summary>
+    public class DroneToList
     {
-        public class DroneToList
+        public int Id { get; set; }
+
+        public string Model { get; set; }
+
+        public double Battery { get; set; }
+
+        public DroneStatus DroneStatus { get; set; }
+
+        public Location Location { get; set; }
+
+        public int NumberOfSendedParcel { get; set; }
+
+        public override string ToString()
         {
-            public int Id { get; set; }
-
-            public string Model { get; set; }
-
-            public double Battery { get; set; }
-
-            public DroneStatus DroneStatus { get; set; }
-
-            public Location Location { get; set; }
-
-            public int NumberOfSendedParcel { get; set; }
-
-            public override string ToString()
-            {
-                return $"id:{Id}, model:{Model}, battery:{Battery}%, drone status:{DroneStatus}, location:{Location}, number of sended parcels:{NumberOfSendedParcel}";
-            }
-
+            return $"id:{Id}, model:{Model}, battery:{Battery}%, drone status:{DroneStatus}, location:{Location}, number of sended parcels:{NumberOfSendedParcel}";
         }
 
-
     }
+
+
+}
 

@@ -73,7 +73,7 @@ namespace PL
         private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
-            BO.Station station = bL.GetStationById(stationToList.ID);
+            BO.Station station = bL.GetStationById(stationToList.Id);
             Window.GetWindow(this).Content = new StationPage(bL, station, currentUser, this);
         }
 

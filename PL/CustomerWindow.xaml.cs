@@ -77,7 +77,7 @@ namespace PL
                 bl.AddCustomer(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
                 Close();
                 MessageBox.Show("The customer added");
-                Customers.AddeCustomer(bl.convertCustomerToTypeOfCustomerToList(bl.GetCustomerById(getId())));
+                Customers.AddeCustomer(bl.ConvertCustomerToTypeOfCustomerToList(bl.GetCustomerById(getId())));
             }
             catch(Exception ex)
             {
@@ -89,7 +89,7 @@ namespace PL
         {
             try
             {
-                bl.updateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
+                bl.UpdateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
                 MessageBox.Show("The customer Updeted");
                 CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == Customer_P.Id);
                 this.Customer_P.UpdateFromBL(bl.GetCustomerById(getId()));
@@ -127,7 +127,7 @@ namespace PL
             {
                 double longitude = Convert.ToDouble(longitudeTextBox.Text);
                 double latitude = Convert.ToDouble(latitudeTextBox.Text);
-                return new Location(longitude, latitude);
+                return new Location(){ Longitude = longitude, Latitude = latitude};
             }
             catch
             {
@@ -142,7 +142,7 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
             new ParcelWindow(bl, parcel, currentUser).Show();
         }
 

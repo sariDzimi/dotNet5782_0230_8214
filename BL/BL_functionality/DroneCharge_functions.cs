@@ -78,7 +78,12 @@ namespace BL
         #region Convert DroneCharge
         private DroneCharge ConvertDroneChargeDalToBL(DO.DroneCharge droneChargeDL)
         {
-            return new DroneCharge(droneChargeDL.DroneId, droneChargeDL.StationId);
+            return new DroneCharge()
+            {
+                DroneId = droneChargeDL.DroneId,
+                StationId = droneChargeDL.StationId,
+                StartCharging = droneChargeDL.StartCharging
+            };
         }
         #endregion
     }
