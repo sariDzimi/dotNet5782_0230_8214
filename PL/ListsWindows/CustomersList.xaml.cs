@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace PL
     /// </summary>
     public partial class CustomersList : Window
     {
+        ObservableCollection<CustomerToList> Customers = new ObservableCollection<CustomerToList>();
+
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         CustomerList customerList = new CustomerList();
@@ -38,13 +41,17 @@ namespace PL
             currentUser = currentUser1;
             InitializeComponent();
             bl = blArg;
-            customerList.Customers = customerList.ConvertCustomerlBLToPL(bl.GetCustomerToLists().ToList());
-            customersListView.DataContext = customerList.Customers;
+            Customers = Convert<CustomerToList>(bl.GetCustomerToLists());
+            DataContext = Customers;
             WindowStyle = WindowStyle.None;
             CurrentUser.Text = currentUser.Type.ToString();
 
         }
 
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -52,9 +59,10 @@ namespace PL
 
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
-            Customer_p  customerToList = (sender as ListView).SelectedValue as Customer_p;
+            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-            new CustomerWindow(bl, customer, currentUser, customerList).Show();
+            CustomerWindow OpenWindow = new CustomerWindow(bl, customer, currentUser, customerList);
+
         
     }
 

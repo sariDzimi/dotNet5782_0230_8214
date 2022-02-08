@@ -352,6 +352,32 @@
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
+    <Id>45745</Id>
+    <SenderId>7</SenderId>
+    <TargetId>7</TargetId>
+    <Weight>Light</Weight>
+    <Pritority>Reguler</Pritority>
+    <Requested>2022-02-08T16:42:42.4350141+02:00</Requested>
+    <DroneId>1</DroneId>
+    <Scheduled>2022-02-08T16:42:54.7768989+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>true</IsActive>
+  </Parcel>
+  <Parcel>
+    <Id>77777</Id>
+    <SenderId>9</SenderId>
+    <TargetId>9</TargetId>
+    <Weight>Light</Weight>
+    <Pritority>Reguler</Pritority>
+    <Requested>2022-02-08T17:11:38.8677532+02:00</Requested>
+    <DroneId>0</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <IsActive>false</IsActive>
+  </Parcel>
+  <Parcel>
     <Id>523467</Id>
     <SenderId>2</SenderId>
     <TargetId>2</TargetId>
@@ -376,18 +402,5 @@
     <PickedUp>2022-01-30T00:45:49.5855542+02:00</PickedUp>
     <Delivered>2022-01-30T00:45:50.6254906+02:00</Delivered>
     <IsActive>true</IsActive>
-  </Parcel>
-  <Parcel>
-    <Id>4215638</Id>
-    <SenderId>2</SenderId>
-    <TargetId>2</TargetId>
-    <Weight>Light</Weight>
-    <Pritority>Reguler</Pritority>
-    <Requested>2022-02-08T14:25:35.1205141+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <IsActive>false</IsActive>
   </Parcel>
 </ArrayOfParcel>

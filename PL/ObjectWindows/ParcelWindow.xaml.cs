@@ -81,7 +81,7 @@ namespace PL
             if (Parcel_P.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
-                Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(DeleteParcelToList);
+               // Parcel_P.ListChangedDelegate +=DeleteParcelToList;
 
             }
 
@@ -107,12 +107,15 @@ namespace PL
                 ChangedParcelDelegate(parcel);
             }
         }
-        public void DeleteParcelToList(BO.Parcel parcel)
-        {
+        //public void DeleteParcelToList(BO.Parcel parcel)
+        /*{
 
-
+            if (ChangedParcelDelegate != null)
+            {
+                ChangedParcelDelegate(parcel);
+            }
         }
-
+*/
 
         private void AddParcel(object sender, RoutedEventArgs e)
         {
@@ -121,7 +124,7 @@ namespace PL
                 // BO.Parcel parcel = new Parcel();
                 //parcel.Requested = DateTime.Now;
                 Customer customerSender = bL1.GetCustomerById(getIdSender());
-                Customer customerReceiver = bL1.GetCustomerById(getIdSender());
+                Customer customerReceiver = bL1.GetCustomerById(getIdReciver());
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
                 bL1.AddParcel(new BO.Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
@@ -265,10 +268,10 @@ namespace PL
            // Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
 
             bL1.DeleateParcel(parcel.Id);
-            BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
+           // BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
             if (Parcel_P.ListChangedDelegate != null)
             {
-                Parcel_P.ListChangedDelegate(parcelCorrent);
+                Parcel_P.ListChangedDelegate(parcel);
             }
             //parcelList.DeleateParcel(Parcel_P);
             Close();
