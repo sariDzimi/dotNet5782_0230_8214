@@ -12,7 +12,7 @@ namespace PO
 {
     public class Station_p : DependencyObject
     {
-        public Changed<BO.Station> ListChangedDelegate;
+        public Action<BO.Station> ListChangedDelegate;
 
         public void Update(BO.Station station)
         {

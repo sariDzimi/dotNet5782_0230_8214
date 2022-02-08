@@ -12,7 +12,7 @@ namespace PO
 {
     public class Customer_p : DependencyObject
     {
-        public Changed<BO.Customer> ListChangedDelegate;
+        public Action<BO.Customer> ListChangedDelegate;
 
 
 

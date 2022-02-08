@@ -19,12 +19,14 @@ using PL.PO;
 
 namespace PL
 {
-    public delegate void Changed<T>(T change);
+   // public delegate void Changed<T>(T change);
     /// <summary>
     /// Interaction logic for ParcelsList.xaml
     /// </summary>
+    /// 
     public partial class ParcelsList : Window
     {
+        ParcelWindow OpenWindow;
         public CurrentUser currentUser = new CurrentUser();
 
         private IBL bl;
@@ -64,10 +66,16 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcel = bl.GetParcelById(parcelToList.Id);
-            ParcelWindow OpenWindow = new ParcelWindow(bl, parcel, currentUser);
+            BO.Parcel parcel = bl.GetParcelById(parcelToList.ID);
+            OpenWindow = new ParcelWindow(bl, parcel, currentUser);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
+            if (parcelToList.parcelStatus == ParcelStatus.Requested)
+            {
+                OpenWindow.ChangedParcelDelegate += DeleteParcel;
+
+            }
             OpenWindow.Show();
+
         }
 
 
@@ -76,6 +84,7 @@ namespace PL
             ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             int index = Parcels.IndexOf(parcelToList);
             Parcels[index] = new ParcelToList() { Id = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
+
 
         }
         public void AddParcelToLst(BO.Parcel parcel)
@@ -94,33 +103,37 @@ namespace PL
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
             Parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.pritorities == selected));
             DataContext = Parcels;
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfSender");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
             view.GroupDescriptions.Add(groupDescription);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
+
             clearListView();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfReciver");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
             view.GroupDescriptions.Add(groupDescription);
 
         }
         private void clearListView()
         {
-            parcelsList.Parcels = parcelsList.ClearParcels();
-            parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
-            ParcelsListView.DataContext = parcelsList.Parcels;
+            Parcels = new ObservableCollection<ParcelToList>();
+            Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
+            //parcelsList.Parcels = parcelsList.ClearParcels();
+            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
+            DataContext = Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
 
         }
@@ -140,14 +153,8 @@ namespace PL
         {
             ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             Parcels.Remove(parcelToList);
+            OpenWindow.ChangedParcelDelegate -= UpdateInList;
         }
-
-           /* ParcelWindow OpenWindow = new ParcelWindow(bl, currentUser);
-            OpenWindow.ChangedParcelDelegate += AddParcelToLst;
-            OpenWindow.Show();*/
-                //Close();
-                //new ParcelWindow(bl, currentUser).Show();
-            
         private void close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
