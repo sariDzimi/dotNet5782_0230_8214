@@ -9,12 +9,12 @@ using DalApi;
 namespace DalApi
 {
     /// <summary>
-    /// define object of dal
+    /// defines object of dal
     /// </summary>
     public static class DalFactory
     {
         /// <summary>
-        /// creats an object of DaL,
+        /// creats an object of Dal,
         /// based on the type of DalCongfig
         /// </summary>
         /// <returns>instance of dal</returns>

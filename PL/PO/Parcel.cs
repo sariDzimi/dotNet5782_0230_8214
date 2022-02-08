@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using BO;
 using System.Diagnostics;
 using System.Windows;
+using PL;
 
 namespace PO
 {
      public class Parcel_p : DependencyObject
     {
-
+        public Changed<BO.Parcel> ListChangedDelegate;
         //ID
         public static readonly DependencyProperty IdParcel =
       DependencyProperty.Register("ID",

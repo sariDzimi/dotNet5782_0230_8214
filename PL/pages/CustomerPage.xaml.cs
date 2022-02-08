@@ -65,7 +65,7 @@ namespace PL
         {
             try
             {
-                bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
+                bl.AddCustomer(new Customer { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
                 MessageBox.Show("customer ids added succesfuly!");
                 Window.GetWindow(this).Content = new CustomerListPage(bl, currentUser);
             }

@@ -28,11 +28,13 @@ namespace PL
         public CurrentUser currentUser = new CurrentUser();
 
         private IBL bl;
-        ObservableCollection<Parcel_p> parcel_Ps = new ObservableCollection<Parcel_p>();
+
+        ObservableCollection<ParcelToList> Parcels = new ObservableCollection<ParcelToList>();
+
         CollectionView view;
-        List<ParcelToList> items;
+        //List<ParcelToList> items;
         ParcelList parcelsList = new ParcelList();
-        CustomerList Customer = new CustomerList();
+        //CustomerList Customer = new CustomerList();
         //DroneList droneList = new DroneList();
 
         public ParcelsList()
@@ -40,49 +42,59 @@ namespace PL
             InitializeComponent();
         }
 
-        public ParcelsList(IBL bL1, CurrentUser currentUser1, CustomerList customer)
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
+
+        public ParcelsList(IBL bL1, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
-            //Customer = customer;
             InitializeComponent();
             bl = bL1;
-
-
-            items = bl.GetParcelToLists().ToList();
-            parcel_Ps = parcelsList.ConvertParcelBLToPL(items);
+            Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             CurrentUser.Text = currentUser.Type.ToString();
-            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(items);
-            ParcelsListView.DataContext = parcel_Ps;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            DataContext = Parcels;
+
         }
-
-
 
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
-            Parcel_p parcel = (sender as ListView).SelectedValue as Parcel_p;
-            BO.Parcel parcelBL = bl.GetParcelById(parcel.ID);
-            new ParcelWindow(bl, parcelBL, currentUser, Customer).Show();
-            Close();
+            ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
+            BO.Parcel parcel = bl.GetParcelById(parcelToList.ID);
+            ParcelWindow OpenWindow = new ParcelWindow(bl, parcel, currentUser);
+            OpenWindow.ChangedParcelDelegate += UpdateInList;
+            OpenWindow.Show();
+        }
+
+
+        public void UpdateInList(BO.Parcel parcel)
+        {
+            ParcelToList parcelToList = Parcels.First((d) => d.ID == parcel.Id);
+            int index = Parcels.IndexOf(parcelToList);
+            Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
+
+        }
+        public void AddParcelToLst(BO.Parcel parcel)
+        {
+            Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            parcelsList.ClearParcels();
-            parcelsList.ConvertParcelBLToPL(bl.GetParcelsToListBy((d) => d.weightCategories == selected).ToList());
-            ParcelsListView.DataContext = parcelsList.Parcels;
-
+            Parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.weightCategories == selected));
+            DataContext = Parcels;
         }
 
         private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
-            parcelsList.ClearParcels();
-            parcelsList.ConvertParcelBLToPL(bl.GetParcelsToListBy((d) => d.pritorities == selected).ToList());
-            ParcelsListView.DataContext = parcelsList.Parcels;
+            Parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.pritorities == selected));
+            DataContext = Parcels;
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -115,7 +127,12 @@ namespace PL
 
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
-            new ParcelWindow(bl, currentUser, parcelsList.Parcels).Show();
+
+            ParcelWindow OpenWindow = new ParcelWindow(bl, currentUser);
+            OpenWindow.ChangedParcelDelegate += AddParcelToLst;
+            OpenWindow.Show();
+            //Close();
+            //new ParcelWindow(bl, currentUser).Show();
         }
 
         private void close_Click(object sender, RoutedEventArgs e)

@@ -56,14 +56,5 @@ namespace BL
             }
 
         }
-
-        /*        public void start(Drone drone, Action<Drone> simulateDrone, Func<bool> needToStop)
-                {
-                    while (!needToStop())
-                    {
-
-                        Thread.Sleep(DELAY);
-                    }
-                }*/
     }
 }

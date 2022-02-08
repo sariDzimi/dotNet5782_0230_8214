@@ -74,10 +74,10 @@ namespace PL
         {
             try
             {
-                bl.addCustomerToDL(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
+                bl.AddCustomer(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
                 Close();
                 MessageBox.Show("The customer added");
-                Customers.AddeCustomer(bl.convertCustomerToCustomerToList(bl.GetCustomerById(getId())));
+                Customers.AddeCustomer(bl.convertCustomerToTypeOfCustomerToList(bl.GetCustomerById(getId())));
             }
             catch(Exception ex)
             {
@@ -143,7 +143,7 @@ namespace PL
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
-            new ParcelWindow(bl, parcel, currentUser, Customers).Show();
+            new ParcelWindow(bl, parcel, currentUser).Show();
         }
 
         #endregion

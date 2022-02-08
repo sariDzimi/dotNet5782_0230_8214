@@ -48,7 +48,7 @@ namespace PL
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             //this.Content = new ParcelListPage(bL1, currentUser);
-            new ParcelsList(bL1, currentUser, CustomersList).Show();
+            new ParcelsList(bL1, currentUser).Show();
         }
         private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
         {

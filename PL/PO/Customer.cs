@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows;
 using BO;
+using PL;
+
 namespace PO
 {
     public class Customer_p : DependencyObject
     {
+        public Changed<BO.Customer> ListChangedDelegate;
+
 
 
         public void UpdateFromBL(BO.Customer customer)

@@ -6,12 +6,28 @@ using System.Threading.Tasks;
 using BO;
 using System.Diagnostics;
 using System.Windows;
-
+using PL;
 
 namespace PO
 {
     public class Station_p : DependencyObject
     {
+        public Changed<BO.Station> ListChangedDelegate;
+
+        public void Update(BO.Station station)
+        {
+            ID = station.Id;
+            FreeChargeSlots = station.FreeChargeSlots;
+            Name = station.Name;
+            Longitude = station.Location.Longitude;
+            Latitude = station.Location.Latitude;
+
+            if (ListChangedDelegate != null)
+            {
+                ListChangedDelegate(station);
+            }
+        }
+
         //freeChargeSlots
         public static readonly DependencyProperty freeChargeSlots =
        DependencyProperty.Register("numberOfFreeChargeSlots",

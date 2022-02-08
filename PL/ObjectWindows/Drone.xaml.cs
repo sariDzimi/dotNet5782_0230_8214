@@ -26,7 +26,7 @@ namespace PL
     public partial class Drone : Window
     {
         CurrentUser currentUser = new CurrentUser();
-        public Changed<BO.Drone> ChangedDrone;
+        public Changed<BO.Drone> ChangedDroneDelegate;
         IBL bL;
         BO.Drone drone;
         Drone_p drone_P  = new Drone_p();
@@ -49,7 +49,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
             CurrentUser.Text = currentUser.Type.ToString();
-            drone_P.ListChanged += new Changed<BO.Drone>(UpdateDroneList);
+            drone_P.ListChangedDelegate += new Changed<BO.Drone>(UpdateDroneList);
 
         }
 
@@ -61,7 +61,7 @@ namespace PL
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  };
-            drone_P.ListChanged += new Changed<BO.Drone>(UpdateDroneList);
+            drone_P.ListChangedDelegate += new Changed<BO.Drone>(UpdateDroneList);
             bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
@@ -107,9 +107,9 @@ namespace PL
 
         public void UpdateDroneList(BO.Drone drone)
         {
-            if(ChangedDrone!= null)
+            if(ChangedDroneDelegate!= null)
             {
-                ChangedDrone(drone);
+                ChangedDroneDelegate(drone);
             }
         }
 
@@ -148,11 +148,11 @@ namespace PL
         {
             try
             {
-                bL.addDroneToBL(getId(), getMaxWeight(), getModel(), getNumberOfStation());
+                bL.AddDrone(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 BO.Drone drone = bL.GetDroneById(getId());
-                if (drone_P.ListChanged != null)
+                if (drone_P.ListChangedDelegate != null)
                 {
-                    drone_P.ListChanged(drone);
+                    drone_P.ListChangedDelegate(drone);
                 }
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
@@ -310,14 +310,14 @@ namespace PL
             }
         }
 
-        private int getMaxWeight()
+        private WeightCategories getMaxWeight()
         {
             if (WeightSelector.SelectedItem == null)
                 throw new NotValidInput("Max Weight");
             try
             {
 
-                return (int)(WeightCategories)WeightSelector.SelectedItem;
+                return (WeightCategories)WeightSelector.SelectedItem;
             }
             catch (Exception)
             {

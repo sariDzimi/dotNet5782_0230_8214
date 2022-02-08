@@ -7,12 +7,18 @@ using BlApi;
 
 namespace BL
 {
-     public static class BLFactory
+    /// <summary>
+    /// defines object of BL
+    /// </summary>
+    public static class BLFactory
     {
+        /// <summary>
+        /// gets an instance of BL
+        /// </summary>
+        /// <returns>instance of BL</returns>
         public static IBL GetBl()
         {
             return BL.GetInstance;
-
         }
     }
 }

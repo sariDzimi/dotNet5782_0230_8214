@@ -85,10 +85,10 @@ namespace BL
 
                 if (droneBL.DroneStatus == DroneStatus.Maintenance)
                 {
-                    Station station = GetRandomStation();
+                    Station station = getRandomStation();
                     droneBL.Location = station.Location;
                     droneBL.Battery = rand.Next(0, 21);
-                    DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneDL.Id, stationId = station.Id };
+                    DO.DroneCharge droneChargeDL = new DO.DroneCharge() { DroneId = droneDL.Id, StationId = station.Id };
                     dal.AddDroneCharge(droneChargeDL);
                     droneBL.Location = station.Location;
                 }
@@ -104,7 +104,7 @@ namespace BL
                     }
                     catch (Exception)
                     {
-                        droneBL.Location = GetRandomStation().Location;
+                        droneBL.Location = getRandomStation().Location;
                     }
                     double electicityNeeded = calculateElectricityWhenFree(droneBL.Location, closestStationToLoacationWithFreeChargeSlots(droneBL.Location).Location);
                     droneBL.Battery = rand.Next((int)electicityNeeded, 100);
