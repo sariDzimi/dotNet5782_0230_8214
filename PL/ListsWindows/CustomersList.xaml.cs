@@ -68,7 +68,7 @@ namespace PL
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, currentUser, customerList).Show();
+            new CustomerWindow(bl, currentUser).Show();
 
         }
     }

@@ -247,7 +247,10 @@ namespace PL
                 parcel.Delivered = DateTime.Now;
                 bL1.updateParcel(parcel);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
-
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                }
             }
 
         }
@@ -263,6 +266,10 @@ namespace PL
                 bL1.updateParcel(parcel);
                 PickedUpLabel.Text = $"{parcel.PickedUp}";
                 DeliveredC.Visibility = Visibility.Visible;
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                }
             }
         }
 

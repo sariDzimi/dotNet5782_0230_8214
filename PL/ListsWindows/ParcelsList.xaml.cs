@@ -109,8 +109,13 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
-            view.GroupDescriptions.Add(groupDescription);
+            if(view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -123,9 +128,13 @@ namespace PL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
-            view.GroupDescriptions.Add(groupDescription);
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
 
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
         private void clearListView()
         {

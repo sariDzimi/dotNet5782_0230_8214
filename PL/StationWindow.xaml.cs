@@ -22,23 +22,25 @@ namespace PL
     /// </summary>
     public partial class StationWindow : Window
     {
+        public Action<BO.Station> ChangedParcelDelegate;
+
         CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Station station;
         Station_p station_P;
-        StationList StationsList = new StationList();
+        //StationList StationsList = new StationList();
 
         public StationWindow()
         {
             InitializeComponent();
         }
-        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1, StationList Stations)
+        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1) //StationList Stations)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
-            this.StationsList = Stations;
+            //this.StationsList = Stations;
             station = stationArg;
             station_P = new Station_p() { ID = station.Id, Name = station.Name, Longitude = station.Location.Longitude,Latitude= station.Location.Latitude, FreeChargeSlots = station.FreeChargeSlots };
             DroneChargingListView.ItemsSource = station.droneAtChargings;
@@ -47,13 +49,13 @@ namespace PL
             CurrentUser.Text = currentUser.Type.ToString();
         }
 
-        public StationWindow(IBL blArg, CurrentUser currentUser1, StationList Stations)
+        public StationWindow(IBL blArg, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
-            StationsList = Stations;
+            //StationsList = Stations;
             addStationLabel.Visibility = Visibility.Visible;
             CurrentUser.Text = currentUser.Type.ToString();
         }
@@ -86,7 +88,7 @@ namespace PL
                     FreeChargeSlots = getChargeSlots()
                 });
                 Station station = bl.GetStationById(getId());
-                StationsList.UpdateListStations(new Station_p() { ID = getId(), FreeChargeSlots = getChargeSlots(), Name = getName(), Latitude  = getLocation().Latitude, Longitude  = getLocation().Longitude });
+                //StationsList.UpdateListStations(new Station_p() { ID = getId(), FreeChargeSlots = getChargeSlots(), Name = getName(), Latitude  = getLocation().Latitude, Longitude  = getLocation().Longitude });
             }
 
             
@@ -95,6 +97,15 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void UpdateStationList(BO.Station station)
+        {
+            if (ChangedParcelDelegate != null)
+            {
+                ChangedParcelDelegate(station);
+            }
+        }
+        //
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -113,8 +124,12 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
-                Station station = bl.GetStationById(getId());
-                StationsList.AddStation(new StationToList() { ID = getId(), numberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
+                //Station station = bl.GetStationById(getId());
+                if (station_P.ListChangedDelegate != null)
+                {
+                    station_P.ListChangedDelegate(bl.GetStationById(getId()));
+                }
+                //StationsList.AddStation(new StationToList() { ID = getId(), numberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
                 MessageBox.Show("the Station added!!");
                 this.Close();
 

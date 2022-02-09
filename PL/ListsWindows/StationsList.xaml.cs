@@ -23,37 +23,44 @@ namespace PL
     /// </summary>
     public partial class StationsList : Window
     {
-        ObservableCollection<Station_p> Stations = new ObservableCollection<Station_p>();
+        ObservableCollection<StationToList> Stations = new ObservableCollection<StationToList>();
+        StationWindow OpenWindow;
 
         CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
-        List<StationToList> items;
+        //List<StationToList> items;
         StationList stationList = new StationList();
         public StationsList()
         {
             InitializeComponent();
         }
 
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
         public StationsList(IBL bl, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
-            items = bl.GetStationToLists().ToList();
-            Stations = stationList.ConvertStationBLToPL(items);
+            //items = bl.GetStationToLists().ToList();
+            Stations = Convert<StationToList>(bl.GetStationToLists());
+
             //stationList.Stations = stationList.ConvertStationBLToPL(items);
-            StationsListView.DataContext = Stations;
-            view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
+            DataContext = Stations;
+            //view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
-            stationList.ClearStations();
-            stationList.ConvertStationBLToPL(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0).ToList());
-           // StationsListView.DataContext = stationList.Stations;
+            clearListView();
+            //stationList.ClearStations();
+            Stations=Convert<StationToList>(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0));
+            // StationsListView.DataContext = stationList.Stations;
 
         }
 
@@ -66,10 +73,15 @@ namespace PL
 
         private void clearListView()
         {
-            stationList.Stations = stationList.ClearStations();
-            stationList.Stations = stationList.ConvertStationBLToPL(bL.GetStationToLists().ToList());
-            StationsListView.DataContext = stationList.Stations;
+            //stationList.Stations = stationList.ClearStations();
+            //stationList.Stations = stationList.ConvertStationBLToPL(bL.GetStationToLists().ToList());
+            Stations = new ObservableCollection<StationToList>();
+            Stations = Convert<StationToList>(bL.GetStationToLists());
+            //parcelsList.Parcels = parcelsList.ClearParcels();
+            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
+            DataContext = Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
+
         }
 
         private void Button_Click_ClearGroupBy(object sender, RoutedEventArgs e)
@@ -84,15 +96,35 @@ namespace PL
 
         private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
         {
-            Station_p stationToList = (sender as ListView).SelectedValue as Station_p;
+            StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.GetStationById(stationToList.ID);
-            new StationWindow(bL, station, currentUser, stationList).Show();
-            
+            OpenWindow = new StationWindow(bL, station, currentUser);
+            OpenWindow.ChangedParcelDelegate += UpdateInList;
+            OpenWindow.Show();
+
         }
+
+        private void UpdateInList(BO.Station station)
+        {
+            StationToList stationToList = Stations.First((d) => d.ID == station.Id);
+            int index = Stations.IndexOf(stationToList);
+            Stations[index] = new StationToList() { ID = station.Id, Name = station.Name, numberOfFreeChargeSlots = station.FreeChargeSlots };
+
+
+        }
+
+        private void AddStationToLst(BO.Station station)
+        {
+            Stations.Add(new StationToList() { ID = station.Id, Name = station.Name, numberOfFreeChargeSlots = station.FreeChargeSlots });
+        }
+
 
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-            new StationWindow(bL, currentUser, stationList).Show();
+            OpenWindow = new StationWindow(bL, currentUser);
+            OpenWindow.ChangedParcelDelegate += AddStationToLst;
+            OpenWindow.Show();
+            //new StationWindow(bL, currentUser).Show();
         }
 
         private void closeButton_click(object sender, RoutedEventArgs e)
