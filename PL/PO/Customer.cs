@@ -13,18 +13,13 @@ namespace PO
     public class Customer_p : DependencyObject
     {
         public Action<BO.Customer> ListChangedDelegate;
-
-
-
         public void UpdateFromBL(BO.Customer customer)
         {
             this.Id = customer.Id;
             this.Latitude = customer.Location.Latitude;
             this.Longitude = customer.Location.Longitude;
             this.Name = customer.Name;
-            //this.NumberOfParcelsInTheWayToCutemor = 
         }
-
         public void UpdateFromToList(CustomerToList  customer)
         {
 

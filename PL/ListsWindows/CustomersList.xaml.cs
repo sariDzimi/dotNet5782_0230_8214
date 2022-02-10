@@ -25,6 +25,7 @@ namespace PL
     public partial class CustomersList : Window
     {
         ObservableCollection<CustomerToList> Customers = new ObservableCollection<CustomerToList>();
+        CustomerWindow OpenWindow;
 
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
@@ -60,15 +61,27 @@ namespace PL
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-            CustomerWindow OpenWindow = new CustomerWindow(bl, customer, currentUser);
+            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), currentUser);
+            OpenWindow.ChangedParcelDelegate += UpdateInList;
+            OpenWindow.Show();
 
-        
-    }
+        }
+        private void UpdateInList(BO.Customer customer) {
+            CustomerToList parcelToList =Customers.First((d) => d.Id == customer.Id);
+            int index = Customers.IndexOf(parcelToList);
+            Customers[index] = bl.convertCustomerToTypeOfCustomerToList(customer);
+        }
+
+        public void AddCustomerToLst(BO.Customer parcel)
+        {
+            Customers.Add(bl.convertCustomerToTypeOfCustomerToList(parcel));
+        }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, currentUser).Show();
+            OpenWindow = new CustomerWindow(bl, currentUser);
+            OpenWindow.ChangedParcelDelegate += AddCustomerToLst;
+            OpenWindow.Show();
 
         }
     }

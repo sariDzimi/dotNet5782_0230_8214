@@ -83,13 +83,14 @@ namespace PL
         {
             ParcelToList parcelToList = Parcels.First((d) => d.ID == parcel.Id);
             int index = Parcels.IndexOf(parcelToList);
-            Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
-
+            //Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
+            Parcels[index] = bl.convertParcelToTypeOfParcelToList(parcel);
 
         }
         public void AddParcelToLst(BO.Parcel parcel)
         {
-            Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
+           // Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
+            Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -150,7 +151,7 @@ namespace PL
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
 
-            ParcelWindow OpenWindow = new ParcelWindow(bl, currentUser);
+            OpenWindow = new ParcelWindow(bl, currentUser);
             OpenWindow.ChangedParcelDelegate += AddParcelToLst;
             OpenWindow.Show();
             //Close();

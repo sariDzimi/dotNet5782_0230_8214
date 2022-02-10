@@ -2,10 +2,10 @@
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
     <Id>1</Id>
-    <Name>customer0</Name>
+    <Name>sari</Name>
     <Phone>723800699</Phone>
-    <Longitude>4</Longitude>
-    <Latitude>8</Latitude>
+    <Longitude>8</Longitude>
+    <Latitude>4</Latitude>
   </Customer>
   <Customer>
     <Id>2</Id>
@@ -37,10 +37,10 @@
   </Customer>
   <Customer>
     <Id>6</Id>
-    <Name>customer5</Name>
+    <Name>sari</Name>
     <Phone>737232408</Phone>
-    <Longitude>5</Longitude>
-    <Latitude>10</Latitude>
+    <Longitude>10</Longitude>
+    <Latitude>5</Latitude>
   </Customer>
   <Customer>
     <Id>7</Id>
@@ -174,5 +174,12 @@
     <Phone>0583256855</Phone>
     <Longitude>2</Longitude>
     <Latitude>7</Latitude>
+  </Customer>
+  <Customer>
+    <Id>426452</Id>
+    <Name>hsfhg</Name>
+    <Phone>53146</Phone>
+    <Longitude>4</Longitude>
+    <Latitude>3</Latitude>
   </Customer>
 </ArrayOfCustomer>

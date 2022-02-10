@@ -21,6 +21,15 @@ namespace PL
     /// <summary>
     /// Interaction logic for StationsList.xaml
     /// </summary>
+    /// 
+   /* public static class ExtensionOperation
+    {
+        public static ObservableCollection<T> Convert<T>(this IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
+    }
+    */
     public partial class StationsList : Window
     {
         ObservableCollection<StationToList> Stations = new ObservableCollection<StationToList>();
@@ -46,21 +55,15 @@ namespace PL
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
-            //items = bl.GetStationToLists().ToList();
             Stations = Convert<StationToList>(bl.GetStationToLists());
-
-            //stationList.Stations = stationList.ConvertStationBLToPL(items);
             DataContext = Stations;
-            //view = (CollectionView)CollectionViewSource.GetDefaultView(DataContext);
             CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
             clearListView();
-            //stationList.ClearStations();
             Stations=Convert<StationToList>(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0));
-            // StationsListView.DataContext = stationList.Stations;
 
         }
 
@@ -73,12 +76,8 @@ namespace PL
 
         private void clearListView()
         {
-            //stationList.Stations = stationList.ClearStations();
-            //stationList.Stations = stationList.ConvertStationBLToPL(bL.GetStationToLists().ToList());
             Stations = new ObservableCollection<StationToList>();
             Stations = Convert<StationToList>(bL.GetStationToLists());
-            //parcelsList.Parcels = parcelsList.ClearParcels();
-            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
             DataContext = Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
 

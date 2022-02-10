@@ -24,12 +24,10 @@ namespace PL
     public partial class CustomerWindow : Window
     {
         public Action<BO.Customer> ChangedParcelDelegate;
-
         CurrentUser currentUser;
         IBL bl;
         Customer customer;
-        Customer_p Customer_P;
-        //CustomerList Customers = new CustomerList();
+        Customer_p Customer_P = new Customer_p();
         #region CustomerWindow constructors
 
         public CustomerWindow()
@@ -46,7 +44,6 @@ namespace PL
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.Type.ToString();
-            //this.Customers = customerList;
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
 
         }
@@ -59,7 +56,6 @@ namespace PL
             Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.parcelsSentedByCustomer, ParcelsSentedToCustomer = customer.parcelsSentedToCustomer };
             bl = BL;
             DataContext = Customer_P;
-            //Customers = customerList;
             ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
@@ -96,7 +92,6 @@ namespace PL
                 }
                 Close();
                 MessageBox.Show("The customer added");
-                //Customers.AddeCustomer(bl.convertCustomerToTypeOfCustomerToList(bl.GetCustomerById(getId())));
             }
             catch(Exception ex)
             {
@@ -117,7 +112,6 @@ namespace PL
                 {
                     Customer_P.ListChangedDelegate(bl.GetCustomerById(customer.Id));
                 }
-                //Customers.UpdateList(Customer_P);
             }
             catch (Exception ex)
             {
@@ -167,8 +161,6 @@ namespace PL
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
             Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
             ParcelWindow OpaenParcel = new ParcelWindow(bl, parcel, currentUser);
-            //ParcelList parcelList = new ParcelList();
-            //parcelList.UpdateListParcels
             OpaenParcel.ChangedParcelDelegate += UpdateInList;
             OpaenParcel.Show();
         }
@@ -181,9 +173,8 @@ namespace PL
 
         private void addParcelButton_Click(object sender, RoutedEventArgs e)
         {
-
-            //MIRIAM-TODO
-            //new ParcelWindow()
+            ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
+            parcelWindow.Show();
         }
 
     }
