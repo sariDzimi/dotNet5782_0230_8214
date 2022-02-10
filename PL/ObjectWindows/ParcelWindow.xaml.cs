@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
-using PL.PO;
+//using PL.PO;
 
 namespace PL
 {
@@ -32,7 +32,7 @@ namespace PL
         Parcel parcel;
         Parcel_p Parcel_P= new Parcel_p();
         //ParcelList parcelList= new ParcelList();
-        CustomerList CustomerList = new CustomerList();
+        //CustomerList CustomerList = new CustomerList();
         //DroneList droneList = new DroneList();
         //Drone_p drone_P = new Drone_p();
         public ParcelWindow()
@@ -297,7 +297,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
             //Show();
         }
 
@@ -305,7 +305,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
             //Show();
         }
 

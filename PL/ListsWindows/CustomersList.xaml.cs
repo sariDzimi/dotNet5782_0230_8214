@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using PL.PO;
+//using PL.PO;
 using PO;
 
 namespace PL
@@ -28,7 +28,7 @@ namespace PL
 
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
-        CustomerList customerList = new CustomerList();
+        //CustomerList customerList = new CustomerList();
         public CustomersList()
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace PL
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
             BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-            CustomerWindow OpenWindow = new CustomerWindow(bl, customer, currentUser, customerList);
+            CustomerWindow OpenWindow = new CustomerWindow(bl, customer, currentUser);
 
         
     }

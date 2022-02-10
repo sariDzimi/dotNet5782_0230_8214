@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,7 @@ namespace PO
         public void AddStation(StationToList station)
         {
             //Station station1 = BL.GetStationById(station.ID);
-            Stations.Add(new Station_p { ID = station.ID, Name = station.Name, FreeChargeSlots= station.numberOfFreeChargeSlots, /*Latitude  =station1.Location.Latitude, Longitude = station1.Location.Longitude*/  });
+            Stations.Add(new Station_p { ID = station.ID, Name = station.Name, FreeChargeSlots= station.numberOfFreeChargeSlots, *//*Latitude  =station1.Location.Latitude, Longitude = station1.Location.Longitude*//*  });
         }
         public ObservableCollection<Station_p> ConvertStationBLToPL(List<StationToList> StationsBL)
         {
@@ -60,3 +60,4 @@ namespace PO
     }
 }
 
+*/

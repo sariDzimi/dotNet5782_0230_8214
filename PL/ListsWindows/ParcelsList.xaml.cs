@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using System.Collections.ObjectModel;
 using PO;
-using PL.PO;
+//using PL.PO;
 
 namespace PL
 {
@@ -35,7 +35,7 @@ namespace PL
 
         CollectionView view;
         //List<ParcelToList> items;
-        ParcelList parcelsList = new ParcelList();
+        //ParcelList parcelsList = new ParcelList();
         //CustomerList Customer = new CustomerList();
         //DroneList droneList = new DroneList();
 

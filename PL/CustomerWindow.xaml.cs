@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using PL.PO;
+//using PL.PO;
 using PO;
 
 namespace PL
@@ -51,7 +51,7 @@ namespace PL
 
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1, CustomerList customerList)
+        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();

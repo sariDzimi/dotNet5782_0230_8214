@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BL;
-using PL.PO;
+//using PL.PO;
 
 namespace PL
 {
@@ -25,7 +25,7 @@ namespace PL
     {
         public CurrentUser currentUser = new CurrentUser();
         public IBL bL1;
-        CustomerList CustomersList = new CustomerList();
+        //CustomerList CustomersList = new CustomerList();
         public ManegerWindow()
         {
             InitializeComponent();

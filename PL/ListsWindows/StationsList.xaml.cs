@@ -30,7 +30,7 @@ namespace PL
         private IBL bL;
         CollectionView view;
         //List<StationToList> items;
-        StationList stationList = new StationList();
+        //StationList stationList = new StationList();
         public StationsList()
         {
             InitializeComponent();
