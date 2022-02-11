@@ -63,7 +63,7 @@ namespace PL
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
             clearListView();
-            Stations=Convert<StationToList>(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0));
+            Stations=Convert<StationToList>(bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0));
 
         }
 
@@ -96,7 +96,7 @@ namespace PL
         private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
-            BO.Station station = bL.GetStationById(stationToList.ID);
+            BO.Station station = bL.GetStationById(stationToList.Id);
             OpenWindow = new StationWindow(bL, station, currentUser);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             OpenWindow.Show();
@@ -105,16 +105,16 @@ namespace PL
 
         private void UpdateInList(BO.Station station)
         {
-            StationToList stationToList = Stations.First((d) => d.ID == station.Id);
+            StationToList stationToList = Stations.First((d) => d.Id == station.Id);
             int index = Stations.IndexOf(stationToList);
-            Stations[index] = new StationToList() { ID = station.Id, Name = station.Name, numberOfFreeChargeSlots = station.FreeChargeSlots };
+            Stations[index] = new StationToList() { Id = station.Id, Name = station.Name, NumberOfFreeChargeSlots = station.FreeChargeSlots };
 
 
         }
 
         private void AddStationToLst(BO.Station station)
         {
-            Stations.Add(new StationToList() { ID = station.Id, Name = station.Name, numberOfFreeChargeSlots = station.FreeChargeSlots });
+            Stations.Add(new StationToList() { Id = station.Id, Name = station.Name, NumberOfFreeChargeSlots = station.FreeChargeSlots });
         }
 
 

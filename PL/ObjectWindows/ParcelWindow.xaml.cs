@@ -223,7 +223,7 @@ namespace PL
                 Pritorities pritorities = getPritorities();
                 parcel.Pritority = pritorities;
                 parcel.Weight = weightCategories;
-                bL1.updateParcel(parcel);
+                bL1.UpdateParcel(parcel);
                 if (Parcel_P.ListChangedDelegate != null)
                 {
                     Parcel_P.ListChangedDelegate(bL1.GetParcelById(Parcel_P.ID));

@@ -56,8 +56,8 @@ namespace PL
             Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.ParcelsSentedByCustomer, ParcelsSentedToCustomer = customer.ParcelsSentedToCustomer };
             bl = BL;
             DataContext = Customer_P;
-            ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
-            ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
+            ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
+            ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.Type.ToString();
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
@@ -159,7 +159,7 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
             ParcelWindow OpaenParcel = new ParcelWindow(bl, parcel, currentUser);
             OpaenParcel.ChangedParcelDelegate += UpdateInList;
             OpaenParcel.Show();

@@ -69,12 +69,12 @@ namespace PL
         private void UpdateInList(BO.Customer customer) {
             CustomerToList parcelToList =Customers.First((d) => d.Id == customer.Id);
             int index = Customers.IndexOf(parcelToList);
-            Customers[index] = bl.convertCustomerToTypeOfCustomerToList(customer);
+            Customers[index] = bl.ConvertCustomerToTypeOfCustomerToList(customer);
         }
 
         public void AddCustomerToLst(BO.Customer parcel)
         {
-            Customers.Add(bl.convertCustomerToTypeOfCustomerToList(parcel));
+            Customers.Add(bl.ConvertCustomerToTypeOfCustomerToList(parcel));
         }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
