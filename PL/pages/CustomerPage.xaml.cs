@@ -48,11 +48,11 @@ namespace PL
             currentUser = currentUser1;
             InitializeComponent();
             customer = customerArg;
-            Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude = customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.parcelsSentedByCustomer, ParcelsSentedToCustomer = customer.parcelsSentedToCustomer };
+            Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude = customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.ParcelsSentedByCustomer, ParcelsSentedToCustomer = customer.ParcelsSentedToCustomer };
             bl = BL;
             DataContext = Customer_P;
-            ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
-            ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
+            ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
+            ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
         }
 

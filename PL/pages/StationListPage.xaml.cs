@@ -43,7 +43,7 @@ namespace PL
 
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
-            StationsListView.ItemsSource = bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0);
+            StationsListView.ItemsSource = bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0);
         }
 
         private void Button_Click_groupByNumberOfFree(object sender, RoutedEventArgs e)

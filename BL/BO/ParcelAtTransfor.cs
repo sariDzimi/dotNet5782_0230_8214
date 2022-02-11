@@ -12,7 +12,7 @@ namespace BO
     /// </summary>
     public class ParcelAtTransfor
     {
-        public int Id { get; set; }]
+        public int Id { get; set; }
         public DO.Pritorities Pritorities { get; set; }
         public CustomerAtParcel CustomerAtDeliverySender { get; set; }
         public CustomerAtParcel CustomerAtDeliveryReciver { get; set; }
@@ -21,7 +21,7 @@ namespace BO
         {
             return $"ID  : {Id}, " +
                 $" pritorities: {Pritorities}, customerAtDeliverySender: {CustomerAtDeliverySender}," +
-                $" customerAtDeliveryReciver: {CustomerAtDeliveryReciver}, "
+                $" customerAtDeliveryReciver: {CustomerAtDeliveryReciver}, ";
             }
 
     }

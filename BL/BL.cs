@@ -117,7 +117,7 @@ namespace BL
                     try
                     {
                         //gets all customer with delivered parcels
-                        List<BO.Customer> customers = GetCustomersBy(c => c.parcelsSentedToCustomer.Any(p => p.ParcelStatus == ParcelStatus.Delivered)).ToList();
+                        List<BO.Customer> customers = GetCustomersBy(c => c.ParcelsSentedToCustomer.Any(p => p.ParcelStatus == ParcelStatus.Delivered)).ToList();
                         Customer customer = customers[(int)rand.Next(0, customers.Count)];
                         droneBL.Location = customer.Location;
                     }

@@ -11,36 +11,28 @@ namespace BO
     /// <summary>
     /// individuals that purchase services from the company
     /// </summary>
-    public class Customer
-    {
-    //    public Customer()
-    //    {
-    //        parcelsSentedByCustomer = new List<ParcelAtCustomer>();
-
-    //        parcelsSentedToCustomer = new List<ParcelAtCustomer>();
-    //    }
+    public class Customer { 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-
         public Location Location { get; set; }
         public override string ToString()
         {
             string parcelSentedByCustomer = " ";
             string parcelSentedToCustomer = " ";
 
-            if (parcelsSentedByCustomer.Count != 0)
+            if (ParcelsSentedByCustomer.Count != 0)
             {
-                foreach (var p in parcelsSentedByCustomer)
+                foreach (var p in ParcelsSentedByCustomer)
                 {
                     parcelSentedByCustomer += p;
                     parcelSentedByCustomer += " ";
                 }
             }
 
-            if (parcelsSentedToCustomer.Count != 0)
+            if (ParcelsSentedToCustomer.Count != 0)
             {
-                foreach (var p in parcelsSentedToCustomer)
+                foreach (var p in ParcelsSentedToCustomer)
                 {
                     parcelSentedToCustomer += p;
                     parcelSentedToCustomer += " ";
@@ -51,14 +43,8 @@ namespace BO
                 $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
         }
 
-        public List<ParcelAtCustomer> parcelsSentedByCustomer;
-        public List<ParcelAtCustomer> parcelsSentedToCustomer;
-
-
-
-
-
-
+        public List<ParcelAtCustomer> ParcelsSentedByCustomer;
+        public List<ParcelAtCustomer> ParcelsSentedToCustomer;
     }
 }
 

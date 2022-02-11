@@ -201,17 +201,23 @@ namespace BL
                 Name = station.Name,
                 Location = new Location(){ Longitude = station.Longitude , Latitude = station.Latitude }
             };
-
-            StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(station.Id);
+            int totalOfFreeChargeSlots = station.ChargeSlots;
+            //StationBL.FreeChargeSlots = calculateFreeChargeSlotsInStation(station.Id);
             foreach (var dronecharge in GetDronesCharges())
             {
                 if (dronecharge.StationId == station.Id)
+                {
+                    StationBL.DroneAtChargings ??= new List<DroneAtCharging>();
                     StationBL.DroneAtChargings.Add(new DroneAtCharging()
                     {
-                        ID = dronecharge.DroneId,
+                        Id = dronecharge.DroneId,
                         Battery = GetDroneById(dronecharge.DroneId).Battery
                     });
+                    totalOfFreeChargeSlots--;
+                }
+
             }
+            StationBL.FreeChargeSlots = totalOfFreeChargeSlots;
             return StationBL;
         }
 
@@ -226,8 +232,8 @@ namespace BL
             {
                 Id = station.Id,
                 Name = station.Name,
-                numberOfFreeChargeSlots = station.FreeChargeSlots,
-                numberOfUsedChargeSlots = dal.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots
+                NumberOfFreeChargeSlots = station.FreeChargeSlots,
+                NumberOfUsedChargeSlots = dal.GetStationById(station.Id).ChargeSlots - station.FreeChargeSlots
             };
         }
 

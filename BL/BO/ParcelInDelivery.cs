@@ -34,7 +34,7 @@ namespace BO
             return $"ID  : {Id}, " +
                 $" pritorities: {pritorities}, customerAtDeliverySender: {customerAtParcelTheSender}," +
                 $" customerAtDeliveryReciver: {customerAtParcelTheReciver}, weightCategories {weightCategories}," +
-                $" locationCollect {locationCollect}, locationTarget {locationTarget}, distance {distance}   "
+                $" locationCollect {locationCollect}, locationTarget {locationTarget}, distance {distance}   ";
         }
     }
 }

@@ -66,7 +66,7 @@ namespace PL
         private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
-            BO.Parcel parcel = bl.GetParcelById(parcelToList.ID);
+            BO.Parcel parcel = bl.GetParcelById(parcelToList.Id);
             OpenWindow = new ParcelWindow(bl, parcel, currentUser);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             if (parcelToList.parcelStatus == ParcelStatus.Requested)
@@ -75,9 +75,7 @@ namespace PL
 
             }
             OpenWindow.Show();
-
         }
-
 
         public void UpdateInList(BO.Parcel parcel)
         {

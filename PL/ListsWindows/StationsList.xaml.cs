@@ -52,7 +52,7 @@ namespace PL
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
             stationList.ClearStations();
-            stationList.ConvertStationBLToPL(bL.GetStationToListBy(s => s.numberOfFreeChargeSlots != 0).ToList());
+            stationList.ConvertStationBLToPL(bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0).ToList());
            // StationsListView.DataContext = stationList.Stations;
 
         }

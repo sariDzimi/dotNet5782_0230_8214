@@ -12,10 +12,6 @@ namespace BO
     /// </summary>
     public class Station
     {
-        //public Station()
-        //{
-        //    droneAtChargings = new List<DroneAtCharging>();
-        //}
         private int freeChargeSlots;
         public int Id { get; set; }
         public int Name { get; set; }

@@ -68,7 +68,7 @@ namespace PL
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
 
             //Hide();
-            new Drone(bl, bl.GetDroneById(droneAtCharging.ID), currentUser).Show();
+            new Drone(bl, bl.GetDroneById(droneAtCharging.Id), currentUser).Show();
             //Show();
 
         }
@@ -114,7 +114,7 @@ namespace PL
                     FreeChargeSlots = getChargeSlots()
                 });
                 Station station = bl.GetStationById(getId());
-                StationsList.AddStation(new StationToList() { Id = getId(), numberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
+                StationsList.AddStation(new StationToList() { Id = getId(), NumberOfFreeChargeSlots = getChargeSlots(), Name = getName()});
                 MessageBox.Show("the Station added!!");
                 this.Close();
 

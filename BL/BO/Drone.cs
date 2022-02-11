@@ -12,12 +12,6 @@ namespace BO
     /// </summary>
     public class Drone
     {
-        //public Drone()
-        //{
-        //    ParcelInDelivery = new ParcelInDelivery();
-        //    battery = 100;
-        //}
-
         private double battery;
         public int Id { get; set; }
         public string Model { get; set; }

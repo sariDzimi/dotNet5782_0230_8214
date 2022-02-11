@@ -50,7 +50,7 @@ namespace PO
         }
 
 
-        //ID
+        //Id
         public static readonly DependencyProperty IdStation =
        DependencyProperty.Register("ID",
                                    typeof(object),
