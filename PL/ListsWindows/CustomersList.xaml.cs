@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using PL.PO;
+//using PL.PO;
 using PO;
 
 namespace PL
@@ -25,10 +25,11 @@ namespace PL
     public partial class CustomersList : Window
     {
         ObservableCollection<CustomerToList> Customers = new ObservableCollection<CustomerToList>();
+        CustomerWindow OpenWindow;
 
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
-        CustomerList customerList = new CustomerList();
+        //CustomerList customerList = new CustomerList();
         public CustomersList()
         {
             InitializeComponent();
@@ -60,15 +61,27 @@ namespace PL
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            BO.Customer customer = bl.GetCustomerById(customerToList.Id);
-            CustomerWindow OpenWindow = new CustomerWindow(bl, customer, currentUser, customerList);
+            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), currentUser);
+            OpenWindow.ChangedParcelDelegate += UpdateInList;
+            OpenWindow.Show();
 
-        
-    }
+        }
+        private void UpdateInList(BO.Customer customer) {
+            CustomerToList parcelToList =Customers.First((d) => d.Id == customer.Id);
+            int index = Customers.IndexOf(parcelToList);
+            Customers[index] = bl.convertCustomerToTypeOfCustomerToList(customer);
+        }
+
+        public void AddCustomerToLst(BO.Customer parcel)
+        {
+            Customers.Add(bl.convertCustomerToTypeOfCustomerToList(parcel));
+        }
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, currentUser, customerList).Show();
+            OpenWindow = new CustomerWindow(bl, currentUser);
+            OpenWindow.ChangedParcelDelegate += AddCustomerToLst;
+            OpenWindow.Show();
 
         }
     }

@@ -89,7 +89,7 @@ namespace PL
         {
             DroneToList droneToList = Drones.First((d) => d.Id == drone.Id);
             int index = Drones.IndexOf(droneToList);
-            Drones[index] =  new DroneToList() {Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Model = drone.Model,Location = drone.Location  };
+            Drones[index] = new DroneToList() {Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Model = drone.Model,Location = drone.Location  };
 
 
         }

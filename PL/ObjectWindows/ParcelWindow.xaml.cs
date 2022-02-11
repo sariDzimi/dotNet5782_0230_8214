@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
-using PL.PO;
+//using PL.PO;
 
 namespace PL
 {
@@ -31,8 +31,8 @@ namespace PL
         IBL bL1;
         Parcel parcel;
         Parcel_p Parcel_P= new Parcel_p();
-        ParcelList parcelList= new ParcelList();
-        CustomerList CustomerList = new CustomerList();
+        //ParcelList parcelList= new ParcelList();
+        //CustomerList CustomerList = new CustomerList();
         //DroneList droneList = new DroneList();
         //Drone_p drone_P = new Drone_p();
         public ParcelWindow()
@@ -128,10 +128,10 @@ namespace PL
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
                 bL1.AddParcel(new BO.Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
-                BO.Parcel parcel = bL1.GetParcelById(getId());
+                //BO.Parcel parcel = ;
                 if (Parcel_P.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(parcel);
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(getId()));
                 }
                 //parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight(), NameOfCustomerReciver = customerAtParcelReciver1.Name, NameOfCustomerSended= customerAtParcelSender1.Name });
                 MessageBox.Show("the parcel was added succesfuly!!!");
@@ -223,8 +223,11 @@ namespace PL
                 Pritorities pritorities = getPritorities();
                 parcel.Pritority = pritorities;
                 parcel.Weight = weightCategories;
-                bL1.UpdateParcel(parcel);
-
+                bL1.updateParcel(parcel);
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(Parcel_P.ID));
+                }
             }
             catch (NotValidInput ex)
             {
@@ -244,7 +247,10 @@ namespace PL
                 parcel.Delivered = DateTime.Now;
                 bL1.UpdateParcel(parcel);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
-
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                }
             }
 
         }
@@ -260,6 +266,10 @@ namespace PL
                 bL1.UpdateParcel(parcel);
                 PickedUpLabel.Text = $"{parcel.PickedUp}";
                 DeliveredC.Visibility = Visibility.Visible;
+                if (Parcel_P.ListChangedDelegate != null)
+                {
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                }
             }
         }
 
@@ -287,7 +297,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
             //Show();
         }
 
@@ -295,7 +305,7 @@ namespace PL
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
             //Hide();
-            new CustomerWindow(bL1, customer, currentUser, CustomerList).Show();
+            new CustomerWindow(bL1, customer, currentUser).Show();
             //Show();
         }
 

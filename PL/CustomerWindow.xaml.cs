@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using PL.PO;
+//using PL.PO;
 using PO;
 
 namespace PL
@@ -23,11 +23,11 @@ namespace PL
     /// </summary>
     public partial class CustomerWindow : Window
     {
+        public Action<BO.Customer> ChangedParcelDelegate;
         CurrentUser currentUser;
         IBL bl;
         Customer customer;
-        Customer_p Customer_P;
-        CustomerList Customers = new CustomerList();
+        Customer_p Customer_P = new Customer_p();
         #region CustomerWindow constructors
 
         public CustomerWindow()
@@ -36,7 +36,7 @@ namespace PL
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomerWindow(IBL BL, CurrentUser currentUser1, CustomerList customerList)
+        public CustomerWindow(IBL BL, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -44,10 +44,11 @@ namespace PL
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.Type.ToString();
-            this.Customers = customerList;
+            Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
+
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1, CustomerList customerList)
+        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -55,11 +56,20 @@ namespace PL
             Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.ParcelsSentedByCustomer, ParcelsSentedToCustomer = customer.ParcelsSentedToCustomer };
             bl = BL;
             DataContext = Customer_P;
-            Customers = customerList;
-            ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
-            ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
+            ParcelByCustomerListView.ItemsSource = customer.parcelsSentedByCustomer;
+            ParcelToCustomerListView.ItemsSource = customer.parcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.Type.ToString();
+            Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
+
+        }
+
+        public void UpdateCustomerList(BO.Customer customer)
+        {
+            if (ChangedParcelDelegate != null)
+            {
+                ChangedParcelDelegate(customer);
+            }
         }
 
         #endregion
@@ -75,9 +85,13 @@ namespace PL
             try
             {
                 bl.AddCustomer(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
+                BO.Customer customer = bl.GetCustomerById(getId());
+                if (Customer_P.ListChangedDelegate != null)
+                {
+                    Customer_P.ListChangedDelegate(customer);
+                }
                 Close();
                 MessageBox.Show("The customer added");
-                Customers.AddeCustomer(bl.ConvertCustomerToTypeOfCustomerToList(bl.GetCustomerById(getId())));
             }
             catch(Exception ex)
             {
@@ -94,7 +108,10 @@ namespace PL
                 CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == Customer_P.Id);
                 this.Customer_P.UpdateFromBL(bl.GetCustomerById(getId()));
                 this.Customer_P.UpdateFromToList(customer);
-                Customers.UpdateList(Customer_P);
+                if (Customer_P.ListChangedDelegate != null)
+                {
+                    Customer_P.ListChangedDelegate(bl.GetCustomerById(customer.Id));
+                }
             }
             catch (Exception ex)
             {
@@ -142,16 +159,22 @@ namespace PL
         private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
-            new ParcelWindow(bl, parcel, currentUser).Show();
+            Parcel parcel = bl.GetParcelById(parcelAtCustomer.ID);
+            ParcelWindow OpaenParcel = new ParcelWindow(bl, parcel, currentUser);
+            OpaenParcel.ChangedParcelDelegate += UpdateInList;
+            OpaenParcel.Show();
         }
 
+        public void UpdateInList(BO.Parcel parcel)
+        {
+           
+        }
         #endregion
 
         private void addParcelButton_Click(object sender, RoutedEventArgs e)
         {
-            //MIRIAM-TODO
-            //new ParcelWindow()
+            ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
+            parcelWindow.Show();
         }
 
     }

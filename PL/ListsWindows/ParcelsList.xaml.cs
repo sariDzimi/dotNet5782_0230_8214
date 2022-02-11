@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using System.Collections.ObjectModel;
 using PO;
-using PL.PO;
+//using PL.PO;
 
 namespace PL
 {
@@ -35,7 +35,7 @@ namespace PL
 
         CollectionView view;
         //List<ParcelToList> items;
-        ParcelList parcelsList = new ParcelList();
+        //ParcelList parcelsList = new ParcelList();
         //CustomerList Customer = new CustomerList();
         //DroneList droneList = new DroneList();
 
@@ -81,13 +81,14 @@ namespace PL
         {
             ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             int index = Parcels.IndexOf(parcelToList);
-            Parcels[index] = new ParcelToList() { Id = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
-
+            //Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
+            Parcels[index] = bl.convertParcelToTypeOfParcelToList(parcel);
 
         }
         public void AddParcelToLst(BO.Parcel parcel)
         {
-            Parcels.Add(new ParcelToList() { Id = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
+           // Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
+            Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -107,8 +108,13 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
-            view.GroupDescriptions.Add(groupDescription);
+            if(view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -121,9 +127,13 @@ namespace PL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             clearListView();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
-            view.GroupDescriptions.Add(groupDescription);
+            if (view != null && view.CanGroup == true)
+            {
+                view.GroupDescriptions.Clear();
 
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerReciver");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
         private void clearListView()
         {
@@ -139,7 +149,7 @@ namespace PL
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
 
-            ParcelWindow OpenWindow = new ParcelWindow(bl, currentUser);
+            OpenWindow = new ParcelWindow(bl, currentUser);
             OpenWindow.ChangedParcelDelegate += AddParcelToLst;
             OpenWindow.Show();
             //Close();
