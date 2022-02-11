@@ -210,10 +210,10 @@ namespace BL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                NumberOfParcelsInTheWayToCutemor = customer.ParcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
-                NumberOfRecievedParcels = customer.ParcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered),
-                NumberOfParcelsSendedAndNotProvided = customer.ParcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
-                NumberOfParcelsSendedAndProvided = customer.ParcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered)
+                NumberOfParcelsInTheWayToCutemor = customer.ParcelsSentedToCustomer ==null? 0: customer.ParcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
+                NumberOfRecievedParcels = customer.ParcelsSentedToCustomer ==null? 0: customer.ParcelsSentedToCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered),
+                NumberOfParcelsSendedAndNotProvided = customer.ParcelsSentedByCustomer==null?0: customer.ParcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.PickedUp),
+                NumberOfParcelsSendedAndProvided = customer.ParcelsSentedByCustomer==null?0: customer.ParcelsSentedByCustomer.Count(p => p.ParcelStatus == ParcelStatus.Delivered)
             };
         }
 

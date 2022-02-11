@@ -50,7 +50,6 @@ namespace PL
             bL1 = bL;
             AddParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-            //this.parcelList.Parcels = parcel_PsA;
             Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
         }
@@ -107,15 +106,6 @@ namespace PL
                 ChangedParcelDelegate(parcel);
             }
         }
-        //public void DeleteParcelToList(BO.Parcel parcel)
-        /*{
-
-            if (ChangedParcelDelegate != null)
-            {
-                ChangedParcelDelegate(parcel);
-            }
-        }
-*/
 
         private void AddParcel(object sender, RoutedEventArgs e)
         {
@@ -128,12 +118,10 @@ namespace PL
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
                 bL1.AddParcel(new BO.Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
-                //BO.Parcel parcel = ;
                 if (Parcel_P.ListChangedDelegate != null)
                 {
                     Parcel_P.ListChangedDelegate(bL1.GetParcelById(getId()));
                 }
-                //parcelList.AddParcel(new ParcelToList() { ID = getId(), pritorities = getPritorities(), weightCategories = getMaxWeight(), NameOfCustomerReciver = customerAtParcelReciver1.Name, NameOfCustomerSended= customerAtParcelSender1.Name });
                 MessageBox.Show("the parcel was added succesfuly!!!");
                 Close();
             }
