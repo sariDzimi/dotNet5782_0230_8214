@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-//using PL.PO;
 using PO;
 
 namespace PL
@@ -99,6 +98,10 @@ namespace PL
             }
         }
 
+        
+        
+
+
         private void updateButton_click(object sender, RoutedEventArgs e)
         {
             try
@@ -167,15 +170,17 @@ namespace PL
 
         public void UpdateInList(BO.Parcel parcel)
         {
-           
+            ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
+            ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
         }
         #endregion
 
         private void addParcelButton_Click(object sender, RoutedEventArgs e)
         {
             ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
+            parcelWindow.ChangedParcelDelegate = UpdateInList;
             parcelWindow.Show();
-        }
 
+        }
     }
 }

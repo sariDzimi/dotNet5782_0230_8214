@@ -16,7 +16,6 @@ using System.ComponentModel;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
-//using PL.PO;
 
 namespace PL
 {
@@ -28,12 +27,11 @@ namespace PL
         public Action<BO.Drone> ChangedDroneDelegate;
         IBL bL;
         BO.Drone drone;
-        Drone_p drone_P  = new Drone_p();
+        Drone_p drone_P = new Drone_p();
         public bool boo = false;
         BackgroundWorker worker = new BackgroundWorker();
         public Drone()
         {
-            //WindowStyle = WindowStyle.None;
             drone = new BO.Drone() { };
             InitializeComponent();
         }
@@ -52,14 +50,29 @@ namespace PL
             drone = droneBL;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  };
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery };
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
             bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-           
+            SwitchDroneStatus();
+            if (drone.ParcelInDelivery != null)
+                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            WeightSelector.IsEnabled = false;
+
+
+        }
+        public void UpdateDroneList(BO.Drone drone)
+        {
+            if (ChangedDroneDelegate != null)
+            {
+                ChangedDroneDelegate(drone);
+            }
+        }
+        private void SwitchDroneStatus()
+        {
             switch (drone.DroneStatus)
             {
                 case DroneStatus.Free:
@@ -81,54 +94,9 @@ namespace PL
                     {
                         if (parcelBL.Delivered == null)
                         {
-                            supllyParcel.IsEnabled =true;
+                            OpaenDrone.Visibility = Visibility.Visible;
+                            supllyParcel.IsEnabled = true;
                         }
-
-
-                    }
-                    break;
-            }
-
-           
-            if (drone.ParcelInDelivery != null)
-                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            WeightSelector.IsEnabled = false;
-
-
-        }
-
-        public void UpdateDroneList(BO.Drone drone)
-        {
-            if(ChangedDroneDelegate!= null)
-            {
-                ChangedDroneDelegate(drone);
-            }
-        }
-
-        private void  SwitchDroneStatus()
-        {
-            switch (drone.DroneStatus)
-            {
-                case DroneStatus.Free:
-                    sendDroneForDelivery.IsEnabled = true;
-                    //OpaenDrone.Visibility = Visibility.Hidden;
-                    break;
-                case DroneStatus.Maintenance:
-                    releaseDroneFromCharging.IsEnabled = true;
-                    // OpaenDrone.Visibility = Visibility.Hidden;
-                    break;
-                case DroneStatus.Delivery:
-
-                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
-
-                    if (parcelBL.PickedUp == null)
-                    {
-                        colectParcel.IsEnabled = true;
-                        OpaenDrone.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        //if (parcelBL.Delivered == null)
 
                     }
                     break;
@@ -354,8 +322,9 @@ namespace PL
         private void openParcelInDelivery_Click(object sender, RoutedEventArgs e)
         {
 
-            Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-
+            BO.Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
+            ParcelWindow parcelWindow = new ParcelWindow(bL, parcel, userType.manager);
+            parcelWindow.Show();
         }
 
 
