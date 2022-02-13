@@ -25,7 +25,6 @@ namespace PL
     {
         public userType currentUser;
         public IBL bL;
-       // CustomerList customerList = new CustomerList();
         public MainWindow()
         {
 
@@ -229,7 +228,7 @@ namespace PL
             try
             {
                 BO.Customer customer = bL.GetCustomerById(getId());
-                if ((customer.Name == getNameLog()))
+                if (customer.Name == getNameLog())
                 {
                     MessageBox.Show("you are in");
                     currentUser = userType.cutomer;
