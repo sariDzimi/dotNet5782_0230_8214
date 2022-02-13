@@ -123,7 +123,7 @@ namespace PL
         {
             StationToList stationToList = Stations.First((d) => d.Id == station.Id);
             int index = Stations.IndexOf(stationToList);
-            Stations[index] = new StationToList() { Id = station.Id, Name = station.Name, NumberOfFreeChargeSlots = station.FreeChargeSlots };
+            Stations[index] = bL.convertStationToTypeOfStationToList(station);
 
 
         }
@@ -149,7 +149,6 @@ namespace PL
             OpenWindow = new StationWindow(bL);
             OpenWindow.ChangedParcelDelegate += AddStationToLst;
             OpenWindow.Show();
-            //new StationWindow(bL, currentUser).Show();
         }
         /// <summary>
         /// 

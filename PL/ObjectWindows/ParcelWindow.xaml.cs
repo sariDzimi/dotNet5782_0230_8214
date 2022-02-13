@@ -26,20 +26,14 @@ namespace PL
     public partial class ParcelWindow : Window
     {
         public Action<BO.Parcel> ChangedParcelDelegate;
-
         userType currentUser;
         IBL bL1;
         Parcel parcel;
         Parcel_p Parcel_P = new Parcel_p();
-        //ParcelList parcelList= new ParcelList();
-        //CustomerList CustomerList = new CustomerList();
-        //DroneList droneList = new DroneList();
-        //Drone_p drone_P = new Drone_p();
         public ParcelWindow()
         {
             InitializeComponent();
         }
-
         public ParcelWindow(IBL bL, userType currentUser1)
         {
             currentUser = currentUser1;
@@ -53,11 +47,9 @@ namespace PL
             Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
         }
-
         public ParcelWindow(IBL bl, Parcel parcel1, userType currentUser1)
         {
             currentUser = currentUser1;
-            //CustomerList = customerList;
             InitializeComponent();
             AddParcelButton.Visibility = Visibility.Hidden;
             parcel = parcel1;
@@ -80,8 +72,6 @@ namespace PL
             if (Parcel_P.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
-                // Parcel_P.ListChangedDelegate +=DeleteParcelToList;
-
             }
 
             if (Parcel_P.PickedUp == null && parcel.Scheduled != null)
@@ -94,7 +84,6 @@ namespace PL
             }
 
         }
-
         private void close_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -106,7 +95,6 @@ namespace PL
                 ChangedParcelDelegate(parcel);
             }
         }
-
         private void AddParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -145,7 +133,7 @@ namespace PL
                 MessageBox.Show("station number not found");
             }
         }
-        
+
 
         private Pritorities getPritorities()
         {
@@ -175,7 +163,6 @@ namespace PL
                 throw new NotValidInput("weight");
             }
         }
-
         private int getIdSender()
         {
             try
@@ -218,7 +205,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
 
-
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -230,6 +216,7 @@ namespace PL
             {
                 parcel.Delivered = DateTime.Now;
                 bL1.UpdateParcel(parcel);
+                bL1.SupplyParcelByDrone(bL1.GetDroneById(parcel.droneAtParcel.Id).Id);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
                 if (Parcel_P.ListChangedDelegate != null)
                 {
@@ -238,7 +225,6 @@ namespace PL
             }
 
         }
-
         private void PickedUpC_Checked(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("agree Pickup", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
@@ -248,6 +234,7 @@ namespace PL
             {
                 parcel.PickedUp = DateTime.Now;
                 bL1.UpdateParcel(parcel);
+                bL1.CollectParcleByDrone(bL1.GetDroneById(parcel.droneAtParcel.Id).Id);
                 PickedUpLabel.Text = $"{parcel.PickedUp}";
                 DeliveredC.Visibility = Visibility.Visible;
                 if (Parcel_P.ListChangedDelegate != null)
@@ -256,18 +243,13 @@ namespace PL
                 }
             }
         }
-
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-            // Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
-
             bL1.DeleateParcel(parcel.Id);
-            // BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
             if (Parcel_P.ListChangedDelegate != null)
             {
                 Parcel_P.ListChangedDelegate(parcel);
             }
-            //parcelList.DeleateParcel(Parcel_P);
             Close();
         }
 
@@ -280,17 +262,13 @@ namespace PL
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
-            //Hide();
             new CustomerWindow(bL1, customer, currentUser).Show();
-            //Show();
         }
 
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
             BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
-            //Hide();
             new CustomerWindow(bL1, customer, currentUser).Show();
-            //Show();
         }
 
         private void close_buuton(object sender, RoutedEventArgs e)
@@ -299,6 +277,3 @@ namespace PL
         }
     }
 }
-
-
-

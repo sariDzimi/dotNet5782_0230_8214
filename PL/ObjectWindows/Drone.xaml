@@ -13,55 +13,7 @@
             <Setter Property="Background"
               Value= "#FFA6B748" />
         </Style>
-        <!--<Style x:Key="close" TargetType="Button">
-            <Setter Property="Background"
-              Value= "#00000000" />
-            <Setter Property="Foreground"
-              Value="Black" />
-
-        </Style>-->
-        <!--<Style x:Key="Labels" TargetType="Label">
-            <Setter Property="Background"
-              Value= "#00000000" />
-            <Setter Property="Foreground"
-              Value="Black" />-->
-
-        <!--</Style>-->
-
-        <Style x:Key="commonStyle"
-           TargetType="Control" >
-            <Setter Property="FontSize"
-              Value="15" />
-            <Setter Property="FontFamily"
-              Value="Consolas" />
-            <Setter Property="FontWeight"
-              Value="Bold" />
-        </Style>
-        <Style TargetType="Label"
-           BasedOn="{StaticResource commonStyle}">
-            <Setter Property="Background"
-                    
-              Value= "#FFD3D6BF" />
-            <Setter Property="Foreground"
-              Value="Black" />
-        </Style>
-
-
-        <Style TargetType="ComboBox"
-           BasedOn="{StaticResource commonStyle}">
-            <Setter Property="Background"
-              Value= "#FF7791EA" />
-            <Setter Property="Foreground"
-              Value="Black" />
-        </Style>
-        <Style TargetType="ListView">
-            <Setter Property="Background"
-              Value= "#FFDADFF1" />
-            <Setter Property="Foreground"
-              Value="#FF08089B" />
-            <Setter Property="FontSize"
-              Value="20" />
-        </Style>
+ 
         <Style x:Key="Text" TargetType="TextBlock">
             <Setter Property="Background"
               Value= "#00000000" />
@@ -75,7 +27,6 @@
 
         <Grid x:Name="Actions" Visibility="Visible" HorizontalAlignment="Center" Margin="-21,0,-247,-10">
             <Grid HorizontalAlignment="Center" >
-                <!--<Button Content="close" HorizontalAlignment="Left" Margin="703,381,0,0" VerticalAlignment="Top" Height="27" Width="87" Click="ButtonClick_Close"/>-->
                 <Grid x:Name="Buttons">
 
                     <Button x:Name="releaseDroneFromCharging" Content="release drone from charging" HorizontalAlignment="Left" Margin="498,280,0,0" VerticalAlignment="Top" Click="Button_Click_releaseDroneFromCharging" Height="32" Width="272" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
@@ -160,7 +111,7 @@
                     <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="275,252,0,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}" Width="52" Grid.Row="1"/>
                     <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging"  Style="{StaticResource Labels}" HorizontalAlignment="Left" Margin="29,252,0,0" VerticalAlignment="Top" Height="30" Width="248"  Visibility="{Binding ElementName= addButton , Path= Visibility}" Grid.Row="1"/>
                     <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="449,9,0,0" VerticalAlignment="Top" Height="22" Width="190" Click="Button_Click_1" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
-                    <Button x:Name="OpaenDrone" Content="open" HorizontalAlignment="Left" Visibility="Hidden" Margin="298,203,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="Button_Click_4" Grid.Row="1"/>
+                    <Button x:Name="OpaenDrone" Content="open" HorizontalAlignment="Left" Visibility="Hidden" Margin="298,203,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="openParcel" Grid.Row="1"/>
                     <ComboBox x:Name="WeightSelector" Text="{Binding Weight}"  HorizontalAlignment="Left" Margin="138,52,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="28"/>
                 </Grid>
                 <Button Content="simulation" HorizontalAlignment="Left" Margin="367,57,0,0" VerticalAlignment="Top" Click="simulation_Click"/>

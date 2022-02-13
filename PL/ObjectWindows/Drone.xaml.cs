@@ -16,7 +16,6 @@ using System.ComponentModel;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
-//using PL.PO;
 
 namespace PL
 {
@@ -28,12 +27,11 @@ namespace PL
         public Action<BO.Drone> ChangedDroneDelegate;
         IBL bL;
         BO.Drone drone;
-        Drone_p drone_P  = new Drone_p();
+        Drone_p drone_P = new Drone_p();
         public bool boo = false;
         BackgroundWorker worker = new BackgroundWorker();
         public Drone()
         {
-            //WindowStyle = WindowStyle.None;
             drone = new BO.Drone() { };
             InitializeComponent();
         }
@@ -54,14 +52,29 @@ namespace PL
             drone = droneBL;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null  ? new BO.ParcelInDelivery() : drone.ParcelInDelivery  };
+            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery };
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
             bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-           
+            SwitchDroneStatus();
+            if (drone.ParcelInDelivery != null)
+                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
+            WeightSelector.IsEnabled = false;
+
+
+        }
+        public void UpdateDroneList(BO.Drone drone)
+        {
+            if (ChangedDroneDelegate != null)
+            {
+                ChangedDroneDelegate(drone);
+            }
+        }
+        private void SwitchDroneStatus()
+        {
             switch (drone.DroneStatus)
             {
                 case DroneStatus.Free:
@@ -83,61 +96,14 @@ namespace PL
                     {
                         if (parcelBL.Delivered == null)
                         {
-                            supllyParcel.IsEnabled =true;
+                            OpaenDrone.Visibility = Visibility.Visible;
+                            supllyParcel.IsEnabled = true;
                         }
 
-
-                    }
-                    break;
-            }
-
-           
-            if (drone.ParcelInDelivery != null)
-                ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
-            WeightSelector.IsEnabled = false;
-
-
-        }
-
-        public void UpdateDroneList(BO.Drone drone)
-        {
-            if(ChangedDroneDelegate!= null)
-            {
-                ChangedDroneDelegate(drone);
-            }
-        }
-
-        private void  SwitchDroneStatus()
-        {
-            switch (drone.DroneStatus)
-            {
-                case DroneStatus.Free:
-                    sendDroneForDelivery.IsEnabled = true;
-                    //OpaenDrone.Visibility = Visibility.Hidden;
-                    break;
-                case DroneStatus.Maintenance:
-                    releaseDroneFromCharging.IsEnabled = true;
-                    // OpaenDrone.Visibility = Visibility.Hidden;
-                    break;
-                case DroneStatus.Delivery:
-
-                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
-
-                    if (parcelBL.PickedUp == null)
-                    {
-                        colectParcel.IsEnabled = true;
-                        OpaenDrone.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        //if (parcelBL.Delivered == null)
-
                     }
                     break;
             }
         }
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -166,18 +132,15 @@ namespace PL
             }
 
         }
-
         private void ButtonClick_Close(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-
         private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
         private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
         {
             try
@@ -191,7 +154,6 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
         private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
         {
             try
@@ -213,7 +175,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
         {
             try
@@ -230,7 +191,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -249,7 +209,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
         {
             try
@@ -269,7 +228,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
@@ -282,12 +240,10 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("hello");
         }
-
         private int getId()
         {
             try
@@ -299,7 +255,6 @@ namespace PL
                 throw new NotValidInput("id");
             }
         }
-
         private WeightCategories getMaxWeight()
         {
             if (WeightSelector.SelectedItem == null)
@@ -314,7 +269,6 @@ namespace PL
                 throw new NotValidInput("Max Weight");
             }
         }
-
         private int getNumberOfStation()
         {
             try
@@ -326,7 +280,6 @@ namespace PL
                 throw new NotValidInput("station number");
             }
         }
-
         private double getTime()
         {
             try
@@ -344,11 +297,12 @@ namespace PL
             return modelDroneL.Text;
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void openParcel(object sender, RoutedEventArgs e)
         {
-           
-            Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-          
+
+            BO.Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
+            ParcelWindow parcelWindow = new ParcelWindow(bL, parcel, userType.manager);
+            parcelWindow.Show();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
