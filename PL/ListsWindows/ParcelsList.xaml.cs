@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using BlApi;
 using System.Collections.ObjectModel;
 using PO;
-//using PL.PO;
 
 namespace PL
 {
@@ -28,17 +27,9 @@ namespace PL
     {
         ParcelWindow OpenWindow;
         public CurrentUser currentUser = new CurrentUser();
-
         private IBL bl;
-
         ObservableCollection<ParcelToList> Parcels = new ObservableCollection<ParcelToList>();
-
         CollectionView view;
-        //List<ParcelToList> items;
-        //ParcelList parcelsList = new ParcelList();
-        //CustomerList Customer = new CustomerList();
-        //DroneList droneList = new DroneList();
-
         public ParcelsList()
         {
             InitializeComponent();
@@ -81,13 +72,11 @@ namespace PL
         {
             ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
             int index = Parcels.IndexOf(parcelToList);
-            //Parcels[index] = new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight };
             Parcels[index] = bl.convertParcelToTypeOfParcelToList(parcel);
 
         }
         public void AddParcelToLst(BO.Parcel parcel)
         {
-           // Parcels.Add(new ParcelToList() { ID = parcel.Id, NameOfCustomerReciver = parcel.customerAtParcelReciver.Name, NameOfCustomerSended = parcel.customerAtParcelSender.Name, pritorities = parcel.Pritority, weightCategories = parcel.Weight });
             Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
         }
         private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -119,8 +108,6 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
-
             clearListView();
         }
 
@@ -139,8 +126,6 @@ namespace PL
         {
             Parcels = new ObservableCollection<ParcelToList>();
             Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
-            //parcelsList.Parcels = parcelsList.ClearParcels();
-            //parcelsList.Parcels = parcelsList.ConvertParcelBLToPL(bl.GetParcelToLists().ToList());
             DataContext = Parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
 
@@ -152,8 +137,6 @@ namespace PL
             OpenWindow = new ParcelWindow(bl, currentUser);
             OpenWindow.ChangedParcelDelegate += AddParcelToLst;
             OpenWindow.Show();
-            //Close();
-            //new ParcelWindow(bl, currentUser).Show();
         }
 
 

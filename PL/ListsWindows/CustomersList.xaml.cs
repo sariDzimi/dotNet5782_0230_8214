@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-//using PL.PO;
 using PO;
 
 namespace PL
@@ -29,7 +28,6 @@ namespace PL
 
         CurrentUser currentUser = new CurrentUser();
         private IBL bl;
-        //CustomerList customerList = new CustomerList();
         public CustomersList()
         {
             InitializeComponent();

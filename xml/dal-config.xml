@@ -3,11 +3,11 @@
 	<dal>list</dal>
 	<dal-packages>
 		<list>
-			<!--<object>DalObject</object>-->
-			<xml>DalXml</xml>
+			<object>DalObject</object>
+			<!--<xml>DalXml</xml>-->
 
 
 		</list>
-		<xml>DalXml</xml>
+		<!--<xml>DalXml</xml>-->
 	</dal-packages>
 </config>

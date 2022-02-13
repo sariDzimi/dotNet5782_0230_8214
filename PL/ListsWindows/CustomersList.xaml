@@ -14,9 +14,9 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="274,286,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
-        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="270" Margin="0,176,0,0" VerticalAlignment="Top" Width="800" MouseDoubleClick="customeList_MouseDoubleList" ItemsSource="{Binding}"   >
+        <ListView x:Name="customersListView" HorizontalAlignment="Center" Height="343" Margin="0,44,0,0" VerticalAlignment="Top" Width="800" MouseDoubleClick="customeList_MouseDoubleList" ItemsSource="{Binding}"   >
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="id" Width="40" DisplayMemberBinding="{Binding Id}"  />
@@ -30,7 +30,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_Click"/>
-        <Button Content="add customer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="118" Click="addCustomer_click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="742,2,0,0" VerticalAlignment="Top" Height="36" Width="47" Click="closeButton_Click"/>
+        <Button Content="add customer" HorizontalAlignment="Left" Margin="9,393,0,0" VerticalAlignment="Top" Height="35" Width="231" Click="addCustomer_click"/>
     </Grid>
 </Window>

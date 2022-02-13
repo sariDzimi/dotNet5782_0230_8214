@@ -24,8 +24,6 @@ namespace PL
     public partial class DronesList : Window
     {
         ObservableCollection<DroneToList> Drones = new ObservableCollection<DroneToList>();
-
-       // CollectionView view;
         public CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         public DronesList()
@@ -81,7 +79,6 @@ namespace PL
             Drone OpenWindow = new Drone(bl, droneBL, currentUser);
             OpenWindow.ChangedDroneDelegate += UpdateInList;
             OpenWindow.Show();
-            //Close();
 
         }
 
@@ -95,20 +92,21 @@ namespace PL
         }
         public void AddDrone(BO.Drone drone)
         {
-            Drones.Add(new DroneToList() { });
+            Drones.Add(new DroneToList() {Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Location =  drone.Location, Model  = drone.Model});
+            Drones.Add(bl.ConvertDroneToTypeOfDroneToList(drone));
+
         }
+        
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
             Drone OpenWindow = new Drone(bl,currentUser);
             OpenWindow.ChangedDroneDelegate += AddDrone;
             OpenWindow.Show();
-            //Close();
 
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            //new ManegerWindow(bl, currentUser).Show();
             Close();
         }
 

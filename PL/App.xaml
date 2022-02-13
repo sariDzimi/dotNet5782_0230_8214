@@ -13,11 +13,28 @@
         </Style>
         <Style x:Key="OurStyle" TargetType="Window">
             <Setter Property="Background"
-                    Value="#FFB0A0A0">
-            </Setter>
+                  Value= "#FFDEDED7" />
+
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#FFF1E2E2"></Setter>
-            
+            <Setter Property="Foreground"
+              Value="Black" />
+
+        </Style>
+        <Style TargetType="Label">
+            <!--BasedOn="{StaticResource commonStyle}">-->
+            <Setter Property="Background"
+              Value= "#FFD3D6BF" />
+            <Setter Property="Foreground"
+              Value="Black" />
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background"
+              Value= "#FFD3D6BF" />
+            <Setter Property="Foreground"
+              Value="Black" />
+            <Setter Property="FontSize"
+              Value="20" />
         </Style>
     </Application.Resources>
 </Application>

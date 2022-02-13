@@ -73,6 +73,8 @@ namespace BlApi
 
         public void StartSimulation(Drone drone, Action<Drone, int> action, Func<bool> func);
         public double GetRateOFCharging();
+        public DroneToList ConvertDroneToTypeOfDroneToList(Drone drone);
+
     }
 }
 

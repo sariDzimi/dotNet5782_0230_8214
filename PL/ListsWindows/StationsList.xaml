@@ -22,7 +22,7 @@
         </Style>
         <Style x:Key="Text" TargetType="TextBlock">
             <Setter Property="Background"
-              Value= "#00000000" />
+              Value= "#FFB4B1B1" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -32,10 +32,10 @@
             
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Header="ID" Width="80" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="ID" Width="80" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn x:Name="numberOfFreeChargeSlots" Header="free charge slots" Width="150" DisplayMemberBinding="{Binding numberOfFreeChargeSlots}" />
-                    <GridViewColumn Header="used charge slots" Width="150" DisplayMemberBinding="{Binding numberOfUsedChargeSlots}" />
+                    <GridViewColumn x:Name="numberOfFreeChargeSlots" Header="free charge slots" Width="150" DisplayMemberBinding="{Binding NumberOfFreeChargeSlots}" />
+                    <GridViewColumn Header="used charge slots" Width="150" DisplayMemberBinding="{Binding NumberOfUsedChargeSlots}" />
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>

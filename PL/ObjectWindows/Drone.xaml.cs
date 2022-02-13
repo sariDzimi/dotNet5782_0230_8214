@@ -36,7 +36,6 @@ namespace PL
         {
             //WindowStyle = WindowStyle.None;
             drone = new BO.Drone() { };
-
             InitializeComponent();
         }
         public Drone(IBL bL1, CurrentUser currentUser1)
@@ -50,7 +49,6 @@ namespace PL
             addButton.IsEnabled = true;
             CurrentUser.Text = currentUser.Type.ToString();
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
-
         }
 
         public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
@@ -358,9 +356,7 @@ namespace PL
         {
            
             Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-            //Hide();
-            //new ParcelWindow(bL, parcel, currentUser, customerList).Show();
-            //Show();
+          
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

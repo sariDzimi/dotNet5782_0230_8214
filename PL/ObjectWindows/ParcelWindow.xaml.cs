@@ -111,8 +111,6 @@ namespace PL
         {
             try
             {
-                // BO.Parcel parcel = new Parcel();
-                //parcel.Requested = DateTime.Now;
                 Customer customerSender = bL1.GetCustomerById(getIdSender());
                 Customer customerReceiver = bL1.GetCustomerById(getIdReciver());
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
