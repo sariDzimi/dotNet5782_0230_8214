@@ -86,9 +86,7 @@
             <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
             <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
             <DatePicker Name="dp1"  Margin="622,134,26,61" Grid.Row="1"  SelectedDateChanged="dpick_SelectedDateChanged"/>
-            <!--<DatePicker Name="dp2" DisplayDate="2019-01-01" Margin="622,181,26,14" Grid.Row="1" />-->
             <Label x:Name="DateFrom" Content="FROM" HorizontalAlignment="Left" Margin="565,136,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-            <!--<Label Content="UNTIL" HorizontalAlignment="Left" Margin="571,181,0,0" Grid.Row="1" VerticalAlignment="Top"/>-->
 
         </Grid>
     </Grid>
