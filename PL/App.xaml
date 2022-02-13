@@ -16,12 +16,10 @@
                   Value= "#FFDEDED7" />
 
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="#FFF1E2E2"></Setter>
-            <Setter Property="Foreground"
-              Value="Black" />
-
+            <Setter Property="Foreground" Value="Black"></Setter>
+           
         </Style>
-        <Style TargetType="Label">
+        <Style x:Key="Labels" TargetType="Label" >
             <!--BasedOn="{StaticResource commonStyle}">-->
             <Setter Property="Background"
               Value= "#FFD3D6BF" />
@@ -43,6 +41,10 @@
                     <Setter Property = "Background" Value = "Black" />
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style x:Key="GridItem" TargetType="Grid">
+            <Setter Property="Background"
+              Value= "White" />
         </Style>
     </Application.Resources>
 </Application>

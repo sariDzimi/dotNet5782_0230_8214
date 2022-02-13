@@ -150,10 +150,6 @@ namespace PL
                 }
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
-               
-
-
-
             }
             catch (NotValidInput ex)
             {
