@@ -23,7 +23,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public CurrentUser currentUser = new CurrentUser();
+        public userType currentUser;
         public IBL bL;
        // CustomerList customerList = new CustomerList();
         public MainWindow()
@@ -31,51 +31,14 @@ namespace PL
 
             bL = BLFactory.GetBl();
             InitializeComponent();
-            //new ManegerWindow().Show();
-            //Close();
-
-
         }
         public MainWindow(IBL bL1)
         {
             bL = bL1;
             InitializeComponent();
             new ManegerWindow().Show();
-
             Close();
-
-
-
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    new DronesList(bL).Show();
-        //    Close();
-        //}
-
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    new ParcelsList(bL).Show();
-        //    Close();
-        //}
-        //private void ButtonClick_OpenStationsList(object sender, RoutedEventArgs e)
-        //{
-        //    new StationsList(bL).Show();
-        //    Close();
-        //}
-
-        //private void Button_Click_2(object sender, RoutedEventArgs e)
-        //{
-        //    new CustomersList(bL).Show();
-        //    Close();
-        //}
-
-        //private void Button_Click_3(object sender, RoutedEventArgs e)
-        //{
-        //    //DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
-        //}
-
         private void workerButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -99,7 +62,7 @@ namespace PL
                 flag = bL.IsValidMamager(manager);
                 if (flag == true)
                 {
-                    currentUser.Type = userType.manager;
+                    currentUser = userType.manager;
                     MessageBox.Show("you are in");
                     new ManegerWindow(bL, currentUser).Show();
                     Close();
@@ -269,7 +232,7 @@ namespace PL
                 if ((customer.Name == getNameLog()))
                 {
                     MessageBox.Show("you are in");
-                    currentUser.Type = userType.cutomer;
+                    currentUser = userType.cutomer;
                     new CustomerWindow(bL, customer, currentUser).Show();
                 }
                 else
@@ -306,7 +269,7 @@ namespace PL
                 };
 
                 bL.AddCustomer(customer);
-                currentUser.Type = userType.cutomer;
+                currentUser = userType.cutomer;
                 MessageBox.Show("you are in");
                 new CustomerWindow(bL, customer, currentUser).Show();
                 Close();

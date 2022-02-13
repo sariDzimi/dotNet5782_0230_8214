@@ -24,7 +24,7 @@ namespace PL
     public partial class CustomerWindow : Window
     {
         public Action<BO.Customer> ChangedParcelDelegate;
-        CurrentUser currentUser;
+        userType currentUser;
         IBL bl;
         Customer customer;
         Customer_p Customer_P = new Customer_p();
@@ -36,19 +36,19 @@ namespace PL
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomerWindow(IBL BL, CurrentUser currentUser1)
+        public CustomerWindow(IBL BL, userType currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = BL;
             updateButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.Type.ToString();
+            CurrentUser.Text = currentUser.ToString();
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
 
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg, CurrentUser currentUser1)
+        public CustomerWindow(IBL BL, Customer customerArg, userType currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -59,7 +59,7 @@ namespace PL
             ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.Type.ToString();
+            CurrentUser.Text = currentUser.ToString();
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
 
         }

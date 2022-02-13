@@ -26,7 +26,6 @@ namespace PL
         ObservableCollection<CustomerToList> Customers = new ObservableCollection<CustomerToList>();
         CustomerWindow OpenWindow;
 
-        CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         public CustomersList()
         {
@@ -34,16 +33,13 @@ namespace PL
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomersList(IBL blArg, CurrentUser currentUser1)
+        public CustomersList(IBL blArg)
         {
-
-            currentUser = currentUser1;
             InitializeComponent();
             bl = blArg;
             Customers = Convert<CustomerToList>(bl.GetCustomerToLists());
             DataContext = Customers;
             WindowStyle = WindowStyle.None;
-            CurrentUser.Text = currentUser.Type.ToString();
 
         }
 
@@ -59,7 +55,7 @@ namespace PL
         private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
         {
             CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), currentUser);
+            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), userType.manager);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             OpenWindow.Show();
 
@@ -77,7 +73,7 @@ namespace PL
 
         private void addCustomer_click(object sender, RoutedEventArgs e)
         {
-            OpenWindow = new CustomerWindow(bl, currentUser);
+            OpenWindow = new CustomerWindow(bl, userType.cutomer);
             OpenWindow.ChangedParcelDelegate += AddCustomerToLst;
             OpenWindow.Show();
 

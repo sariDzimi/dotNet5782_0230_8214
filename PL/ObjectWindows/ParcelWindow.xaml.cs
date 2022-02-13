@@ -27,7 +27,7 @@ namespace PL
     {
         public Action<BO.Parcel> ChangedParcelDelegate;
 
-        CurrentUser currentUser = new CurrentUser();
+        userType currentUser;
         IBL bL1;
         Parcel parcel;
         Parcel_p Parcel_P = new Parcel_p();
@@ -40,7 +40,7 @@ namespace PL
             InitializeComponent();
         }
 
-        public ParcelWindow(IBL bL, CurrentUser currentUser1)
+        public ParcelWindow(IBL bL, userType currentUser1)
         {
             currentUser = currentUser1;
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace PL
 
         }
 
-        public ParcelWindow(IBL bl, Parcel parcel1, CurrentUser currentUser1)
+        public ParcelWindow(IBL bl, Parcel parcel1, userType currentUser1)
         {
             currentUser = currentUser1;
             //CustomerList = customerList;
@@ -68,7 +68,7 @@ namespace PL
             weightLabel.IsEnabled = false;
             priorityLabel.IsEnabled = false;
             DataContext = Parcel_P;
-            CurrentUser.Text = currentUser.Type.ToString();
+            currentUserTextBlock.Text = currentUser.ToString();
             Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
             if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
@@ -274,7 +274,7 @@ namespace PL
         private void OpenDrone_Click(object sender, RoutedEventArgs e)
         {
             BO.Drone drone = bL1.GetDroneById(Parcel_P.IdDrone);
-            new Drone(bL1, drone, currentUser).Show();
+            new Drone(bL1, drone).Show();
         }
 
         private void openCustomerSender(object sender, RoutedEventArgs e)

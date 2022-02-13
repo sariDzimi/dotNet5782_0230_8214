@@ -24,33 +24,26 @@ namespace PL
     public partial class DronesList : Window
     {
         ObservableCollection<DroneToList> Drones = new ObservableCollection<DroneToList>();
-        public CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         public DronesList()
         {
             WindowStyle = WindowStyle.None;
             InitializeComponent();
-
         }
-
 
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
 
-
-
-        public DronesList(IBL bL1, CurrentUser currentUser1)
+        public DronesList(IBL bL1)
         {
-            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = bL1;
             Drones = Convert<DroneToList>(bl.GetDroneToLists());
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            CurrentUser.Text = currentUser.Type.ToString();
             DataContext = Drones;
         }
 
@@ -59,8 +52,6 @@ namespace PL
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
             Drones = Convert<DroneToList>(bl.GetDroneToListsBy((d) => d.MaxWeight == selected));
             DataContext = Drones;
-
-
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -76,7 +67,7 @@ namespace PL
         {
             DroneToList droneToList = (sender as ListView).SelectedValue as DroneToList;
             BO.Drone droneBL = bl.GetDroneById(droneToList.Id);
-            Drone OpenWindow = new Drone(bl, droneBL, currentUser);
+            Drone OpenWindow = new Drone(bl, droneBL);
             OpenWindow.ChangedDroneDelegate += UpdateInList;
             OpenWindow.Show();
 
@@ -100,7 +91,7 @@ namespace PL
 
         private void addADrone_Click(object sender, RoutedEventArgs e)
         {
-            Drone OpenWindow = new Drone(bl,currentUser);
+            Drone OpenWindow = new Drone(bl);
             OpenWindow.ChangedDroneDelegate += AddDrone;
             OpenWindow.Show();
 

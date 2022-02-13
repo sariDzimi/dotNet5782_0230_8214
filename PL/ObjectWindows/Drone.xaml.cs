@@ -25,7 +25,6 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        CurrentUser currentUser = new CurrentUser();
         public Action<BO.Drone> ChangedDroneDelegate;
         IBL bL;
         BO.Drone drone;
@@ -38,23 +37,20 @@ namespace PL
             drone = new BO.Drone() { };
             InitializeComponent();
         }
-        public Drone(IBL bL1, CurrentUser currentUser1)
+        public Drone(IBL bL1)
         {
-            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             addButton.IsEnabled = true;
-            CurrentUser.Text = currentUser.Type.ToString();
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
         }
 
-        public Drone(IBL bL1, BO.Drone droneBL, CurrentUser currentUser1)
+        public Drone(IBL bL1, BO.Drone droneBL)
         {
             WindowStyle = WindowStyle.None;
-            currentUser = currentUser1;
             drone = droneBL;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
