@@ -26,36 +26,44 @@ namespace PL
     {
         ParcelWindow OpenWindow;
         private IBL bl;
-        ObservableCollection<ParcelToList> Parcels = new ObservableCollection<ParcelToList>();
+        ObservableCollection<ParcelToList> parcels = new ObservableCollection<ParcelToList>();
         CollectionView view;
         public ParcelsList()
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
         }
 
+        public ParcelsList(IBL bL1) : this()
+        {
+            bl = bL1;
+            parcels = Convert(bl.GetParcelToLists());
+            PrioritySelector.ItemsSource = Enum.GetValues(typeof(Pritorities));
+            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            DataContext = parcels;
+        }
+
+        /// <summary>
+        /// converts collection of type IEnumerable to observable collection
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original">collection of type IEnumerable</param>
+        /// <returns>collection of type ObservableCollection</returns>
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
 
-        public ParcelsList(IBL bL1)
-        {
-            WindowStyle = WindowStyle.None;
-            InitializeComponent();
-            bl = bL1;
-            Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
-            PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
-            MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            DataContext = Parcels;
-
-        }
-
-        private void MouseDoubleClick_ParcelChoosen(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// opens parcel window of the choosen parcel
+        /// </summary>
+        /// <param name="sender">parcel</param>
+        /// <param name="e"></param>
+        private void parcelChoosen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
             BO.Parcel parcel = bl.GetParcelById(parcelToList.Id);
             OpenWindow = new ParcelWindow(bl, parcel, userType.manager);
-            OpenWindow.ChangedParcelDelegate += UpdateInList;
+            OpenWindow.ChangedParcelDelegate += updateInList;
             if (parcelToList.parcelStatus == ParcelStatus.Requested)
             {
                 OpenWindow.ChangedParcelDelegate += DeleteParcel;
@@ -64,33 +72,57 @@ namespace PL
             OpenWindow.Show();
         }
 
-        public void UpdateInList(BO.Parcel parcel)
+        /// <summary>
+        /// updates parcel in the observable collection
+        /// </summary>
+        /// <param name="parcel">updated parcel</param>
+        public void updateInList(BO.Parcel parcel)
         {
-            ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
-            int index = Parcels.IndexOf(parcelToList);
-            Parcels[index] = bl.convertParcelToTypeOfParcelToList(parcel);
+            ParcelToList parcelToList = parcels.First((d) => d.Id == parcel.Id);
+            int index = parcels.IndexOf(parcelToList);
+            parcels[index] = bl.convertParcelToTypeOfParcelToList(parcel);
 
         }
-        public void AddParcelToLst(BO.Parcel parcel)
+
+        /// <summary>
+        /// adda parcel to the observable collection
+        /// </summary>
+        /// <param name="parcel">parcel</param>
+        public void addParcelToList(BO.Parcel parcel)
         {
-            Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
+            parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
         }
-        private void MaxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        /// <summary>
+        /// shows only parcels with the maxWeight
+        /// </summary>
+        /// <param name="sender">maxWeight</param>
+        /// <param name="e"></param>
+        private void maxWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.WeightCategories)MaxWeightSelector.SelectedItem;
-            Parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.weightCategories == selected));
-            DataContext = Parcels;
+            parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.weightCategories == selected));
+            DataContext = parcels;
         }
 
-        private void PrioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// shows only paecels with the priority
+        /// </summary>
+        /// <param name="sender">priority</param>
+        /// <param name="e"></param>
+        private void prioritySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (BO.Pritorities)PrioritySelector.SelectedItem;
-            Parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.pritorities == selected));
-            DataContext = Parcels;
-
+            parcels = Convert<ParcelToList>(bl.GetParcelsToListBy((d) => d.pritorities == selected));
+            DataContext = parcels;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// groups parcels by senders name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void groupBySender_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
             if(view != null && view.CanGroup == true)
@@ -99,15 +131,24 @@ namespace PL
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
                 view.GroupDescriptions.Add(groupDescription);
             }
-            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// show all parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showAllList_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// groups parcel by recivers name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void groupByReciver_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
             if (view != null && view.CanGroup == true)
@@ -118,31 +159,50 @@ namespace PL
                 view.GroupDescriptions.Add(groupDescription);
             }
         }
+
+        /// <summary>
+        /// clears grouped of selcted view to default view
+        /// </summary>
         private void clearListView()
         {
-            Parcels = new ObservableCollection<ParcelToList>();
-            Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
-            DataContext = Parcels;
+            parcels = new ObservableCollection<ParcelToList>();
+            parcels = Convert<ParcelToList>(bl.GetParcelToLists());
+            DataContext = parcels;
             view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
 
         }
 
-        private void AddParcelButton(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// adds parcel
+        /// </summary>
+        /// <param name="sender">parcel</param>
+        /// <param name="e"></param>
+        private void addParcel_Click(object sender, RoutedEventArgs e)
         {
 
             OpenWindow = new ParcelWindow(bl, userType.manager);
-            OpenWindow.ChangedParcelDelegate += AddParcelToLst;
+            OpenWindow.ChangedParcelDelegate += addParcelToList;
             OpenWindow.Show();
         }
 
-
+        /// <summary>
+        /// deletes parcel
+        /// </summary>
+        /// <param name="parcel"></param>
         private void DeleteParcel(BO.Parcel parcel)
         {
-            ParcelToList parcelToList = Parcels.First((d) => d.Id == parcel.Id);
-            Parcels.Remove(parcelToList);
-            OpenWindow.ChangedParcelDelegate -= UpdateInList;
+            ParcelToList parcelToList = parcels.First((d) => d.Id == parcel.Id);
+            parcels.Remove(parcelToList);
+            OpenWindow.ChangedParcelDelegate -= updateInList;
         }
-        private void close_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

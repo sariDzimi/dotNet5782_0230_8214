@@ -23,60 +23,90 @@ namespace PL
     /// </summary>
     public partial class CustomersList : Window
     {
-        ObservableCollection<CustomerToList> Customers = new ObservableCollection<CustomerToList>();
-        CustomerWindow OpenWindow;
 
         private IBL bl;
+        ObservableCollection<CustomerToList> customers = new ObservableCollection<CustomerToList>();
+        CustomerWindow customerWindow;
+
         public CustomersList()
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
         }
-
-        public CustomersList(IBL blArg)
+        public CustomersList(IBL bl) : this()
         {
-            InitializeComponent();
-            bl = blArg;
-            Customers = Convert<CustomerToList>(bl.GetCustomerToLists());
-            DataContext = Customers;
-            WindowStyle = WindowStyle.None;
-
+            this.bl = bl;
+            customers = Convert(this.bl.GetCustomerToLists());
+            DataContext = customers;
         }
 
-        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        /// <summary>
+        /// opens CustomerWindow of the customer that is choosen
+        /// </summary>
+        /// <param name="sender">choosen customer</param>
+        /// <param name="e"></param>
+        private void customerChoosen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            return new ObservableCollection<T>(original);
+            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
+            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), userType.manager);
+            OpenWindow.ChangedParcelDelegate += updateInList;
+            OpenWindow.Show();
         }
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// adds customer
+        /// </summary>
+        /// <param name="sender">customer</param>
+        /// <param name="e"></param>
+        private void addCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            customerWindow = new CustomerWindow(bl, userType.cutomer);
+            customerWindow.ChangedParcelDelegate += addCustomerToList;
+            customerWindow.Show();
+        }
+
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void customeList_MouseDoubleList(object sender, MouseButtonEventArgs e)
+        #region Binding
+        /// <summary>
+        /// converts collection of type IEnumerable to observable collection
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original">collection of type IEnumerable</param>
+        /// <returns>collection of type ObservableCollection</returns>
+        private void updateInList(BO.Customer customer)
         {
-            CustomerToList customerToList = (sender as ListView).SelectedValue as CustomerToList;
-            CustomerWindow OpenWindow = new CustomerWindow(bl, bl.GetCustomerById(customerToList.Id), userType.manager);
-            OpenWindow.ChangedParcelDelegate += UpdateInList;
-            OpenWindow.Show();
-
-        }
-        private void UpdateInList(BO.Customer customer) {
-            CustomerToList parcelToList =Customers.First((d) => d.Id == customer.Id);
-            int index = Customers.IndexOf(parcelToList);
-            Customers[index] = bl.ConvertCustomerToTypeOfCustomerToList(customer);
+            CustomerToList parcelToList = customers.First((d) => d.Id == customer.Id);
+            int index = customers.IndexOf(parcelToList);
+            customers[index] = bl.ConvertCustomerToTypeOfCustomerToList(customer);
         }
 
-        public void AddCustomerToLst(BO.Customer parcel)
+        /// <summary>
+        /// adds the customer to the observable collection
+        /// </summary>
+        /// <param name="customer">customer</param>
+        public void addCustomerToList(BO.Customer customer)
         {
-            Customers.Add(bl.ConvertCustomerToTypeOfCustomerToList(parcel));
+            customers.Add(bl.ConvertCustomerToTypeOfCustomerToList(customer));
         }
 
-        private void addCustomer_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// converts collection of type IEnumerable to observable collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <returns></returns>
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
-            OpenWindow = new CustomerWindow(bl, userType.cutomer);
-            OpenWindow.ChangedParcelDelegate += AddCustomerToLst;
-            OpenWindow.Show();
-
+            return new ObservableCollection<T>(original);
         }
+        #endregion
     }
 }

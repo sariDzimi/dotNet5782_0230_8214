@@ -28,7 +28,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
-        <ListView x:Name="StationsListView" Height="333" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="MouseDoubleClick_stationChoosen" ItemsSource="{Binding}">
+        <ListView x:Name="StationsListView" Height="333" VerticalAlignment="Top" Margin="0,101,0,0" MouseDoubleClick="stationChoosen_MouseDoubleClick" ItemsSource="{Binding}">
             
             <ListView.View>
                 <GridView >
@@ -42,11 +42,11 @@
                 <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="show only stations with free charge slots" HorizontalAlignment="Left" Margin="315,35,0,0" VerticalAlignment="Top" Height="19" Width="237" Checked="Cheked_onlyStationsWithFreeSlots" Unchecked="unChecked_onlyFreeChargeSlots"/>
-        <Button Content="group by number of free charge slots" HorizontalAlignment="Left" Margin="307,59,0,0" VerticalAlignment="Top" Height="27" Width="267" Click="Button_Click_groupByNumberOfFree"/>
-        <Button Content="clear group by" HorizontalAlignment="Left" Margin="590,59,0,0" VerticalAlignment="Top" Height="27" Width="132" Click="Button_Click_ClearGroupBy"/>
-        <Button Content="add station" HorizontalAlignment="Left" Margin="196,63,0,0" VerticalAlignment="Top" Height="23" Width="92" Click="adddStation_Click"/>
-        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_click"/>
+        <CheckBox Content="show only stations with free charge slots" HorizontalAlignment="Left" Margin="315,35,0,0" VerticalAlignment="Top" Height="19" Width="237" Checked="showOnlyStationsWithFreeSlots_Checked" Unchecked="dontShowOnlyFreeChargeSlots_Unchecked"/>
+        <Button Content="group by number of free charge slots" HorizontalAlignment="Left" Margin="307,59,0,0" VerticalAlignment="Top" Height="27" Width="267" Click="groupByNumberOfFreeChargeSlots_Click"/>
+        <Button Content="clear group by" HorizontalAlignment="Left" Margin="590,59,0,0" VerticalAlignment="Top" Height="27" Width="132" Click="clearGroupBy_Click"/>
+        <Button Content="add station" HorizontalAlignment="Left" Margin="196,63,0,0" VerticalAlignment="Top" Height="23" Width="92" Click="addStation_Click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeWindow_click"/>
     </Grid>
 
 </Window>

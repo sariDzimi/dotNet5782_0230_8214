@@ -40,7 +40,6 @@ namespace PL
         public Drone(IBL bL1)
         {
             InitializeComponent();
-            WindowStyle = WindowStyle.None;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
             bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -50,7 +49,6 @@ namespace PL
 
         public Drone(IBL bL1, BO.Drone droneBL)
         {
-            WindowStyle = WindowStyle.None;
             drone = droneBL;
             InitializeComponent();
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
@@ -138,7 +136,7 @@ namespace PL
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void addDrone_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -166,19 +164,12 @@ namespace PL
             }
 
         }
-
-        private void ButtonClick_Close(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-
         private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void Button_Click_sendDroneToCharge(object sender, RoutedEventArgs e)
+        private void sendDroneToCharge_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -192,7 +183,7 @@ namespace PL
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void Button_Click_releaseDroneFromCharging(object sender, RoutedEventArgs e)
+        private void releaseDroneFromCharging_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -214,7 +205,7 @@ namespace PL
             }
         }
 
-        private void Button_Click_sendDroneForDelivery(object sender, RoutedEventArgs e)
+        private void sendDroneForDelivery_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -231,7 +222,7 @@ namespace PL
             }
         }
 
-        private void Button_Click_colectParcel(object sender, RoutedEventArgs e)
+        private void colectParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -250,7 +241,7 @@ namespace PL
             }
         }
 
-        private void Button_Click_supllyParcel(object sender, RoutedEventArgs e)
+        private void supllyParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -270,7 +261,7 @@ namespace PL
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void updateDroneModel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -283,11 +274,10 @@ namespace PL
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("hello");
-        }
-
+        /// <summary>
+        /// gets input of drone id
+        /// </summary>
+        /// <returns>id of drone</returns>
         private int getId()
         {
             try
@@ -300,6 +290,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of maxWeight of drone
+        /// </summary>
+        /// <returns>max weight</returns>
         private WeightCategories getMaxWeight()
         {
             if (WeightSelector.SelectedItem == null)
@@ -315,6 +309,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of the station number where the drone is charged
+        /// </summary>
+        /// <returns>station number where the drone is charged</returns>
         private int getNumberOfStation()
         {
             try
@@ -327,6 +325,11 @@ namespace PL
             }
         }
 
+
+        /// <summary>
+        /// gets input of time that the drone was charged
+        /// </summary>
+        /// <returns>time that the drone was charged</returns>
         private double getTime()
         {
             try
@@ -339,37 +342,54 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of drones model
+        /// </summary>
+        /// <returns>model of drone</returns>
         private string getModel()
         {
             return modelDroneL.Text;
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void openParcelInDelivery_Click(object sender, RoutedEventArgs e)
         {
-           
+
             Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-          
+
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-        private void DesEableButtons()
+
+        /// <summary>
+        /// dis-enables actions buttons
+        /// </summary>
+        private void DisenableButtons()
         {
             Buttons.Visibility = Visibility.Hidden;
+            simulation.IsEnabled = false;
+            stopSimulation.IsEnabled = true;
         }
 
+        /// <summary>
+        /// enables actions buttons
+        /// </summary>
         private void EnableButtons()
         {
             Buttons.Visibility = Visibility.Visible;
+            simulation.IsEnabled = true;
+            stopSimulation.IsEnabled = false;
             this.SwitchDroneStatus();
 
         }
 
+        #region simulation
+        /// <summary>
+        /// activates the simulation
+        /// </summary>
+        /// <param name="sender">current drone</param>
+        /// <param name="e"></param>
         private void simulation_Click(object sender, RoutedEventArgs e)
         {
-            DesEableButtons();
+            DisenableButtons();
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {
                 bL.StartSimulation(
@@ -392,12 +412,17 @@ namespace PL
             worker.RunWorkerAsync();
         }
 
-        private void stop_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// stops the simulation
+        /// </summary>
+        /// <param name="sender">current drone</param>
+        /// <param name="e"></param>
+        private void stopSimulation_Click(object sender, RoutedEventArgs e)
         {
             worker.CancelAsync();
             this.EnableButtons();
-
         }
+        #endregion
     }
 }
 

@@ -21,60 +21,63 @@ namespace PL
     public partial class StationsList : Window
     {
         ObservableCollection<StationToList> Stations = new ObservableCollection<StationToList>();
-        StationWindow OpenWindow;
+        StationWindow stationWindow;
         private IBL bL;
         CollectionView view;
         public StationsList()
         {
             InitializeComponent();
+            WindowStyle = WindowStyle.None;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="original"></param>
-        /// <returns></returns>
-        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
-        {
-            return new ObservableCollection<T>(original);
-        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="currentUser1"></param>
-        public StationsList(IBL bl)
+        public StationsList(IBL bl) : this()
         {
-            WindowStyle = WindowStyle.None;
-            InitializeComponent();
             bL = bl;
             Stations = Convert<StationToList>(bl.GetStationToLists());
             DataContext = Stations;
         }
+
         /// <summary>
-        /// 
+        /// converts collection of type IEnumerable to observable collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original">collection of type IEnumerable</param>
+        /// <returns>collection of type observable collection</returns>
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
+
+        /// <summary>
+        /// shows only stations with free charge slots
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
+        private void showOnlyStationsWithFreeSlots_Checked(object sender, RoutedEventArgs e)
         {
             clearListView();
             Stations = Convert<StationToList>(bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0));
 
         }
+
         /// <summary>
-        /// 
+        /// groups stations by number of free charge slots
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_groupByNumberOfFree(object sender, RoutedEventArgs e)
+        private void groupByNumberOfFreeChargeSlots_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumberOfFreeChargeSlots");
             view.GroupDescriptions.Add(groupDescription);
         }
         /// <summary>
-        /// 
+        /// clears grouped of selcted view to default view
         /// </summary>
         private void clearListView()
         {
@@ -83,43 +86,47 @@ namespace PL
             DataContext = Stations;
             view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_ClearGroupBy(object sender, RoutedEventArgs e)
+        private void clearGroupBy_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
         }
+        
         /// <summary>
-        /// 
+        /// shows all stations
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void unChecked_onlyFreeChargeSlots(object sender, RoutedEventArgs e)
+        private void dontShowOnlyFreeChargeSlots_Unchecked(object sender, RoutedEventArgs e)
         {
             clearListView();
         }
+        
         /// <summary>
-        /// 
+        /// opens station window of choosen station
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MouseDoubleClick_stationChoosen(object sender, MouseButtonEventArgs e)
+        private void stationChoosen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.GetStationById(stationToList.Id);
-            OpenWindow = new StationWindow(bL, station);
-            OpenWindow.ChangedParcelDelegate += UpdateInList;
-            OpenWindow.Show();
+            stationWindow = new StationWindow(bL, station);
+            stationWindow.ChangedParcelDelegate += updateInList;
+            stationWindow.Show();
 
         }
+
         /// <summary>
-        /// 
+        /// updates station in the observable collection
         /// </summary>
         /// <param name="station"></param>
-        private void UpdateInList(BO.Station station)
+        private void updateInList(BO.Station station)
         {
             StationToList stationToList = Stations.First((d) => d.Id == station.Id);
             int index = Stations.IndexOf(stationToList);
@@ -127,36 +134,35 @@ namespace PL
 
 
         }
+
         /// <summary>
-        /// 
+        /// adds station to the observable collection
         /// </summary>
         /// <param name="station"></param>
-        private void AddStationToLst(BO.Station station)
+        private void addStationToList(BO.Station station)
         {
             Stations.Add(new StationToList() { Id = station.Id, Name = station.Name, NumberOfFreeChargeSlots = station.FreeChargeSlots });
             Stations.Add(bL.convertStationToTypeOfStationToList(station));
-
-
         }
 
         /// <summary>
-        /// 
+        /// adds station
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void adddStation_Click(object sender, RoutedEventArgs e)
+        private void addStation_Click(object sender, RoutedEventArgs e)
         {
-            OpenWindow = new StationWindow(bL);
-            OpenWindow.ChangedParcelDelegate += AddStationToLst;
-            OpenWindow.Show();
-            //new StationWindow(bL, currentUser).Show();
+            stationWindow = new StationWindow(bL);
+            stationWindow.ChangedParcelDelegate += addStationToList;
+            stationWindow.Show();
         }
+
         /// <summary>
-        /// 
+        /// closes the window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void closeButton_click(object sender, RoutedEventArgs e)
+        private void closeWindow_click(object sender, RoutedEventArgs e)
         {
             Close();
         }
