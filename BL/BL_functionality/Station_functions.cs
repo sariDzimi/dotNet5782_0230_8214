@@ -226,7 +226,7 @@ namespace BL
         /// </summary>
         /// <param name="station">station</param>
         /// <returns>stationToList</returns>
-        private StationToList convertStationToTypeOfStationToList(Station station)
+        public  StationToList convertStationToTypeOfStationToList(Station station)
         {
             return new StationToList()
             {

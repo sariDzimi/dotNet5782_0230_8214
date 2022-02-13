@@ -62,7 +62,7 @@
                 <ListView.View>
 
                     <GridView >
-                        <GridViewColumn x:Name="ID" Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" />
+                        <GridViewColumn x:Name="ID" Header="ID" Width="40" DisplayMemberBinding="{Binding Id}" />
                         <GridViewColumn Header="weightCategories" Width="150" DisplayMemberBinding="{Binding weightCategories}" />
                         <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
                         <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfCustomerSended}" />

@@ -30,7 +30,11 @@ namespace PL
         userType currentUser;
         IBL bL1;
         Parcel parcel;
-        Parcel_p Parcel_P= new Parcel_p();
+        Parcel_p Parcel_P = new Parcel_p();
+        //ParcelList parcelList= new ParcelList();
+        //CustomerList CustomerList = new CustomerList();
+        //DroneList droneList = new DroneList();
+        //Drone_p drone_P = new Drone_p();
         public ParcelWindow()
         {
             InitializeComponent();
@@ -70,17 +74,17 @@ namespace PL
             if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
             {
                 OpenDrone.Visibility = Visibility.Visible;
-               
+
             }
 
             if (Parcel_P.Scheduled == null)
             {
                 DeleateParcel.Visibility = Visibility.Visible;
-               // Parcel_P.ListChangedDelegate +=DeleteParcelToList;
+                // Parcel_P.ListChangedDelegate +=DeleteParcelToList;
 
             }
 
-            if (Parcel_P.PickedUp == null && parcel.Scheduled !=null)
+            if (Parcel_P.PickedUp == null && parcel.Scheduled != null)
             {
                 PickedUpC.Visibility = Visibility.Visible;
             }
@@ -109,14 +113,22 @@ namespace PL
             {
                 Customer customerSender = bL1.GetCustomerById(getIdSender());
                 Customer customerReceiver = bL1.GetCustomerById(getIdReciver());
-                CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id =customerSender.Id, Name  = customerSender.Name};
+                CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = customerSender.Id, Name = customerSender.Name };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
-                bL1.AddParcel(new BO.Parcel() { Id = getId(), Weight = getMaxWeight(), Pritority = getPritorities(), customerAtParcelSender = customerAtParcelSender1, customerAtParcelReciver = customerAtParcelReciver1, Requested = DateTime.Now });
+                BO.Parcel parcel = new Parcel()
+                {
+                    Weight = getMaxWeight(),
+                    Pritority = getPritorities(),
+                    customerAtParcelSender = customerAtParcelSender1,
+                    customerAtParcelReciver = customerAtParcelReciver1,
+                    Requested = DateTime.Now
+                };
+                int idParcel = bL1.AddParcel(parcel);
                 if (Parcel_P.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(getId()));
+                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(idParcel));
                 }
-                MessageBox.Show("the parcel was added succesfuly!!!");
+                MessageBox.Show($"the parcel was added succesfuly!!! your Id's parcel is:{idParcel}");
                 Close();
             }
             catch (NotValidInput ex)
@@ -133,17 +145,7 @@ namespace PL
                 MessageBox.Show("station number not found");
             }
         }
-        private int getId()
-        {
-            try
-            {
-                return Convert.ToInt32(idParcelLabel.Text);
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("id");
-            }
-        }
+        
 
         private Pritorities getPritorities()
         {
@@ -257,10 +259,10 @@ namespace PL
 
         private void DeleteParcel(object sender, RoutedEventArgs e)
         {
-           // Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
+            // Parcel_P.ListChangedDelegate += new Changed<BO.Parcel>(UpdateParcelList);
 
             bL1.DeleateParcel(parcel.Id);
-           // BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
+            // BO.Parcel parcelCorrent = bL1.GetParcelById(parcel.Id);
             if (Parcel_P.ListChangedDelegate != null)
             {
                 Parcel_P.ListChangedDelegate(parcel);

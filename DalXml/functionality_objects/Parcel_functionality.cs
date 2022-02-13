@@ -15,17 +15,18 @@ namespace Dal
         /// adds parcel to parcels xml file
         /// </summary>
         /// <param name="parcel">parcel</param>
-        public void AddParcel(Parcel parcel)
+        public int AddParcel(Parcel parcel)
         {
             List<DO.Parcel> parcelList = GetParcels().ToList();
-            if (parcelList.Any(p => p.Id == parcel.Id))
+            Random rand = new Random();
+            do
             {
-                throw new IdAlreadyExistException("parcel", parcel.Id);
-            }
+                parcel.Id = rand.Next(111, 999);
 
+            } while (DataSource.parcels.Any(ps => ps.Id == parcel.Id));
             parcelList.Add(parcel);
-
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(parcelList, dir + parcelFilePath);
+            return parcel.Id;
         }
 
         #endregion

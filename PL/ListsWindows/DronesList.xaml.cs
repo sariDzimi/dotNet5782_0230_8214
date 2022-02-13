@@ -83,7 +83,6 @@ namespace PL
         }
         public void AddDrone(BO.Drone drone)
         {
-            Drones.Add(new DroneToList() {Id = drone.Id, Battery = drone.Battery, DroneStatus = drone.DroneStatus, Location =  drone.Location, Model  = drone.Model});
             Drones.Add(bl.ConvertDroneToTypeOfDroneToList(drone));
 
         }

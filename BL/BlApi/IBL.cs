@@ -56,7 +56,7 @@ namespace BlApi
         public Parcel ConvertParcelToTypeOfListToParcel(ParcelToList parcelToList);
         public IEnumerable<StationToList> GetStationToListBy(Predicate<StationToList> findBy);
 
-        public void AddParcel(Parcel parcel);
+        public int AddParcel(Parcel parcel);
         public void AddStation(Station station);
 
         public void UpdateStation(Station station);
@@ -74,6 +74,8 @@ namespace BlApi
         public void StartSimulation(Drone drone, Action<Drone, int> action, Func<bool> func);
         public double GetRateOFCharging();
         public DroneToList ConvertDroneToTypeOfDroneToList(Drone drone);
+        public StationToList convertStationToTypeOfStationToList(Station station);
+
 
     }
 }
