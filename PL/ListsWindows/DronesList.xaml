@@ -5,14 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesList" Height="640" Width="800"
+        Title="DronesList" Height="500" Width="900"
          Style="{StaticResource OurStyle}">
     <Window.Resources>
-        <Style x:Key="close" TargetType="Button">
-            <Setter Property="Background"
-              Value= "#FFFF061C" />
 
-        </Style>
         <Style x:Key="commonStyle"
            TargetType="Control">
             <Setter Property="FontSize"
@@ -57,7 +53,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="608,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
-        <Grid Name="MainGrid">
+        <Grid Name="MainGrid" Margin="0,0,0,-93">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="23*"/>
@@ -71,13 +67,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Name="StatusSelector"  VerticalAlignment="Top" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" Margin="27,13,23,0" Height="31"/>
+                <ComboBox Name="StatusSelector"  VerticalAlignment="Top" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" Margin="22,14,28,0" Height="31"/>
                 <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="0" Margin="136,16,0,0" HorizontalAlignment="Left" Width="148" Height="31"/>
-                <Button x:Name="addADrone" Content="Add a drone"  Click="addADrone_Click"   Height="31" Margin="16,569,184,-435" Grid.ColumnSpan="2"/>
+                <Button x:Name="addADrone" Content="Add a drone"  Click="addADrone_Click"   Height="31" Margin="16,429,184,-317" Grid.ColumnSpan="2"/>
             </Grid>
 
 
-            <ListView x:Name="DronesListView" Margin="0,69,0,84" MouseDoubleClick="MouseDoubleClick_droneChoosen" ItemsSource="{Binding}" Grid.RowSpan="3" HorizontalAlignment="Center" Width="800">
+            <ListView x:Name="DronesListView" Margin="0,12,0,0" MouseDoubleClick="MouseDoubleClick_droneChoosen" ItemsSource="{Binding}" Grid.RowSpan="2" HorizontalAlignment="Center" Width="900" Height="326" VerticalAlignment="Top" Grid.Row="1">
 
                 <ListView.View >
 
@@ -100,7 +96,7 @@
 
             <Label Content="drone status:" HorizontalAlignment="Left" Margin="318,16,0,0" VerticalAlignment="Top" Height="31" Width="101" RenderTransformOrigin="3.152,-1.109"/>
             <Label Content="max weight" HorizontalAlignment="Left" Margin="20,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.295,-6.252" Width="101" Height="31"/>
-            <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeButton_Click"/>
+            <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="838,8,0,0" VerticalAlignment="Top" Height="36" Width="46" Click="closeButton_Click"/>
         </Grid>
     </Grid>
 

@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style x:Key="close" TargetType="Button">
             <Setter Property="Background"
-              Value= "#FFFF061C" />
+             Value= "#FFD3D6BF"  />
             <Setter Property="Foreground"
               Value="Black" />
 

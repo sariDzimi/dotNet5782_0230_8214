@@ -93,13 +93,13 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            if(view != null && view.CanGroup == true)
+            if (view != null && view.CanGroup == true)
             {
                 view.GroupDescriptions.Clear();
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
                 view.GroupDescriptions.Add(groupDescription);
             }
-            
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -135,6 +135,16 @@ namespace PL
             OpenWindow.Show();
         }
 
+        private void dpick_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Parcels = new ObservableCollection<ParcelToList>();
+            foreach (var parcel in bl.GetParcelsBy((p) => p.Scheduled > dp1.SelectedDate.Value.Date))
+            {
+                Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
+            }
+            DataContext = Parcels;
+    
+        }
 
         private void DeleteParcel(BO.Parcel parcel)
         {
