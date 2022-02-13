@@ -59,7 +59,7 @@ namespace PL
         private void Cheked_onlyStationsWithFreeSlots(object sender, RoutedEventArgs e)
         {
             clearListView();
-            Stations=Convert<StationToList>(bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0));
+            Stations = Convert<StationToList>(bL.GetStationToListBy(s => s.NumberOfFreeChargeSlots != 0));
 
         }
         /// <summary>
