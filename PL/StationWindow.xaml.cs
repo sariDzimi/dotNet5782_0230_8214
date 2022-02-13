@@ -23,8 +23,6 @@ namespace PL
     public partial class StationWindow : Window
     {
         public Action<BO.Station> ChangedParcelDelegate;
-
-        CurrentUser currentUser = new CurrentUser();
         IBL bl;
         Station station;
         Station_p station_P;
@@ -34,9 +32,8 @@ namespace PL
             InitializeComponent();
         }
 
-        public StationWindow(IBL blArg, Station stationArg, CurrentUser currentUser1) 
+        public StationWindow(IBL blArg, Station stationArg) 
         {
-            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
@@ -45,17 +42,14 @@ namespace PL
             DroneChargingListView.ItemsSource = station.DroneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
             DataContext = station_P;
-            CurrentUser.Text = currentUser.Type.ToString();
         }
 
-        public StationWindow(IBL blArg, CurrentUser currentUser1)
+        public StationWindow(IBL blArg)
         {
-            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             bl = blArg;
             addStationLabel.Visibility = Visibility.Visible;
-            CurrentUser.Text = currentUser.Type.ToString();
         }
 
         private void DroneChargingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,7 +60,7 @@ namespace PL
         private void DroneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
-            new Drone(bl, bl.GetDroneById(droneAtCharging.Id), currentUser).Show();
+            new Drone(bl, bl.GetDroneById(droneAtCharging.Id)).Show();
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)

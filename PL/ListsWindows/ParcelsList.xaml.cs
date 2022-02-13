@@ -18,7 +18,6 @@ using PO;
 
 namespace PL
 {
-   // public delegate void Changed<T>(T change);
     /// <summary>
     /// Interaction logic for ParcelsList.xaml
     /// </summary>
@@ -26,7 +25,6 @@ namespace PL
     public partial class ParcelsList : Window
     {
         ParcelWindow OpenWindow;
-        public CurrentUser currentUser = new CurrentUser();
         private IBL bl;
         ObservableCollection<ParcelToList> Parcels = new ObservableCollection<ParcelToList>();
         CollectionView view;
@@ -40,16 +38,14 @@ namespace PL
             return new ObservableCollection<T>(original);
         }
 
-        public ParcelsList(IBL bL1, CurrentUser currentUser1)
+        public ParcelsList(IBL bL1)
         {
-            currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bl = bL1;
             Parcels = Convert<ParcelToList>(bl.GetParcelToLists());
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Pritorities));
             MaxWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            CurrentUser.Text = currentUser.Type.ToString();
             DataContext = Parcels;
 
         }
@@ -58,7 +54,7 @@ namespace PL
         {
             ParcelToList parcelToList = (sender as ListView).SelectedValue as ParcelToList;
             BO.Parcel parcel = bl.GetParcelById(parcelToList.Id);
-            OpenWindow = new ParcelWindow(bl, parcel, currentUser);
+            OpenWindow = new ParcelWindow(bl, parcel, userType.manager);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             if (parcelToList.parcelStatus == ParcelStatus.Requested)
             {
@@ -134,7 +130,7 @@ namespace PL
         private void AddParcelButton(object sender, RoutedEventArgs e)
         {
 
-            OpenWindow = new ParcelWindow(bl, currentUser);
+            OpenWindow = new ParcelWindow(bl, userType.manager);
             OpenWindow.ChangedParcelDelegate += AddParcelToLst;
             OpenWindow.Show();
         }

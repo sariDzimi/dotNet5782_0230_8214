@@ -22,7 +22,6 @@ namespace PL
     {
         ObservableCollection<StationToList> Stations = new ObservableCollection<StationToList>();
         StationWindow OpenWindow;
-        CurrentUser currentUser = new CurrentUser();
         private IBL bL;
         CollectionView view;
         public StationsList()
@@ -44,15 +43,13 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="currentUser1"></param>
-        public StationsList(IBL bl, CurrentUser currentUser1)
+        public StationsList(IBL bl)
         {
-            currentUser = currentUser1;
             WindowStyle = WindowStyle.None;
             InitializeComponent();
             bL = bl;
             Stations = Convert<StationToList>(bl.GetStationToLists());
             DataContext = Stations;
-            CurrentUser.Text = currentUser.Type.ToString();
         }
         /// <summary>
         /// 
@@ -113,7 +110,7 @@ namespace PL
         {
             StationToList stationToList = (sender as ListView).SelectedValue as StationToList;
             BO.Station station = bL.GetStationById(stationToList.Id);
-            OpenWindow = new StationWindow(bL, station, currentUser);
+            OpenWindow = new StationWindow(bL, station);
             OpenWindow.ChangedParcelDelegate += UpdateInList;
             OpenWindow.Show();
 
@@ -147,7 +144,7 @@ namespace PL
         /// <param name="e"></param>
         private void adddStation_Click(object sender, RoutedEventArgs e)
         {
-            OpenWindow = new StationWindow(bL, currentUser);
+            OpenWindow = new StationWindow(bL);
             OpenWindow.ChangedParcelDelegate += AddStationToLst;
             OpenWindow.Show();
             //new StationWindow(bL, currentUser).Show();
