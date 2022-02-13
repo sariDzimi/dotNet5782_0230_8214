@@ -18,7 +18,7 @@
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
 
 
-        <TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="152,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="{Binding ID}"   />
+        <!--<TextBox x:Name="idParcelLabel" HorizontalAlignment="Left" Margin="152,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="{Binding ID}"   />-->
 
         <TextBox x:Name="iddroneLabel" Text="{Binding IdDrone}" HorizontalAlignment="Left" Margin="152,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}" />
 
@@ -53,7 +53,7 @@
 
         </Grid>
 
-        <Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="75,63,0,0" VerticalAlignment="Top" Height="27" Width="90"/>
+        <!--<Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="75,63,0,0" VerticalAlignment="Top" Height="27" Width="90"/>-->
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="75,99,0,0" VerticalAlignment="Top" Height="27" Width="90" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
 
         <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="64" Click="UpdatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" />

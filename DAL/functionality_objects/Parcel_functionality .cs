@@ -16,13 +16,16 @@ namespace Dal
         /// </summary>
         /// <param name="parcel">parcel</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddParcel(Parcel parcel)
+        public int AddParcel(Parcel parcel)
         {
-            if (DataSource.parcels.Any(ps => ps.Id == parcel.Id))
+            Random rand = new Random();
+            do
             {
-                throw new IdAlreadyExistException("parcel", parcel.Id);
-            }
+                parcel.Id = rand.Next(111, 999);
+
+            } while (DataSource.parcels.Any(ps => ps.Id == parcel.Id));
             DataSource.parcels.Add(parcel);
+            return parcel.Id;
         }
 
         #endregion

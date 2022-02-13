@@ -137,6 +137,8 @@ namespace PL
         private void AddStationToLst(BO.Station station)
         {
             Stations.Add(new StationToList() { Id = station.Id, Name = station.Name, NumberOfFreeChargeSlots = station.FreeChargeSlots });
+            Stations.Add(bL.convertStationToTypeOfStationToList(station));
+
 
         }
 

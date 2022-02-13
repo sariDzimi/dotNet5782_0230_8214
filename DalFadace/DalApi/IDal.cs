@@ -19,7 +19,7 @@ namespace DalApi
         #endregion
 
         #region Parcel
-        void AddParcel(Parcel parcel);
+        int AddParcel(Parcel parcel);
         IEnumerable<Parcel> GetParcels(Predicate<Parcel> getBy = null);
         Parcel GetParcelById(int id);
         void UpdateParcel(Parcel parcel);

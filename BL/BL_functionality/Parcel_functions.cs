@@ -15,21 +15,22 @@ namespace BL
         /// </summary>
         /// <param name="parcel"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddParcel(Parcel parcel)
+        public int AddParcel(Parcel parcel)
         {
             DO.Parcel parcelDL = convertParcelFromBLToDal(parcel);
+            int idParcel;
             try
             {
                 lock (dal)
                 {
-                    dal.AddParcel(parcelDL);
+                    idParcel= dal.AddParcel(parcelDL);
                 }
             }
             catch (DalApi.IdAlreadyExistException)
             {
                 throw new IdAlreadyExist("parcel", parcel.Id);
             }
-
+            return idParcel;
         }
 
         #endregion
