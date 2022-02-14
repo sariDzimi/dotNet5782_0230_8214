@@ -27,83 +27,102 @@ namespace PL
     {
         public Action<BO.Parcel> ChangedParcelDelegate;
         userType currentUser;
-        IBL bL1;
-        Parcel parcel;
-        Parcel_p Parcel_P = new Parcel_p();
+        IBL bl;
+        BO.Parcel parcel;
+        PO.Parcel parcel_display = new PO.Parcel();
         public ParcelWindow()
         {
-            InitializeComponent();
-        }
-        public ParcelWindow(IBL bL, userType currentUser1)
-        {
-            currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
             weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
-            bL1 = bL;
-            AddParcelButton.Visibility = Visibility.Visible;
+        }
+        public ParcelWindow(IBL bl, userType currentUser) : this()
+        {
+            this.currentUser = currentUser;
+            this.bl = bl;
+            addParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
-            Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
+            parcel_display.ListChangedDelegate += new Action<BO.Parcel>(updateParcelList);
 
         }
-        public ParcelWindow(IBL bl, Parcel parcel1, userType currentUser1)
+        public ParcelWindow(IBL bl, BO.Parcel parcel, userType currentUser) : this()
         {
-            currentUser = currentUser1;
-            InitializeComponent();
-            AddParcelButton.Visibility = Visibility.Hidden;
-            parcel = parcel1;
-            Parcel_P = new Parcel_p() { ID = parcel.Id, CustomerAtParcelReciver = parcel.customerAtParcelReciver, IdDrone = parcel.droneAtParcel == null ? 0 : parcel.droneAtParcel.Id, CustomerAtParcelSender = parcel.customerAtParcelSender, Delivered = parcel.Delivered, PickedUp = parcel.PickedUp, Pritority = parcel.Pritority, Requested = parcel.Requested, Scheduled = parcel.Scheduled, Weight = parcel.Weight };
-            bL1 = bl;
-            weightLabel.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            priorityLabel.ItemsSource = Enum.GetValues(typeof(Pritorities));
+            this.currentUser = currentUser;
+            addParcelButton.Visibility = Visibility.Hidden;
+            this.parcel = parcel;
+            parcel_display = new PO.Parcel()
+            {
+                ID = this.parcel.Id,
+                CustomerAtParcelReciver = this.parcel.customerAtParcelReciver,
+                IdDrone = this.parcel.droneAtParcel == null ? 0 : this.parcel.droneAtParcel.Id,
+                CustomerAtParcelSender = this.parcel.customerAtParcelSender,
+                Delivered = this.parcel.Delivered,
+                PickedUp = this.parcel.PickedUp,
+                Pritority = this.parcel.Pritority,
+                Requested = this.parcel.Requested,
+                Scheduled = this.parcel.Scheduled,
+                Weight = this.parcel.Weight
+            };
+
+            this.bl = bl;
             weightLabel.IsEnabled = false;
             priorityLabel.IsEnabled = false;
-            DataContext = Parcel_P;
-            currentUserTextBlock.Text = currentUser.ToString();
-            Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
+            DataContext = parcel_display;
+            currentUserTextBlock.Text = this.currentUser.ToString();
+            parcel_display.ListChangedDelegate += new Action<BO.Parcel>(updateParcelList);
 
-            if (Parcel_P.IdDrone != 0 && parcel.Delivered == null)
+            if (parcel_display.IdDrone != 0 && this.parcel.Delivered == null) //if parcel is not deliverd yet,
+                                                                              //the ability of watching the drone is open
             {
-                OpenDrone.Visibility = Visibility.Visible;
-
+                openDroneButton.Visibility = Visibility.Visible;
             }
 
-            if (Parcel_P.Scheduled == null)
+            if (parcel_display.Scheduled == null) //if the parcel is not assigned to a drone,
+                                                  //the ability of deleing the drone is open
             {
-                DeleateParcel.Visibility = Visibility.Visible;
+                deleateParcelButton.Visibility = Visibility.Visible;
             }
 
-            if (Parcel_P.PickedUp == null && parcel.Scheduled != null)
+            if (parcel_display.PickedUp == null && this.parcel.Scheduled != null) // if the parcel is assinged but no picked up,
+                                                                                  // the ability of picking up the parcel is open
             {
-                PickedUpC.Visibility = Visibility.Visible;
+                pickedUpCheckBox.Visibility = Visibility.Visible;
             }
-            else if (Parcel_P.Delivered == null && parcel.PickedUp != null)
+            else if (parcel_display.Delivered == null && this.parcel.PickedUp != null) //if prcel is not supllied yet but was picked up already,
+                                                                                       //the ability of supllying the parcel is open
             {
-                DeliveredC.Visibility = Visibility.Visible;
+                deliveredChekBox.Visibility = Visibility.Visible;
             }
 
         }
-        private void close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-        public void UpdateParcelList(BO.Parcel parcel)
+
+        /// <summary>
+        /// updates prcel in prarcel list window
+        /// </summary>
+        /// <param name="parcel"></param>
+        public void updateParcelList(BO.Parcel parcel)
         {
             if (ChangedParcelDelegate != null)
             {
                 ChangedParcelDelegate(parcel);
             }
         }
-        private void AddParcel(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// adds parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Customer customerSender = bL1.GetCustomerById(getIdSender());
-                Customer customerReceiver = bL1.GetCustomerById(getIdReciver());
+                BO.Customer customerSender = bl.GetCustomerById(getIdSender());
+                BO.Customer customerReceiver = bl.GetCustomerById(getIdReciver());
                 CustomerAtParcel customerAtParcelSender1 = new CustomerAtParcel() { Id = customerSender.Id, Name = customerSender.Name };
                 CustomerAtParcel customerAtParcelReciver1 = new CustomerAtParcel() { Id = customerReceiver.Id, Name = customerReceiver.Name };
-                BO.Parcel parcel = new Parcel()
+                BO.Parcel parcel = new BO.Parcel()
                 {
                     Weight = getMaxWeight(),
                     Pritority = getPritorities(),
@@ -111,10 +130,10 @@ namespace PL
                     customerAtParcelReciver = customerAtParcelReciver1,
                     Requested = DateTime.Now
                 };
-                int idParcel = bL1.AddParcel(parcel);
-                if (Parcel_P.ListChangedDelegate != null)
+                int idParcel = bl.AddParcel(parcel);
+                if (parcel_display.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(idParcel));
+                    parcel_display.ListChangedDelegate(bl.GetParcelById(idParcel));
                 }
                 MessageBox.Show($"the parcel was added succesfuly!!! your Id's parcel is:{idParcel}");
                 Close();
@@ -134,7 +153,10 @@ namespace PL
             }
         }
 
-
+        /// <summary>
+        /// gets input of pritority
+        /// </summary>
+        /// <returns>pritority</returns>
         private Pritorities getPritorities()
         {
             if (priorityLabel.SelectedItem == null)
@@ -150,6 +172,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of max weight
+        /// </summary>
+        /// <returns>max weight</returns>
         private WeightCategories getMaxWeight()
         {
             if (weightLabel.SelectedItem == null)
@@ -163,6 +189,11 @@ namespace PL
                 throw new NotValidInput("weight");
             }
         }
+
+        /// <summary>
+        /// gets input: id of sender
+        /// </summary>
+        /// <returns>id of sender</returns>
         private int getIdSender()
         {
             try
@@ -174,6 +205,11 @@ namespace PL
                 throw new NotValidInput("Id Sender");
             }
         }
+
+        /// <summary>
+        /// gets input: id of reciver
+        /// </summary>
+        /// <returns>id of reciver</returns>
         private int getIdReciver()
         {
             try
@@ -186,7 +222,12 @@ namespace PL
             }
         }
 
-        private void UpdatePrcel(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// updates parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updatePrcel(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -194,10 +235,10 @@ namespace PL
                 Pritorities pritorities = getPritorities();
                 parcel.Pritority = pritorities;
                 parcel.Weight = weightCategories;
-                bL1.UpdateParcel(parcel);
-                if (Parcel_P.ListChangedDelegate != null)
+                bl.UpdateParcel(parcel);
+                if (parcel_display.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(Parcel_P.ID));
+                    parcel_display.ListChangedDelegate(bl.GetParcelById(parcel_display.ID));
                 }
             }
             catch (NotValidInput ex)
@@ -207,75 +248,106 @@ namespace PL
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// supplies parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deliveredCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("agree Delivered", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-            }
-            else
+            if (MessageBox.Show("agree Delivered", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 parcel.Delivered = DateTime.Now;
-                bL1.UpdateParcel(parcel);
-                bL1.SupplyParcelByDrone(bL1.GetDroneById(parcel.droneAtParcel.Id).Id);
+                bl.UpdateParcel(parcel);
+                bl.SupplyParcelByDrone(bl.GetDroneById(parcel.droneAtParcel.Id).Id);
                 DeliveredLabel.Text = $"{parcel.Delivered}";
-                if (Parcel_P.ListChangedDelegate != null)
+                if (parcel_display.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                    parcel_display.ListChangedDelegate(bl.GetParcelById(parcel.Id));
                 }
             }
 
         }
-        private void PickedUpC_Checked(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// collects parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pickedUp_Checked(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("agree Pickup", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-            }
-            else
+            if (MessageBox.Show("agree Pickup", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 parcel.PickedUp = DateTime.Now;
-                bL1.UpdateParcel(parcel);
-                bL1.CollectParcleByDrone(bL1.GetDroneById(parcel.droneAtParcel.Id).Id);
+                bl.UpdateParcel(parcel);
+                bl.CollectParcleByDrone(bl.GetDroneById(parcel.droneAtParcel.Id).Id);
                 PickedUpLabel.Text = $"{parcel.PickedUp}";
-                DeliveredC.Visibility = Visibility.Visible;
-                if (Parcel_P.ListChangedDelegate != null)
+                deliveredChekBox.Visibility = Visibility.Visible;
+                if (parcel_display.ListChangedDelegate != null)
                 {
-                    Parcel_P.ListChangedDelegate(bL1.GetParcelById(parcel.Id));
+                    parcel_display.ListChangedDelegate(bl.GetParcelById(parcel.Id));
                 }
             }
         }
-        private void DeleteParcel(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// deletes the parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteParcel(object sender, RoutedEventArgs e)
         {
-            bL1.DeleateParcel(parcel.Id);
-            if (Parcel_P.ListChangedDelegate != null)
+            bl.DeleateParcel(parcel.Id);
+            if (parcel_display.ListChangedDelegate != null)
             {
-                Parcel_P.ListChangedDelegate(parcel);
+                parcel_display.ListChangedDelegate(parcel);
             }
             Close();
         }
 
-        private void OpenDrone_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens the drone window that is responsible of deliverig the parcel 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void openDrone_Click(object sender, RoutedEventArgs e)
         {
-            BO.Drone drone = bL1.GetDroneById(Parcel_P.IdDrone);
-            new Drone(bL1, drone).Show();
+            BO.Drone drone = bl.GetDroneById(parcel_display.IdDrone);
+            new Drone(bl, drone).Show();
         }
 
+        /// <summary>
+        /// open the customer window of sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openCustomerSender(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelSender.Id);
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            BO.Customer customer = bl.GetCustomerById(parcel.customerAtParcelSender.Id);
+            new CustomerWindow(bl, customer, currentUser).Show();
         }
 
+
+        /// <summary>
+        /// open the customer window of the reciver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openCustomerReciver(object sender, RoutedEventArgs e)
         {
-            BO.Customer customer = bL1.GetCustomerById(parcel.customerAtParcelReciver.Id);
-            new CustomerWindow(bL1, customer, currentUser).Show();
+            BO.Customer customer = bl.GetCustomerById(parcel.customerAtParcelReciver.Id);
+            new CustomerWindow(bl, customer, currentUser).Show();
         }
 
-        private void close_buuton(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        
     }
 }

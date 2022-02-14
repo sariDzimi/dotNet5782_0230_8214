@@ -24,50 +24,55 @@ namespace PL
     {
         public Action<BO.Station> ChangedParcelDelegate;
         IBL bl;
-        Station station;
-        Station_p station_P;
+        BO.Station station;
+        PO.Station station_display;
 
         public StationWindow()
         {
             InitializeComponent();
         }
 
-        public StationWindow(IBL blArg, Station stationArg) 
+        public StationWindow(IBL bl, BO.Station station) 
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            bl = blArg;
-            station = stationArg;
-            station_P = new Station_p() { ID = station.Id, Name = station.Name, Longitude = station.Location.Longitude,Latitude= station.Location.Latitude, FreeChargeSlots = station.FreeChargeSlots };
-            DroneChargingListView.ItemsSource = station.DroneAtChargings;
+            this.bl = bl;
+            this.station = station;
+            station_display = new PO.Station() { ID = this.station.Id, Name = this.station.Name, Longitude = this.station.Location.Longitude, Latitude = this.station.Location.Latitude, FreeChargeSlots = this.station.FreeChargeSlots };
+            droneChargingListView.ItemsSource = this.station.DroneAtChargings;
             updateStationLabel.Visibility = Visibility.Visible;
-            DataContext = station_P;
+            DataContext = station_display;
         }
 
-        public StationWindow(IBL blArg)
+        public StationWindow(IBL bl)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            bl = blArg;
+            this.bl = bl;
             addStationLabel.Visibility = Visibility.Visible;
         }
 
-        private void DroneChargingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DroneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// opens drone window of the choosen droneCharge
+        /// </summary>
+        /// <param name="sender">droneCharge</param>
+        /// <param name="e"></param>
+        private void droneChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.DroneAtCharging droneAtCharging = (sender as ListView).SelectedValue as DroneAtCharging;
             new Drone(bl, bl.GetDroneById(droneAtCharging.Id)).Show();
         }
 
-        private void updateButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// updates station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateStation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.UpdateStation(new Station()
+                bl.UpdateStation(new BO.Station()
                 {
                     Id = getId(),
                     Name = getName(),
@@ -75,7 +80,8 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
-                Station station = bl.GetStationById(getId());
+                BO.Station station = bl.GetStationById(getId());
+                updateStationList(station);
             }
 
             
@@ -85,23 +91,28 @@ namespace PL
             }
         }
 
-        public void UpdateStationList(BO.Station station)
+        /// <summary>
+        /// updates station in station list window
+        /// </summary>
+        /// <param name="station">updated station</param>
+        public void updateStationList(BO.Station station)
         {
             if (ChangedParcelDelegate != null)
             {
                 ChangedParcelDelegate(station);
             }
         }
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void addButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// adds stations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addStation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.AddStation(new Station()
+                bl.AddStation(new BO.Station()
                 {
                     Id = getId(),
                     Name = getName(),
@@ -109,9 +120,9 @@ namespace PL
                     Location = getLocation(),
                     FreeChargeSlots = getChargeSlots()
                 });
-                if (station_P.ListChangedDelegate != null)
+                if (station_display.ListChangedDelegate != null)
                 {
-                    station_P.ListChangedDelegate(bl.GetStationById(getId()));
+                    station_display.ListChangedDelegate(bl.GetStationById(getId()));
                 }
                 MessageBox.Show("the Station added!!");
                 this.Close();
@@ -123,11 +134,20 @@ namespace PL
             }
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// gets input of location
+        /// </summary>
+        /// <returns>location</returns>
         private Location getLocation()
         {
             try
@@ -142,8 +162,10 @@ namespace PL
             }
         }
 
-
-
+        /// <summary>
+        /// gets input of id
+        /// </summary>
+        /// <returns>id of station</returns>
         private int getId()
         {
             try
@@ -156,6 +178,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input on name
+        /// </summary>
+        /// <returns>name of station</returns>
         private int getName()
         {
             try
@@ -168,6 +194,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input: number of charge slots
+        /// </summary>
+        /// <returns>number of charge slots of station</returns>
         private int getChargeSlots()
         {
             try

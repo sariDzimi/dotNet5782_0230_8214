@@ -10,7 +10,7 @@ using PL;
 
 namespace PO
 {
-    public class Customer_p : DependencyObject
+    public class Customer : DependencyObject
     {
         public Action<BO.Customer> ListChangedDelegate;
         public void UpdateFromBL(BO.Customer customer)
@@ -63,7 +63,7 @@ namespace PO
         public static readonly DependencyProperty NameCustomer =
        DependencyProperty.Register("Name",
                                    typeof(object),
-                                   typeof(Customer_p),
+                                   typeof(Customer),
                                    new UIPropertyMetadata(0));
         public string Name
         {
@@ -81,7 +81,7 @@ namespace PO
         public static readonly DependencyProperty IdCustomer =
         DependencyProperty.Register("ID",
                                     typeof(object),
-                                    typeof(Customer_p),
+                                    typeof(Customer),
                                     new UIPropertyMetadata(0));
 
         public int Id
@@ -100,7 +100,7 @@ namespace PO
         public static readonly DependencyProperty PhoneCustomer =
         DependencyProperty.Register("Phone",
                                 typeof(object),
-                                typeof(Customer_p),
+                                typeof(Customer),
                                 new UIPropertyMetadata(0));
 
         public string Phone
@@ -120,7 +120,7 @@ namespace PO
         public static readonly DependencyProperty LongitudeCustomer =
       DependencyProperty.Register("Longitude",
                                   typeof(object),
-                                  typeof(Station_p),
+                                  typeof(Station),
                                   new UIPropertyMetadata(0));
         public double Longitude
         {
@@ -137,7 +137,7 @@ namespace PO
         public static readonly DependencyProperty LatitudeCustomer =
       DependencyProperty.Register("Latitude",
                                   typeof(object),
-                                  typeof(Station_p),
+                                  typeof(Station),
                                   new UIPropertyMetadata(0));
         public double Latitude
         {
@@ -154,7 +154,7 @@ namespace PO
         public static readonly DependencyProperty parcelsSentedByCustomer =
        DependencyProperty.Register("parcelsSentedByCustomer",
                                typeof(object),
-                               typeof(Customer_p),
+                               typeof(Customer),
                                new UIPropertyMetadata(0));
 
         public List<ParcelAtCustomer> ParcelsSentedByCustomer
@@ -174,7 +174,7 @@ namespace PO
         public static readonly DependencyProperty parcelsSentedToCustomer =
         DependencyProperty.Register("parcelsSentedToCustomer",
                                 typeof(object),
-                                typeof(Customer_p),
+                                typeof(Customer),
                                 new UIPropertyMetadata(0));
 
         public List<ParcelAtCustomer> ParcelsSentedToCustomer
@@ -194,7 +194,7 @@ namespace PO
         public static readonly DependencyProperty numberOfParcelsInTheWayToCutemor =
        DependencyProperty.Register("NumberOfParcelsInTheWayToCutemor",
                                typeof(object),
-                               typeof(Customer_p),
+                               typeof(Customer),
                                new UIPropertyMetadata(0));
 
         public int NumberOfParcelsInTheWayToCutemor
@@ -214,7 +214,7 @@ namespace PO
         public static readonly DependencyProperty numberOfRecievedParcels =
       DependencyProperty.Register("NumberOfRecievedParcels",
                               typeof(object),
-                              typeof(Customer_p),
+                              typeof(Customer),
                               new UIPropertyMetadata(0));
 
         public int NumberOfRecievedParcels
@@ -233,7 +233,7 @@ namespace PO
         public static readonly DependencyProperty numberOfParcelsSendedAndNotProvided =
      DependencyProperty.Register("NumberOfParcelsSendedAndNotProvided",
                              typeof(object),
-                             typeof(Customer_p),
+                             typeof(Customer),
                              new UIPropertyMetadata(0));
 
         public int NumberOfParcelsSendedAndNotProvided
@@ -253,7 +253,7 @@ namespace PO
         public static readonly DependencyProperty numberOfParcelsSendedAndProvided =
     DependencyProperty.Register("NumberOfParcelsSendedAndProvided",
                             typeof(object),
-                            typeof(Customer_p),
+                            typeof(Customer),
                             new UIPropertyMetadata(0));
 
         public int NumberOfParcelsSendedAndProvided

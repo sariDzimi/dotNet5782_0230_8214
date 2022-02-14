@@ -10,7 +10,7 @@ using PL;
 
 namespace PO
 {
-    public class Station_p : DependencyObject
+    public class Station : DependencyObject
     {
         public Action<BO.Station> ListChangedDelegate;
 
@@ -32,7 +32,7 @@ namespace PO
         public static readonly DependencyProperty freeChargeSlots =
        DependencyProperty.Register("numberOfFreeChargeSlots",
                                    typeof(object),
-                                   typeof(Station_p),
+                                   typeof(Station),
                                    new UIPropertyMetadata(0));
         public int FreeChargeSlots
         {
@@ -54,7 +54,7 @@ namespace PO
         public static readonly DependencyProperty IdStation =
        DependencyProperty.Register("ID",
                                    typeof(object),
-                                   typeof(Station_p),
+                                   typeof(Station),
                                    new UIPropertyMetadata(0));
         public int ID
         {
@@ -72,7 +72,7 @@ namespace PO
         public static readonly DependencyProperty NameStation =
        DependencyProperty.Register("Name",
                                    typeof(object),
-                                   typeof(Station_p),
+                                   typeof(Station),
                                    new UIPropertyMetadata(0));
         public int Name
         {
@@ -90,7 +90,7 @@ namespace PO
         public static readonly DependencyProperty LongitudeStation =
        DependencyProperty.Register("Longitude",
                                    typeof(object),
-                                   typeof(Station_p),
+                                   typeof(Station),
                                    new UIPropertyMetadata(0));
         public double Longitude
         {
@@ -107,7 +107,7 @@ namespace PO
         public static readonly DependencyProperty LatitudeStation =
       DependencyProperty.Register("Latitude",
                                   typeof(object),
-                                  typeof(Station_p),
+                                  typeof(Station),
                                   new UIPropertyMetadata(0));
         public double Latitude
         {
@@ -126,7 +126,7 @@ namespace PO
         public static readonly DependencyProperty droneAtCharging =
       DependencyProperty.Register("DroneAtCharging",
                                   typeof(object),
-                                  typeof(Station_p),
+                                  typeof(Station),
                                   new UIPropertyMetadata(0));
         public List<DroneAtCharging> DroneAtCharging
         {

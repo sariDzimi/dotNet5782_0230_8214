@@ -10,14 +10,14 @@ using PL;
 
 namespace PO
 {
-     public class Parcel_p : DependencyObject
+     public class Parcel : DependencyObject
     {
         public Action<BO.Parcel> ListChangedDelegate;
         //ID
         public static readonly DependencyProperty IdParcel =
       DependencyProperty.Register("ID",
                                   typeof(object),
-                                  typeof(Parcel_p),
+                                  typeof(Parcel),
                                   new UIPropertyMetadata(0));
         public int ID
         {
@@ -35,7 +35,7 @@ namespace PO
        public static readonly DependencyProperty nameOfReciver =
       DependencyProperty.Register("NameOfReciver",
                                   typeof(object),
-                                  typeof(Parcel_p),
+                                  typeof(Parcel),
                                   new UIPropertyMetadata(0));
         public string NameOfReciver
         {
@@ -53,7 +53,7 @@ namespace PO
         public static readonly DependencyProperty parcelStatus =
        DependencyProperty.Register("ParcelStatus",
                                    typeof(object),
-                                   typeof(Parcel_p),
+                                   typeof(Parcel),
                                    new UIPropertyMetadata(0));
         public ParcelStatus ParcelStatus
         {
@@ -71,7 +71,7 @@ namespace PO
         public static readonly DependencyProperty nameOfSender =
        DependencyProperty.Register("NameOfSender",
                                    typeof(object),
-                                   typeof(Parcel_p),
+                                   typeof(Parcel),
                                    new UIPropertyMetadata(0));
         public string NameOfSender
         {
@@ -89,7 +89,7 @@ namespace PO
         public static readonly DependencyProperty customerAtParcelSender =
       DependencyProperty.Register("CustomerAtParcelSender",
                                   typeof(object),
-                                  typeof(Parcel_p),
+                                  typeof(Parcel),
                                   new UIPropertyMetadata(0));
         public CustomerAtParcel CustomerAtParcelSender
         {
@@ -107,7 +107,7 @@ namespace PO
         public static readonly DependencyProperty customerAtParcelReciver =
         DependencyProperty.Register("CustomerAtParcelReciver",
                                   typeof(object),
-                                  typeof(Parcel_p),
+                                  typeof(Parcel),
                                   new UIPropertyMetadata(0));
         public CustomerAtParcel CustomerAtParcelReciver
         {
@@ -125,7 +125,7 @@ namespace PO
         public static readonly DependencyProperty weightParcel =
         DependencyProperty.Register("Weight",
                                  typeof(object),
-                                 typeof(Parcel_p),
+                                 typeof(Parcel),
                                  new UIPropertyMetadata(0));
         public WeightCategories Weight
         {
@@ -144,7 +144,7 @@ namespace PO
         public static readonly DependencyProperty pritorityParcel =
         DependencyProperty.Register("Pritority",
                                 typeof(object),
-                                typeof(Parcel_p),
+                                typeof(Parcel),
                                 new UIPropertyMetadata(0));
         public Pritorities Pritority
         {
@@ -162,7 +162,7 @@ namespace PO
         public static readonly DependencyProperty requestedParcel =
         DependencyProperty.Register("Requested",
                                typeof(object),
-                               typeof(Parcel_p),
+                               typeof(Parcel),
                                new UIPropertyMetadata(0));
         public DateTime? Requested
         {
@@ -180,7 +180,7 @@ namespace PO
         public static readonly DependencyProperty idDrone =
         DependencyProperty.Register("IdDrone",
                               typeof(object),
-                              typeof(Parcel_p),
+                              typeof(Parcel),
                               new UIPropertyMetadata(0));
         public int IdDrone
         {
@@ -198,7 +198,7 @@ namespace PO
         public static readonly DependencyProperty ScheduledParcel =
         DependencyProperty.Register("Scheduled",
                               typeof(object),
-                              typeof(Parcel_p),
+                              typeof(Parcel),
                               new UIPropertyMetadata(0));
         public DateTime? Scheduled
         {
@@ -216,7 +216,7 @@ namespace PO
         public static readonly DependencyProperty PickedUpParcel =
         DependencyProperty.Register("PickedUp",
                              typeof(object),
-                             typeof(Parcel_p),
+                             typeof(Parcel),
                              new UIPropertyMetadata(0));
         public DateTime? PickedUp
         {
@@ -234,7 +234,7 @@ namespace PO
         public static readonly DependencyProperty DeliveredParcel =
         DependencyProperty.Register("Delivered",
                             typeof(object),
-                            typeof(Parcel_p),
+                            typeof(Parcel),
                             new UIPropertyMetadata(0));
         public DateTime? Delivered
         {

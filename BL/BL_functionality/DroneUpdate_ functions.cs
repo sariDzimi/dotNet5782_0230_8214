@@ -134,7 +134,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AssignAParcelToADrone(int id)
+        public void AssignParcelToDrone(int id)
         {
             Drone drone = GetDroneById(id);
             Parcel bestParcel = null;

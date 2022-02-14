@@ -63,21 +63,21 @@
             <TextBox x:Name="customerAtParcelSenderLabel" Text="{Binding CustomerAtParcelSender }" HorizontalAlignment="Left" Margin="189,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" Grid.Column="1"/>
             <Label x:Name="customerAtParcelReciverLabel" Content="customer At Parcel Reciver" HorizontalAlignment="Left" Margin="-6,76,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <TextBox x:Name="customerAtParcelReciverText" Text="{Binding CustomerAtParcelReciver}" HorizontalAlignment="Left" Margin="187,84,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Grid.Column="1"/>
-            <Button x:Name="OpenDrone" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="194,16,0,0" VerticalAlignment="Top" Click="OpenDrone_Click" Width="41" RenderTransformOrigin="11.171,-1.233" Grid.Column="1"/>
+            <Button x:Name="openDroneButton" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="194,16,0,0" VerticalAlignment="Top" Click="openDrone_Click" Width="41" RenderTransformOrigin="11.171,-1.233" Grid.Column="1"/>
 
         </Grid>
 
         <!--<Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="75,63,0,0" VerticalAlignment="Top" Height="27" Width="90"/>-->
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="110,70,0,0" VerticalAlignment="Top" Height="27" Width="90" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
 
-        <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="356,154,0,0" VerticalAlignment="Top" Width="64" Click="UpdatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" Grid.Row="1" />
-        <Button x:Name="DeleateParcel" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="441,153,0,0" VerticalAlignment="Top" Width="70" Click="DeleteParcel" Grid.Row="1"/>
-        <Button x:Name="AddParcelButton" Content="Add" HorizontalAlignment="Left" Margin="280,154,0,0" VerticalAlignment="Top" Width="62" Click="AddParcel" Visibility="Hidden" Grid.Row="1"/>
-        <CheckBox x:Name="DeliveredC"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,177,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Grid.Row="1"/>
-        <CheckBox x:Name="PickedUpC" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="PickedUpC_Checked" Grid.Row="1"/>
+        <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="356,154,0,0" VerticalAlignment="Top" Width="64" Click="updatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" Grid.Row="1" />
+        <Button x:Name="deleateParcelButton" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="441,153,0,0" VerticalAlignment="Top" Width="70" Click="deleteParcel" Grid.Row="1"/>
+        <Button x:Name="addParcelButton" Content="Add" HorizontalAlignment="Left" Margin="280,154,0,0" VerticalAlignment="Top" Width="62" Click="addParcel_Click" Visibility="Hidden" Grid.Row="1"/>
+        <CheckBox x:Name="deliveredChekBox"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,177,0,0" VerticalAlignment="Top" Checked="deliveredCheckBox_Checked" Grid.Row="1"/>
+        <CheckBox x:Name="pickedUpCheckBox" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="pickedUp_Checked" Grid.Row="1"/>
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="618,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
         <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="618,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
-        <Button x:Name="Close"  Content="X"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="758,13,0,171"  Width="37" RenderTransformOrigin="1.63,0.089" Click="close_buuton"/>
+        <Button x:Name="Close"  Content="X"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="758,13,0,171"  Width="37" RenderTransformOrigin="1.63,0.089" Click="closeWindow_Click"/>
 
     </Grid>
 </Window>
