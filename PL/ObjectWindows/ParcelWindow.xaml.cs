@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 //using PL.PO;
 
 namespace PL
@@ -46,7 +47,11 @@ namespace PL
             OpenReciver.Visibility = Visibility.Hidden;
             Parcel_P.ListChangedDelegate += new Action<BO.Parcel>(UpdateParcelList);
 
+           
+
         }
+
+       
         public ParcelWindow(IBL bl, Parcel parcel1, userType currentUser1)
         {
             currentUser = currentUser1;

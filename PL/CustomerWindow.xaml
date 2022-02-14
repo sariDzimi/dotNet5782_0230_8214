@@ -15,7 +15,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="630,20,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
-        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="805,10,0,0" VerticalAlignment="Top" Height="36" Width="47" Click="closeButton_Click"/>
+        <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="837,8,0,0" VerticalAlignment="Top" Height="36" Width="47" Click="closeButton_Click"/>
         <Label Content="id" HorizontalAlignment="Left" Margin="61,57,0,0" VerticalAlignment="Top" Width="33" Style="{StaticResource Labels}" Height="27"/>
         <Label Content="name" HorizontalAlignment="Left" Margin="61,98,0,0" VerticalAlignment="Top" Style="{StaticResource Labels}"/>
         <Label Content="phone" HorizontalAlignment="Left" Margin="59,132,0,0" VerticalAlignment="Top" Style="{StaticResource Labels}"/>
@@ -51,5 +51,6 @@
         <TextBox x:Name="latitudeTextBox"  HorizontalAlignment="Left" Margin="108,231,0,0" Text="{Binding Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Height="24"/>
         <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="672,136,0,0" VerticalAlignment="Top" Click="updateButton_click" Height="31" Width="162"/>
         <Button x:Name="addParcelButton" Content="add parcle" HorizontalAlignment="Left" Margin="672,195,0,0" VerticalAlignment="Top" Height="29" Width="162" Click="addParcelButton_Click"/>
+
     </Grid>
 </Window>

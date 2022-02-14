@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BlApi;
 using BO;
 using PO;
@@ -37,6 +38,7 @@ namespace PL
 
         public CustomerWindow(IBL BL, userType currentUser1)
         {
+       
             currentUser = currentUser1;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -44,6 +46,7 @@ namespace PL
             updateButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.ToString();
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
+            
 
         }
 
@@ -60,6 +63,7 @@ namespace PL
             addButton.Visibility = Visibility.Collapsed;
             CurrentUser.Text = currentUser.ToString();
             Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
+            
 
         }
 
@@ -154,6 +158,8 @@ namespace PL
                 throw new NotValidInput("Location");
             }
         }
+
+        
 
         #endregion
 

@@ -6,14 +6,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="450" Width="800"
+        Title="Drone" Height="455" Width="800"
          Style="{StaticResource OurStyle}" >
     <Window.Resources>
         <Style TargetType="local:Drone">
             <Setter Property="Background"
               Value= "#FFA6B748" />
         </Style>
- 
+
         <Style x:Key="Text" TargetType="TextBlock">
             <Setter Property="Background"
               Value= "#00000000" />
@@ -48,8 +48,8 @@
                         <Grid Height="407" HorizontalAlignment="Left" Margin="12,12,0,0" Name="grid1" VerticalAlignment="Top" Width="347"   />
                     </Border>
 
-                    <Label Content="id :" Margin="30,32,0,60" Style="{StaticResource Labels}" HorizontalAlignment="Left" Width="31"  />
-                    <TextBox x:Name="idDroneL" Text="{Binding ID}" Height="25"   HorizontalAlignment="Left" Margin="83,34,0,60" RenderTransformOrigin="0.5,0.5" IsReadOnly="{Binding ElementName= updateBottun , Path=IsEnabled}" Width="140" >
+                    <Label Content="id :" Margin="33,61,0,31" Style="{StaticResource Labels}" HorizontalAlignment="Left" Width="31"  />
+                    <TextBox x:Name="idDroneL" Text="{Binding ID}" Height="25"   HorizontalAlignment="Left" Margin="67,60,0,35" RenderTransformOrigin="0.5,0.5" IsReadOnly="{Binding ElementName= updateBottun , Path=IsEnabled}" Width="140" >
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1"/>
@@ -59,7 +59,7 @@
                             </TransformGroup>
                         </TextBox.RenderTransform>
                     </TextBox>
-                    <Label Content="model :" Margin="32,80,0,10" Style="{StaticResource Labels}" HorizontalAlignment="Left" RenderTransformOrigin="0.882,1.101" Width="54" >
+                    <Label Content="model :" Margin="32,101,0,318" Style="{StaticResource Labels}" HorizontalAlignment="Left" RenderTransformOrigin="0.882,1.101" Width="54" Grid.RowSpan="2" >
                         <Label.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
@@ -69,7 +69,7 @@
                             </TransformGroup>
                         </Label.RenderTransform>
                     </Label>
-                    <TextBox x:Name="modelDroneL" HorizontalAlignment="Left" Margin="113,82,0,12" Height="25" Text="{Binding Model}" RenderTransformOrigin="0.5,0.5" Width="145">
+                    <TextBox x:Name="modelDroneL" HorizontalAlignment="Left" Margin="94,102,0,322" Height="25" Text="{Binding Model}" RenderTransformOrigin="0.5,0.5" Width="145" Grid.RowSpan="2">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
@@ -79,7 +79,7 @@
                             </TransformGroup>
                         </TextBox.RenderTransform>
                     </TextBox>
-                    <Label Content="Battery :" Margin="32,6,0,290" HorizontalAlignment="Left" Style="{StaticResource Labels}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" RenderTransformOrigin="0.5,0.5" Width="58" Grid.Row="1">
+                    <Label Content="Battery :" Margin="32,23,0,273" HorizontalAlignment="Left" Style="{StaticResource Labels}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" RenderTransformOrigin="0.5,0.5" Width="58" Grid.Row="1">
                         <Label.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
@@ -95,27 +95,29 @@
                     <ProgressBar Minimum="0" 
                 Maximum="100" HorizontalAlignment="Left" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"
                 Value="{Binding Battery }" 
-                Name="pbStatus" Margin="113,8,0,289"  RenderTransformOrigin="0.5,0.5" Width="145" Grid.Row="1" />
+                Name="pbStatus" Margin="96,23,0,274"  RenderTransformOrigin="0.5,0.5" Width="145" Grid.Row="1" />
 
                     <TextBlock  Text="{Binding Battery, StringFormat={}{0:0}%}" 
            HorizontalAlignment="Left" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"
            VerticalAlignment="Top" Margin="113,9,0,0" Width="56" Height="26" Grid.Row="1"/>
 
-                    <Label x:Name="MaxWeightLabel" Visibility="Visible" Content="MaxWeight :" Margin="29,52,258,245" Style="{StaticResource Labels}" Grid.Row="1" />
-                    <TextBox x:Name="ParcelInDelivery" HorizontalAlignment="Left" Text="{Binding ParcelInDelivery}"  IsReadOnly="True" Margin="156,208,0,89" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="122" Grid.Row="1" />
-                    <Label Content="DroneStatus :" Margin="26,103,258,188"   Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Grid.Row="1"/>
-                    <TextBox x:Name="Location" HorizontalAlignment="Left" Text="{Binding Location}"  IsReadOnly="True" Margin="120,158,0,133" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" RenderTransformOrigin="0.5,0.5" Width="120" Grid.Row="1" />
-                    <Label Content="ParcelAtTransfor :" HorizontalAlignment="Left" Margin="30,208,0,89"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="126" Grid.Row="1"/>
-                    <TextBox x:Name="DroneStatusDroneL" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,103,0,188" Text="{Binding DroneStatus}" Width="136" Grid.Row="1"/>
-                    <Label Content="Location :" HorizontalAlignment="Left" Margin="26,158,0,133"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="89" Grid.Row="1"/>
-                    <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="275,252,0,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}" Width="52" Grid.Row="1"/>
-                    <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging"  Style="{StaticResource Labels}" HorizontalAlignment="Left" Margin="29,252,0,0" VerticalAlignment="Top" Height="30" Width="248"  Visibility="{Binding ElementName= addButton , Path= Visibility}" Grid.Row="1"/>
+                    <Label x:Name="MaxWeightLabel" Visibility="Visible" Content="MaxWeight :" Margin="29,66,258,231" Style="{StaticResource Labels}" Grid.Row="1" />
+                    <TextBox x:Name="ParcelInDelivery" HorizontalAlignment="Left" Text="{Binding ParcelInDelivery}"  IsReadOnly="True" Margin="156,214,0,83" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="122" Grid.Row="1" />
+                    <Label Content="DroneStatus :" Margin="26,112,258,179"   Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Grid.Row="1"/>
+                    <TextBox x:Name="Location" HorizontalAlignment="Left" Text="{Binding Location}"  IsReadOnly="True" Margin="116,166,0,125" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" RenderTransformOrigin="0.5,0.5" Width="120" Grid.Row="1" />
+                    <Label Content="ParcelAtTransfor :" HorizontalAlignment="Left" Margin="30,216,0,81"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="126" Grid.Row="1"/>
+                    <TextBox x:Name="DroneStatusDroneL" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,113,0,178" Text="{Binding DroneStatus}" Width="136" Grid.Row="1"/>
+                    <Label Content="Location :" HorizontalAlignment="Left" Margin="26,165,0,126"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="89" Grid.Row="1"/>
+                    <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="277,260,0,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}" Width="52" Grid.Row="1"/>
+                    <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging"  Style="{StaticResource Labels}" HorizontalAlignment="Left" Margin="29,261,0,0" VerticalAlignment="Top" Height="30" Width="248"  Visibility="{Binding ElementName= addButton , Path= Visibility}" Grid.Row="1"/>
                     <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="449,9,0,0" VerticalAlignment="Top" Height="22" Width="190" Click="updateDroneModel_Click" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
                     <Button x:Name="OpaenDrone" Content="open" HorizontalAlignment="Left" Visibility="Hidden" Margin="298,203,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="openParcelInDelivery_Click" Grid.Row="1"/>
-                    <ComboBox x:Name="WeightSelector" Text="{Binding Weight}"  HorizontalAlignment="Left" Margin="138,52,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="28"/>
+                    <ComboBox x:Name="WeightSelector" Text="{Binding Weight}"  HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="28"/>
                 </Grid>
                 <Button x:Name="simulation" Content="simulation" HorizontalAlignment="Left" Margin="367,57,0,0" VerticalAlignment="Top" Click="simulation_Click"/>
                 <Button x:Name="stopSimulation" Content="stop" HorizontalAlignment="Left" Margin="367,25,0,0" VerticalAlignment="Top" Click="stopSimulation_Click" Width="72"/>
+                <Label Name="lblTime" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,9,0,0" Height="37" Width="222" />
+
             </Grid>
         </Grid>
     </Grid>
