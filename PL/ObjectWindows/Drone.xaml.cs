@@ -35,7 +35,6 @@ namespace PL
         {
             InitializeComponent();
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            drone_display.ListChangedDelegate += new Action<BO.Drone>(updateDroneListWindow);
         }
 
         public Drone(IBL bL) : this()
@@ -43,6 +42,8 @@ namespace PL
             this.bL = bL;
             DroneStatusDroneL.Visibility = Visibility.Hidden;
             addButton.IsEnabled = true;
+            drone_display.ListChangedDelegate += new Action<BO.Drone>(updateDroneListWindow);
+
         }
 
         public Drone(IBL bL1, BO.Drone droneBL) : this()
@@ -59,7 +60,6 @@ namespace PL
                 MaxWeight = drone.MaxWeight,
                 Model = drone.Model,
                 ParcelInDelivery = drone.ParcelInDelivery
-                //ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
             };
 
             bL = bL1;
@@ -70,6 +70,8 @@ namespace PL
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             WeightSelector.IsEnabled = false;
+            drone_display.ListChangedDelegate += new Action<BO.Drone>(updateDroneListWindow);
+
         }
 
         void timer_Tick(object sender, EventArgs e)
