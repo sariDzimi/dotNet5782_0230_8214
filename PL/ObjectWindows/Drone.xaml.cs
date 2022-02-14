@@ -32,7 +32,6 @@ namespace PL
         BackgroundWorker worker = new BackgroundWorker();
         public Drone()
         {
-            drone = new BO.Drone() { };
             InitializeComponent();
         }
         public Drone(IBL bL1)
@@ -45,18 +44,24 @@ namespace PL
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
         }
 
-        public Drone(IBL bL1, BO.Drone droneBL)
+        public Drone(IBL bL1, BO.Drone droneBL) : this(bL1)
         {
             drone = droneBL;
-            InitializeComponent();
-            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p() { Battery = drone.Battery, ID = drone.Id, DroneStatus = drone.DroneStatus, Location = drone.Location, MaxWeight = drone.MaxWeight, Model = drone.Model, ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery };
-            drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
-            bL = bL1;
+            drone_P = new Drone_p()
+            {
+                Battery = drone.Battery,
+                ID = drone.Id,
+                DroneStatus = drone.DroneStatus,
+                Location = drone.Location,
+                MaxWeight = drone.MaxWeight,
+                Model = drone.Model,
+                //ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
+               ParcelInDelivery = drone.ParcelInDelivery
+            };
+
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             SwitchDroneStatus();
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
