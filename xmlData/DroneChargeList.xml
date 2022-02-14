@@ -30,4 +30,14 @@
     <StationId>3</StationId>
     <StartCharging>0001-01-01T00:00:00</StartCharging>
   </DroneCharge>
+  <DroneCharge>
+    <DroneId>23</DroneId>
+    <StationId>653782</StationId>
+    <StartCharging>0001-01-01T00:00:00</StartCharging>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>45768</DroneId>
+    <StationId>56</StationId>
+    <StartCharging>0001-01-01T00:00:00</StartCharging>
+  </DroneCharge>
 </ArrayOfDroneCharge>

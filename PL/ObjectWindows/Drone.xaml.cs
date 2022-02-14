@@ -31,6 +31,7 @@ namespace PL
         PO.Drone drone_display = new PO.Drone();
         BackgroundWorker worker;
 
+        #region Constructor
         public Drone()
         {
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace PL
 
         public Drone(IBL bL1, BO.Drone droneBL) : this()
         {
-           
+
             drone = droneBL;
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_display = new PO.Drone()
@@ -73,6 +74,9 @@ namespace PL
             drone_display.ListChangedDelegate += new Action<BO.Drone>(updateDroneListWindow);
 
         }
+        #endregion
+
+        #region Drone Function
 
         void timer_Tick(object sender, EventArgs e)
         {
@@ -259,7 +263,49 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+        /// <summary>
+        /// opens window of the parcel in delivery
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void openParcelInDelivery_Click(object sender, RoutedEventArgs e)
+        {
 
+            BO.Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
+            ParcelWindow parcelWindow = new ParcelWindow(bL, parcel, userType.manager);
+            parcelWindow.Show();
+        }
+
+        /// <summary>
+        /// dis-enables action buttons when simulaions is active
+        /// </summary>
+        private void disenableButtonsWhileSimulates()
+        {
+            Buttons.Visibility = Visibility.Hidden;
+            simulation.IsEnabled = false;
+            stopSimulation.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// enables action buttons when simulation stops
+        /// </summary>
+        private void enableButtonWhileSimulates()
+        {
+            Buttons.Visibility = Visibility.Visible;
+            simulation.IsEnabled = true;
+            stopSimulation.IsEnabled = false;
+            this.showButtonsAccordingToDroneStatus();
+
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (worker != null)
+                worker.CancelAsync();
+        }
+        #endregion
+
+        #region Get Input
         /// <summary>
         /// gets input of drne id
         /// </summary>
@@ -335,46 +381,7 @@ namespace PL
             return modelDroneL.Text;
         }
 
-        /// <summary>
-        /// opens window of the parcel in delivery
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void openParcelInDelivery_Click(object sender, RoutedEventArgs e)
-        {
-
-            BO.Parcel parcel = bL.GetParcelById(drone.ParcelInDelivery.Id);
-            ParcelWindow parcelWindow = new ParcelWindow(bL, parcel, userType.manager);
-            parcelWindow.Show();
-        }
-
-        /// <summary>
-        /// dis-enables action buttons when simulaions is active
-        /// </summary>
-        private void disenableButtonsWhileSimulates()
-        {
-            Buttons.Visibility = Visibility.Hidden;
-            simulation.IsEnabled = false;
-            stopSimulation.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// enables action buttons when simulation stops
-        /// </summary>
-        private void enableButtonWhileSimulates()
-        {
-            Buttons.Visibility = Visibility.Visible;
-            simulation.IsEnabled = true;
-            stopSimulation.IsEnabled = false;
-            this.showButtonsAccordingToDroneStatus();
-
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if(worker != null)
-                worker.CancelAsync();
-        }
+        #endregion
 
         #region simulation
         /// <summary>

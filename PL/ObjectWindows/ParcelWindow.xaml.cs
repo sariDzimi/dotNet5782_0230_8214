@@ -31,6 +31,8 @@ namespace PL
         IBL bl;
         BO.Parcel parcel;
         PO.Parcel parcel_display = new PO.Parcel();
+
+        #region Constructor
         public ParcelWindow()
         {
             InitializeComponent();
@@ -46,7 +48,7 @@ namespace PL
             OpenReciver.Visibility = Visibility.Hidden;
             parcel_display.ListChangedDelegate += new Action<BO.Parcel>(updateParcelList);
 
-           
+
 
         }
         public ParcelWindow(IBL bl, BO.Parcel parcel, userType currentUser) : this()
@@ -100,6 +102,9 @@ namespace PL
 
         }
 
+        #endregion
+
+        #region Parcel Function
         /// <summary>
         /// updates prcel in prarcel list window
         /// </summary>
@@ -156,74 +161,7 @@ namespace PL
             }
         }
 
-        /// <summary>
-        /// gets input of pritority
-        /// </summary>
-        /// <returns>pritority</returns>
-        private Pritorities getPritorities()
-        {
-            if (priorityLabel.SelectedItem == null)
-                throw new NotValidInput("Pritorities");
-            try
-            {
 
-                return (Pritorities)priorityLabel.SelectedItem;
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("Pritorities");
-            }
-        }
-
-        /// <summary>
-        /// gets input of max weight
-        /// </summary>
-        /// <returns>max weight</returns>
-        private WeightCategories getMaxWeight()
-        {
-            if (weightLabel.SelectedItem == null)
-                throw new NotValidInput("weight");
-            try
-            {
-                return (WeightCategories)weightLabel.SelectedItem;
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("weight");
-            }
-        }
-
-        /// <summary>
-        /// gets input: id of sender
-        /// </summary>
-        /// <returns>id of sender</returns>
-        private int getIdSender()
-        {
-            try
-            {
-                return Convert.ToInt32(customerAtParcelSenderLabel.Text);
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("Id Sender");
-            }
-        }
-
-        /// <summary>
-        /// gets input: id of reciver
-        /// </summary>
-        /// <returns>id of reciver</returns>
-        private int getIdReciver()
-        {
-            try
-            {
-                return Convert.ToInt32(customerAtParcelReciverText.Text);
-            }
-            catch (Exception)
-            {
-                throw new NotValidInput("Id Sender");
-            }
-        }
 
         /// <summary>
         /// updates parcel
@@ -351,6 +289,77 @@ namespace PL
         {
             Close();
         }
+        #endregion
 
+        #region Get Input
+        /// <summary>
+        /// gets input of pritority
+        /// </summary>
+        /// <returns>pritority</returns>
+        private Pritorities getPritorities()
+        {
+            if (priorityLabel.SelectedItem == null)
+                throw new NotValidInput("Pritorities");
+            try
+            {
+
+                return (Pritorities)priorityLabel.SelectedItem;
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("Pritorities");
+            }
+        }
+
+        /// <summary>
+        /// gets input of max weight
+        /// </summary>
+        /// <returns>max weight</returns>
+        private WeightCategories getMaxWeight()
+        {
+            if (weightLabel.SelectedItem == null)
+                throw new NotValidInput("weight");
+            try
+            {
+                return (WeightCategories)weightLabel.SelectedItem;
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("weight");
+            }
+        }
+
+        /// <summary>
+        /// gets input: id of sender
+        /// </summary>
+        /// <returns>id of sender</returns>
+        private int getIdSender()
+        {
+            try
+            {
+                return Convert.ToInt32(customerAtParcelSenderLabel.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("Id Sender");
+            }
+        }
+
+        /// <summary>
+        /// gets input: id of reciver
+        /// </summary>
+        /// <returns>id of reciver</returns>
+        private int getIdReciver()
+        {
+            try
+            {
+                return Convert.ToInt32(customerAtParcelReciverText.Text);
+            }
+            catch (Exception)
+            {
+                throw new NotValidInput("Id Sender");
+            }
+        }
+        #endregion
     }
 }

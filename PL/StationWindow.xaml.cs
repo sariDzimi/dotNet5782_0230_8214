@@ -27,12 +27,14 @@ namespace PL
         BO.Station station;
         PO.Station station_display;
 
+
+        #region Constructor
         public StationWindow()
         {
             InitializeComponent();
         }
 
-        public StationWindow(IBL bl, BO.Station station) 
+        public StationWindow(IBL bl, BO.Station station)
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
@@ -52,6 +54,9 @@ namespace PL
             addStationLabel.Visibility = Visibility.Visible;
         }
 
+        #endregion
+
+        #region Station Function
         /// <summary>
         /// opens drone window of the choosen droneCharge
         /// </summary>
@@ -84,7 +89,7 @@ namespace PL
                 updateStationList(station);
             }
 
-            
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -143,7 +148,9 @@ namespace PL
         {
             Close();
         }
+        #endregion
 
+        #region Get Input
         /// <summary>
         /// gets input of location
         /// </summary>
@@ -154,7 +161,7 @@ namespace PL
             {
                 double longitude = Convert.ToDouble(longitudeTextBox.Text);
                 double latitude = Convert.ToDouble(laditudeTextBox.Text);
-                return new Location() { Longitude = longitude, Latitude = latitude};
+                return new Location() { Longitude = longitude, Latitude = latitude };
             }
             catch
             {
@@ -209,5 +216,6 @@ namespace PL
                 throw new NotValidInput("charge slots");
             }
         }
+        #endregion
     }
 }

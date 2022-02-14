@@ -13,7 +13,6 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
         <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="630,20,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
         <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="805,10,0,0" VerticalAlignment="Top" Height="36" Width="47" Click="closeWindow_Click"/>
         <Label Content="id" HorizontalAlignment="Left" Margin="61,57,0,0" VerticalAlignment="Top" Width="33" Style="{StaticResource Labels}" Height="27"/>
