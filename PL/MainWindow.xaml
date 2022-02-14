@@ -93,7 +93,7 @@
                             <Grid Margin="-489,-274,141,64">
 
                                 <Label x:Name="IdLabel" Margin="10,86,347,130" RenderTransformOrigin="0.492,1.393">Id:</Label>
-                                <TextBox x:Name="IdTextBox" Margin="60,80,46,125" />
+                                <TextBox x:Name="IdTextBox" Margin="60,80,46,125"  />
                                 <Label x:Name="NameLabel" Margin="5,10,347,0" Height="33" VerticalAlignment="Top">Name:</Label>
                                 <TextBox x:Name="NameTextBox" Margin="60,10,44,207" />
                                 <Button x:Name="LogInBtn" Click="LogInBtn_Click" Height="32" Margin="43,146,50,0" VerticalAlignment="Top"  >Log In</Button>
@@ -152,7 +152,9 @@
                                 <ColumnDefinition Width="40*"/>
                             </Grid.ColumnDefinitions>
                             <Label x:Name="SignUpIdLabel" Grid.Row="2" Grid.Column="1">Id:</Label>
-                            <TextBox x:Name="SignUpIdTextBox" Grid.Row="2" Grid.Column="3" ></TextBox>
+                            <!--<TextBox x:Name="SignUpIdTextBox" Grid.Row="2" Grid.Column="3" ></TextBox>-->
+                            <TextBox x:Name="SignUpIdTextBox" Grid.Row="2" Grid.Column="3"   />
+
                             <Label x:Name="SignUpNameLabel" Grid.Row="4" Grid.Column="1">Name:</Label>
                             <TextBox x:Name="SignUpNameTextBox" Grid.Row="4" Grid.Column="3" ></TextBox>
                             <Label x:Name="SignUpPhoneLabel" Grid.Row="6" Grid.Column="1"  >Phone:</Label>

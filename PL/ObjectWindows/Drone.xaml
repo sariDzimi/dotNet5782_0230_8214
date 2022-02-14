@@ -50,7 +50,7 @@
                     </Border>
 
                     <Label Content="id :" Margin="33,61,0,31" Style="{StaticResource Labels}" HorizontalAlignment="Left" Width="31"  />
-                    <TextBox x:Name="idDroneL" Text="{Binding ID}" Height="25"   HorizontalAlignment="Left" Margin="67,60,0,35" RenderTransformOrigin="0.5,0.5" IsReadOnly="{Binding ElementName= updateBottun , Path=IsEnabled}" Width="140" >
+                    <TextBox x:Name="idDroneL" Text="{Binding Id}" Height="25"   HorizontalAlignment="Left" Margin="67,60,0,35" RenderTransformOrigin="0.5,0.5" IsReadOnly="{Binding ElementName= updateBottun , Path=IsEnabled}" Width="140" >
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleY="1"/>
@@ -109,7 +109,7 @@
                     <Label Content="ParcelAtTransfor :" HorizontalAlignment="Left" Margin="30,216,0,81"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="126" Grid.Row="1"/>
                     <TextBox x:Name="DroneStatusDroneL" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,113,0,178" Text="{Binding DroneStatus}" Width="136" Grid.Row="1"/>
                     <Label Content="Location :" HorizontalAlignment="Left" Margin="26,165,0,126"  Style="{StaticResource Labels}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Width="89" Grid.Row="1"/>
-                    <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="277,260,0,0" TextChanged="numberOfStationInput_TextChanged" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}" Width="52" Grid.Row="1"/>
+                    <TextBox x:Name="numberOfStationInput" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Margin="277,260,0,0" Text="{Binding numberOfStation}" Visibility="{Binding ElementName= addButton , Path= Visibility}" Width="52" Grid.Row="1"/>
                     <Label x:Name="numberOfStationLabel" Content="number of stasion for first chaging"  Style="{StaticResource Labels}" HorizontalAlignment="Left" Margin="29,261,0,0" VerticalAlignment="Top" Height="30" Width="248"  Visibility="{Binding ElementName= addButton , Path= Visibility}" Grid.Row="1"/>
                     <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="449,9,0,0" VerticalAlignment="Top" Height="22" Width="190" Click="updateDroneModel_Click" IsEnabled="False" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
                     <Button x:Name="OpaenDrone" Content="open" HorizontalAlignment="Left" Visibility="Hidden" Margin="298,203,0,0" VerticalAlignment="Top" Height="27" Width="40" Click="openParcelInDelivery_Click" Grid.Row="1"/>
