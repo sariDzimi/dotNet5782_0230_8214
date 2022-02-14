@@ -125,7 +125,7 @@ namespace PL
         private void groupBySender_Click(object sender, RoutedEventArgs e)
         {
             clearListView();
-            if(view != null && view.CanGroup == true)
+            if (view != null && view.CanGroup == true)
             {
                 view.GroupDescriptions.Clear();
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("NameOfCustomerSended");
@@ -190,6 +190,18 @@ namespace PL
         /// deletes parcel
         /// </summary>
         /// <param name="parcel"></param>
+
+        private void dpick_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Parcels = new ObservableCollection<ParcelToList>();
+            foreach (var parcel in bl.GetParcelsBy((p) => p.Scheduled > dp1.SelectedDate.Value.Date))
+            {
+                Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
+            }
+            DataContext = Parcels;
+    
+        }
+
         private void DeleteParcel(BO.Parcel parcel)
         {
             ParcelToList parcelToList = parcels.First((d) => d.Id == parcel.Id);

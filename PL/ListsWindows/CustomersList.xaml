@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomersList" Height="450" Width="800"
+        Title="CustomersList" Height="500" Width="900"
          Style="{StaticResource OurStyle}">
     <Window.Resources>
         <Style x:Key="Text" TargetType="TextBlock">
@@ -20,10 +20,10 @@
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="id" Width="40" DisplayMemberBinding="{Binding Id}"  />
-                    <GridViewColumn Header="name" Width="45" DisplayMemberBinding="{Binding Name}"  />
-                    <GridViewColumn Header="phone" Width="85" DisplayMemberBinding="{Binding Phone}" />
-                    <GridViewColumn Header="coming parcels" Width="110" DisplayMemberBinding="{Binding NumberOfParcelsInTheWayToCutemor}" />
-                    <GridViewColumn Header="recieved parcels" Width="110" DisplayMemberBinding="{Binding NumberOfRecievedParcels}" />
+                    <GridViewColumn Header="name" Width="55" DisplayMemberBinding="{Binding Name}"  />
+                    <GridViewColumn Header="phone" Width="75" DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn Header="coming parcels" Width="130" DisplayMemberBinding="{Binding NumberOfParcelsInTheWayToCutemor}" />
+                    <GridViewColumn Header="recieved parcels" Width="140" DisplayMemberBinding="{Binding NumberOfRecievedParcels}" />
                     <GridViewColumn Header="sended parcels(not provided)" Width="200" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndNotProvided}" />
                     <GridViewColumn Header="sended and provided parcels" Width="200" DisplayMemberBinding="{Binding NumberOfParcelsSendedAndProvided}" />
 

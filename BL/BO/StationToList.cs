@@ -11,6 +11,8 @@ namespace BO
     /// </summary>
     public class StationToList
     {
+        
+
         public int Id { get; set; }
 
         public int Name { get; set; }

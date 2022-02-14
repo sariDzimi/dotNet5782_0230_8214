@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParcelsList" Height="450" Width="800"
+        Title="ParcelsList" Height="500" Width="900"
         Style="{StaticResource OurStyle}">
     <Window.Resources>
         <Style x:Key="Buttons" TargetType="Button">
@@ -49,25 +49,25 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="AddParcel"  Style="{StaticResource Buttons}" Content="Add Parcel" HorizontalAlignment="Left" Margin="552,162,0,0" VerticalAlignment="Top" Width="220"  Height="37" Click="addParcel_Click" Grid.Row="1"/>
+            <Button x:Name="AddParcel"  Style="{StaticResource Buttons}" Content="Add Parcel" HorizontalAlignment="Left" Margin="422,185,0,0" VerticalAlignment="Top" Width="126"  Height="37" Click="AddParcelButton" Grid.Row="1"/>
 
-            <ComboBox Name="PrioritySelector" HorizontalAlignment="Left" Style="{StaticResource ComboBoxs}"  VerticalAlignment="Top" Width="150" SelectionChanged="prioritySelector_SelectionChanged" Grid.Column="0" Margin="377,18,0,0" Height="31" RenderTransformOrigin="0.119,-1.246" />
-            <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" Style="{StaticResource ComboBoxs}" SelectionChanged="maxWeightSelector_SelectionChanged" Grid.Column="0" Margin="103,18,0,0" HorizontalAlignment="Left" Width="148" Height="30"/>
+            <ComboBox Name="PrioritySelector" HorizontalAlignment="Left" Style="{StaticResource ComboBoxs}"  VerticalAlignment="Top" Width="150" SelectionChanged="PrioritySelector_SelectionChanged" Margin="329,22,0,0" Height="31" RenderTransformOrigin="0.119,-1.246" />
+            <ComboBox Name="MaxWeightSelector" VerticalAlignment="Top" Style="{StaticResource ComboBoxs}" SelectionChanged="MaxWeightSelector_SelectionChanged" Grid.Column="0" Margin="89,18,0,0" HorizontalAlignment="Left" Width="148" Height="30"/>
 
 
 
-            <ListView x:Name="ParcelsListView" Margin="0,74,10,70" MouseDoubleClick="parcelChoosen_MouseDoubleClick"  ItemsSource="{Binding}" Grid.RowSpan="2" >
+            <ListView x:Name="ParcelsListView" Margin="0,74,10,122" MouseDoubleClick="MouseDoubleClick_ParcelChoosen"  ItemsSource="{Binding}" Grid.RowSpan="2" >
 
 
                 <ListView.View>
 
                     <GridView >
                         <GridViewColumn x:Name="ID" Header="ID" Width="40" DisplayMemberBinding="{Binding Id}" />
-                        <GridViewColumn Header="weightCategories" Width="150" DisplayMemberBinding="{Binding weightCategories}" />
-                        <GridViewColumn Header="NameOfCustomerReciver" Width="150" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
-                        <GridViewColumn Header="NameOfCustomerSended" Width="150" DisplayMemberBinding="{Binding NameOfCustomerSended}" />
-                        <GridViewColumn Header="parcelStatus" Width="150" DisplayMemberBinding="{Binding parcelStatus}" />
-                        <GridViewColumn Header="pritorities" Width="150" DisplayMemberBinding="{Binding pritorities}" />
+                        <GridViewColumn Header="Weight" Width="150" DisplayMemberBinding="{Binding weightCategories}" />
+                        <GridViewColumn Header="NameOfCustomerReciver" Width="190" DisplayMemberBinding="{Binding NameOfCustomerReciver}" />
+                        <GridViewColumn Header="NameOfCustomerSended" Width="190" DisplayMemberBinding="{Binding NameOfCustomerSended}" />
+                        <GridViewColumn Header="parcelStatus" Width="170" DisplayMemberBinding="{Binding parcelStatus}" />
+                        <GridViewColumn Header="pritorities" Width="170" DisplayMemberBinding="{Binding pritorities}" />
 
                     </GridView>
                 </ListView.View>
@@ -77,14 +77,16 @@
                 </ListView.GroupStyle>
             </ListView>
 
-            <Button Content="Group By Sender" HorizontalAlignment="Left" Style="{StaticResource Buttons}" Margin="170,163,0,0" VerticalAlignment="Top" Width="163" Height="35" Click="groupBySender_Click" Grid.Row="1" />
-            <Label Content="Priority" HorizontalAlignment="Left" Margin="298,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
-            <Label Content="Weight" HorizontalAlignment="Left" Margin="41,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.259,0.347"/>
-            <Button Content="All List" HorizontalAlignment="Left" Style="{StaticResource Buttons}" Margin="12,164,0,0" VerticalAlignment="Top" Width="116" Height="33" Click="showAllList_Click" Grid.Row="1"/>
-            <Button Content="Group By Reciver" HorizontalAlignment="Left" Margin="353,164,0,0" Style="{StaticResource Buttons}" VerticalAlignment="Top" RenderTransformOrigin="-5.376,-2.148" Width="164" Height="35" Click="groupByReciver_Click" Grid.Row="1"/>
-            <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="closeWindow_Click"/>
+            <Button Content="Group By Sender" HorizontalAlignment="Left" Style="{StaticResource Buttons}" Margin="146,187,0,0" VerticalAlignment="Top" Width="129" Height="35" Click="Button_Click" Grid.Row="1" />
+            <Label Content="Priority" HorizontalAlignment="Left" Margin="262,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.537,-0.217" Width="74"/>
+            <Label Content="Weight" HorizontalAlignment="Left" Margin="21,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.259,0.347"/>
+            <Button Content="All List" HorizontalAlignment="Left" Style="{StaticResource Buttons}" Margin="14,186,0,0" VerticalAlignment="Top" Width="116" Height="33" Click="Button_Click_1" Grid.Row="1"/>
+            <Button Content="Group By Reciver" HorizontalAlignment="Left" Margin="287,186,0,0" Style="{StaticResource Buttons}" VerticalAlignment="Top" RenderTransformOrigin="-5.376,-2.148" Width="124" Height="35" Click="Button_Click_2" Grid.Row="1"/>
+            <Button x:Name="close" Style="{StaticResource close}" Content="X" HorizontalAlignment="Left" Margin="743,0,0,0" VerticalAlignment="Top" Height="36" Width="57" Click="close_Click"/>
             <TextBlock HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="590,21,0,0" Text="User:" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" Height="24"/>
             <TextBlock x:Name="CurrentUser" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23"/>
+            <DatePicker Name="dp1"  Margin="622,134,26,61" Grid.Row="1"  SelectedDateChanged="dpick_SelectedDateChanged"/>
+            <Label x:Name="DateFrom" Content="FROM" HorizontalAlignment="Left" Margin="565,136,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         </Grid>
     </Grid>
