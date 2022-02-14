@@ -18,20 +18,21 @@ namespace BL
                     case DroneStatus.Free:
                         try
                         {
-                            bl.AssignAParcelToADrone(drone.Id);
+                            bl.AssignParcelToDrone(drone.Id);
                         }
                         catch (NotFound)
                         {
                             if (drone.Battery != 100)
-                                bl.SendDroneToCharge(drone.Id);
-                            //else
-
+                                try
+                                {
+                                    bl.SendDroneToCharge(drone.Id);
+                                }
+                                catch(DroneDoesNotHaveEnoughBattery){} 
                         }
                         updateDrone(drone, 1);
                         Thread.Sleep(DELAY);
                         break;
                     case DroneStatus.Delivery:
-                        //Check if it works.........
                         if (drone.ParcelInDelivery.IsWating)
                             bl.CollectParcleByDrone(drone.Id);
                         else

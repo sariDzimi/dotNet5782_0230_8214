@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="455" Width="800"
+        Title="Drone" Height="450" Width="800"
+        Closing="Window_Closing"
          Style="{StaticResource OurStyle}" >
     <Window.Resources>
         <Style TargetType="local:Drone">
@@ -34,7 +35,7 @@
                     <Label x:Name="timeCharging"  Content="time of charging"  HorizontalAlignment="Left" Margin="498,331,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}"/>
                     <TextBox x:Name="timeOfCharging"    HorizontalAlignment="Left" Margin="640,332,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="28"  IsEnabled="{Binding ElementName= releaseDroneFromCharging , Path=IsEnabled}" Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" />
                     <Button x:Name="sendDroneToCharge" Content="send drone for charging" HorizontalAlignment="Left" Margin="498,99,0,0" VerticalAlignment="Top" Click="sendDroneToCharge_Click" Height="30" Width="276" IsEnabled="{Binding ElementName= sendDroneForDelivery , Path=IsEnabled}"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
-                    <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,45,0,0" VerticalAlignment="Top" Click="sendDroneForDelivery_Click" Height="32" Width="276" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
+                    <Button x:Name="sendDroneForDelivery" Content="send drone for delivery" HorizontalAlignment="Left" Margin="498,45,0,0" VerticalAlignment="Top" Click="assignParcelToDrone_Click" Height="32" Width="276" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
                     <Button x:Name="colectParcel" Content="colect parcel" HorizontalAlignment="Left" Margin="501,222,0,0" VerticalAlignment="Top" Click="colectParcel_Click" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
                     <Button x:Name="supllyParcel" Content="suplly parcel" HorizontalAlignment="Left" Margin="501,158,0,0" VerticalAlignment="Top" Click="supllyParcel_Click" Height="31" Width="273" IsEnabled="False"  Visibility="{Binding ElementName= DroneStatusDroneL , Path=Visibility}" Style="{StaticResource TriggerStyle}"/>
                     <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="501,377,0,0" VerticalAlignment="Top" Height="32" Width="273" Click="addDrone_Click" Style="{StaticResource TriggerStyle}"   />

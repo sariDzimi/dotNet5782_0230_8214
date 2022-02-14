@@ -38,7 +38,7 @@
         <TextBox x:Name="laditudeTextBox" HorizontalAlignment="Left" Margin="395,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Latitude}"/>
         <TextBox x:Name="ChargeStolsTextBox" HorizontalAlignment="Left" Margin="191,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding FreeChargeSlots}"/>
 
-        <ListView x:Name="DroneChargingListView" Margin="88,299,528,0" MouseDoubleClick="DroneChargingListView_MouseDoubleClick" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}">
+        <ListView x:Name="droneChargingListView" Margin="88,299,528,0" MouseDoubleClick="droneChargingListView_MouseDoubleClick" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding ID}"/>
@@ -46,9 +46,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="425,123,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="updateButton_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
-        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="addButton_Click" Visibility="{Binding Visibility, ElementName=addStationLabel}"/>
-        <Button x:Name="close" Content="X" Style="{StaticResource close}"  Margin="758,10,0,401" Click="closeButton_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="37"/>
+        <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="425,123,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="updateStation_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
+        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="addStation_Click" Visibility="{Binding Visibility, ElementName=addStationLabel}"/>
+        <Button x:Name="close" Content="X" Style="{StaticResource close}"  Margin="758,10,0,401" Click="closeWindow_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="37"/>
 
     </Grid>
 </Window>

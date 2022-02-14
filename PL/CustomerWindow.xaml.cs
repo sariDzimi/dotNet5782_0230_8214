@@ -26,48 +26,58 @@ namespace PL
         public Action<BO.Customer> ChangedParcelDelegate;
         userType currentUser;
         IBL bl;
-        Customer customer;
-        Customer_p Customer_P = new Customer_p();
-        #region CustomerWindow constructors
+        BO.Customer customer;
+        PO.Customer customer_display;
 
+        #region CustomerWindow constructors
         public CustomerWindow()
         {
             InitializeComponent();
             WindowStyle = WindowStyle.None;
         }
 
-        public CustomerWindow(IBL BL, userType currentUser1)
+        public CustomerWindow(IBL bl, userType currentUser)
         {
-       
-            currentUser = currentUser1;
+            this.currentUser = currentUser;
             InitializeComponent();
             WindowStyle = WindowStyle.None;
-            bl = BL;
+            this.bl = bl;
             updateButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.ToString();
-            Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
-            
+            CurrentUser.Text = this.currentUser.ToString();
+            customer_display.ListChangedDelegate += new Action<BO.Customer>(updateCustomerList);
 
         }
 
-        public CustomerWindow(IBL BL, Customer customerArg, userType currentUser1)
+        public CustomerWindow(IBL bl, BO.Customer customer, userType currentUser)
         {
-            currentUser = currentUser1;
+            this.currentUser = currentUser;
             InitializeComponent();
-            customer = customerArg;
-            Customer_P = new Customer_p() { Id = customer.Id, Name = customer.Name, Longitude = customer.Location.Longitude, Latitude= customer.Location.Latitude, Phone = customer.Phone, ParcelsSentedByCustomer = customer.ParcelsSentedByCustomer, ParcelsSentedToCustomer = customer.ParcelsSentedToCustomer };
-            bl = BL;
-            DataContext = Customer_P;
-            ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
-            ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
+            this.customer = customer;
+            customer_display = new PO.Customer()
+            {
+                Id = this.customer.Id,
+                Name = this.customer.Name,
+                Longitude = this.customer.Location.Longitude,
+                Latitude = this.customer.Location.Latitude,
+                Phone = this.customer.Phone,
+                ParcelsSentedByCustomer = this.customer.ParcelsSentedByCustomer,
+                ParcelsSentedToCustomer = this.customer.ParcelsSentedToCustomer
+            };
+            this.bl = bl;
+            DataContext = customer_display;
+            ParcelByCustomerListView.ItemsSource = this.customer.ParcelsSentedByCustomer;
+            ParcelToCustomerListView.ItemsSource = this.customer.ParcelsSentedToCustomer;
             addButton.Visibility = Visibility.Collapsed;
-            CurrentUser.Text = currentUser.ToString();
-            Customer_P.ListChangedDelegate += new Action<BO.Customer>(UpdateCustomerList);
-            
+            CurrentUser.Text = this.currentUser.ToString();
+            customer_display.ListChangedDelegate += new Action<BO.Customer>(updateCustomerList);
 
         }
 
-        public void UpdateCustomerList(BO.Customer customer)
+        /// <summary>
+        /// updates customer in customers list window
+        /// </summary>
+        /// <param name="customer">updated customer</param>
+        public void updateCustomerList(BO.Customer customer)
         {
             if (ChangedParcelDelegate != null)
             {
@@ -78,46 +88,58 @@ namespace PL
         #endregion
 
         #region buttons functionality
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// closes window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void addButton_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// adds customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addCustomer_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.AddCustomer(new Customer { Id = getId(), Name = getName(),Phone = getPhone(), Location = getLocation() });
+                bl.AddCustomer(new BO.Customer { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
                 BO.Customer customer = bl.GetCustomerById(getId());
-                if (Customer_P.ListChangedDelegate != null)
+                if (customer_display.ListChangedDelegate != null)
                 {
-                    Customer_P.ListChangedDelegate(customer);
+                    customer_display.ListChangedDelegate(customer);
                 }
                 Close();
-                MessageBox.Show("The customer added");
+                MessageBox.Show("The customer was added succesfully");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        
-        
-
-
-        private void updateButton_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// updates customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateCustomer_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.UpdateCustomer(new Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
+                bl.UpdateCustomer(new BO.Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
                 MessageBox.Show("The customer Updeted");
-                CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == Customer_P.Id);
-                this.Customer_P.UpdateFromBL(bl.GetCustomerById(getId()));
-                this.Customer_P.UpdateFromToList(customer);
-                if (Customer_P.ListChangedDelegate != null)
+                CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == customer_display.Id);
+                customer_display.UpdateFromBL(bl.GetCustomerById(getId()));
+                customer_display.UpdateFromToList(customer);
+                if (customer_display.ListChangedDelegate != null)
                 {
-                    Customer_P.ListChangedDelegate(bl.GetCustomerById(customer.Id));
+                    customer_display.ListChangedDelegate(bl.GetCustomerById(customer.Id));
                 }
             }
             catch (Exception ex)
@@ -129,6 +151,11 @@ namespace PL
         #endregion
 
         #region get input from TextBoxes
+
+        /// <summary>
+        /// gets input of id
+        /// </summary>
+        /// <returns>id of customer</returns>
         private int getId()
         {
             try
@@ -141,17 +168,29 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of name
+        /// </summary>
+        /// <returns>name of customer</returns>
         private string getName() { return nameTextBox.Text; }
 
+        /// <summary>
+        /// gets input of phone
+        /// </summary>
+        /// <returns>phone of customer</returns>
         private string getPhone() { return phoneTextBox.Text; }
 
+        /// <summary>
+        /// gets input of location
+        /// </summary>
+        /// <returns>location of customer</returns>
         private Location getLocation()
         {
             try
             {
                 double longitude = Convert.ToDouble(longitudeTextBox.Text);
                 double latitude = Convert.ToDouble(latitudeTextBox.Text);
-                return new Location(){ Longitude = longitude, Latitude = latitude};
+                return new Location() { Longitude = longitude, Latitude = latitude };
             }
             catch
             {
@@ -165,26 +204,41 @@ namespace PL
 
         #region ParcelsList MouseDoubleClick
 
-        private void ParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// opens parcel window of choosen parcel
+        /// </summary>
+        /// <param name="sender">parcel</param>
+        /// <param name="e"></param>
+        private void parcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcelAtCustomer = (sender as ListView).SelectedValue as ParcelAtCustomer;
-            Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
+            BO.Parcel parcel = bl.GetParcelById(parcelAtCustomer.Id);
             ParcelWindow OpaenParcel = new ParcelWindow(bl, parcel, currentUser);
-            OpaenParcel.ChangedParcelDelegate += UpdateInList;
+            OpaenParcel.ChangedParcelDelegate += updateInList;
             OpaenParcel.Show();
         }
 
-        public void UpdateInList(BO.Parcel parcel)
+        /// <summary>
+        /// updates the parcels lists
+        /// </summary>
+        /// <param name="parcel"></param>
+        public void updateInList(BO.Parcel parcel)
         {
             ParcelByCustomerListView.ItemsSource = customer.ParcelsSentedByCustomer;
             ParcelToCustomerListView.ItemsSource = customer.ParcelsSentedToCustomer;
         }
         #endregion
 
-        private void addParcelButton_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// opens parcel window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addParcel_Click(object sender, RoutedEventArgs e)
         {
             ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
-            parcelWindow.ChangedParcelDelegate = UpdateInList;
+            parcelWindow.ChangedParcelDelegate = updateInList;
             parcelWindow.Show();
 
         }

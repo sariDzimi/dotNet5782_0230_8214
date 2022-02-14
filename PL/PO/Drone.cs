@@ -10,12 +10,12 @@ using PL;
 
 namespace PO
 {
-    public class Drone_p : DependencyObject
+    public class Drone : DependencyObject
     {
         public Action<BO.Drone> ListChangedDelegate; 
-        public void Update(BO.Drone drone)
+        public void update(BO.Drone drone)
         {
-            ID = drone.Id;
+            Id = drone.Id;
             Battery = drone.Battery;
             Model = drone.Model;
             DroneStatus = drone.DroneStatus;
@@ -29,11 +29,11 @@ namespace PO
         }
         //ID
         public static readonly DependencyProperty IdDrone =
-       DependencyProperty.Register("ID",
+       DependencyProperty.Register("Id",
                                    typeof(object),
-                                   typeof(Drone_p),
+                                   typeof(Drone),
                                    new UIPropertyMetadata(0));
-        public int ID
+        public int Id
         {
             get
             {
@@ -49,7 +49,7 @@ namespace PO
         public static readonly DependencyProperty BatteryDrone =
        DependencyProperty.Register("Battery",
                                    typeof(object),
-                                   typeof(Drone_p),
+                                   typeof(Drone),
                                    new UIPropertyMetadata(0));
         public double Battery
         {
@@ -69,7 +69,7 @@ namespace PO
         public static readonly DependencyProperty ModelDrone =
        DependencyProperty.Register("Model",
                                    typeof(object),
-                                   typeof(Drone_p),
+                                   typeof(Drone),
                                    new UIPropertyMetadata(0));
         public string Model
         {
@@ -87,7 +87,7 @@ namespace PO
         public static readonly DependencyProperty DroneStatusDrone =
       DependencyProperty.Register("DroneStatus",
                                   typeof(object),
-                                  typeof(Drone_p),
+                                  typeof(Drone),
                                   new UIPropertyMetadata(0));
         public DroneStatus DroneStatus
         {
@@ -105,7 +105,7 @@ namespace PO
         public static readonly DependencyProperty MaxWeightDrone =
       DependencyProperty.Register("Weight",
                                   typeof(object),
-                                  typeof(Drone_p),
+                                  typeof(Drone),
                                   new UIPropertyMetadata(0));
         public WeightCategories MaxWeight
         {
@@ -123,7 +123,7 @@ namespace PO
         public static readonly DependencyProperty parcelInD =
      DependencyProperty.Register("ParcelInDelivery",
                                  typeof(object),
-                                 typeof(Drone_p),
+                                 typeof(Drone),
                                  new UIPropertyMetadata(0));
         public ParcelInDelivery ParcelInDelivery
         {
@@ -145,7 +145,7 @@ namespace PO
         public static readonly DependencyProperty location =
     DependencyProperty.Register("Location",
                                 typeof(object),
-                                typeof(Drone_p),
+                                typeof(Drone),
                                 new UIPropertyMetadata(0));
         public Location Location
         {
@@ -159,38 +159,12 @@ namespace PO
             }
         }
 
-        //private double battery;
-        //public int Id { get; set; }
-        //public string Model { get; set; }
-        //public WeightCategories MaxWeight { get; set; }
-
-        //public double Battery
-        //{
-        //    get
-        //    {
-        //        return battery;
-        //    }
-        //    set
-        //    {
-        //        if (value < 0 || value > 100)
-        //            throw new OutOfRange("battery");
-        //        battery = Math.Floor((double)value * 100) / 100;
-        //    }
-        //}
-        //public DroneStatus DroneStatus { get; set; }
-
-        //public ParcelInDelivery ParcelInDelivery { get; set; }
-
-        //public Location Location { get; set; }
-
         public override string ToString()
         {
-            return $"drone  : {ID}, " +
+            return $"drone  : {Id}, " +
                 $" battery: {Battery}%, Model: {Model}, MaxWeight: {MaxWeight}, " +
                 $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelInDelivery}," +
                 $"Location: {Location}";
-
-            ;
         }
     }
 }

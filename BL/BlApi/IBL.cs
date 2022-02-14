@@ -14,7 +14,7 @@ namespace BlApi
         public void ReleaseDroneFromCharging(int idDrone, double timeInCharging);
         public void CollectParcleByDrone(int idDrone);
         public void SendDroneToCharge(int droneId);
-        public void AssignAParcelToADrone(int id);
+        public void AssignParcelToDrone(int id);
         public void SupplyParcelByDrone(int DroneID);
        
         public void AddDrone(int id, WeightCategories weight, string model, int numberStaion);

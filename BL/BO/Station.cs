@@ -25,8 +25,8 @@ namespace BO
             }
             set
             {
-                if (value < 0)
-                    throw new OutOfRange("chargeSlots");
+                //if (value < 0)
+                //    throw new OutOfRange("chargeSlots");
                 freeChargeSlots = value;
             }
         }

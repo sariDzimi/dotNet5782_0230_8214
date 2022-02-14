@@ -28,19 +28,20 @@ namespace PL
         public Action<BO.Drone> ChangedDroneDelegate;
         IBL bL;
         BO.Drone drone;
-        Drone_p drone_P = new Drone_p();
-        public bool boo = false;
-        BackgroundWorker worker = new BackgroundWorker();
+        PO.Drone drone_display = new PO.Drone();
+        BackgroundWorker worker;
+
         public Drone()
         {
             InitializeComponent();
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
+            drone_display.ListChangedDelegate += new Action<BO.Drone>(updateDroneListWindow);
         }
+
         public Drone(IBL bL) : this()
         {
-            DroneStatusDroneL.Visibility = Visibility.Hidden;
             this.bL = bL;
+            DroneStatusDroneL.Visibility = Visibility.Hidden;
             addButton.IsEnabled = true;
         }
 
@@ -49,22 +50,23 @@ namespace PL
            
             drone = droneBL;
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
-            drone_P = new Drone_p()
+            drone_display = new PO.Drone()
             {
                 Battery = drone.Battery,
-                ID = drone.Id,
+                Id = drone.Id,
                 DroneStatus = drone.DroneStatus,
                 Location = drone.Location,
                 MaxWeight = drone.MaxWeight,
                 Model = drone.Model,
-                ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
+                ParcelInDelivery = drone.ParcelInDelivery
+                //ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
             };
-            
+
             bL = bL1;
-            DataContext = drone_P;
+            DataContext = drone_display;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
-            SwitchDroneStatus();
+            showButtonsAccordingToDroneStatus();
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             WeightSelector.IsEnabled = false;
@@ -75,14 +77,28 @@ namespace PL
             lblTime.Content = DateTime.Now.ToLongTimeString();
         }
         public void UpdateDroneList(BO.Drone drone)
+        /// <summary>
+        /// updates drone in the drone list window
+        /// </summary>
+        /// <param name="drone"></param>
+        public void updateDroneListWindow(BO.Drone drone)
         {
             if (ChangedDroneDelegate != null)
             {
                 ChangedDroneDelegate(drone);
             }
         }
-        private void SwitchDroneStatus()
+
+        /// <summary>
+        /// shows only action buttons that are related to the drone status
+        /// </summary>
+        private void showButtonsAccordingToDroneStatus()
         {
+            sendDroneForDelivery.IsEnabled = false;
+            releaseDroneFromCharging.IsEnabled = false;
+            colectParcel.IsEnabled = false;
+            supllyParcel.IsEnabled = false;
+
             switch (drone.DroneStatus)
             {
                 case DroneStatus.Free:
@@ -92,37 +108,51 @@ namespace PL
                     releaseDroneFromCharging.IsEnabled = true;
                     break;
                 case DroneStatus.Delivery:
-
-                    Parcel parcelBL = bL.GetParcelById(drone_P.ParcelInDelivery.Id);
-
-                    if (parcelBL.PickedUp == null)
+                    if (drone.ParcelInDelivery.IsWating)
                     {
                         colectParcel.IsEnabled = true;
-                        OpaenDrone.Visibility = Visibility.Visible;
                     }
                     else
                     {
-                        if (parcelBL.Delivered == null)
-                        {
-                            OpaenDrone.Visibility = Visibility.Visible;
-                            supllyParcel.IsEnabled = true;
-                        }
-
+                        supllyParcel.IsEnabled = true;
                     }
+                    OpaenDrone.Visibility = Visibility.Visible;
                     break;
             }
         }
 
+        /// <summary>
+        /// actives the drones with the action
+        /// </summary>
+        /// <param name="action">action</param>
+        /// <param name="id">id of drone</param>
+        /// <param name="message">message if the action is done succesfully</param>
+        private void activeDrone(Action<int> action, int id, string message)
+        {
+            try
+            {
+                action(id);
+                showButtonsAccordingToDroneStatus();
+                drone_display.update(drone);
+                MessageBox.Show(message);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
+        /// <summary>
+        /// adds drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addDrone_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bL.AddDrone(getId(), getMaxWeight(), getModel(), getNumberOfStation());
                 BO.Drone drone = bL.GetDroneById(getId());
-                if (drone_P.ListChangedDelegate != null)
+                if (drone_display.ListChangedDelegate != null)
                 {
-                    drone_P.ListChangedDelegate(drone);
+                    drone_display.ListChangedDelegate(drone);
                 }
                 MessageBox.Show("the drone was added succesfuly!!!");
                 Close();
@@ -142,36 +172,33 @@ namespace PL
             }
 
         }
-        private void numberOfStationInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
-
+        /// <summary>
+        /// sends drone for charging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendDroneToCharge_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                bL.SendDroneToCharge(drone_P.ID);
-                sendDroneForDelivery.IsEnabled = false;
-                releaseDroneFromCharging.IsEnabled = true;
-                timeOfCharging.Text = "";
-                drone_P.Update(drone);
-                MessageBox.Show("The drone was sent for charging successfully");
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            activeDrone(bL.SendDroneToCharge, drone.Id, "The drone was sent for charging successfully");
         }
 
+        /// <summary>
+        /// releases drone from charging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void releaseDroneFromCharging_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 double time = getTime();
-                bL.ReleaseDroneFromCharging(drone_P.ID, time);
+                bL.ReleaseDroneFromCharging(drone_display.Id, time);
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                drone_P.Update(drone);
-                MessageBox.Show("Release the drone from charging successfully");
+                drone_display.update(drone);
+                MessageBox.Show("Released drone from charging successfully");
             }
             catch (OutOfRange)
             {
@@ -183,62 +210,42 @@ namespace PL
             }
         }
 
-        private void sendDroneForDelivery_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// sends drone for a delivery
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void assignParcelToDrone_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                bL.AssignAParcelToADrone(drone_P.ID);
-                sendDroneForDelivery.IsEnabled = false;
-                colectParcel.IsEnabled = true;
-                drone_P.Update(drone);
-                MessageBox.Show("Assign a drone to parcel successfully");
-                OpaenDrone.Visibility = Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            activeDrone(bL.AssignParcelToDrone, drone_display.Id, "Assign a drone to parcel successfully");
+            OpaenDrone.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// collect parcel from sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void colectParcel_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                bL.CollectParcleByDrone(drone_P.ID);
-                colectParcel.IsEnabled = false;
-                supllyParcel.IsEnabled = true;
-                MessageBox.Show("collect a parcel by drone successfully");
-                drone_P.Update(drone);
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            activeDrone(bL.CollectParcleByDrone, drone_display.Id, "collect a parcel by drone successfully");
         }
 
+        /// <summary>
+        /// supllies parcel to the reciver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void supllyParcel_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                bL.SupplyParcelByDrone(drone_P.ID);
-                supllyParcel.IsEnabled = false;
-                sendDroneForDelivery.IsEnabled = true;
-                MessageBox.Show("suplly a parcel by drone successfully");
-                drone_P.Update(drone);
-
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            activeDrone(bL.SupplyParcelByDrone, drone.Id, "suplly a parcel by drone successfully");
         }
 
+        /// <summary>
+        /// updates drone model
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updateDroneModel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -253,7 +260,7 @@ namespace PL
         }
 
         /// <summary>
-        /// gets input of drone id
+        /// gets input of drne id
         /// </summary>
         /// <returns>id of drone</returns>
         private int getId()
@@ -278,7 +285,6 @@ namespace PL
                 throw new NotValidInput("Max Weight");
             try
             {
-
                 return (WeightCategories)WeightSelector.SelectedItem;
             }
             catch (Exception)
@@ -302,7 +308,6 @@ namespace PL
                 throw new NotValidInput("station number");
             }
         }
-
 
         /// <summary>
         /// gets input of time that the drone was charged
@@ -329,6 +334,11 @@ namespace PL
             return modelDroneL.Text;
         }
 
+        /// <summary>
+        /// opens window of the parcel in delivery
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openParcelInDelivery_Click(object sender, RoutedEventArgs e)
         {
 
@@ -337,11 +347,10 @@ namespace PL
             parcelWindow.Show();
         }
 
-
         /// <summary>
-        /// dis-enables actions buttons
+        /// dis-enables action buttons when simulaions is active
         /// </summary>
-        private void DisenableButtons()
+        private void disenableButtonsWhileSimulates()
         {
             Buttons.Visibility = Visibility.Hidden;
             simulation.IsEnabled = false;
@@ -349,15 +358,21 @@ namespace PL
         }
 
         /// <summary>
-        /// enables actions buttons
+        /// enables action buttons when simulation stops
         /// </summary>
-        private void EnableButtons()
+        private void enableButtonWhileSimulates()
         {
             Buttons.Visibility = Visibility.Visible;
             simulation.IsEnabled = true;
             stopSimulation.IsEnabled = false;
-            this.SwitchDroneStatus();
+            this.showButtonsAccordingToDroneStatus();
 
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if(worker != null)
+                worker.CancelAsync();
         }
 
         #region simulation
@@ -368,6 +383,8 @@ namespace PL
         /// <param name="e"></param>
         private void simulation_Click(object sender, RoutedEventArgs e)
         {
+            worker = new BackgroundWorker();
+            disenableButtonsWhileSimulates();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
@@ -389,7 +406,7 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
-                drone_P.Update(drone);
+                drone_display.update(drone);
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
@@ -403,7 +420,7 @@ namespace PL
         private void stopSimulation_Click(object sender, RoutedEventArgs e)
         {
             worker.CancelAsync();
-            this.EnableButtons();
+            this.enableButtonWhileSimulates();
         }
         #endregion
     }
