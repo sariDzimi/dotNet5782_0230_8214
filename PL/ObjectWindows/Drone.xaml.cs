@@ -33,20 +33,20 @@ namespace PL
         public Drone()
         {
             InitializeComponent();
-        }
-        public Drone(IBL bL1)
-        {
-            InitializeComponent();
-            DroneStatusDroneL.Visibility = Visibility.Hidden;
-            bL = bL1;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            addButton.IsEnabled = true;
             drone_P.ListChangedDelegate += new Action<BO.Drone>(UpdateDroneList);
         }
+        public Drone(IBL bL) : this()
+        {
+            DroneStatusDroneL.Visibility = Visibility.Hidden;
+            this.bL = bL;
+            addButton.IsEnabled = true;
+        }
 
-        public Drone(IBL bL1, BO.Drone droneBL) : this(bL1)
+        public Drone(IBL bL1, BO.Drone droneBL) : this()
         {
             drone = droneBL;
+            ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_P = new Drone_p()
             {
                 Battery = drone.Battery,
@@ -55,10 +55,10 @@ namespace PL
                 Location = drone.Location,
                 MaxWeight = drone.MaxWeight,
                 Model = drone.Model,
-                //ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
-               ParcelInDelivery = drone.ParcelInDelivery
+                ParcelInDelivery = drone.ParcelInDelivery == null ? new BO.ParcelInDelivery() : drone.ParcelInDelivery
             };
-
+            
+            bL = bL1;
             DataContext = drone_P;
             addButton.Visibility = Visibility.Hidden;
             updateBottun.IsEnabled = true;
@@ -66,9 +66,8 @@ namespace PL
             if (drone.ParcelInDelivery != null)
                 ParcelInDelivery.Text = drone.ParcelInDelivery.ToString();
             WeightSelector.IsEnabled = false;
-
-
         }
+
         public void UpdateDroneList(BO.Drone drone)
         {
             if (ChangedDroneDelegate != null)

@@ -193,12 +193,12 @@ namespace PL
 
         private void dpick_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Parcels = new ObservableCollection<ParcelToList>();
+            parcels = new ObservableCollection<ParcelToList>();
             foreach (var parcel in bl.GetParcelsBy((p) => p.Scheduled > dp1.SelectedDate.Value.Date))
             {
-                Parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
+                parcels.Add(bl.convertParcelToTypeOfParcelToList(parcel));
             }
-            DataContext = Parcels;
+            DataContext = parcels;
     
         }
 
