@@ -22,8 +22,6 @@
         <TextBlock x:Name="currentUserTextBlock" HorizontalAlignment="Left" Style="{StaticResource Text}" Margin="646,21,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="175"/>
         <TextBox x:Name="iddroneLabel" Text="{Binding IdDrone}" HorizontalAlignment="Left" Margin="186,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}" />
 
-
-
         <Grid Margin="199,166,252,40" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="115*"/>
@@ -35,16 +33,7 @@
             <Label x:Name="priorityText" Content="priority" HorizontalAlignment="Left" Margin="-34,36,0,0" VerticalAlignment="Top" Width="57"/>
             <ComboBox x:Name="priorityLabel" Text="{Binding Pritority}" Margin="43,41,-68,0"  VerticalAlignment="Top" Visibility="Visible"/>
             <Label x:Name="ScheduledTrxt" Content="Scheduled" HorizontalAlignment="Left" Margin="-30,5,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-            <TextBox x:Name="ScheduledLabel" Text="{Binding Scheduled}" IsEnabled="False" Margin="52,5,-115,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="29" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
-                <TextBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.001"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBox.RenderTransform>
-            </TextBox>
+            <TextBox x:Name="ScheduledLabel" Text="{Binding Scheduled}" IsEnabled="False" Margin="52,5,-115,0"  TextWrapping="Wrap" VerticalAlignment="Top" Height="29" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
             <Label  x:Name="PickedUpText" Content="PickedUp" HorizontalAlignment="Left" Margin="-30,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.033,0.464" Grid.Row="2"/>
             <TextBox  x:Name="PickedUpLabel" IsEnabled="False" Text="{Binding PickedUp}" Margin="51,10,-114,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2" Height="36"/>
             <Label x:Name="DeliveredText" Content="Delivered" HorizontalAlignment="Left" Margin="-33,57,0,0" VerticalAlignment="Top" Grid.Row="2"/>
@@ -64,12 +53,8 @@
             <Label x:Name="customerAtParcelReciverLabel" Content="customer At Parcel Reciver" HorizontalAlignment="Left" Margin="-6,76,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <TextBox x:Name="customerAtParcelReciverText" Text="{Binding CustomerAtParcelReciver}" HorizontalAlignment="Left" Margin="187,84,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Grid.Column="1"/>
             <Button x:Name="openDroneButton" Content="open" Visibility="Hidden" HorizontalAlignment="Left" Margin="194,16,0,0" VerticalAlignment="Top" Click="openDrone_Click" Width="41" RenderTransformOrigin="11.171,-1.233" Grid.Column="1"/>
-
         </Grid>
-
-        <!--<Label x:Name="idParcel" Content="id Parcel" HorizontalAlignment="Left" Margin="75,63,0,0" VerticalAlignment="Top" Height="27" Width="90"/>-->
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="110,70,0,0" VerticalAlignment="Top" Height="27" Width="90" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
-
         <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="356,154,0,0" VerticalAlignment="Top" Width="64" Click="updatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" Grid.Row="1" />
         <Button x:Name="deleateParcelButton" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="441,153,0,0" VerticalAlignment="Top" Width="70" Click="deleteParcel" Grid.Row="1"/>
         <Button x:Name="addParcelButton" Content="Add" HorizontalAlignment="Left" Margin="280,154,0,0" VerticalAlignment="Top" Width="62" Click="addParcel_Click" Visibility="Hidden" Grid.Row="1"/>
@@ -78,6 +63,5 @@
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="618,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>
         <Button x:Name="OpenReciver" Content="open" HorizontalAlignment="Left" Margin="618,134,0,0" VerticalAlignment="Top" Click="openCustomerReciver" Visibility="Visible"/>
         <Button x:Name="Close"  Content="X"  Visibility="Visible"  HorizontalAlignment="Left"  Margin="758,13,0,171"  Width="37" RenderTransformOrigin="1.63,0.089" Click="closeWindow_Click"/>
-
     </Grid>
 </Window>

@@ -33,7 +33,6 @@
 
         <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Margin="175,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding ID}"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="191,142,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Name}"/>
-        <!--<TextBox x:Name="freeChargeStolsTextBox" HorizontalAlignment="Left" Margin="208,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}" Text="{Binding FreeChargeSlots}"/>-->
         <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Margin="175,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Longitude}"/>
         <TextBox x:Name="laditudeTextBox" HorizontalAlignment="Left" Margin="395,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Latitude}"/>
         <TextBox x:Name="ChargeStolsTextBox" HorizontalAlignment="Left" Margin="191,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding FreeChargeSlots}"/>
