@@ -10,10 +10,14 @@ using PL;
 
 namespace PO
 {
+    /// <summary>
+    /// display object of Parcel
+    /// </summary>
      public class Parcel : DependencyObject
     {
         public Action<BO.Parcel> ListChangedDelegate;
-        //ID
+        
+        #region Id
         public static readonly DependencyProperty IdParcel =
       DependencyProperty.Register("ID",
                                   typeof(object),
@@ -30,9 +34,11 @@ namespace PO
                 SetValue(IdParcel, value);
             }
         }
-      
-        //NameOfReciver
-       public static readonly DependencyProperty nameOfReciver =
+
+        #endregion
+
+        #region NameOfReciver
+        public static readonly DependencyProperty nameOfReciver =
       DependencyProperty.Register("NameOfReciver",
                                   typeof(object),
                                   typeof(Parcel),
@@ -49,7 +55,9 @@ namespace PO
             }
         }
 
-        //NameOfReciver
+        #endregion
+
+        #region NameOfReciver
         public static readonly DependencyProperty parcelStatus =
        DependencyProperty.Register("ParcelStatus",
                                    typeof(object),
@@ -67,7 +75,9 @@ namespace PO
             }
         }
 
-        //NameOfSender
+        #endregion
+
+        #region NameOfSender
         public static readonly DependencyProperty nameOfSender =
        DependencyProperty.Register("NameOfSender",
                                    typeof(object),
@@ -84,8 +94,9 @@ namespace PO
                 SetValue(nameOfSender, value);
             }
         }
+        #endregion
 
-        //customer At Parcel Sender
+        #region customer At Parcel Sender
         public static readonly DependencyProperty customerAtParcelSender =
       DependencyProperty.Register("CustomerAtParcelSender",
                                   typeof(object),
@@ -102,8 +113,9 @@ namespace PO
                 SetValue(customerAtParcelSender, value);
             }
         }
+        #endregion
 
-        //customer At Parcel Reciver
+        #region customer At Parcel Reciver
         public static readonly DependencyProperty customerAtParcelReciver =
         DependencyProperty.Register("CustomerAtParcelReciver",
                                   typeof(object),
@@ -120,8 +132,9 @@ namespace PO
                 SetValue(customerAtParcelReciver, value);
             }
         }
+        #endregion
 
-        //Weight 
+        #region Weight
         public static readonly DependencyProperty weightParcel =
         DependencyProperty.Register("Weight",
                                  typeof(object),
@@ -138,9 +151,9 @@ namespace PO
                 SetValue(weightParcel, value);
             }
         }
+        #endregion
 
-
-        //Pritority
+        #region Pritority
         public static readonly DependencyProperty pritorityParcel =
         DependencyProperty.Register("Pritority",
                                 typeof(object),
@@ -157,8 +170,9 @@ namespace PO
                 SetValue(pritorityParcel, value);
             }
         }
+        #endregion
 
-        //Requested
+        #region Requested
         public static readonly DependencyProperty requestedParcel =
         DependencyProperty.Register("Requested",
                                typeof(object),
@@ -176,7 +190,9 @@ namespace PO
             }
         }
 
-        //IdDrone
+        #endregion
+
+        #region IdDrone
         public static readonly DependencyProperty idDrone =
         DependencyProperty.Register("IdDrone",
                               typeof(object),
@@ -194,7 +210,9 @@ namespace PO
             }
         }
 
-        //Scheduled
+        #endregion
+
+        #region Scheduled
         public static readonly DependencyProperty ScheduledParcel =
         DependencyProperty.Register("Scheduled",
                               typeof(object),
@@ -211,8 +229,9 @@ namespace PO
                 SetValue(ScheduledParcel, value);
             }
         }
+        #endregion
 
-        //PickedUp 
+        #region PickedUp
         public static readonly DependencyProperty PickedUpParcel =
         DependencyProperty.Register("PickedUp",
                              typeof(object),
@@ -230,7 +249,9 @@ namespace PO
             }
         }
 
-        //Delivered
+        #endregion
+
+        #region Delivered
         public static readonly DependencyProperty DeliveredParcel =
         DependencyProperty.Register("Delivered",
                             typeof(object),
@@ -247,6 +268,6 @@ namespace PO
                 SetValue(DeliveredParcel, value);
             }
         }
-
+        #endregion
     }
 }

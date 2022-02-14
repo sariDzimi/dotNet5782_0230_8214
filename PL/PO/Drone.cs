@@ -10,24 +10,15 @@ using PL;
 
 namespace PO
 {
+    /// <summary>
+    /// display object of drone
+    /// </summary>
     public class Drone : DependencyObject
     {
-        public Action<BO.Drone> ListChangedDelegate; 
-        public void update(BO.Drone drone)
-        {
-            Id = drone.Id;
-            Battery = drone.Battery;
-            Model = drone.Model;
-            DroneStatus = drone.DroneStatus;
-            MaxWeight = drone.MaxWeight;
-            ParcelInDelivery = drone.ParcelInDelivery;
-            Location = drone.Location;
-            if(ListChangedDelegate != null)
-            {
-                ListChangedDelegate(drone);
-            }
-        }
-        //ID
+        public Action<BO.Drone> ListChangedDelegate;
+
+        #region Id
+
         public static readonly DependencyProperty IdDrone =
        DependencyProperty.Register("Id",
                                    typeof(object),
@@ -45,7 +36,9 @@ namespace PO
             }
         }
 
-        //Battery
+        #endregion
+
+        #region Battery
         public static readonly DependencyProperty BatteryDrone =
        DependencyProperty.Register("Battery",
                                    typeof(object),
@@ -64,8 +57,9 @@ namespace PO
                 SetValue(BatteryDrone, value);
             }
         }
+        #endregion
 
-        //Model
+        #region Model
         public static readonly DependencyProperty ModelDrone =
        DependencyProperty.Register("Model",
                                    typeof(object),
@@ -82,8 +76,9 @@ namespace PO
                 SetValue(ModelDrone, value);
             }
         }
+        #endregion
 
-        //DroneStatus
+        #region DroneStatus
         public static readonly DependencyProperty DroneStatusDrone =
       DependencyProperty.Register("DroneStatus",
                                   typeof(object),
@@ -100,8 +95,9 @@ namespace PO
                 SetValue(DroneStatusDrone, value);
             }
         }
+        #endregion
 
-        //MaxWeight
+        #region MaxWeight
         public static readonly DependencyProperty MaxWeightDrone =
       DependencyProperty.Register("Weight",
                                   typeof(object),
@@ -119,7 +115,9 @@ namespace PO
             }
         }
 
-        //ParcelInDelivery
+        #endregion
+
+        #region ParcelInDelivery
         public static readonly DependencyProperty parcelInD =
      DependencyProperty.Register("ParcelInDelivery",
                                  typeof(object),
@@ -139,9 +137,9 @@ namespace PO
             }
         }
 
-       // public ParcelInDelivery ParcelInDelivery { get; set; }
+        #endregion
 
-        //Location
+        #region Location
         public static readonly DependencyProperty location =
     DependencyProperty.Register("Location",
                                 typeof(object),
@@ -158,13 +156,28 @@ namespace PO
                 SetValue(location, value);
             }
         }
+        #endregion
 
-        public override string ToString()
+        #region update
+        /// <summary>
+        /// updates Drone to be as the BL object
+        /// </summary>
+        /// <param name="Drone">updated drone</param>
+        public void updateDisplayObject(BO.Drone drone)
         {
-            return $"drone  : {Id}, " +
-                $" battery: {Battery}%, Model: {Model}, MaxWeight: {MaxWeight}, " +
-                $"DroneStatus : {DroneStatus}, ParcelAtTransfor: {ParcelInDelivery}," +
-                $"Location: {Location}";
+            Id = drone.Id;
+            Battery = drone.Battery;
+            Model = drone.Model;
+            DroneStatus = drone.DroneStatus;
+            MaxWeight = drone.MaxWeight;
+            ParcelInDelivery = drone.ParcelInDelivery;
+            Location = drone.Location;
+            if (ListChangedDelegate != null)
+            {
+                ListChangedDelegate(drone);
+            }
         }
+
+        #endregion
     }
 }

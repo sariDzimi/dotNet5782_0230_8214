@@ -134,7 +134,7 @@ namespace PL
             {
                 action(id);
                 showButtonsAccordingToDroneStatus();
-                drone_display.update(drone);
+                drone_display.updateDisplayObject(drone);
                 MessageBox.Show(message);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -198,7 +198,7 @@ namespace PL
                 releaseDroneFromCharging.IsEnabled = false;
                 sendDroneForDelivery.IsEnabled = true;
                 timeOfCharging.Text = "";
-                drone_display.update(drone);
+                drone_display.updateDisplayObject(drone);
                 MessageBox.Show("Released drone from charging successfully");
             }
             catch (OutOfRange)
@@ -406,7 +406,7 @@ namespace PL
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += (object? sender, ProgressChangedEventArgs e) =>
             {
-                drone_display.update(drone);
+                drone_display.updateDisplayObject(drone);
             };
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();

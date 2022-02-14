@@ -9,7 +9,7 @@ namespace PL
     public partial class ManegerWindow : Window
     {
 
-        public IBL bL1;
+        public IBL bl;
         userType currentUser;
 
         public ManegerWindow()
@@ -17,34 +17,60 @@ namespace PL
             InitializeComponent();
         }
 
-        public ManegerWindow(IBL bL, userType currentUser1)
+        public ManegerWindow(IBL bl, userType currentUser)
         {
-            bL1 = bL;
-            currentUser = currentUser1;
+            this.bl = bl;
+            this.currentUser = currentUser;
             InitializeComponent();
-            CurrentUser.Text = currentUser1.ToString();
+            CurrentUser.Text = currentUser.ToString();
         }
 
+        /// <summary>
+        /// opens window of drones list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openDroneList_Click(object sender, RoutedEventArgs e)
         {
-            new DronesList(bL1).Show();
+            new DronesList(bl).Show();
         }
 
+        /// <summary>
+        /// opens window of parcels list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openParcelList_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelsList(bL1).Show();
+            new ParcelsList(bl).Show();
         }
+
+        /// <summary>
+        /// opens window of stations list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openStationsList_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList(bL1).Show();
+            new StationsList(bl).Show();
         }
 
+        /// <summary>
+        /// opens window of customers list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openCustomerList_Click(object sender, RoutedEventArgs e)
         {
-            new CustomersList(bL1).Show();
+            new CustomersList(bl).Show();
         }
 
-        private void showListsButtons_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// shows and hides lists buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showAndHideListsButtons_Click(object sender, RoutedEventArgs e)
         {
            DronesList.Visibility = DronesList.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }

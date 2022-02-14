@@ -24,74 +24,60 @@ namespace PL
     public partial class MainWindow : Window
     {
         public userType currentUser;
-        public IBL bL;
+        public IBL bl;
         public MainWindow()
         {
-
-            bL = BLFactory.GetBl();
+            bl = BLFactory.GetBl();
             InitializeComponent();
         }
-        public MainWindow(IBL bL1)
+        public MainWindow(IBL bl)
         {
-            bL = bL1;
+            this.bl = bl;
             InitializeComponent();
             new ManegerWindow().Show();
             Close();
         }
-        private void workerButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void managerButton_Click(object sender, RoutedEventArgs e)
-        {
-            new ManegerWindow(bL, currentUser).Show();
-        }
-
-        private void customerButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void EnterManeger(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// if user is a valid manager, opens manager window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void enterManeger(object sender, RoutedEventArgs e)
         {
             try
             {
                 BO.Manager manager = new BO.Manager() { UserName = getUserName(), Password = getPassword() };
-                bool flag;
-                flag = bL.IsValidMamager(manager);
-                if (flag == true)
+                bool isValid = bl.IsValidMamager(manager);
+                if (isValid)
                 {
                     currentUser = userType.manager;
                     MessageBox.Show("you are in");
-                    new ManegerWindow(bL, currentUser).Show();
+                    new ManegerWindow(bl, currentUser).Show();
                     Close();
                 }
-
-
-
                 else
                 {
-                    MessageBox.Show("you are not maneger, please login like user");
-                    new MainWindow(bL).Show();
+                    MessageBox.Show("you are not maneger, please login as user");
+                    new MainWindow(bl).Show();
                     Close();
                 }
             }
             catch (BO.NotFound)
             {
-                MessageBox.Show("you are not maneger, please login like user");
-
+                MessageBox.Show("you are not a maneger, please login as user");
             }
 
             catch (NotValidInput ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-
-
         }
 
-
+        /// <summary>
+        ///gets input of password
+        /// </summary>
+        /// <returns>password</returns>
         private int getPassword()
         {
 
@@ -105,6 +91,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of user name
+        /// </summary>
+        /// <returns>user name</returns>
         private string getUserName()
         {
             try
@@ -117,10 +107,10 @@ namespace PL
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            new Window1().Show();
-        }
+        /// <summary>
+        /// gets input of id
+        /// </summary>
+        /// <returns>id</returns>
         private int getId()
         {
 
@@ -134,6 +124,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of signed name
+        /// </summary>
+        /// <returns>signed name</returns>
         private string getNameSighnUp()
         {
             try
@@ -146,6 +140,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of signed id
+        /// </summary>
+        /// <returns>signed id</returns>
         private int getIdSighnUp()
         {
 
@@ -159,19 +157,10 @@ namespace PL
             }
         }
 
-        private string getNameLogin()
-        {
-            try
-            {
-                return NameTextBox.Text;
-            }
-            catch
-            {
-                throw new NotValidInput("UserName");
-            }
-        }
-
-
+        /// <summary>
+        /// gets input of signed longitude
+        /// </summary>
+        /// <returns>signed longitude</returns>
         private double getLongitute()
         {
             try
@@ -184,6 +173,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of signed phone
+        /// </summary>
+        /// <returns>signed phone</returns>
         private string getPhone()
         {
             try
@@ -196,8 +189,10 @@ namespace PL
             }
         }
 
-
-
+        /// <summary>
+        /// gets input of signed latitude
+        /// </summary>
+        /// <returns>signed latitude</returns>
         private double getLutitude()
         {
             try
@@ -210,6 +205,10 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// gets input of loged name
+        /// </summary>
+        /// <returns>loged name</returns>
         private string getNameLog()
         {
             try
@@ -223,39 +222,45 @@ namespace PL
 
         }
 
-        private void LogInBtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// log in if the customer is valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logIn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                BO.Customer customer = bL.GetCustomerById(getId());
+                BO.Customer customer = bl.GetCustomerById(getId());
                 if (customer.Name == getNameLog())
                 {
                     MessageBox.Show("you are in");
                     currentUser = userType.cutomer;
-                    new CustomerWindow(bL, customer, currentUser).Show();
+                    new CustomerWindow(bl, customer, currentUser).Show();
                 }
                 else
                 {
                     MessageBox.Show("please sighn up");
-
                 }
 
             }
             catch (BO.NotFound)
             {
                 MessageBox.Show("please sighn up");
-
             }
 
             catch (NotValidInput ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-
         }
 
-        private void SignUpSignInBtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// signes up the custmer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void signUp_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -267,10 +272,10 @@ namespace PL
                     Location = new BO.Location() { Longitude = getLongitute(), Latitude = getLutitude()}
                 };
 
-                bL.AddCustomer(customer);
+                bl.AddCustomer(customer);
                 currentUser = userType.cutomer;
                 MessageBox.Show("you are in");
-                new CustomerWindow(bL, customer, currentUser).Show();
+                new CustomerWindow(bl, customer, currentUser).Show();
                 Close();
 
             }

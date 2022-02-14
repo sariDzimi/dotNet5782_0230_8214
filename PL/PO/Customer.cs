@@ -10,56 +10,14 @@ using PL;
 
 namespace PO
 {
+    /// <summary>
+    /// display object of Customer
+    /// </summary>
     public class Customer : DependencyObject
     {
         public Action<BO.Customer> ListChangedDelegate;
-        public void UpdateFromBL(BO.Customer customer)
-        {
-            this.Id = customer.Id;
-            this.Latitude = customer.Location.Latitude;
-            this.Longitude = customer.Location.Longitude;
-            this.Name = customer.Name;
-        }
-        public void UpdateFromToList(CustomerToList  customer)
-        {
 
-            this.NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor;
-            this.NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided;
-            this.NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided;
-            this.NumberOfRecievedParcels = customer.NumberOfRecievedParcels;
-          
-                }
-        public override string ToString()
-        {
-            string parcelSentedByCustomer = " ";
-            string parcelSentedToCustomer = " ";
-
-            if (ParcelsSentedByCustomer.Count != 0)
-            {
-                foreach (var p in ParcelsSentedByCustomer)
-                {
-                    parcelSentedByCustomer += p;
-                    parcelSentedByCustomer += " ";
-                }
-            }
-
-            if (ParcelsSentedToCustomer.Count != 0)
-            {
-                foreach (var p in ParcelsSentedToCustomer)
-                {
-                    parcelSentedToCustomer += p;
-                    parcelSentedToCustomer += " ";
-                }
-            }
-
-
-
-
-            return $"customer {Name} :  {Phone}, Location :," +
-             $"parcelsSentedByCustomer: {parcelSentedByCustomer}, parcelsSentedToCustomer: {parcelSentedToCustomer} ";
-        }
-
-        //Name
+        #region Name
         public static readonly DependencyProperty NameCustomer =
        DependencyProperty.Register("Name",
                                    typeof(object),
@@ -76,8 +34,9 @@ namespace PO
                 SetValue(NameCustomer, value);
             }
         }
+        #endregion
 
-        //ID
+        #region Id
         public static readonly DependencyProperty IdCustomer =
         DependencyProperty.Register("ID",
                                     typeof(object),
@@ -95,8 +54,9 @@ namespace PO
                 SetValue(IdCustomer, value);
             }
         }
+        #endregion
 
-        //Phone
+        #region Phone
         public static readonly DependencyProperty PhoneCustomer =
         DependencyProperty.Register("Phone",
                                 typeof(object),
@@ -115,10 +75,11 @@ namespace PO
             }
         }
 
+        #endregion
 
-        //Location
+        #region Longitude
         public static readonly DependencyProperty LongitudeCustomer =
-      DependencyProperty.Register("Longitude",
+        DependencyProperty.Register("Longitude",
                                   typeof(object),
                                   typeof(Station),
                                   new UIPropertyMetadata(0));
@@ -134,8 +95,11 @@ namespace PO
             }
         }
 
+        #endregion
+
+        #region Latitude
         public static readonly DependencyProperty LatitudeCustomer =
-      DependencyProperty.Register("Latitude",
+        DependencyProperty.Register("Latitude",
                                   typeof(object),
                                   typeof(Station),
                                   new UIPropertyMetadata(0));
@@ -150,9 +114,12 @@ namespace PO
                 SetValue(LatitudeCustomer, value);
             }
         }
-        //parcels Sented By Customer
+
+        #endregion
+
+        #region parcels Sented By Customer
         public static readonly DependencyProperty parcelsSentedByCustomer =
-       DependencyProperty.Register("parcelsSentedByCustomer",
+        DependencyProperty.Register("parcelsSentedByCustomer",
                                typeof(object),
                                typeof(Customer),
                                new UIPropertyMetadata(0));
@@ -169,8 +136,9 @@ namespace PO
             }
         }
 
-        //
-        //parcels Sented To Customer
+        #endregion
+
+        #region parcels Sented To Customer
         public static readonly DependencyProperty parcelsSentedToCustomer =
         DependencyProperty.Register("parcelsSentedToCustomer",
                                 typeof(object),
@@ -188,11 +156,12 @@ namespace PO
                 SetValue(parcelsSentedToCustomer, value);
             }
         }
+        #endregion
 
+        #region NumberOfParcelsInTheWayToCutemor
 
-        //NumberOfParcelsInTheWayToCutemor
         public static readonly DependencyProperty numberOfParcelsInTheWayToCutemor =
-       DependencyProperty.Register("NumberOfParcelsInTheWayToCutemor",
+        DependencyProperty.Register("NumberOfParcelsInTheWayToCutemor",
                                typeof(object),
                                typeof(Customer),
                                new UIPropertyMetadata(0));
@@ -209,8 +178,9 @@ namespace PO
             }
         }
 
+        #endregion
 
-        //NumberOfRecievedParcels 
+        #region NumberOfRecievedParcels
         public static readonly DependencyProperty numberOfRecievedParcels =
       DependencyProperty.Register("NumberOfRecievedParcels",
                               typeof(object),
@@ -229,9 +199,12 @@ namespace PO
             }
         }
 
-        //NumberOfParcelsSendedAndNotProvided
+        #endregion
+
+        #region NumberOfParcelsSendedAndNotProvided
+
         public static readonly DependencyProperty numberOfParcelsSendedAndNotProvided =
-     DependencyProperty.Register("NumberOfParcelsSendedAndNotProvided",
+        DependencyProperty.Register("NumberOfParcelsSendedAndNotProvided",
                              typeof(object),
                              typeof(Customer),
                              new UIPropertyMetadata(0));
@@ -248,10 +221,11 @@ namespace PO
             }
         }
 
+        #endregion
 
-        //NumberOfParcelsSendedAndProvided
+        #region NumberOfParcelsSendedAndProvided
         public static readonly DependencyProperty numberOfParcelsSendedAndProvided =
-    DependencyProperty.Register("NumberOfParcelsSendedAndProvided",
+        DependencyProperty.Register("NumberOfParcelsSendedAndProvided",
                             typeof(object),
                             typeof(Customer),
                             new UIPropertyMetadata(0));
@@ -267,6 +241,35 @@ namespace PO
                 SetValue(numberOfParcelsSendedAndProvided, value);
             }
         }
+
+        #endregion
+
+        #region update
+
+        /// <summary>
+        /// updates Customer to be as the BL object
+        /// </summary>
+        /// <param name="customer">updated customer</param>
+        public void updateDisplayObject(BO.Customer customer)
+        {
+            Latitude = customer.Location.Latitude;
+            Longitude = customer.Location.Longitude;
+            Id = customer.Id;
+            Name = customer.Name;
+        }
+
+        /// <summary>
+        /// updates Customer to be as CustomerToList
+        /// </summary>
+        /// <param name="customer">CustomerToList</param>
+        public void updateFromCustomerToList(CustomerToList customer)
+        {
+            NumberOfParcelsInTheWayToCutemor = customer.NumberOfParcelsInTheWayToCutemor;
+            NumberOfParcelsSendedAndNotProvided = customer.NumberOfParcelsSendedAndNotProvided;
+            NumberOfParcelsSendedAndProvided = customer.NumberOfParcelsSendedAndProvided;
+            NumberOfRecievedParcels = customer.NumberOfRecievedParcels;
+        }
+        #endregion
     }
 
 }

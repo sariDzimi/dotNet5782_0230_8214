@@ -8,7 +8,11 @@ namespace PL
 {
     class NotValidInput : Exception
     {
-        public NotValidInput(string  e) : base($"{e}  Not valid")
+        /// <summary>
+        /// Exception of not valid input
+        /// </summary>
+        /// <param name="e"></param>
+        public NotValidInput(string  e) : base($"{e} not valid")
         {
             
         }

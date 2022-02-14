@@ -135,8 +135,8 @@ namespace PL
                 bl.UpdateCustomer(new BO.Customer() { Id = getId(), Name = getName(), Phone = getPhone(), Location = getLocation() });
                 MessageBox.Show("The customer Updeted");
                 CustomerToList customer = bl.GetCustomerToLists().First((c) => c.Id == customer_display.Id);
-                customer_display.UpdateFromBL(bl.GetCustomerById(getId()));
-                customer_display.UpdateFromToList(customer);
+                customer_display.updateDisplayObject(bl.GetCustomerById(getId()));
+                customer_display.updateFromCustomerToList(customer);
                 if (customer_display.ListChangedDelegate != null)
                 {
                     customer_display.ListChangedDelegate(bl.GetCustomerById(customer.Id));

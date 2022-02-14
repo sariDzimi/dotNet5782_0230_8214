@@ -10,25 +10,14 @@ using PL;
 
 namespace PO
 {
+    /// <summary>
+    /// display object of Station
+    /// </summary>
     public class Station : DependencyObject
     {
         public Action<BO.Station> ListChangedDelegate;
 
-        public void Update(BO.Station station)
-        {
-            ID = station.Id;
-            FreeChargeSlots = station.FreeChargeSlots;
-            Name = station.Name;
-            Longitude = station.Location.Longitude;
-            Latitude = station.Location.Latitude;
-
-            if (ListChangedDelegate != null)
-            {
-                ListChangedDelegate(station);
-            }
-        }
-
-        //freeChargeSlots
+        #region freeChargeSlots
         public static readonly DependencyProperty freeChargeSlots =
        DependencyProperty.Register("numberOfFreeChargeSlots",
                                    typeof(object),
@@ -49,8 +38,9 @@ namespace PO
             }
         }
 
+        #endregion
 
-        //Id
+        #region Id
         public static readonly DependencyProperty IdStation =
        DependencyProperty.Register("ID",
                                    typeof(object),
@@ -68,7 +58,9 @@ namespace PO
             }
         }
 
-        //Name
+        #endregion
+
+        #region Name
         public static readonly DependencyProperty NameStation =
        DependencyProperty.Register("Name",
                                    typeof(object),
@@ -86,7 +78,9 @@ namespace PO
             }
         }
 
-        //Location
+        #endregion
+
+        #region Location
         public static readonly DependencyProperty LongitudeStation =
        DependencyProperty.Register("Longitude",
                                    typeof(object),
@@ -121,7 +115,11 @@ namespace PO
             }
         }
 
-        //droneAtChargings 
+
+
+        #endregion
+
+        #region droneAtChargings
 
         public static readonly DependencyProperty droneAtCharging =
       DependencyProperty.Register("DroneAtCharging",
@@ -140,23 +138,7 @@ namespace PO
             }
         }
 
-        public override string ToString()
-        {
-            string droneAtCharging = " ";
-            if (DroneAtCharging.Count != 0)
-            {
-                foreach (var d in DroneAtCharging)
-                {
-                    droneAtCharging += d;
-                    droneAtCharging += " ";
-                }
-            }
-
-            return $"station {Name} : {ID}, 'Location', 'ChargeSlots': {FreeChargeSlots}," +
-                $"{droneAtCharging}  ";
-        }
-
-
+        #endregion
 
     }
 }
