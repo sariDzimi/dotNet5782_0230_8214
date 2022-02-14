@@ -58,7 +58,7 @@
         <Label x:Name="idDrone" Content="id drone" HorizontalAlignment="Left" Margin="110,70,0,0" VerticalAlignment="Top" Height="27" Width="90" Visibility="{Binding ElementName=OpenReciver, Path=Visibility}"/>
         <Button x:Name="UpdateParcel" Content="update" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="64" Click="updatePrcel" Visibility="{Binding ElementName=DeleateParcel, Path=Visibility}" Grid.Row="1" />
         <Button x:Name="deleateParcelButton" Content="Delete" Visibility="Hidden" HorizontalAlignment="Left" Margin="93,197,0,0" VerticalAlignment="Top" Width="70" Click="deleteParcel" Grid.Row="1"/>
-        <Button x:Name="addParcelButton" Content="Add" HorizontalAlignment="Left" Margin="280,154,0,0" VerticalAlignment="Top" Width="62" Click="addParcel_Click" Visibility="Hidden" Grid.Row="1"/>
+        <Button x:Name="addParcelButton" Content="Add" HorizontalAlignment="Left" Margin="508,203,0,0" VerticalAlignment="Top" Width="62" Click="addParcel_Click"  Visibility="Hidden" Grid.Row="1" RenderTransformOrigin="4.502,2.573"/>
         <CheckBox x:Name="deliveredChekBox"  Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,177,0,0" VerticalAlignment="Top" Checked="deliveredCheckBox_Checked" Grid.Row="1"/>
         <CheckBox x:Name="pickedUpCheckBox" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="145,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.556,-3.839" Checked="pickedUp_Checked" Grid.Row="1"/>
         <Button x:Name="OpenSender" Content="open" HorizontalAlignment="Left" Margin="618,107,0,0" VerticalAlignment="Top" Click="openCustomerSender" Visibility="{Binding ElementName= OpenReciver, Path=Visibility}"/>

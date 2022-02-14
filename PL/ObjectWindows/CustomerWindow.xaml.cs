@@ -27,7 +27,7 @@ namespace PL
         userType currentUser;
         IBL bl;
         BO.Customer customer;
-        PO.Customer customer_display;
+        PO.Customer customer_display = new PO.Customer();
 
         #region CustomerWindow constructors
         public CustomerWindow()
