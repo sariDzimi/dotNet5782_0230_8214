@@ -89,6 +89,20 @@ namespace PL
 
         #region buttons functionality
 
+
+        /// <summary>
+        /// opens parcel window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addParcel_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
+            parcelWindow.ChangedParcelDelegate = updateInList;
+            parcelWindow.Show();
+
+        }
+
         /// <summary>
         /// closes window
         /// </summary>
@@ -230,17 +244,5 @@ namespace PL
         #endregion
 
 
-        /// <summary>
-        /// opens parcel window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void addParcel_Click(object sender, RoutedEventArgs e)
-        {
-            ParcelWindow parcelWindow = new ParcelWindow(bl, currentUser);
-            parcelWindow.ChangedParcelDelegate = updateInList;
-            parcelWindow.Show();
-
-        }
     }
 }
