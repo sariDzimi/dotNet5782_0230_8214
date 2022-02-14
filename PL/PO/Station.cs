@@ -140,26 +140,6 @@ namespace PO
             }
         }
 
-
-
-
-        //public int Id { get; set; }
-        //public int Name { get; set; }
-        //public Location Location { get; set; }
-
-        //public int FreeChargeSlots
-        //{
-        //    get
-        //    {
-        //        return freeChargeSlots;
-        //    }
-        //    set
-        //    {
-        //        if (value < 0)
-        //            throw new OutOfRange("chargeSlots");
-        //        freeChargeSlots = value;
-        //    }
-        //}
         public override string ToString()
         {
             string droneAtCharging = " ";
@@ -176,7 +156,6 @@ namespace PO
                 $"{droneAtCharging}  ";
         }
 
-        //public List<DroneAtCharging> droneAtChargings;
 
 
     }

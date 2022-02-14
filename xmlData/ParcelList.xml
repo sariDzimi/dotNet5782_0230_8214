@@ -280,10 +280,10 @@
     <Weight>Light</Weight>
     <Pritority>Fast</Pritority>
     <Requested>2022-02-11T01:17:21.897043+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <DroneId>4</DroneId>
+    <Scheduled>2022-02-14T14:16:41.1910348+02:00</Scheduled>
+    <PickedUp>2022-02-14T14:16:44.2356296+02:00</PickedUp>
+    <Delivered>2022-02-14T14:16:45.822772+02:00</Delivered>
     <IsActive>true</IsActive>
   </Parcel>
   <Parcel>
@@ -410,8 +410,8 @@
     <Weight>Light</Weight>
     <Pritority>Reguler</Pritority>
     <Requested>2022-02-11T01:18:02.71836+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
+    <DroneId>4</DroneId>
+    <Scheduled>2022-02-14T14:16:47.6595948+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Delivered xsi:nil="true" />
     <IsActive>true</IsActive>

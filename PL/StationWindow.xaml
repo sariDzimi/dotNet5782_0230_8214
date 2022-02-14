@@ -8,13 +8,6 @@
         Title="StationWindow" Height="450" Width="800"
          Style="{StaticResource OurStyle}">
     <Window.Resources>
-        <Style x:Key="close" TargetType="Button">
-            <Setter Property="Background"
-              Value= "#FFFF061C" />
-            <Setter Property="Foreground"
-              Value="Black" />
-
-        </Style>
         <Style x:Key="Text" TargetType="TextBlock">
             <Setter Property="Background"
               Value= "#00000000" />
@@ -40,14 +33,14 @@
         <ListView x:Name="droneChargingListView" Margin="88,299,528,0" MouseDoubleClick="droneChargingListView_MouseDoubleClick" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="drone id" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="battery" DisplayMemberBinding="{Binding Battery}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="425,123,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="updateStation_Click" Visibility="{Binding ElementName=updateStationLabel, Path=Visibility}"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Height="48" Width="128" Click="addStation_Click" Visibility="{Binding Visibility, ElementName=addStationLabel}"/>
-        <Button x:Name="close" Content="X" Style="{StaticResource close}"  Margin="758,10,0,401" Click="closeWindow_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="37"/>
+        <Button x:Name="close" Content="X" Style="{StaticResource close}"  Margin="720,14,0,376" Click="closeWindow_Click" RenderTransformOrigin="1.63,0.089" HorizontalAlignment="Left" Width="37"/>
 
     </Grid>
 </Window>

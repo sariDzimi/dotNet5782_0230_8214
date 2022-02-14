@@ -76,7 +76,6 @@ namespace PL
         {
             lblTime.Content = DateTime.Now.ToLongTimeString();
         }
-        public void UpdateDroneList(BO.Drone drone)
         /// <summary>
         /// updates drone in the drone list window
         /// </summary>
@@ -389,7 +388,6 @@ namespace PL
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
-            DisenableButtons();
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {
                 bL.StartSimulation(
