@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BlApi;
 using BO;
 using PO;
@@ -196,6 +197,8 @@ namespace PL
                 throw new NotValidInput("Location");
             }
         }
+
+        
 
         #endregion
 

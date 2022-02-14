@@ -14,6 +14,7 @@
         </Style>
     </Window.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="207*"/>
             <RowDefinition Height="227*"/>
@@ -42,6 +43,7 @@
             <TextBox x:Name="RequestedLabel" IsEnabled="False" Margin="51,79,-113,0" Text="{Binding Requested}" TextWrapping="Wrap" VerticalAlignment="Top" Height="36"/>
             <Label Content="User:" HorizontalAlignment="Left" Margin="349,-134,0,0" VerticalAlignment="Top" Height="25" Width="36"/>
             <TextBlock x:Name="UserText" HorizontalAlignment="Left" Margin="432,-138,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="64"/>
+
         </Grid>
         <Grid Margin="93,55,125,26" >
             <Grid.ColumnDefinitions>

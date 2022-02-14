@@ -16,6 +16,7 @@ using System.ComponentModel;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace PL
 {
@@ -46,6 +47,7 @@ namespace PL
 
         public Drone(IBL bL1, BO.Drone droneBL) : this()
         {
+           
             drone = droneBL;
             ParcelInDelivery parcelInDelivery = new ParcelInDelivery();
             drone_display = new PO.Drone()
@@ -70,6 +72,11 @@ namespace PL
             WeightSelector.IsEnabled = false;
         }
 
+        void timer_Tick(object sender, EventArgs e)
+        {
+            lblTime.Content = DateTime.Now.ToLongTimeString();
+        }
+        public void UpdateDroneList(BO.Drone drone)
         /// <summary>
         /// updates drone in the drone list window
         /// </summary>
@@ -378,6 +385,11 @@ namespace PL
         {
             worker = new BackgroundWorker();
             disenableButtonsWhileSimulates();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+            DisenableButtons();
             worker.DoWork += (object? sender, DoWorkEventArgs e) =>
             {
                 bL.StartSimulation(

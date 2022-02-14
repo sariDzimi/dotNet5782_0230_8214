@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BlApi;
 using PO;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 //using PL.PO;
 
 namespace PL
@@ -44,6 +45,8 @@ namespace PL
             addParcelButton.Visibility = Visibility.Visible;
             OpenReciver.Visibility = Visibility.Hidden;
             parcel_display.ListChangedDelegate += new Action<BO.Parcel>(updateParcelList);
+
+           
 
         }
         public ParcelWindow(IBL bl, BO.Parcel parcel, userType currentUser) : this()
